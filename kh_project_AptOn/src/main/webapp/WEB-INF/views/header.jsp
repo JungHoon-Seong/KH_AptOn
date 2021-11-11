@@ -5,14 +5,14 @@
     <div class="container d-flex align-items-center">
 
       <div class="logo me-auto">
-        <a href="/apton_wip"><img src="resources/img/logo.png">&nbsp;&nbsp;with APTON</a>
+        <a href="/apton"><img src="resources/img/logo.png">&nbsp;&nbsp;with APTON</a>
         <!-- Uncomment below if you prefer to use an image logo -->
         <!-- <a href="index.html"><img src="resources/img/logo.png" class="img-fluid"></a>-->
       </div>
 
       <nav id="navbar" class="navbar order-last order-lg-0">
         <ul>
-          <li><a class="nav-link scrollto active" href="/apton_wip">Home</a></li>
+          <li><a class="nav-link scrollto active" href="/apton">Home</a></li>
           <li><a class="nav-link scrollto" href="#about">About</a></li>
           <li><a class="nav-link scrollto" href="#services">Services</a></li>
           <li><a class="nav-link scrollto " href="memberlist">회원리스트</a></li>
