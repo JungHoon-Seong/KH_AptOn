@@ -4,6 +4,8 @@ import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -11,6 +13,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+
+import kh.teamproject.apton.admin.model.vo.Admin;
+import kh.teamproject.apton.member.model.vo.Member;
 
 /**
  * Handles requests for the application home page.
@@ -55,6 +60,32 @@ public class HomeController {
 		mv.setViewName("error/commonError");
 		
 		return mv;
+	}
+	
+	// 임시 admin 로그인용 template by NaHyowon 2021.11.15
+	@RequestMapping(value = "adminlogin", method =RequestMethod.GET )
+	public String managerLogin(HttpServletRequest request) {
+		Admin admin = new Admin();
+		admin.setAdminId("admin01");
+		admin.setAdminPwd("pwd01");
+		admin.setAdminLog("20211115"); // 임시로 yyyymmdd 형식 by NaHyowon 2021.11.15
+		request.getSession().setAttribute("admin", admin);
+
+		return "loginTemplate/adminLogin";
+	}
+	
+	// 임시 member 로그인용 template by NaHyowon 2021.11.15
+	@RequestMapping(value = "memberlogin", method =RequestMethod.GET )
+	public String memberLogin(HttpServletRequest request) {
+		Member member= new Member();
+		member.setHouseNum(202111151102L); //2021.11.15 가입 1102호 주민이라는 뜻 
+		member.setName("입주민01");
+		member.setPwd("pwd01");
+		member.setPhone("01012341234");
+		member.setMemberSign(null);
+		request.getSession().setAttribute("member", member);
+		
+		return "loginTemplate/memberLogin";
 	}
 	
 }

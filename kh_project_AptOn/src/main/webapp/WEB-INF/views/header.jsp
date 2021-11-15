@@ -11,6 +11,8 @@
       </div>
 
       <nav id="navbar" class="navbar order-last order-lg-0">
+      ${admin.adminId }
+      ${member.houseNum }
         <ul>
           <li><a class="nav-link scrollto active" href="/apton">Home</a></li>
           <li><a class="nav-link scrollto" href="#about">About</a></li>
