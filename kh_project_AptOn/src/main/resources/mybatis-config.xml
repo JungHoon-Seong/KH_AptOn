@@ -7,12 +7,10 @@
 
 <!-- 추가 및 수정 시 작성자와 날짜, 내용 등을 주석으로 남기기 -->
 <typeAliases>
-	<typeAlias type="kh.teamproject.apton.board.model.vo.Board" alias="Board"/>
 </typeAliases>
 
 <!-- 추가 및 수정 시 작성자와 날짜, 내용 등을 주석으로 남기기 -->
 <mappers>
-	<mapper resource="mappers/board-mapper.xml"/>
 </mappers>
 
 
