@@ -61,6 +61,12 @@ public class HomeController {
 		
 		return mv;
 	}
+	@RequestMapping(value = "adminmain", method = RequestMethod.GET)
+	public ModelAndView sidebar(ModelAndView mv) {
+		mv.setViewName("adminmain");
+		
+		return mv;
+	}
 	
 	// 임시 admin 로그인용 template by NaHyowon 2021.11.15
 	@RequestMapping(value = "adminlogin", method =RequestMethod.GET )
