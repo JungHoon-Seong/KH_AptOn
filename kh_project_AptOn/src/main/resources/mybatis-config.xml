@@ -9,10 +9,11 @@
 <typeAliases>
 
 	<!-- Member,Admin vo 및 mapper 생성 후 등록 by NaHyowon 2021.11.15-->  
-	
 	<typeAlias type="kh.teamproject.apton.member.model.vo.Member" alias="Member"/> 
 	<typeAlias type="kh.teamproject.apton.admin.model.vo.Admin" alias="Admin"/>
 	<typeAlias type="kh.teamproject.apton.defectreception.model.vo.DrBoard" alias="DrBoard"/> 
+	<typeAlias type="kh.teamproject.apton.votesign.model.vo.VoteInfo" alias="VoteInfo"/>  <!--  VoteInfo mapper 생성 후 등록 by NaHyowon 2021.11.16 -->
+	
 </typeAliases>
 
 <!-- 추가 및 수정 시 작성자와 날짜, 내용 등을 주석으로 남기기 -->
@@ -20,9 +21,11 @@
 
 	<!-- Member,Admin용 vo 및 mapper 생성 후 등록 by NaHyowon 2021.11.15--> 
 	<!-- DrBoard mapper 추가  by SJH 2021.11.16-->
+	
 	<mapper resource="mappers/member-mapper.xml"/>
 	<mapper resource="mappers/admin-mapper.xml"/>
 	<mapper resource="mappers/drboard-mapper.xml"/>
+	<mapper resource="mappers/voteinfo-mapper.xml"/> <!--  VoteInfo mapper 생성 후 등록 by NaHyowon 2021.11.16 -->
 </mappers>
 
 

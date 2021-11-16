@@ -3,7 +3,7 @@
   <!-- ======= Header ======= -->
   <header id="header" class="fixed-top d-flex align-items-center">
     <div class="container d-flex align-items-center">
- <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ <span style="font-size:30px;cursor:pointer" onclick="openNav()" id="showbar">&#9776;</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       <div class="logo me-auto">
      
         <a href="/apton"><img src="resources/img/logo.png">&nbsp;&nbsp;with APTON</a>

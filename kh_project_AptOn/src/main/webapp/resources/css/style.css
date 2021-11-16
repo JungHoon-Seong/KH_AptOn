@@ -26,7 +26,6 @@ a:hover {
 h1, h2, h3, h4, h5, h6 {
   font-family: "Raleway", sans-serif;
 }
-
 /*--------------------------------------------------------------
 # Back to top button
 --------------------------------------------------------------*/
@@ -302,24 +301,26 @@ h1, h2, h3, h4, h5, h6 {
   z-index: 1;
   top: 0;
   left: 0;
-  background-color: #3498dba4;
+  background-color: #0246D0;
   overflow-x: hidden;
   transition: 0.5s;
   padding-top: 60px;
   box-shadow: 5px 10px 8px #888888;
+  opacity: 0.8;
 }
 
 .sidenav a {
   padding: 8px 8px 8px 32px;
   text-decoration: none;
-  font-size: 25px;
-  color: #1f2224dc;
+  font-size: 23px;
+  color: white;
   display: block;
-  transition: 0.3s;
+  transition: 0.2s;
 }
 
 .sidenav a:hover {
-  color: #f1f1f1;
+  font-size: 25px;
+  color: pink;
 }
 
 .sidenav .closebtn {
@@ -329,8 +330,17 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 36px;
   margin-left: 50px;
 }
+.sidenav .closebtn:hover {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 38px;
+  margin-left: 50px;
+}
+
 
 #main {
+  margin-top : 80px;
   transition: margin-left .5s;
   padding: 16px;
 }
@@ -339,7 +349,10 @@ h1, h2, h3, h4, h5, h6 {
   .sidenav {padding-top: 15px;}
   .sidenav a {font-size: 18px;}
 }
-
+#showbar:hover{
+	color : #3498dba4;
+	transition: 0.5s;
+}
 /*--------------------------------------------------------------
 # Hero Section
 --------------------------------------------------------------*/
@@ -416,7 +429,7 @@ h1, h2, h3, h4, h5, h6 {
 # Sections General
 --------------------------------------------------------------*/
 section {
-  padding: 60px 0;
+  padding: 90px 0;
 }
 
 .section-bg {
