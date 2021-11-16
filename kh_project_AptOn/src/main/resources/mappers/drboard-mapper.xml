@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="DrBoard">
+	<!-- DrBoard ResultMap 생성 by SJH 2021.11.16 -->
+	
+	<resultMap id="DrBoardMap" type="DrBoard">
+		<id property="drNo" column="DR_NO" />
+		<result property="houseNo" column="HOUSE_NUM" />
+		<result property="adminId" column="ADMIN_ID" />
+		<result property="drTitle" column="DR_TITLE"/>
+		<result property="drContent" column="DR_CONTENT"/>
+		<result property="drDate" column="DR_DATE"/>
+		<result property="drState" column="DR_STATE"/>
+		<result property="drProcessingDate" column="DR_PROCESSINGDATE"/>		
+		<result property="drProcessingDetail" column="DR_PROCESSINGDETAIL"/>
+	</resultMap>
+	
+	
+
+</mapper>
