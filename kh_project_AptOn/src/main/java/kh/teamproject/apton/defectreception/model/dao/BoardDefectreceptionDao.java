@@ -32,4 +32,11 @@ public class BoardDefectreceptionDao {
 		return drblist;
 	}
 
+	public List<DrBoard> selectContentView(int drno) {
+		List<DrBoard> drblist;
+		
+		drblist = sqlSession.selectList("DrBoard.selectContentView",drno);
+		return drblist;
+	}
+
 }

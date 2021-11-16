@@ -32,6 +32,18 @@ public class BoardDefectreceptionService {
 		}
 		return vo;
 	}
+	
+	public List<DrBoard> selectContentView(int drno)  {
+		List<DrBoard> vo = null;
+		
+		try {
+			vo = boardDao. selectContentView(drno);
+		} catch (Throwable e) {
+			e.printStackTrace();
+		}
+		
+		return vo;
+	}
 
 		
 	public int updateBoard(int bno, String bcont) {
@@ -52,5 +64,8 @@ public class BoardDefectreceptionService {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
+
+	
 
 }

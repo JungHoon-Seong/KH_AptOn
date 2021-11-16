@@ -28,5 +28,14 @@
 		]]>
 	</select>
 	
+	<select id="selectContentView" resultMap="DrBoardMap">
+		<![CDATA[
+		SELECT * FROM DEFECT_RECEPTION WHERE DR_NO = #{drNo}
+		]]>
+	</select>
+	
+	
+	
+	
 
 </mapper>

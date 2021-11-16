@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import kh.teamproject.apton.defectreception.model.vo.DrBoard;
@@ -64,6 +65,27 @@ public class BoardDefectreceptionController {
 		mv.addObject("maxPage",maxPage);
 		
 		
+		mv.setViewName(viewPage);
+		return mv;
+	}
+	
+	@RequestMapping(value = "view-defectreception")
+	public ModelAndView selectContentView(ModelAndView mv, @RequestParam(value="no" , defaultValue = "0")int drno ) {
+		String viewPage = "error/commonError"; //기본페이지 에러페이지로 동일하게 설정함
+		
+		
+		List<DrBoard> drbList = null;
+		try {
+			drbList = boardService.selectContentView(drno);
+			viewPage= "/defectreception/defectreception_contentview";
+		} catch (Exception e) {
+			viewPage= "error/commonError";
+			mv.addObject("msg" , "게시판 오류 발생");
+			mv.addObject("url" , "index");
+			e.printStackTrace();
+		}
+		
+		mv.addObject("drbList",drbList);
 		mv.setViewName(viewPage);
 		return mv;
 	}
