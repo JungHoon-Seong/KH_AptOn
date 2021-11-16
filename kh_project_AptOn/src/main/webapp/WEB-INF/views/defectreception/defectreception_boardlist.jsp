@@ -52,12 +52,15 @@
  table{
  border: 1px solid black;
  width: 1200px;
+ text-align: center;
  }
  #rowheader{
  font-weight: bold;
  text-align: center;
  background-color: #ccc;
- 
+ }
+ .completestate{
+ font-weight: bold;
  }
  </style>
   
@@ -110,13 +113,22 @@
 	<c:forEach items="${drbList}" var="vo">
 		<tr>
 			<td>${vo.drNo }</td>
-			<td>${vo.drImage }</td>
+			<td>이미지</td>
 			<td>
 			<a href="view-defectreception?no=${vo.drNo }">${vo.drTitle }</a>
 			</td>
 			<td>${vo.drDate }</td>
 			<td>${vo.houseNo }</td>
-			<td>${vo.drState }</td>
+			
+			<c:choose>
+			<c:when test="${vo.drState == 1}">
+				<td class="completestate">처리완료</td>
+			</c:when>
+			<c:when test="${vo.drState == 0}">
+				<td class="">처리중</td>
+			</c:when>
+			</c:choose>
+			
 		</tr>
 	</c:forEach>
 </c:if>

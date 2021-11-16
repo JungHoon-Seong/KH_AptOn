@@ -15,6 +15,18 @@
 		<result property="drProcessingDetail" column="DR_PROCESSINGDETAIL"/>
 	</resultMap>
 	
+	<select id="getListCount" resultType="_int">
+		select count(*) from DEFECT_RECEPTION
+
+	</select>
+	
+	
+	<select id="selectBoardList" resultMap="DrBoardMap">
+		<![CDATA[
+		SELECT * FROM DEFECT_RECEPTION
+		ORDER BY dr_no desc
+		]]>
+	</select>
 	
 
 </mapper>
