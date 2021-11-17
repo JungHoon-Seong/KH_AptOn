@@ -51,14 +51,14 @@
  	width: 1200px;
  }
  table {
-	 border: 1px solid black;
-	 width: 1200px;
-	 text-align: center;
+	border: 1px solid black;
+	
+	text-align: center;
+	background-color: #ccc;
  }
- #rowheader {
-	 font-weight: bold;
-	 text-align: center;
-	 background-color: #ccc;
+ td {
+ 	border: 1px solid black;
+ 	width: 240px;
  }
  .completestate {
 	 font-weight: bold;
@@ -66,27 +66,37 @@
  footer {
  	clear: both;
  }
- #btnWriteBox {
+ #btnBox {
  	float: right;
  }
- #btnwrite {
+ .textContent {
+ 	text-align: center;
+ }
+ .img {
+ 	width: 240px;
+ 	height: 200px;
+ }
+  #btnWrite {
 	 broder: none;
 	 border-radius: 5px;
 	 color: white;
-	 padding: 15px 32px;
+	 padding: 7px 16px;
 	 text-align: center;
 	 font-size: 16px;
 	 margin: 4px 2px;
 	 cursor: pointer;
 	 background-color: #008CBA;
  }
+ #textTitle {
+ border: none;
+ width: 1000px;
+ }
+ #textContent {
+ border: none;
+ width: 1000px;
+ height: 375px;
+ }
  </style>
-  
-  <script>
-  function writescript(){
-	  location.href = "./insert-defectreception";
-  }
-  </script>
   
 </head>
 
@@ -123,53 +133,30 @@
 
 <section id="mainsection">
 	<table id="maintable">
-	<tr id="rowheader">
-		<td>No.</td>
-		<td>이미지</td>
-		<td>제목</td>
-		<td>작성일자</td>
-		<td>가구번호</td>
-		<td>처리상태</td>
-	</tr>
+	<form action="./insert-defectreception"  method="post">
 	
-	<!-- Todo drImage는 다른 테이블에 있다 해결이 필요함 -->
-	<c:if test="${drbList != null }">
-	<c:forEach items="${drbList}" var="vo">
 		<tr>
-			<td>${vo.drNo }</td>
-			<td>이미지</td>
-			<td>
-			<a href="view-defectreception?no=${vo.drNo }">${vo.drTitle }</a>
-			</td>
-			<td>${vo.drDate }</td>
-			<td>${vo.houseNo }</td>
-			
-			<c:choose>
-			<c:when test="${vo.drState == 1}">
-				<td class="completestate">처리완료</td>
-			</c:when>
-			<c:when test="${vo.drState == 0}">
-				<td class="">처리중</td>
-			</c:when>
-			</c:choose>
-			
+			<td><input type="text" name="t" id="textTitle" placeholder="제목을 입력해주세요"/></td>
 		</tr>
-	</c:forEach>
-</c:if>
-	</table>
-	<div id="paging">
-		<c:if test="${startPage > 1 }" >이전</c:if>
-		<c:forEach begin="${startPage }" end="${endPage }" step="1" var="i">
-			<a href="board-defectreception?p=${i}">${i}</a>
-		</c:forEach>
-		<c:if test="${endPage < pageCount }"> 다음 </c:if>
-	</div>
-	<!-- SJH TODO 회원 세션일경우만 보이도록 보완필요 -->
-	 
-		<div id="btnWriteBox">
-			<button type='button' id='btnwrite' onclick='writescript()'>민원 작성</button>
-		</div>
+
+		<tr>
+			<td><input type="file" name="imgs[]" id="imageUpload"/></td>	
+		</tr>
+		<tr>
+			<td class="textContent" colspan="5">
+			<textarea name="c" id="textContent" placeholder="내용을 입력해주세요"></textarea>
+			</td>
+		</tr>
 	
+	</table>
+		<div>
+		</div>
+	<!-- SJH TODO 회원 세션일경우만 보이도록 보완필요 -->
+		<div id="btnBox">
+			<button type="submit" id="btnWrite">작성</button>
+			
+		</div>
+	</form>
 </section>
 </main>
 

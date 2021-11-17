@@ -1,17 +1,37 @@
 package kh.teamproject.apton.defectreception.model.dao;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
+import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kh.teamproject.apton.defectreception.model.vo.DrBoard;
 
 @Repository("boardDao")
-public class BoardDefectreceptionDao {
-	//TODO 접수게시판 DB테이블 선언 및 테스트내용을 아직 채워주지 않았음 
+public class BoardDefectreceptionDao { 
+	
+	//TODO SJH autocommit을 끄기 위해 추가했으나  getSqlSessionFactory메소드를 꼭 써야하는지 확인이 필요함
+	private SqlSessionFactory getSqlSessionFactory() {
+		String resource = "/mybatis-config.xml";
+		SqlSessionFactory factory = null;
+		try {
+			// InputStream으로 Mybatis의 설정 정보를 읽어 온다
+			InputStream inputStream = Resources.getResourceAsStream(resource);
+			// 읽어 온 Mybatis의 설정 정보를 바탕으로 SqlSessionFactoryBuilder를 생성한다
+			SqlSessionFactoryBuilder builder = new SqlSessionFactoryBuilder();
+			factory = builder.build(inputStream);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return factory;
+	}
 	
 	@Autowired
 	private SqlSession sqlSession;
@@ -37,5 +57,25 @@ public class BoardDefectreceptionDao {
 		drblist = sqlSession.selectList("DrBoard.selectContentView",drno);
 		return drblist;
 	}
+
+	public int insertBoard(DrBoard bvo) {
+		int result = 0;
+		try {
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		sqlSession = getSqlSessionFactory().openSession(false);
+		result = sqlSession.insert("DrBoard.insertContent", bvo);
+		if (result > 0) {
+			sqlSession.commit();
+		}else {
+			sqlSession.rollback();
+		}
+		
+		return result;
+	}
+	
+	
 
 }

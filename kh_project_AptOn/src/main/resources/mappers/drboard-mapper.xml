@@ -35,6 +35,12 @@
 		]]>
 	</select>
 	
+	<insert id="insertContent" parameterType="DrBoard" statementType="PREPARED">
+		
+		INSERT INTO DEFECT_RECEPTION VALUES(SEQ_DR_Board_NO.nextval,
+		#{HOUSE_NUM}, #{ADMIN_ID}, #{DR_TITLE}, #{DR_CONTENT} , #{DR_DATE}, #{DR_STATE},  #{DR_PROCESSINGDATE}, #{DR_PROCESSINGDETAIL})
+		
+	</insert>
 	
 	
 	

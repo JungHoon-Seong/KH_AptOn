@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import kh.teamproject.apton.defectreception.model.dao.BoardDefectreceptionDao;
 import kh.teamproject.apton.defectreception.model.vo.DrBoard;
+import kh.teamproject.apton.member.model.dao.MemberDao;
 
 
 
@@ -54,8 +55,7 @@ public class BoardDefectreceptionService {
 
 	
 	public int insertBoard(DrBoard bvo) {
-		// TODO Auto-generated method stub
-		return 0;
+		return boardDao.insertBoard(bvo);
 	}
 
 

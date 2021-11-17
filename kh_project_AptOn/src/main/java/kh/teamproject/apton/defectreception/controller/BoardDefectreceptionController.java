@@ -5,11 +5,13 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import kh.teamproject.apton.defectreception.model.vo.DrBoard;
 import kh.teamproject.apton.defectreception.service.BoardDefectreceptionService;
+import kh.teamproject.apton.member.model.service.MemberService;
 
 @Controller
 public class BoardDefectreceptionController {
@@ -17,7 +19,7 @@ public class BoardDefectreceptionController {
 	@Autowired
 	private BoardDefectreceptionService boardService;
 	
-	@RequestMapping(value = "board-defectreception")
+	@RequestMapping(value = "board-defectreception", method = RequestMethod.GET)
 	public ModelAndView selectBoardList(ModelAndView mv, String clickedPage, @RequestParam(value = "p", defaultValue = "1")String pageNum) {
 		String viewPage = "error/commonError"; //기본페이지 에러페이지로 동일하게 설정함
 		
@@ -87,7 +89,7 @@ public class BoardDefectreceptionController {
 		return mv;
 	}
 	
-	@RequestMapping(value = "view-defectreception")
+	@RequestMapping(value = "view-defectreception", method = RequestMethod.GET)
 	public ModelAndView selectContentView(ModelAndView mv, @RequestParam(value="no" , defaultValue = "0")int drno ) {
 		String viewPage = "error/commonError"; //기본페이지 에러페이지로 동일하게 설정함
 		
@@ -108,12 +110,40 @@ public class BoardDefectreceptionController {
 		return mv;
 	}
 	
-	//SJH TODO 관리자단 
-	@RequestMapping(value = "manage-defectreception")
-	public ModelAndView selectManageBoardList(ModelAndView mv, String clickedPage) {
+	@RequestMapping(value = "insert-defectreception", method = RequestMethod.GET)
+	public String insertContent() {
+		return "./defectreception/defectreception_insert";
+	}
+	
+	@RequestMapping(value = "insert-defectreception", method = RequestMethod.POST)
+	public ModelAndView insertContent(ModelAndView mv, DrBoard bvo ) {
+		String viewPage = "error/commonError"; //기본페이지 에러페이지로 동일하게 설정함
+
+		int drBoardResult = 0;
+		try {
+			drBoardResult = boardService.insertBoard(bvo);
+			
+		} catch (Exception e) {
+			viewPage= "error/commonError";
+			mv.addObject("msg" , "게시판 오류 발생");
+			mv.addObject("url" , "index");
+			e.printStackTrace();
+		}
+		
+		mv.addObject("result",drBoardResult);
+		mv.setViewName(viewPage);
 		return mv;
 	}
 	
+	@RequestMapping(value = "update-defectreception", method = RequestMethod.POST)
+	public ModelAndView updateContent() {
+		return null;
+	}
+	
+	@RequestMapping(value = "delete-defectreception", method = RequestMethod.POST)
+	public ModelAndView deleteontent() {
+		return null;
+	}
 
 	
 }
