@@ -25,7 +25,7 @@ import kh.teamproject.apton.member.model.vo.Member;
 @Controller
 public class LoginController {
 	@Autowired
-	private MemberService MService;
+	private MemberService Service;
 	private Logger logger = LoggerFactory.getLogger(LoginController.class);
 	@RequestMapping(value = "login", method = RequestMethod.GET)
 	public ModelAndView login(ModelAndView mv) {
@@ -34,25 +34,24 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value = "login", method = RequestMethod.POST) //포스트 방식 매핑
-	public String login(Member vo, Admin avo, HttpSession session) throws Exception {
+	public String login(Member vo, HttpSession session) throws Exception {
 		String viewName = "";
 		logger.info("post login");
 //		session = request.getSession();
 		
 			System.out.println(vo);
 			
-			Member login = MService.login(vo);
+			Member login = Service.login(vo);
 			System.out.println("회원 로그인 정보  -> "+ login);
 		
 			if(login == null) {
 				session.setAttribute("result", "로그인 실패");
 				viewName= "login";
-			} else if(login != null){
+			} else{
 				session.setAttribute("member", vo);
 				viewName= "index";
 			}
 			
-		
 		return viewName;
 	}
 	

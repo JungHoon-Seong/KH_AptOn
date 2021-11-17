@@ -7,7 +7,7 @@ import kh.teamproject.apton.member.model.dao.MemberDao;
 import kh.teamproject.apton.member.model.vo.Member;
 
 
-@Service
+@Service("MService")
 public class MemberService {
 
 	@Autowired

@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import kh.teamproject.apton.admin.model.dao.AdminDao;
 import kh.teamproject.apton.admin.model.vo.Admin;
 
-@Service
+@Service("AService")
 public class AdminService {
 
 	@Autowired
