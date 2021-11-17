@@ -11,5 +11,10 @@
 		<result property="memberSign" column="member_sign"/>
 	</resultMap>
 	
+	<!-- Member select(로그인) 생성 by ParkJunYeb 2021.11.17-->
+	<select id="login" resultType="Member">
+	select house_num, pwd from 
+	where house_num = #{houseNum} and pwd = #{pwd}
+	</select>
 
 </mapper>
