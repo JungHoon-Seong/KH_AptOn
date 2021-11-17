@@ -16,4 +16,8 @@
 		select * from Notice
 	</select>
 
+	<select id="getNoticelistCount" resultType="_int">
+		select count(*) from Notice
+
+	</select>
 </mapper>
