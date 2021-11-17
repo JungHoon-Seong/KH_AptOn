@@ -31,7 +31,7 @@
 	
 	<select id="selectContentView" resultMap="DrBoardMap">
 		<![CDATA[
-		SELECT * FROM  WHERE DR_NO = #{drNo}
+		SELECT * FROM DEFECT_RECEPTION WHERE DR_NO = #{drNo}
 		]]>
 	</select>
 	

@@ -26,9 +26,8 @@ public class BoardDefectreceptionDao {
 		int startRow = (currentPage - 1) * limit;
 		
 		RowBounds row = new RowBounds(startRow, limit);
-		
 		//todo ""안에 문자열은 추후바뀔 수 있음 
-		drblist = sqlSession.selectList("DrBoard.selectBoardList");
+		drblist = sqlSession.selectList("DrBoard.selectBoardList", null, row);
 		return drblist;
 	}
 

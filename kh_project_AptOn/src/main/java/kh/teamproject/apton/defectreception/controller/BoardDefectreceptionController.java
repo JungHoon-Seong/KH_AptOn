@@ -18,9 +18,12 @@ public class BoardDefectreceptionController {
 	private BoardDefectreceptionService boardService;
 	
 	@RequestMapping(value = "board-defectreception")
-	public ModelAndView selectBoardList(ModelAndView mv, String clickedPage) {
+	public ModelAndView selectBoardList(ModelAndView mv, String clickedPage, @RequestParam(value = "p", defaultValue = "1")String pageNum) {
 		String viewPage = "error/commonError"; //기본페이지 에러페이지로 동일하게 설정함
 		
+		
+		final int PAGE_SIZE = 6;
+		final int PAGE_BLOCK = 3;
 		int currentPage = 1;
 		int listCount = 0;
 		int pageCount = 0;
@@ -34,16 +37,17 @@ public class BoardDefectreceptionController {
 			e.printStackTrace();
 		}
 		
-		int limit = 6;
-		int startPage = ((int)((double)currentPage / limit + 0.9) - 1) * limit  + 1;
+		if (pageNum != null) {
+			clickedPage = pageNum;
+		}
 		
-		pageCount = (listCount / limit) + (listCount % limit == 0 ? 0 : 1);
+		int startPage = ((int)((double)currentPage / PAGE_SIZE + 0.9) - 1) * PAGE_SIZE  + 1;
 		
-		int endPage = startPage + limit - 1;
+		pageCount = (listCount / PAGE_SIZE) + (listCount % PAGE_SIZE == 0 ? 0 : 1);
+		
+		int endPage = startPage + PAGE_SIZE - 1;
 		if(endPage > pageCount) endPage=pageCount;
-		System.out.println("listCount: "+ listCount);
-		System.out.println("endpage: "+ endPage);
-		int maxPage = (int)((double)listCount / limit + 0.9);
+		int maxPage = (int)((double)listCount / PAGE_SIZE + 0.9);
 		if (clickedPage != null) {
 			if (Integer.parseInt(clickedPage) <= 0) {
 				currentPage = 1;
@@ -54,9 +58,15 @@ public class BoardDefectreceptionController {
 			}
 		}
 		
+		if (currentPage % PAGE_BLOCK == 0) {
+			startPage = (currentPage / PAGE_BLOCK - 1) * PAGE_BLOCK + 1;
+		}else {
+			startPage = (currentPage / PAGE_BLOCK) * PAGE_BLOCK + 1;
+		}
+		
 		List<DrBoard> drbList = null;
 		try {
-			drbList = boardService.selectBoardList(currentPage, limit);
+			drbList = boardService.selectBoardList(currentPage, PAGE_SIZE);
 			viewPage= "/defectreception/defectreception_boardlist";
 		} catch (Exception e) {
 			viewPage= "error/commonError";
