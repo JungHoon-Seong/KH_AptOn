@@ -56,7 +56,9 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value = "error", method = RequestMethod.GET)
-	public ModelAndView error(ModelAndView mv) {
+	public ModelAndView error(ModelAndView mv, String msg) {
+		System.out.println(msg);
+		mv.addObject("msg",msg);
 		mv.setViewName("error/commonError");
 		
 		return mv;

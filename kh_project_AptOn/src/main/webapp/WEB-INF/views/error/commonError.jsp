@@ -9,7 +9,7 @@
     <title>Document</title>
     <style>
     .main{
-    margin-top: 15%;
+    margin-top: 5%;
   }
   
   .st0{fill:#fff}
@@ -142,6 +142,10 @@
 </head>
 <body>
     <div class="main">
+     <div id="errormsg">
+     ${msg }<br>
+     <span id="sec" class="st8 st10">5</span>초 후 메인페이지로 이동합니다.
+     </div>
         <div>
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 355">
         <g id="ocean">
@@ -411,7 +415,8 @@
               Page not found. 
               </text>
               <div id="errormsg">
-                <span id="sec" class="st8 st10">5</span>초 후 메인페이지로 이동합니다
+             
+                
               </div>
               
             </g>

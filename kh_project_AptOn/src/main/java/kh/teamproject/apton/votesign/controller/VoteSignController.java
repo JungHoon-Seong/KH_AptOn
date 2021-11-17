@@ -90,4 +90,11 @@ public class VoteSignController {
 		return mv;
 	}
 	
+	//투표 등록 페이지
+	@RequestMapping(value = "enrollvote", method = RequestMethod.GET)
+	public String error() {
+		
+		return "voteNsign/enrollvote";
+	}
+	
 }

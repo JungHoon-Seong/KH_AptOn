@@ -306,7 +306,8 @@ h1, h2, h3, h4, h5, h6 {
   transition: 0.5s;
   padding-top: 60px;
   box-shadow: 5px 10px 8px #888888;
-  opacity: 0.8;
+  opacity: 1;
+
 }
 
 .sidenav a {
@@ -314,8 +315,9 @@ h1, h2, h3, h4, h5, h6 {
   text-decoration: none;
   font-size: 23px;
   color: white;
-  display: block;
+  display: inline-block;
   transition: 0.2s;
+  white-space: nowrap;
 }
 
 .sidenav a:hover {
@@ -471,7 +473,9 @@ h1, h2, h3, h4, h5, h6 {
 }
 #adminmain{
 	margin-top:70px;
+	margin-bottom:200px;
 	transition:0.5s;
+	
 }
 /*--------------------------------------------------------------
 # What We Do

@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>투표/결재 목록 게시판</title>
+<title>투표/결재 목록</title>
   <!-- Favicons -->
   <link href="resources/img/favicon.png" rel="icon">
   <link href="resources/img/apple-touch-icon.png" rel="apple-touch-icon">
@@ -224,17 +224,23 @@
 			<li><a href="javascript:PageMove(${endPage+1})" class="arrowbtn">&#10095;</a></li>
 			</c:if>
 			<li id="enrollbtn">
-			<button>투표/결재 등록</button>
+			<button onclick="goenroll()">투표/결재 등록</button>
 			</li>
       </ul>
 </span>
 
 </section>
 </main>
+<jsp:include page="../footer.jsp" flush="true" />
+
+
 <script>
 function PageMove(page){
     location.href = "votelist?clickedPage="+page;
-  }
+  };
+function goenroll(){
+	location.href = "enrollvote";
+};
 
 </script>
 </body>

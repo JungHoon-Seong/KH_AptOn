@@ -42,6 +42,14 @@
 </aside>
 
 <script>
+//adminId가 null이거나 빈 값이면 error 페이지로 이동
+//관리자 계정으로 접속하지 않았습니다. 멘트와 함께 이동
+/* window.onload = function(){
+	if(${adminId == null}){
+		location.href="error?msg=관리자 계정이 아닙니다.";
+	};
+	
+}; */
 function openNav() {
   document.getElementById("mySidenav").style.width = "200px";
   document.getElementById("adminmain").style.marginLeft = "200px";
@@ -51,6 +59,9 @@ function closeNav() {
   document.getElementById("mySidenav").style.width = "0";
   document.getElementById("adminmain").style.marginLeft= "0";
 }
+
+
+
 </script>
   
   
