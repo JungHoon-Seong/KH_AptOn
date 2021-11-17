@@ -12,8 +12,8 @@
 	</resultMap>
 	
 	<!-- Member select(로그인) 생성 by ParkJunYeb 2021.11.17-->
-	<select id="login" resultType="Member">
-	select house_num, pwd from 
+	<select id="login" resultMap="MemberMap" parameterType="Member">
+	select house_num, pwd from member 
 	where house_num = #{houseNum} and pwd = #{pwd}
 	</select>
 

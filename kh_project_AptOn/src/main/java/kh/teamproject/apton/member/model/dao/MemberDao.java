@@ -13,6 +13,6 @@ public class MemberDao {
 	private SqlSession sqlSession;
 	
 	public Member login(Member vo) {
-		return sqlSession.selectOne("member-mapper.login", vo);
+		return sqlSession.selectOne("Member.login", vo);
 	}
 }

@@ -8,4 +8,10 @@
 		<result property="adminPwd" column="admin_pwd" />
 		<result property="adminLog" column="admin_log" />
 	</resultMap>
+	
+	<!-- Admin select(로그인) 생성 by ParkJunYeb 2021.11.17-->
+		<select id="login" resultMap="AdminMap" parameterType="Admin">
+		select admin_id, admin_pwd from admin 
+		where admin_id = #{adminId} and admin_pwd = #{adminPwd}
+		</select>
 </mapper>

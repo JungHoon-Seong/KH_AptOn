@@ -52,7 +52,7 @@
     </div>
   </section><!-- End Hero -->
 
-	<form name="form-log" method="post" action="#">
+	<form name="form-log" method="post" action="login">
 	<h2>로그인</h2>
 		<div>
 			<input type="text" id="houseNum" placeholder="아이디" name="houseNum">
@@ -61,7 +61,7 @@
 			<input type="password" id="pwd" placeholder="비밀번호" name="pwd">
 		</div>
 		<div>
-			<input type="submit" id="log-btn">
+			<input type="submit" id="log-btn" value="로그인">
 		</div>
 		
 	</form>
