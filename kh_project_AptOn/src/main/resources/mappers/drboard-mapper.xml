@@ -23,14 +23,15 @@
 	
 	<select id="selectBoardList" resultMap="DrBoardMap">
 		<![CDATA[
-		SELECT * FROM DEFECT_RECEPTION
+		SELECT * FROM (SELECT ROWNUM RNUM, dr_no, HOUSE_NUM, ADMIN_ID, dr_TITLE, DR_CONTENT, to_char(DR_DATE, 'YY/MM/DD') DR_DATE, DR_STATE, DR_PROCESSINGDATE, DR_PROCESSINGDETAIL 
+		FROM DEFECT_RECEPTION)
 		ORDER BY dr_no desc
 		]]>
 	</select>
 	
 	<select id="selectContentView" resultMap="DrBoardMap">
 		<![CDATA[
-		SELECT * FROM DEFECT_RECEPTION WHERE DR_NO = #{drNo}
+		SELECT * FROM  WHERE DR_NO = #{drNo}
 		]]>
 	</select>
 	

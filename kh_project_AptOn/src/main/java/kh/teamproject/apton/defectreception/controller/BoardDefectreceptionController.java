@@ -23,9 +23,11 @@ public class BoardDefectreceptionController {
 		
 		int currentPage = 1;
 		int listCount = 0;
+		int pageCount = 0;
 		try {
 			listCount = boardService.getListCount();
-			viewPage = "/defectreception/defectreception_boardlist"; 
+			viewPage = "/defectreception/defectreception_boardlist";
+			
 		} catch (Exception e) {
 			mv.addObject("msg", "게시판 오류발생");
 			mv.addObject("url", "index");
@@ -34,7 +36,13 @@ public class BoardDefectreceptionController {
 		
 		int limit = 6;
 		int startPage = ((int)((double)currentPage / limit + 0.9) - 1) * limit  + 1;
+		
+		pageCount = (listCount / limit) + (listCount % limit == 0 ? 0 : 1);
+		
 		int endPage = startPage + limit - 1;
+		if(endPage > pageCount) endPage=pageCount;
+		System.out.println("listCount: "+ listCount);
+		System.out.println("endpage: "+ endPage);
 		int maxPage = (int)((double)listCount / limit + 0.9);
 		if (clickedPage != null) {
 			if (Integer.parseInt(clickedPage) <= 0) {
@@ -59,7 +67,7 @@ public class BoardDefectreceptionController {
 		
 		mv.addObject("drbList",drbList);
 		mv.addObject("currentPage",currentPage);
-		mv.addObject("limit",limit);
+		mv.addObject("pageCount",pageCount);
 		mv.addObject("startPage",startPage);
 		mv.addObject("endPage",endPage);
 		mv.addObject("maxPage",maxPage);
