@@ -37,14 +37,26 @@
 
   <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
   
+  <style>
+  #adminmain{
+	margin-top:100px;
+}
+  
+  </style>
+  
 </head>
 <body>
 <jsp:include page="header4admin.jsp" flush="true" />
 
-
-<section id="main">
-섹션영역 밀림 확인용
+<main id="adminmain">
+<section>
+어드민 화면은 main의 id를 adminmain으로 하면 style.css 에서 margin-top : 70px; 이 적용되고 <br>
+header4admin.jsp에서 자바스크립트가 사이드바 버튼 클릭시 mainadmin의 margin-left를 200px로 만들어서 밀립니다.<br>
+그리고 그 메인 안에 섹션을 만들어서 화면을 구성하면 됩니다.
 </section>
+</main>
+<br>
+adminmain 바깥의 영역입니다. 사이드바에 밀려나지 않습니다.
 
 
 

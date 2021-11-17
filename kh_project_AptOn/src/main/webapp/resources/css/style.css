@@ -340,7 +340,6 @@ h1, h2, h3, h4, h5, h6 {
 
 
 #main {
-  margin-top : 80px;
   transition: margin-left .5s;
   padding: 16px;
 }
@@ -428,9 +427,9 @@ h1, h2, h3, h4, h5, h6 {
 /*--------------------------------------------------------------
 # Sections General
 --------------------------------------------------------------*/
-section {
+/* section {
   padding: 90px 0;
-}
+} */
 
 .section-bg {
   background-color: #f7fbfe;
@@ -470,10 +469,16 @@ section {
 .section-title p {
   margin-bottom: 0;
 }
-
+#adminmain{
+	margin-top:70px;
+	transition:0.5s;
+}
 /*--------------------------------------------------------------
 # What We Do
 --------------------------------------------------------------*/
+#what-we-do{
+	padding-top:0px;
+}
 .what-we-do .icon-box {
   text-align: center;
   padding: 30px 20px;

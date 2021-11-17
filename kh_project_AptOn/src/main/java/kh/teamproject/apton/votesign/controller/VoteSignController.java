@@ -1,5 +1,7 @@
 package kh.teamproject.apton.votesign.controller;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
 
@@ -21,9 +23,13 @@ public class VoteSignController {
 	
 	@RequestMapping(value ="votelist", method = RequestMethod.GET)
 	public ModelAndView listOfVoteSign(ModelAndView mv, String clickedPage) {
-		
 		String viewpage = "error/commonError"; //viewpage는 미리 에러로 지정
-		
+		if(clickedPage!=null) {
+			if(!(clickedPage.matches("[+-]?\\d*(\\.\\d+)?"))) {
+				mv.setViewName(viewpage);
+				return mv;
+			} 
+		}
 		int currentPage = 1;
 		int listCount=0;
 		try {
@@ -35,10 +41,7 @@ public class VoteSignController {
 			mv.addObject("url" , "index");
 			e.printStackTrace();
 		} 
-		
 		int limit = 10;
-		int startPage = (((int)((double)currentPage / limit + 0.9)) - 1) * limit + 1;
-		int endPage = startPage + limit - 1;
 		int maxPage = (int)((double)listCount / limit + 0.9);
 		if(clickedPage !=null) {
 			if(Integer.parseInt(clickedPage) <=0) {
@@ -49,6 +52,12 @@ public class VoteSignController {
 			else {
 				currentPage = Integer.parseInt(clickedPage);
 			}
+		}
+		
+		int startPage = (((int)((double)currentPage / 5 + 0.9)) - 1) * 5 + 1;
+		int endPage = startPage + 5 - 1;
+		if(endPage >= maxPage) {
+			endPage = maxPage;
 		}
 		List<Map> volist = null;
 		try {
@@ -61,12 +70,20 @@ public class VoteSignController {
 			e.printStackTrace();
 		}
 		
+		//마감일과의 비교를 위한 오늘 날짜 구하기
+		LocalDate now = LocalDate.now();
+		DateTimeFormatter frm = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+		
+		String formatedNow = now.format(frm);
+		
 		mv.addObject("volist",volist);
 		mv.addObject("currentPage",currentPage);
 		mv.addObject("limit",limit);
 		mv.addObject("startPage",startPage);
 		mv.addObject("endPage",endPage);
 		mv.addObject("maxPage",maxPage);
+		mv.addObject("listCount",listCount);
+		mv.addObject("today",formatedNow);
 		
 		mv.setViewName(viewpage);
 		
