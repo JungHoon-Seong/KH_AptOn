@@ -29,4 +29,31 @@
 	 ]]>
 	</select>
 	
+	<insert id="enrollvote" parameterType="VoteInfo">
+		<![CDATA[
+INSERT INTO VOTE_INFO VALUES(
+	SEQ_VOTESIGN.NEXTVAL
+	, #{category}
+	, #{adminId}
+	, #{voteTitle}
+	, #{voteDesc}
+	, (select count(*) from member)
+	, 0
+	, 0
+	, TO_DATE(#{voteStartDate})
+	, TO_DATE(#{voteDeadLine})
+	)
+	 ]]>
+	</insert>
+	
+		<select id="selectvotedetail" parameterType="_int" resultMap="VoteInfoMap">
+	<![CDATA[
+		select "vote_no","category","admin_id"
+			,"vote_title","vote_desc","vote_rights"
+			,"vote_Y","vote_N"
+			,TO_CHAR("vote_startdate", 'YYYY/MM/DD') as vote_startdate
+			,TO_CHAR("vote_deadline", 'YYYY/MM/DD') as vote_deadline
+			 from vote_info where "vote_no" = #{vote_no} 
+	 ]]>
+	</select>
 </mapper>

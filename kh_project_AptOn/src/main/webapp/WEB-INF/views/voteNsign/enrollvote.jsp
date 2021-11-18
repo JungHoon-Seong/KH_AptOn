@@ -184,8 +184,9 @@ width:600px;
 </style>
 
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script> 
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+ <!-- 제이쿼리 날짜 선택 api 등록 -->
   <script> 
   $( function() {
 	  $(".datepicker").datepicker({ 
@@ -207,7 +208,45 @@ width:600px;
 	  });
 
   </script>
+<!-- 데이터 보내기 -->
+<script type="text/javascript">
+function goenroll(){
+	console.log(quill.getContents());
+	console.log(JSON.stringify(quill.root.innerHTML));
+	var adminid = "${admin.adminId }";
+/* 	private String voteTitle;
+	private String voteDesc;
+	private int voteRights; //투표 및 서명 대상자 수
+	private int voteY; 
+	private int voteN;
+	private String voteStartDate;
+	private String voteDeadLine;  */
+	$.ajax({
+		url : "enrollvote.do",
+		data : { 
+			category : $("#choosecat").val(),
+			adminId : adminid,
+			voteTitle : $("#title").val(),
+			voteDesc : JSON.stringify(quill.root.innerHTML), //html타입을 string으로
+			voteStartDate : $("#startdate").val(),
+			voteDeadLine : $("#enddate").val()
+		},
+		type : "post",
+		success : function(msg){
+			alert("등록되었습니다.");
+			location.href="votelist";
+		},
+		error : function(request, status, errorData){
+			alert("error code : " + request.status + "\n"
+				+ "message : " + request.responseText + "\n"
+				+ "error : " + errorData
+			);
+			location.href="error";
+		}
+	}); //ajax
+}; //function
 
+</script>
 </head>
 <body>
 <jsp:include page="../header4admin.jsp" flush="true" />
@@ -218,10 +257,11 @@ width:600px;
   <div id="headdiv">
     <ul id="category">
       <li>
-        <strong>종류</strong>
+        <strong>종류</strong><input id="choosecat" type="text" value="category" style="display:none";>
       </li>
       <li class="" onclick="setCatClass(event);" id="li_vote">투표</li>
       <li class="" onclick="setCatClass(event);" id="li_sign">서명</li>
+      <li>${admin.adminId }</li>
     </ul>
   </div>
 
@@ -245,17 +285,18 @@ width:600px;
 </fieldset>
 <!-- Create the editor container -->
 <div id="editor">
-  
   <p><br></p>
 </div>
-<button onclick="goenroll()" id="enrollbtn">투표/결재 등록</button>
+<button onclick="goenroll();" id="enrollbtn">투표/결재 등록</button>
 </section>
 </main>
+<jsp:include page="../footer.jsp" flush="true" />
 <!-- Include the Quill library -->
 <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
 
 <!-- Initialize Quill editor -->
 <script>
+//Quill editor 기능 구현
   var toolbarOptions =[ ['bold', 'italic', 'underline', 'strike'],
   [{ 'list': 'ordered'}, { 'list': 'bullet' }] ];
   var quill = new Quill('#editor', {
@@ -266,7 +307,8 @@ width:600px;
   });
 </script>
 <script> 
-function setCatClass(event){
+// 투표와 서명 중 선택하는 기능 구현
+function setCatClass(event){ 
 	console.log("여기");
 	console.log($(event.target));
 	var thisEle = $(event.target);
@@ -277,11 +319,13 @@ function setCatClass(event){
 		$(thisEle).attr('class','selectcategory');
 		$("#li_sign").attr('class','');
 		$("#li_sign").html('서명');
+		$("#choosecat").val("1");
 	} else if(thisEle.attr("id")=="li_sign"){
 		$(thisEle).html("&nbsp;&#10004; 서명&nbsp")
 		$(thisEle).attr('class','selectcategory');
 		$("#li_vote").attr('class','');
 		$("#li_vote").html('투표');
+		$("#choosecat").val("0");
 	}
 	
 };
@@ -322,11 +366,7 @@ $("#enddate").on("change keyup paste", function() {
 		}
 	};
 });
-
-
-
 </script>
-
 
 
 </body>

@@ -184,11 +184,12 @@
 		 </td>
 		  <td> <!-- DEADLINE과 today 비교  -->
 		  <c:choose>
-			<c:when test="${today <  map['DEADLINE'] }"><span style="color:#EB87CE;">진행중</span></c:when>
+			<c:when test="${today <=  map['DEADLINE'] && today >=  map['STARTDATE']}"><span style="color:#EB87CE;">진행중</span></c:when>
+			<c:when test="${today <  map['STARTDATE'] }"><span style="color:#6ACFE1;">대기중</span></c:when>
 			<c:otherwise><span style="color:#EBA487;">종료</span> <b>&check;</b></c:otherwise>
 		</c:choose>
 		  </td>
-		  <td><a href="#"><nobr>${map["vote_title"] }<nobr></a></td>
+		  <td><a href="votedetail?vote_no=${map['vote_no'] }"><nobr>${map["vote_title"] }<nobr></a></td>
 		  <td>${map["STARTDATE"] }</td>
 		  <td>${map["DEADLINE"] }</td>
 		</tr>

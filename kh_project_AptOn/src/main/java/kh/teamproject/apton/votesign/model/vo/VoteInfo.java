@@ -24,6 +24,12 @@ public class VoteInfo {
 	private int voteN;
 	private String voteStartDate;
 	private String voteDeadLine;
+	
+	
+	
+	public VoteInfo() {
+		super();
+	}
 	public VoteInfo(int voteNo, int category, String adminId, String voteTitle, String voteDesc, int voteRights,
 			int voteY, int voteN, String voteStartDate, String voteDeadLine) {
 		super();

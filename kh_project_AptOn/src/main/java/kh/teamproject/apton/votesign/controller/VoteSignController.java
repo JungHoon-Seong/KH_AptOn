@@ -5,15 +5,19 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 
 import kh.teamproject.apton.votesign.model.service.VoteSignService;
 import kh.teamproject.apton.votesign.model.vo.VoteInfo;
+import oracle.security.crypto.cert.ext.DeltaCRLIndicatorExtension;
 
 @Controller
 public class VoteSignController {
@@ -92,9 +96,59 @@ public class VoteSignController {
 	
 	//투표 등록 페이지
 	@RequestMapping(value = "enrollvote", method = RequestMethod.GET)
-	public String error() {
+	public String enrollvoteView() {
 		
 		return "voteNsign/enrollvote";
+	}
+	
+	@RequestMapping(value = "enrollvote.do", method = RequestMethod.POST)
+	@ResponseBody
+	public String enrollvoteDo(String msg, HttpServletRequest request) {
+		int category = Integer.parseInt(request.getParameter("category"));
+		String adminId = request.getParameter("adminId");
+		String voteTitle = request.getParameter("voteTitle");
+		String voteDesc = request.getParameter("voteDesc");
+		String voteStartDate = request.getParameter("voteStartDate");
+		String voteDeadLine = request.getParameter("voteDeadLine");
+		
+//		System.out.println(category);
+//		System.out.println(adminId);
+//		System.out.println(voteTitle);
+//		System.out.println(voteDesc);
+//		System.out.println(voteStartDate);
+//		System.out.println(voteDeadLine);
+//		
+		try {
+			VoteInfo vo = new VoteInfo(0, category, adminId, voteTitle, voteDesc, 0, 0, 0, voteStartDate, voteDeadLine);
+			int result = votesignservice.enrollvote(vo);
+			msg = "success";
+		} catch (Throwable e) {
+			e.printStackTrace();
+		}
+		return msg;
+	}// enrollvoteDo
+	
+	//투표 상세 페이지
+	@RequestMapping(value = "votedetail", method = RequestMethod.GET)
+	public ModelAndView votedetailView(ModelAndView mv, HttpServletRequest request) {
+		mv.setViewName("error/commonError");
+		int vote_no = Integer.parseInt(request.getParameter("vote_no"));
+		VoteInfo vo = new VoteInfo();
+		try {
+			vo = votesignservice.selectvotedetail(vote_no);
+		} catch (Throwable e) {
+			e.printStackTrace();
+		}
+		
+		if(vo.getCategory() == 1) {
+			mv.setViewName("voteNsign/votedetail");
+			mv.addObject("vo", vo);
+		} else if(vo.getCategory() == 0){
+			mv.setViewName("voteNsign/signdetail");
+			mv.addObject("vo", vo);
+		}
+		
+		return mv;
 	}
 	
 }

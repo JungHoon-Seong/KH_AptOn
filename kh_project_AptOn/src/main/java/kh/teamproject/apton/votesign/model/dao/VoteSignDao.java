@@ -31,6 +31,15 @@ public class VoteSignDao {
 		return sqlsession.selectOne("VoteInfo.getListCount");
 		
 	}
+	
+	public int enrollvote(VoteInfo vo) throws Throwable,Exception{
+
+		return sqlsession.insert("VoteInfo.enrollvote",vo);
+	}
+	public VoteInfo selectvotedetail(int vote_no) throws Throwable,Exception{
+		
+		return sqlsession.selectOne("VoteInfo.selectvotedetail",vote_no);
+	}
 
 
 }

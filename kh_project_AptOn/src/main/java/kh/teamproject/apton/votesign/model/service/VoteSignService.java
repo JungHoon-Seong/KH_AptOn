@@ -23,6 +23,14 @@ public class VoteSignService {
 		
 		return votesigndao.getListCount();
 	}
+	public int enrollvote(VoteInfo vo) throws Throwable,Exception{
+		
+		return votesigndao.enrollvote(vo);
+	}
+	public VoteInfo selectvotedetail(int vote_no) throws Throwable,Exception{
+		
+		return votesigndao.selectvotedetail(vote_no);
+	}
 	
 
 
