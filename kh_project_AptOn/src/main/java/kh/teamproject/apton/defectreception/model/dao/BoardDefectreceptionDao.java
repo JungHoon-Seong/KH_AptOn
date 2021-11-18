@@ -17,6 +17,8 @@ import kh.teamproject.apton.defectreception.model.vo.DrBoard;
 @Repository("boardDao")
 public class BoardDefectreceptionDao { 
 	
+	public static final int deleteBoard = 0;
+
 	//TODO SJH autocommit을 끄기 위해 추가했으나  getSqlSessionFactory메소드를 꼭 써야하는지 확인이 필요함
 	private SqlSessionFactory getSqlSessionFactory() {
 		String resource = "/mybatis-config.xml";
@@ -75,6 +77,18 @@ public class BoardDefectreceptionDao {
 	public int updateBoard(DrBoard bvo) {
 		int result = 0;
 		result = sqlSession.update("DrBoard.updateContent", bvo);
+		if (result == 0) {
+			System.out.println("dao단오류발생");
+		}
+		return result;
+	}
+
+	public int deleteBoard(DrBoard bvo) {
+		int result = 0;
+		result = sqlSession.delete("DrBoard.deleteContent", bvo);
+		if (result == 0) {
+			System.out.println("dao단오류발생");
+		}
 		return result;
 	}
 	

@@ -144,7 +144,7 @@
 			<td id ="boardNo">${vo.drNo }</td>
 			<td>${vo.drTitle }</td>
 			<td>${vo.drDate }</td>
-			<td>${vo.houseNo }</td>
+			<td id = "houseno">${vo.houseNo }</td>
 			<c:choose>
 				<c:when test="${vo.drState == 1}">
 					<td class="completestate">처리완료</td>
@@ -172,18 +172,25 @@
 	</table>
 		<div>
 		</div>
-	<!-- SJH TODO 회원 세션일경우만 보이도록 보완필요 -->
+	<!-- SJH TODO 회원 세션과 houseno id가 같을 경우만 보이도록 보완필요 -->
 		<div id="btnBox">
 			<button type="button" id="btnUpdate" onclick="btnUpdate()">수정</button>
-			<button type="button" id="btnDelete">삭제</button>
+			<button type="button" id="btnDelete" onclick="btnDelete()">삭제</button>
 		</div>
 		<script>
 			function btnUpdate(){
-				var boardNumber = document.getElementById('boardNo').value;
-				console.log(boardNumber);
 				location.href="./update-defectreception?no=${vo.drNo}";
 			}
-	</script>	
+			function btnDelete(){
+				
+				var confirmDelete = confirm("삭제하시겠습니까?");
+				if(confirmDelete == true){ <!-- 알림창의 확인 버튼 눌러야지 이동됨 -->
+					location.href="./delete-defectreception?no=${vo.drNo}"
+				}
+			}
+	</script>
+	
+		
 	</c:forEach>
 </section>
 </main>

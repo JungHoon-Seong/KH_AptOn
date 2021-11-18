@@ -47,6 +47,11 @@ public class DrBoard {
 		this.drContent = content;
 	}
 
+	public DrBoard(int drno) {
+		this.drNo = drno;
+	}
+
+
 	@Override
 	public String toString() {
 		return "DR_Board [drNo=" + drNo + ", houseNo=" + houseNo + ", adminId=" + adminId + ", drTitle=" + drTitle

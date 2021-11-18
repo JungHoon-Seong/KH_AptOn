@@ -39,13 +39,15 @@
 	<insert id="insertContent" parameterType="DrBoard" statementType="PREPARED">
 		INSERT INTO DEFECT_RECEPTION VALUES(SEQ_DR_Board_NO.nextval,
 		#{houseNo}, #{adminId}, #{drTitle}, #{drContent} , SYSDATE , #{drState}, SYSDATE, #{drProcessingDetail})
-		
 	</insert>
 	
 	<update id="updateContent" parameterType="DrBoard" statementType="PREPARED">
 	UPDATE DEFECT_RECEPTION SET DR_TITLE = #{drTitle}, DR_CONTENT = #{drContent} WHERE DR_NO = #{drNo}
 	</update>
 	
+	<delete id="deleteContent" parameterType="DrBoard" statementType="PREPARED">
+		DELETE FROM DEFECT_RECEPTION WHERE DR_NO = #{drNo}
+	</delete>
 	
 	
 

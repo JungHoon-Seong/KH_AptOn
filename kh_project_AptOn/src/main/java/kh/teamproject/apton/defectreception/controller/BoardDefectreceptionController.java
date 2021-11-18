@@ -150,7 +150,7 @@ public class BoardDefectreceptionController {
 	@RequestMapping(value = "update-defectreception", method = RequestMethod.GET)
 	public ModelAndView updateContent(ModelAndView mv, @RequestParam(value="no" , defaultValue = "0")int drno) {
 		String viewPage = "error/commonError"; //기본페이지 에러페이지로 동일하게 설정함
-		int drBoardResult;
+		//보안 높일려면 가구번호랑 세션아디 비교하여 확인기능 필요할듯
 		
 		List<DrBoard> drbList = null;
 		try {
@@ -178,7 +178,7 @@ public class BoardDefectreceptionController {
 
 	int drBoardResult = 0;
 	
-	
+	//보안 높일려면 가구번호랑 세션아디 비교하여 확인기능 필요할듯
 	DrBoard bvo = new DrBoard(drno, title,Content);
 	drBoardResult = boardService.updateBoard(bvo);
 		
@@ -187,18 +187,34 @@ public class BoardDefectreceptionController {
 		mv.addObject("msg" , "게시판 오류 발생");
 		mv.addObject("url" , "index");
 	}else {
-		viewPage= "./board-defectreception";
+		viewPage= "redirect: ./board-defectreception";
 	}
 	
 	
 	mv.addObject("result",drBoardResult);
-	mv.setViewName("redirect: ./board-defectreception");
+	mv.setViewName(viewPage);
 	return mv;
 	}
 	
-	@RequestMapping(value = "delete-defectreception", method = RequestMethod.POST)
-	public ModelAndView deleteontent() {
-		return null;
+	@RequestMapping(value = "delete-defectreception", method = RequestMethod.GET)
+	public String deleteContent(ModelAndView mv, @RequestParam(value="no" , defaultValue = "0")int drno) {
+		
+		//보안 높일려면 가구번호랑 세션아디 비교하여 확인기능 필요할듯  
+		String viewPage = "error/commonError";
+		int drBoardResult = 0;
+		DrBoard bvo = new DrBoard(drno);
+		drBoardResult = boardService.deleteBoard(bvo);
+		
+		if (drBoardResult == 0) {
+			viewPage= "error/commonError";
+			mv.addObject("msg" , "게시판 오류 발생");
+			mv.addObject("url" , "index");
+		}else {
+			viewPage= "./board-defectreception";
+		}
+		
+		
+		return "redirect: ./board-defectreception";
 	}
 
 	

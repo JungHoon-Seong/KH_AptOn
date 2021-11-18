@@ -51,14 +51,14 @@
  	width: 1200px;
  }
  table {
-	border: 1px solid black;
-	width: 1200px;
-	text-align: center;
-	background-color: #ccc;
+	 border: 1px solid black;
+	 width: 1200px;
+	 text-align: center;
  }
- td {
- 	border: 1px solid black;
- 	width: 240px;
+ #rowheader {
+	 font-weight: bold;
+	 text-align: center;
+	 background-color: #ccc;
  }
  .completestate {
 	 font-weight: bold;
@@ -66,52 +66,27 @@
  footer {
  	clear: both;
  }
- #btnBox {
+ #btnPermitBox {
  	float: right;
  }
- .textContent {
- 	text-align: center;
- }
- .img {
- 	width: 240px;
- 	height: 200px;
- }
-  #btnUpdate {
+ #btnPermit {
 	 broder: none;
 	 border-radius: 5px;
 	 color: white;
-	 padding: 7px 16px;
+	 padding: 15px 32px;
 	 text-align: center;
 	 font-size: 16px;
 	 margin: 4px 2px;
 	 cursor: pointer;
 	 background-color: #008CBA;
  }
- #textNo {
- border: none;
- width: 200px;
- }
- 
- #textTitle {
- border: none;
- width: 1200px;
- height: 2em;
- }
- #textContent {
- border: none;
- width: 1200px;
- height: 375px;
- }
- .readonlyHeader {
- 	border: none;
- 	width: 300px;
- 	background-color: #ccc;
- 	border-bottom: 1px solid #ccc;
- 	text-align: center;
- }
  </style>
- 
- 
+  
+  <script>
+  function permitscript(){
+	  
+  }
+  </script>
   
 </head>
 
@@ -119,7 +94,7 @@
 
 <!-- ========header.jsp 삽입해주세요 -->
 
-<jsp:include page="../header.jsp" flush="true" />
+<jsp:include page="../header4admin.jsp" flush="true" />
 <!-- ========header.jsp 삽입해주세요 -->
 
   <!-- ======= Hero Section ======= -->
@@ -134,7 +109,7 @@
 
 
 <main id="main">
-<h2>노원 롯데 캐슬 - <a href="./board-defectreception">아파트 민원 접수</a></h2>
+<h2>관리자 노원 롯데 캐슬 - <a href="./board-defectreception">아파트 민원 접수</a></h2>
 
 <aside id="aside">
 <!-- 메뉴이름 및 링크는 추후 결정 -->
@@ -148,46 +123,55 @@
 
 <section id="mainsection">
 	<table id="maintable">
-	<form action="./update-defectreception"  method="post">
-		<c:forEach items="${drbList}" var="vo">
+	<tr id="rowheader">
+		<td> </td>
+		<td>No.</td>
+		<td>이미지</td>
+		<td>제목</td>
+		<td>작성일자</td>
+		<td>가구번호</td>
+		<td>처리상태</td>
+	</tr>
+	
+	<!-- Todo drImage는 다른 테이블에 있다 해결이 필요함 -->
+	<c:if test="${drbList != null }">
+	<c:forEach items="${drbList}" var="vo">
 		<tr>
-			<td><input type="text" class="readonlyHeader" name="no" value="${vo.drNo }" readonly /></td>
-			<td>${vo.drDate}</td>
-			<td>${vo.houseNo} </td>
+			<td><input type="checkbox" class="chkbox" /></td>
+			<td>${vo.drNo }</td>
+			<td>이미지</td>
+			<td>
+			<a href="view-defectreception?no=${vo.drNo }">${vo.drTitle }</a>
+			</td>
+			<td>${vo.drDate }</td>
+			<td>${vo.houseNo }</td>
+			
 			<c:choose>
 			<c:when test="${vo.drState == 1}">
-				<td class="completestate readonlyHeader" >처리완료</td>
+				<td class="completestate">처리완료</td>
 			</c:when>
 			<c:when test="${vo.drState == 0}">
-				<td class="" >처리중</td>
+				<td class="">처리중</td>
 			</c:when>
 			</c:choose>
-		</tr>
-		<tr>
-			<td class="textContent" colspan="5">
-				<input type="text" name="t" id="textTitle" value="${vo.drTitle}" />
-			<!-- <textarea name="t" id="textTitle" >${vo.drTitle }</textarea> -->
-			</td>
 			
 		</tr>
-		<tr>
-			<td><input type="file" name="imgs[]" id="imageUpload"/></td>	
-		</tr>
-		<tr>
-			<td class="textContent" colspan="5">
-			<textarea name="c" id="textContent" >${vo.drContent }</textarea>
-			</td>
-		</tr>
-		</c:forEach>
+	</c:forEach>
+</c:if>
 	</table>
-		<div>
+	<div id="paging">
+		<c:if test="${startPage > 1 }" >이전</c:if>
+		<c:forEach begin="${startPage }" end="${endPage }" step="1" var="i">
+			<a href="board-defectreception?p=${i}">${i}</a>
+		</c:forEach>
+		<c:if test="${endPage < pageCount }"> 다음 </c:if>
+	</div>
+	<!-- SJH TODO 관리자 세션일경우만 보이도록 보완필요 -->
+	 
+		<div id="btnPermitBox">
+			<button type='button' id='btnPermit' onclick='permitscript()'>민원 허가</button>
 		</div>
-	<!-- SJH TODO 회원 세션일경우만 보이도록 보완필요 -->
-		<div id="btnBox">
-			<button type="submit" id="btnUpdate">수정하기</button>
-			
-		</div>
-	</form>
+	
 </section>
 </main>
 
