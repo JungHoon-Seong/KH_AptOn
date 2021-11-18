@@ -41,6 +41,11 @@ public class DrBoard {
 		this.drProcessingDetail = processingDetail;
 	}
 
+	public DrBoard(int boardno, String title, String content) {
+		this.drNo = boardno;
+		this.drTitle = title;
+		this.drContent = content;
+	}
 
 	@Override
 	public String toString() {

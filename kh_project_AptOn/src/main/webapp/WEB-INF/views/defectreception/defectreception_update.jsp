@@ -76,7 +76,7 @@
  	width: 240px;
  	height: 200px;
  }
-  #btnWrite {
+  #btnUpdate {
 	 broder: none;
 	 border-radius: 5px;
 	 color: white;
@@ -87,16 +87,31 @@
 	 cursor: pointer;
 	 background-color: #008CBA;
  }
+ #textNo {
+ border: none;
+ width: 200px;
+ }
+ 
  #textTitle {
  border: none;
  width: 1200px;
+ height: 2em;
  }
  #textContent {
  border: none;
  width: 1200px;
  height: 375px;
  }
+ .readonlyHeader {
+ 	border: none;
+ 	width: 300px;
+ 	background-color: #ccc;
+ 	border-bottom: 1px solid #ccc;
+ 	text-align: center;
+ }
  </style>
+ 
+ 
   
 </head>
 
@@ -133,27 +148,43 @@
 
 <section id="mainsection">
 	<table id="maintable">
-	<form action="./insert-defectreception"  method="post">
-	
+	<form action="./update-defectreception"  method="post">
+		<c:forEach items="${drbList}" var="vo">
 		<tr>
-			<td><input type="text" name="t" id="textTitle" placeholder="제목을 입력해주세요"/></td>
+			<td><input type="text" class="readonlyHeader" name="no" value="${vo.drNo }" disabled /></td>
+			<td>${vo.drDate}</td>
+			<td>${vo.houseNo} </td>
+			<c:choose>
+			<c:when test="${vo.drState == 1}">
+				<td class="completestate readonlyHeader" >처리완료</td>
+			</c:when>
+			<c:when test="${vo.drState == 0}">
+				<td class="" >처리중</td>
+			</c:when>
+			</c:choose>
 		</tr>
-
+		<tr>
+			<td class="textContent" colspan="5">
+				<input type="text" name="t" id="textTitle" value="${vo.drTitle}" />
+			<!-- <textarea name="t" id="textTitle" >${vo.drTitle }</textarea> -->
+			</td>
+			
+		</tr>
 		<tr>
 			<td><input type="file" name="imgs[]" id="imageUpload"/></td>	
 		</tr>
 		<tr>
 			<td class="textContent" colspan="5">
-			<textarea name="c" id="textContent" placeholder="내용을 입력해주세요"></textarea>
+			<textarea name="c" id="textContent" >${vo.drContent }</textarea>
 			</td>
 		</tr>
-	
+		</c:forEach>
 	</table>
 		<div>
 		</div>
 	<!-- SJH TODO 회원 세션일경우만 보이도록 보완필요 -->
 		<div id="btnBox">
-			<button type="submit" id="btnWrite">작성</button>
+			<button type="submit" id="btnUpdate">수정하기</button>
 			
 		</div>
 	</form>

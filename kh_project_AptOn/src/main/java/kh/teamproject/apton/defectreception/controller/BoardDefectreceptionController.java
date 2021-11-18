@@ -147,9 +147,53 @@ public class BoardDefectreceptionController {
 		return mv;
 	}
 	
+	@RequestMapping(value = "update-defectreception", method = RequestMethod.GET)
+	public ModelAndView updateContent(ModelAndView mv, @RequestParam(value="no" , defaultValue = "0")int drno) {
+		String viewPage = "error/commonError"; //기본페이지 에러페이지로 동일하게 설정함
+		int drBoardResult;
+		
+		List<DrBoard> drbList = null;
+		try {
+			drbList = boardService.selectContentView(drno);
+			viewPage= "./defectreception/defectreception_update";
+		} catch (Exception e) {
+			viewPage= "error/commonError";
+			mv.addObject("msg" , "게시판 오류 발생");
+			mv.addObject("url" , "index");
+		}
+		
+		
+		mv.addObject("drbList",drbList);
+		mv.setViewName(viewPage);
+
+		return mv;
+
+	}
+	
 	@RequestMapping(value = "update-defectreception", method = RequestMethod.POST)
-	public ModelAndView updateContent() {
-		return null;
+	public ModelAndView updateContent(ModelAndView mv, @RequestParam(value="t" , defaultValue = "0")String title,
+			@RequestParam(value="c" , defaultValue = "0")String Content,
+			@RequestParam(value="no" , defaultValue = "0")int drno){
+	String viewPage = "error/commonError"; //기본페이지 에러페이지로 동일하게 설정함
+
+	int drBoardResult = 0;
+	
+	
+	DrBoard bvo = new DrBoard(drno, title,Content);
+	drBoardResult = boardService.updateBoard(bvo);
+		
+	if (drBoardResult == 0) {
+		viewPage= "error/commonError";
+		mv.addObject("msg" , "게시판 오류 발생");
+		mv.addObject("url" , "index");
+	}else {
+		viewPage= "./board-defectreception";
+	}
+	
+	
+	mv.addObject("result",drBoardResult);
+	mv.setViewName("redirect: ./board-defectreception");
+	return mv;
 	}
 	
 	@RequestMapping(value = "delete-defectreception", method = RequestMethod.POST)

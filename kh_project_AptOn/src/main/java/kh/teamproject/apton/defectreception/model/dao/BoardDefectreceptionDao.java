@@ -71,6 +71,12 @@ public class BoardDefectreceptionDao {
 		
 		return result;
 	}
+
+	public int updateBoard(DrBoard bvo) {
+		int result = 0;
+		result = sqlSession.update("DrBoard.updateContent", bvo);
+		return result;
+	}
 	
 	
 

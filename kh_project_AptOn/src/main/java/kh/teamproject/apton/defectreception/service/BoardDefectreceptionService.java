@@ -46,13 +46,6 @@ public class BoardDefectreceptionService {
 		return vo;
 	}
 
-		
-	public int updateBoard(int bno, String bcont) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-
 	
 	public int insertBoard(DrBoard bvo) {
 		return boardDao.insertBoard(bvo);
@@ -63,6 +56,11 @@ public class BoardDefectreceptionService {
 	public int deleteBoard(int bno) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+
+	public int updateBoard(DrBoard bvo) {
+		return boardDao.updateBoard(bvo);
 	}
 
 

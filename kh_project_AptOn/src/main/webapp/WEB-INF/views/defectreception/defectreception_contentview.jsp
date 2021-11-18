@@ -71,6 +71,7 @@
  }
  .textContent {
  	text-align: center;
+ 	height: 375px;
  }
  .img {
  	width: 240px;
@@ -99,6 +100,9 @@
 	 background-color: #f44336;
  }
  </style>
+
+	
+
   
 </head>
 
@@ -137,7 +141,7 @@
 	<table id="maintable">
 	<c:forEach items="${drbList}" var="vo">
 		<tr>
-			<td>${vo.drNo }</td>
+			<td id ="boardNo">${vo.drNo }</td>
 			<td>${vo.drTitle }</td>
 			<td>${vo.drDate }</td>
 			<td>${vo.houseNo }</td>
@@ -164,16 +168,23 @@
 		<tr>
 			<td class="textContent" colspan="5">${vo.drContent }</td>
 		</tr>
-	</c:forEach>
+	
 	</table>
 		<div>
 		</div>
 	<!-- SJH TODO 회원 세션일경우만 보이도록 보완필요 -->
 		<div id="btnBox">
-			<button type="button" id="btnUpdate">수정</button>
+			<button type="button" id="btnUpdate" onclick="btnUpdate()">수정</button>
 			<button type="button" id="btnDelete">삭제</button>
 		</div>
-	
+		<script>
+			function btnUpdate(){
+				var boardNumber = document.getElementById('boardNo').value;
+				console.log(boardNumber);
+				location.href="./update-defectreception?no=${vo.drNo}";
+			}
+	</script>	
+	</c:forEach>
 </section>
 </main>
 
