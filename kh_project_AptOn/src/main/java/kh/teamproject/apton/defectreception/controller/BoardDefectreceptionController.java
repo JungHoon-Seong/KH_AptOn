@@ -2,6 +2,8 @@ package kh.teamproject.apton.defectreception.controller;
 
 import java.util.List;
 
+import javax.naming.spi.DirStateFactory.Result;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -116,22 +118,32 @@ public class BoardDefectreceptionController {
 	}
 	
 	@RequestMapping(value = "insert-defectreception", method = RequestMethod.POST)
-	public ModelAndView insertContent(ModelAndView mv, DrBoard bvo ) {
+	public ModelAndView insertContent(ModelAndView mv, @RequestParam(value="t" , defaultValue = "0")String title,
+			@RequestParam(value="c" , defaultValue = "0")String Content) {
 		String viewPage = "error/commonError"; //기본페이지 에러페이지로 동일하게 설정함
 
 		int drBoardResult = 0;
-		try {
-			drBoardResult = boardService.insertBoard(bvo);
+		
+		//SJHTODO 세션에 따라 호수번호를 입력받아야함 추후 처리
+		int houseNum = 51004;
+		String adminId = "admin2";
+		int state = 0;
+		String ProcessingDetail = "처리중";
+		
+		DrBoard dvo = new DrBoard(houseNum, adminId, title,Content,state,ProcessingDetail);
+		drBoardResult = boardService.insertBoard(dvo);
 			
-		} catch (Exception e) {
+		if (drBoardResult == 0) {
 			viewPage= "error/commonError";
 			mv.addObject("msg" , "게시판 오류 발생");
 			mv.addObject("url" , "index");
-			e.printStackTrace();
+		}else {
+			viewPage= "./board-defectreception";
 		}
 		
+		
 		mv.addObject("result",drBoardResult);
-		mv.setViewName(viewPage);
+		mv.setViewName("redirect: ./board-defectreception");
 		return mv;
 	}
 	

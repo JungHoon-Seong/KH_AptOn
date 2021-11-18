@@ -79,7 +79,7 @@
           <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0">
             <div class="icon-box">
               <div class="icon"><i class="bx bx-file"></i></div>
-              <h4><a href="">아파트 민원 접수</a></h4>
+              <h4><a href="./board-defectreception">아파트 민원 접수</a></h4>
               <p>아파트에서 일어나는 문제점들을 온라인으로 관리사무소에 문의하실 수 있습니다.</p>
             </div>
           </div>

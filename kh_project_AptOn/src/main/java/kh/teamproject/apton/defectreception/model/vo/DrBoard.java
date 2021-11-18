@@ -11,9 +11,37 @@ public class DrBoard {
 	private int drState;
 	private String drProcessingDate; //db에는 Date이기 때문에 to_char로 출력 , to_date로 입력을 sql구문에 적어줘야함.
 	private String drProcessingDetail;
-	
-	
-	
+
+
+	public DrBoard() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+
+	public DrBoard(int houseNum, String adminId2, String title, String content, String date,int state) {
+		this.houseNo = houseNum;
+		this.adminId = adminId2;
+		this.drTitle = title;
+		this.drContent = content;
+		this.drDate = date;
+		this.drState = state;
+	}
+
+
+
+
+	public DrBoard(int houseNum, String adminId2, String title, String content, int state
+			, String processingDetail) {
+		this.houseNo = houseNum;
+		this.adminId = adminId2;
+		this.drTitle = title;
+		this.drContent = content;
+		this.drState = state;
+		this.drProcessingDetail = processingDetail;
+	}
+
+
 	@Override
 	public String toString() {
 		return "DR_Board [drNo=" + drNo + ", houseNo=" + houseNo + ", adminId=" + adminId + ", drTitle=" + drTitle

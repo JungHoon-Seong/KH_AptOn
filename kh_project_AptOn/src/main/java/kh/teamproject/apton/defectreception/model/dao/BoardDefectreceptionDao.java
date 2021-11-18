@@ -60,17 +60,13 @@ public class BoardDefectreceptionDao {
 
 	public int insertBoard(DrBoard bvo) {
 		int result = 0;
-		try {
-			
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
-		sqlSession = getSqlSessionFactory().openSession(false);
+		
+//		sqlSession = getSqlSessionFactory().openSession(false);
 		result = sqlSession.insert("DrBoard.insertContent", bvo);
 		if (result > 0) {
-			sqlSession.commit();
+//			sqlSession.commit();
 		}else {
-			sqlSession.rollback();
+//			sqlSession.rollback();
 		}
 		
 		return result;
