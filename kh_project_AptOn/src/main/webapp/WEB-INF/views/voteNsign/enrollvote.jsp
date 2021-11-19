@@ -301,7 +301,6 @@ function golist(){
       </li>
       <li class="" onclick="setCatClass(event);" id="li_vote">투표</li>
       <li class="" onclick="setCatClass(event);" id="li_sign">서명</li>
-      <li>${admin.adminId }</li>
     </ul>
   </div>
 
@@ -325,10 +324,12 @@ function golist(){
 </fieldset>
 <!-- Create the editor container -->
 <div id="editor">
-  <p><br></p>
+  <p></p>
 </div>
+<span style="font-size:12px;">남은 글자 수 : <input value="200" id="txtlim" style="font-size:12px; border:none; width:25px;" readonly>자</span>
 <button onclick="goenroll();" id="enrollbtn">등록하기</button>
 <button onclick="golist();" id="enrollbtn">취소하기</button>
+
 </section>
 </main>
 
@@ -348,6 +349,12 @@ function golist(){
     },
     theme: 'snow'
   });
+  quill.on('text-change', function (delta, old, source) {
+	  document.getElementById("txtlim").value = 201 - quill.getLength();
+	  if (quill.getLength() > 200) {
+	    quill.deleteText(200, quill.getLength());
+	  }
+	});
 </script>
 <script> 
 // 투표와 서명 중 선택하는 기능 구현

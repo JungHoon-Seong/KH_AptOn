@@ -257,7 +257,7 @@ box-shadow: 3px 3px 3px 1px red;
 	</td>
 </tr>
 </table>
-<a href="votelist"><button id="tolist">목록으로</button></a>
+<button id="tolist" onclick="location.href='votelist' ">목록으로</button>
 <textarea id="textresult" style="width:0; height:0;overflow: hidden;resize:none;border:none;outline:none;">
 </textarea>
 </div>
@@ -277,7 +277,7 @@ box-shadow: 3px 3px 3px 1px red;
 
 <script>
 window.onload = function() {
-	$("#votedesc").html("${vo.voteDesc }");
+	$("#votedesc").html(${vo.voteDesc });
 	
 	var result = $("#voteresult").text();
 	console.log(result);
@@ -294,7 +294,6 @@ function drawBasic() {
       var data = google.visualization.arrayToDataTable([
         ['', '참여자'],
         ['', ${vo.voteY}]
-      
         ]);
 
       var options = {
@@ -304,7 +303,11 @@ function drawBasic() {
         hAxis: {
           title: '참여율 : <fmt:formatNumber value="${voteratio * 100 }" pattern="0"/>%',
           minValue: 0,
-          maxValue: ${vo.voteRights}
+          maxValue: ${vo.voteRights},
+          viewWindow: {
+              min: 0,
+              max: ${vo.voteRights}
+          }
         },
         colors: ['#FA9223']
       };

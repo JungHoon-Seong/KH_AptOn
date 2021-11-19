@@ -257,7 +257,7 @@ box-shadow: 3px 3px 3px 1px red;
 	</td>
 </tr>
 </table>
-<a href="votelist"><button id="tolist">목록으로</button></a>
+<button id="tolist" onclick="location.href='votelist' ">목록으로</button>
 <textarea id="textresult" style="width:0; height:0;overflow: hidden;resize:none;border:none;outline:none;">
 </textarea>
 </div>
@@ -277,12 +277,12 @@ box-shadow: 3px 3px 3px 1px red;
 
 <script>
 window.onload = function() {
-	$("#votedesc").html("${vo.voteDesc }");
+	console.log(${vo.voteDesc });
+	$("#votedesc").html(${vo.voteDesc });
 	
 	var result = $("#voteresult").text();
 	console.log(result);
 	$("#textresult").text(result);
-	
 };
 </script>
 <script type="text/javascript">

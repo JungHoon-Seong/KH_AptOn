@@ -15,8 +15,8 @@
       관리자 : ${admin.adminId } 님 접속중
         <ul>
           <li><a class="nav-link scrollto active" href="/apton">Home</a></li>
-          <li><a class="nav-link scrollto " href="memberlist">회원리스트</a></li>
-          <li><a class="nav-link scrollto" href="insertmember">회원가입</a></li>
+          <li><a class="nav-link scrollto " href="memberlist">메뉴1</a></li>
+          <li><a class="nav-link scrollto" href="insertmember">메뉴2</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->

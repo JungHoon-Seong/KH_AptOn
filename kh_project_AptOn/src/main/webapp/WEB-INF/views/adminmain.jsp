@@ -44,6 +44,9 @@
   
   </style>
   
+<!-- jquery cdn -->
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+
 </head>
 <body>
 <jsp:include page="header4admin.jsp" flush="true" />
