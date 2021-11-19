@@ -3,7 +3,7 @@ package kh.teamproject.apton.defectreception.model.vo;
 public class DrBoard {
 	
 	private int drNo;
-	private int houseNo;
+	private long houseNo;
 	private String adminId;
 	private String drTitle;
 	private String drContent;
@@ -19,7 +19,7 @@ public class DrBoard {
 	}
 
 
-	public DrBoard(int houseNum, String adminId2, String title, String content, String date,int state) {
+	public DrBoard(long houseNum, String adminId2, String title, String content, String date,int state) {
 		this.houseNo = houseNum;
 		this.adminId = adminId2;
 		this.drTitle = title;
@@ -31,7 +31,7 @@ public class DrBoard {
 
 
 
-	public DrBoard(int houseNum, String adminId2, String title, String content, int state
+	public DrBoard(long houseNum, String adminId2, String title, String content, int state
 			, String processingDetail) {
 		this.houseNo = houseNum;
 		this.adminId = adminId2;
@@ -58,61 +58,97 @@ public class DrBoard {
 				+ ", drContent=" + drContent + ", drDate=" + drDate + ", drState=" + drState + ", drProcessingDate="
 				+ drProcessingDate + ", drProcessingDetail=" + drProcessingDetail + "]";
 	}
-	
+
+
 	public int getDrNo() {
 		return drNo;
 	}
+
+
 	public void setDrNo(int drNo) {
 		this.drNo = drNo;
 	}
-	public int getHouseNo() {
+
+
+	public long getHouseNo() {
 		return houseNo;
 	}
-	public void setHouseNo(int houseNo) {
+
+
+	public void setHouseNo(long houseNo) {
 		this.houseNo = houseNo;
 	}
+
+
 	public String getAdminId() {
 		return adminId;
 	}
+
+
 	public void setAdminId(String adminId) {
 		this.adminId = adminId;
 	}
+
+
 	public String getDrTitle() {
 		return drTitle;
 	}
+
+
 	public void setDrTitle(String drTitle) {
 		this.drTitle = drTitle;
 	}
+
+
 	public String getDrContent() {
 		return drContent;
 	}
+
+
 	public void setDrContent(String drContent) {
 		this.drContent = drContent;
 	}
+
+
 	public String getDrDate() {
 		return drDate;
 	}
+
+
 	public void setDrDate(String drDate) {
 		this.drDate = drDate;
 	}
+
+
 	public int getDrState() {
 		return drState;
 	}
+
+
 	public void setDrState(int drState) {
 		this.drState = drState;
 	}
+
+
 	public String getDrProcessingDate() {
 		return drProcessingDate;
 	}
+
+
 	public void setDrProcessingDate(String drProcessingDate) {
 		this.drProcessingDate = drProcessingDate;
 	}
+
+
 	public String getDrProcessingDetail() {
 		return drProcessingDetail;
 	}
+
+
 	public void setDrProcessingDetail(String drProcessingDetail) {
 		this.drProcessingDetail = drProcessingDetail;
 	}
+	
 	
 	
 	

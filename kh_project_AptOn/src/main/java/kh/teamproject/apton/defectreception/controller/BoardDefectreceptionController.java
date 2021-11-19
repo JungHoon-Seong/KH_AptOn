@@ -244,14 +244,14 @@ public class BoardDefectreceptionController {
 
 		
 		//todo 포로젝트의 리소스 폴더가  아닌 다른 로컬 위치의 폴더로 저장되는 문제점이있다. 
-		String root = request.getSession().getServletContext().getRealPath("/src/main/webapp/resources/img");
+		String root = request.getSession().getServletContext().getRealPath("\\resources");
 		System.out.println("root은 이거야!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!:"+ root);
-		//.getRealPath("resources");
+		//.getRealPath("/src/main/webapp/resources/img");
 		String savePath = root + "/uploadFiles";
 		String filePath = null;
 		File folder = new File(savePath);
 		if (!folder.exists()) {
-		//	folder.mkdir(); // 폴더가 없다면 생성한다.
+//			folder.mkdir(); // 폴더가 없다면 생성한다.
 		}
 
 		try {
