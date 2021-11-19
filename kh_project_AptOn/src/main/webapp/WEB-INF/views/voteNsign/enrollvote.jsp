@@ -7,7 +7,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>투표/결재 등록</title>
-    <!-- Favicons -->
+<!-- 공통 css 및 글꼴 입력 부분 시작, title바로 밑에 삽입  -->
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
   <link href="resources/img/favicon.png" rel="icon">
   <link href="resources/img/apple-touch-icon.png" rel="apple-touch-icon">
 
@@ -30,13 +34,34 @@
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
-  <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
 
+  <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
   
   <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
   <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+  <script src="//cdn.quilljs.com/1.3.6/quill.js"></script>
   
-  <style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+
+<style>
+header{
+font-family: 'Noto Sans KR', sans-serif;
+}
+footer{
+font-family: 'Noto Sans KR', sans-serif;
+}
+</style>
+
+<!-- 공통 css 및 글꼴 입력 부분 끝  -->
+
+
+<style>
+  
+#writesection{
+  font-family: 'Noto Sans KR', sans-serif;
+  }
 fieldset{
   border:none;
   margin :0 0 10px 0; 
@@ -181,6 +206,8 @@ width:600px;
 	left:2px;
 	}
 
+
+
 </style>
 
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -211,6 +238,11 @@ width:600px;
 <!-- 데이터 보내기 -->
 <script type="text/javascript">
 function goenroll(){
+	var result = confirm("등록하시겠습니까?");
+	if(result == false){
+		return;		
+	} else{
+	
 	console.log(quill.getContents());
 	console.log(JSON.stringify(quill.root.innerHTML));
 	var adminid = "${admin.adminId }";
@@ -244,7 +276,16 @@ function goenroll(){
 			location.href="error";
 		}
 	}); //ajax
+	}
 }; //function
+function golist(){
+	var result = confirm("취소하시겠습니까?");
+	if(result == false){
+		return;		
+	} else{
+		location.href="votelist";
+	}
+}
 
 </script>
 </head>
@@ -288,9 +329,12 @@ function goenroll(){
   <p><br></p>
 </div>
 <button onclick="goenroll();" id="enrollbtn">투표/결재 등록</button>
+<button onclick="golist();" id="enrollbtn">취소</button>
 </section>
 </main>
+
 <jsp:include page="../footer.jsp" flush="true" />
+
 <!-- Include the Quill library -->
 <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
 

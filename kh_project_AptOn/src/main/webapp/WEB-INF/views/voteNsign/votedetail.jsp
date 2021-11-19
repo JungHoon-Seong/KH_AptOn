@@ -7,6 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>투표 상세</title>
+<!-- 공통 css 및 글꼴 입력 부분 시작, title바로 밑에 삽입  -->
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -40,8 +41,26 @@
   <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
   <script src="//cdn.quilljs.com/1.3.6/quill.js"></script>
   
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+
+<style>
+header{
+font-family: 'Noto Sans KR', sans-serif;
+}
+footer{
+font-family: 'Noto Sans KR', sans-serif;
+}
+</style>
+
+<!-- 공통 css 및 글꼴 입력 부분 끝  -->
+
+
 <style>
 #contentsection{
+	font-family: 'Noto Sans KR', sans-serif;
+	width : 1300px;
 }
 #div1{
 	width: 600px;
@@ -53,6 +72,7 @@
 	width: 600px;
 	margin-left:50px;
 	float:left;
+	
 }
 #votedetail{
 	width:600px;
@@ -110,10 +130,11 @@
   margin-bottom:10px;
 }
 #copyresult:hover {
+border: 1px solid rgba(255, 0, 0, 0.25);
 transform: translateY(-3px);
 color: #f4511e;
 background-color: #FFFFFF;
-box-shadow: 3px 3px 3px 2px red;
+box-shadow: 3px 3px 3px 1px red;
 }
 
 #copyresult span {
@@ -140,6 +161,41 @@ box-shadow: 3px 3px 3px 2px red;
   opacity: 1;
   right: 0;
 }
+	#tolist{
+	margin-top:15px;
+	font-size:13px;
+	border : 1px solid rgba(159,220,120,0.5);
+	border-radius:5px;
+	background-color: rgba(159,220,120,0.5);
+	padding-top:4px;
+	padding-bottom:4px;
+	box-shadow: 3px 3px 0 rgba(159,220,120,1);
+	overflow: hidden;
+	white-space: nowrap;
+	display: block;
+	text-overflow: ellipsis;
+	}
+	#tolist:hover{
+	font-size:13px;
+	border : 1px solid rgba(159,220,120,1);
+	border-radius:5px;
+	background-color: rgba(159,220,120,1);
+	box-shadow: 3px 3px 0 #D04B4D;
+	}
+	#tolist:active{
+	font-size:13px;
+	border : 1px solid rgba(159,220,120,1);
+	border-radius:5px;
+	background-color: rgba(159,220,120,1);
+	box-shadow: 1px 1px 0 #D04B4D;
+	position: relative;
+	top:2px;
+	left:2px;
+	}
+	#textresult:focus{
+	outline:none;
+	}
+
 </style>
 <!-- 구글 파이 차트 api -->
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
@@ -149,7 +205,6 @@ box-shadow: 3px 3px 3px 2px red;
 </head>
 <body>
 <jsp:include page="../header4admin.jsp" flush="true" />
-<!-- {"ops":[{"attributes":{"bold":true},"insert":"굵은 글씨"},{"insert":"\n"},{"attributes":{"bold":true},"insert":"리스트1"},{"attributes":{"list":"bullet"},"insert":"\n"},{"attributes":{"bold":true},"insert":"리스트2"},{"attributes":{"list":"bullet"},"insert":"\n"},{"attributes":{"bold":true},"insert":"리스트3"},{"attributes":{"list":"bullet"},"insert":"\n"}]} -->
 
 <main id="adminmain">
 <section id="contentsection">
@@ -160,7 +215,12 @@ box-shadow: 3px 3px 3px 2px red;
 	<th id="th1">번호</th>
 	<td>${vo.voteNo }</td>
 	<th id="th_cate">종류</th>
-	<td>${vo.category }</td>
+	<td>
+		<c:choose>
+			<c:when test="${vo.category eq '0'}">서명</c:when>
+			<c:when test="${vo.category eq '1'}">투표</c:when>
+		</c:choose>
+	</td>
 </tr>
 <tr>
 	<th>시작일</th>
@@ -192,31 +252,29 @@ box-shadow: 3px 3px 3px 2px red;
 투표율 : <c:set var="voteratio" value="${totalvote /  vo.voteRights}"/> <fmt:formatNumber value="${voteratio * 100 }" pattern="0"/>%<br>
 찬성 : ${vo.voteY }표, 반대 : ${vo.voteN }표<br>
 </div>
-<button id = "copyresult" onclick="copyresult();"><span>결과 복사하기</span></button>
+<button id = "copyresult" onclick="copyresult();"><span><b>결과 복사하기</b></span></button>
 </div>
 	</td>
 </tr>
 </table>
-<textarea id="textresult" style="width:0; height:0;overflow: hidden;resize:none;border:none;">
-
+<a href="votelist"><button id="tolist">목록으로</button></a>
+<textarea id="textresult" style="width:0; height:0;overflow: hidden;resize:none;border:none;outline:none;">
 </textarea>
 </div>
 
 <div id="div2">
 <div id="vote_piechart" style="width: 600px; height: 500px;"></div>
 </div>
+<div style="clear:both;"></div>
 </section>
+
 </main>
 
-<%-- <jsp:include page="../footer.jsp" flush="true" /> --%>
+
+<jsp:include page="../footer.jsp" flush="true" />
 
 
 
-<!-- 결과복사에 넣기
- <details>
-  <summary>Epcot Center</summary>
-  <p>Epcot is a theme park at Walt Disney World Resort featuring exciting attractions, international pavilions, award-winning fireworks and seasonal special events.</p>
-</details> -->
 <script>
 window.onload = function() {
 	$("#votedesc").html("${vo.voteDesc }");
@@ -251,6 +309,7 @@ function copyresult() {
 		textArea.select();
 		document.execCommand('copy');
 		alert(textArea.value+"위의 내용이 복사되었습니다.");
+		$(':focus').blur();  // textarea 포커스된거 없애기
 		};
 </script>
 </body>

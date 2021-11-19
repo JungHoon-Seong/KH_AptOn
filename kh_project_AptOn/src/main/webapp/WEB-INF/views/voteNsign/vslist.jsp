@@ -7,6 +7,10 @@
 <head>
 <meta charset="UTF-8">
 <title>투표/결재 목록</title>
+<!-- 공통 css 및 글꼴 입력 부분 시작, title바로 밑에 삽입  -->
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
   <!-- Favicons -->
   <link href="resources/img/favicon.png" rel="icon">
   <link href="resources/img/apple-touch-icon.png" rel="apple-touch-icon">
@@ -33,7 +37,28 @@
 
   <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
   
+  <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
+  <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+  <script src="//cdn.quilljs.com/1.3.6/quill.js"></script>
+  
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+
 <style>
+header{
+font-family: 'Noto Sans KR', sans-serif;
+}
+footer{
+font-family: 'Noto Sans KR', sans-serif;
+}
+</style>
+
+<!-- 공통 css 및 글꼴 입력 부분 끝  -->
+<style>
+#votemain{
+	font-family: 'Noto Sans KR', sans-serif;
+}
 	table {
 		border-collapse: collapse;
 		width: 800px;
@@ -153,10 +178,7 @@
 	
 	
 </style>
-  
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+
   
 </head>
 <body>
