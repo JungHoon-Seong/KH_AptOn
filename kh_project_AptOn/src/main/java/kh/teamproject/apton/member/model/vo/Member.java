@@ -1,7 +1,10 @@
 package kh.teamproject.apton.member.model.vo;
 
+
 import java.util.Arrays;
 
+import org.springframework.stereotype.Component;
+@Component
 public class Member {
 //	house_num NUMBER NOT NULL PRIMARY KEY, --가구번호
 //	pwd	VARCHAR2(500) NOT NULL,  --비밀번호
