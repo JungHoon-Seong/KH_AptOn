@@ -70,7 +70,8 @@
  	float: right;
  }
  .textContent {
- 	text-align: center;
+ 	text-align: justify;
+ 	vertical-align: top;
  	height: 375px;
  }
  .img {
@@ -99,6 +100,10 @@
 	 cursor: pointer;
 	 background-color: #f44336;
  }
+  h2 {
+ margin-top: 200px;
+ margin-left: 200px;
+ }
  </style>
 
 	
@@ -113,13 +118,6 @@
 <jsp:include page="../header.jsp" flush="true" />
 <!-- ========header.jsp 삽입해주세요 -->
 
-  <!-- ======= Hero Section ======= -->
-  <section id="hero" class="d-flex flex-column justify-content-center align-items-center">
-    <div class="container text-center text-md-left" data-aos="fade-up">
-      <h1>노원 롯데 캐슬 <span>시그니처</span></h1>
-      <h2>with 아파트온</h2>
-    </div>
-  </section><!-- End Hero -->
 
 
 
