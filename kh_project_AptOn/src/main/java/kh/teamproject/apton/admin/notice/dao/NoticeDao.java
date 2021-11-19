@@ -33,4 +33,11 @@ public class NoticeDao {
 		return noticelist;
 	}
 
+	public List<Notice> selectContentView(int noticenum) {
+		List<Notice> noticelist;
+		
+		noticelist = sqlSession.selectList("Notice.selectContentView",noticenum);
+		return noticelist;
+	}
+	
 }

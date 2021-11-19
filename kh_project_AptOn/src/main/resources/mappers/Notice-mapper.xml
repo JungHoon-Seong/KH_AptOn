@@ -23,4 +23,11 @@
 		select count(*) from Notice
  ]]>
 	</select>
+	
+	<select id="selectContentView" resultMap="NoticeMap">
+		<![CDATA[
+		SELECT * from NOTICE WHERE notice_num = #{noticenum}
+		]]>
+	</select>
+	
 </mapper>

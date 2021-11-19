@@ -30,6 +30,19 @@ public class NoticeService {
 		return vo;
 	}
 	
+	public List<Notice> selectContentView(int noticenum)  {
+		List<Notice> vo = null;
+		
+		try {
+			vo = NoticeDao.selectContentView(noticenum);
+		} catch (Throwable e) {
+			e.printStackTrace();
+		}
+		
+		return vo;
+	}
+	
+	
 	public int updateNotice(int no, String ncont) {
 		// TODO Auto-generated method stub
 		return 0;

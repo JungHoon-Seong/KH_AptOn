@@ -24,7 +24,7 @@ public class NoticeController {
 		String viewPage = "error/commonError"; //기본페이지 에러페이지로 동일하게 설정함
 		
 		final int PAGE_SIZE = 6;
-		final int PAGE_BLOCK = 3;
+		final int PAGE_BLOCK = 5;
 		int currentPage = 1;
 		int listCount = 0;
 		int pageCount = 0;
@@ -88,5 +88,25 @@ public class NoticeController {
 		mv.setViewName(viewPage);
 		return mv;
 	}
-
+	
+	@RequestMapping(value = "notice-detail", method = RequestMethod.GET)
+	public ModelAndView selectContentView(ModelAndView mv, @RequestParam(value="no" , defaultValue = "0")int noticenum ) {
+		String viewPage = "error/commonError"; //기본페이지 에러페이지로 동일하게 설정함
+		
+		
+		List<Notice> noticelist = null;
+		try {
+			noticelist = noticeService.selectContentView(noticenum);
+			viewPage= "/notice/noticedetail";
+		} catch (Exception e) {
+			viewPage= "error/commonError";
+			mv.addObject("msg" , "게시판 오류 발생");
+			mv.addObject("url" , "index");
+			e.printStackTrace();
+		}
+		
+		mv.addObject("noticelist",noticelist);
+		mv.setViewName(viewPage);
+		return mv;
+	}
 }
