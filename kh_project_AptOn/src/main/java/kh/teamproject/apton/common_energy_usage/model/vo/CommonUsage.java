@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 //COMMON_ENERGY_DATE NOT NULL DATE   날짜
 //GENERRATION_NUMBER NOT NULL NUMBER 세대수
 //PRICE                       NUMBER 총 관리비
-@Component
+
 public class CommonUsage {
 
 	private int maintenanceCost;
