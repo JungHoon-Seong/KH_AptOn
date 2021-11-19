@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import kh.teamproject.apton.admin.notice.service.NoticeService;
@@ -19,15 +20,17 @@ public class NoticeController {
 	private NoticeService noticeService;    
 	
 	@RequestMapping(value = "/noticelist", method = RequestMethod.GET)
-	public ModelAndView selectBoardList(ModelAndView mv, String clickedPage) {
+	public ModelAndView selectBoardList(ModelAndView mv, String clickedPage, @RequestParam(value = "p", defaultValue = "1")String pageNum) {
 		String viewPage = "error/commonError"; //기본페이지 에러페이지로 동일하게 설정함
 		
+		final int PAGE_SIZE = 6;
+		final int PAGE_BLOCK = 3;
 		int currentPage = 1;
 		int listCount = 0;
 		int pageCount = 0;
 		try {
 			listCount =noticeService.getListCount();
-			viewPage = "/defectreception/defectreception_boardlist";
+			viewPage = "/notice/adminnotice";
 			
 		} catch (Exception e) {
 			mv.addObject("msg", "게시판 오류발생");
@@ -35,16 +38,17 @@ public class NoticeController {
 			e.printStackTrace();
 		}
 		
-		int limit = 6;
-		int startPage = ((int)((double)currentPage / limit + 0.9) - 1) * limit  + 1;
+		if (pageNum != null) {
+			clickedPage = pageNum;
+		}
 		
-		pageCount = (listCount / limit) + (listCount % limit == 0 ? 0 : 1);
+		int startPage = ((int)((double)currentPage / PAGE_SIZE + 0.9) - 1) * PAGE_SIZE  + 1;
 		
-		int endPage = startPage + limit - 1;
+		pageCount = (listCount / PAGE_SIZE) + (listCount % PAGE_SIZE == 0 ? 0 : 1);
+		
+		int endPage = startPage + PAGE_SIZE - 1;
 		if(endPage > pageCount) endPage=pageCount;
-		System.out.println("listCount: "+ listCount);
-		System.out.println("endpage: "+ endPage);
-		int maxPage = (int)((double)listCount / limit + 0.9);
+		int maxPage = (int)((double)listCount / PAGE_SIZE + 0.9);
 		if (clickedPage != null) {
 			if (Integer.parseInt(clickedPage) <= 0) {
 				currentPage = 1;
@@ -55,16 +59,23 @@ public class NoticeController {
 			}
 		}
 		
+		if (currentPage % PAGE_BLOCK == 0) {
+			startPage = (currentPage / PAGE_BLOCK - 1) * PAGE_BLOCK + 1;
+		}else {
+			startPage = (currentPage / PAGE_BLOCK) * PAGE_BLOCK + 1;
+		}
+		
 		List<Notice> noticelist = null;
 		try {
-			noticelist = noticeService.selectNoticeList(currentPage, limit);
-			viewPage= "/defectreception/defectreception_boardlist";
+			noticelist = noticeService.selectNoticeList(currentPage, PAGE_SIZE);
+			viewPage= "/notice/adminnotice";
 		} catch (Exception e) {
 			viewPage= "error/commonError";
 			mv.addObject("msg" , "게시판 오류 발생");
 			mv.addObject("url" , "index");
 			e.printStackTrace();
 		}
+		
 		
 		mv.addObject("noticelist",noticelist);
 		mv.addObject("currentPage",currentPage);
@@ -73,7 +84,7 @@ public class NoticeController {
 		mv.addObject("endPage",endPage);
 		mv.addObject("maxPage",maxPage);
 		
-		
+		System.out.println("notice: -->"+noticelist);
 		mv.setViewName(viewPage);
 		return mv;
 	}

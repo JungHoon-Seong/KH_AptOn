@@ -13,11 +13,14 @@
 	</resultMap>
 	
 	<select id="Noticelist" resultType="Notice">
-		select * from Notice
+		<![CDATA[
+		select notice_num,admin_id,notice_title,notice_date from NOTICE
+			 ]]>
 	</select>
 
 	<select id="getNoticelistCount" resultType="_int">
+			<![CDATA[
 		select count(*) from Notice
-
+ ]]>
 	</select>
 </mapper>

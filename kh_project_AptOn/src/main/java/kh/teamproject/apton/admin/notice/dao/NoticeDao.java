@@ -29,7 +29,7 @@ public class NoticeDao {
 		RowBounds row = new RowBounds(startRow, limit);
 		
 
-		noticelist = sqlSession.selectList("Notice.selectNoticeList");
+		noticelist = sqlSession.selectList("Notice.Noticelist",null, row);
 		return noticelist;
 	}
 
