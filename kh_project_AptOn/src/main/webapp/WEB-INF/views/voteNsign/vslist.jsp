@@ -41,6 +41,7 @@
   <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
   <script src="//cdn.quilljs.com/1.3.6/quill.js"></script>
   
+  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
   
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
