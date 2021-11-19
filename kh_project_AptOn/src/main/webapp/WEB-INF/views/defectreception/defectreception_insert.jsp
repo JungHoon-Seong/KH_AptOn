@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+ 
 <!DOCTYPE html>
 <html lang="en">
 
@@ -36,7 +37,8 @@
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
   <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
-  
+  <!-- SJH TODO ck에디터 CDN 향후 변경될 수 있음 -->
+  <script src="https://cdn.ckeditor.com/ckeditor5/11.0.1/classic/ckeditor.js"></script>
  <style>
  ul {
  list-style-type: none;
@@ -70,8 +72,11 @@
  	float: right;
  }
  .textContent {
- 	text-align: center;
+ 	text-align: justify;
  }
+ .ck-content {
+ 	height: 375px;
+ }  
  .img {
  	width: 240px;
  	height: 200px;
@@ -101,7 +106,7 @@
  margin-left: 200px;
  }
  </style>
-  
+
 </head>
 
 <body>
@@ -136,6 +141,7 @@
 			<td><input type="text" name="t" id="textTitle" placeholder="제목을 입력해주세요"/></td>
 		</tr>
 
+		<!-- form으로 보낼려면 name이 필요한대 에디터에서 제공해주는 플러그인이 name이 없어서 아래 input file을 사용-->
 		<tr>
 			<td><input type="file" name="imgs[]" id="imageUpload"/></td>	
 		</tr>
@@ -176,5 +182,15 @@
   <!-- Template Main JS File -->
   <script src="resources/js/main.js"></script>
 
+  <script>
+  ClassicEditor
+  .create( document.querySelector( '#textContent' ), {
+      // 제거 하고싶은 플러그인 (배열)
+       removePlugins: [ 'ImageUpload' ]
+  } )
+  .catch( error => {
+      console.error( error );
+  } );
+  </script>
 </body>
 </html>

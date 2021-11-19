@@ -36,7 +36,8 @@
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
   <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
-  
+  <!-- SJH TODO ck에디터 CDN 향후 변경될 수 있음 -->
+  <script src="https://cdn.ckeditor.com/ckeditor5/11.0.1/classic/ckeditor.js"></script>
  <style>
  ul {
  list-style-type: none;
@@ -70,8 +71,11 @@
  	float: right;
  }
  .textContent {
- 	text-align: center;
+ 	text-align: justify;
  }
+ .ck-content {
+ 	height: 375px;
+ }  
  .img {
  	width: 240px;
  	height: 200px;
@@ -167,9 +171,11 @@
 			</td>
 			
 		</tr>
+		<!-- form으로 보낼려면 name이 필요한대 에디터에서 제공해주는 플러그인이 name이 없어서 아래 input file을 사용-->
 		<tr>
 			<td><input type="file" name="imgs[]" id="imageUpload"/></td>	
 		</tr>
+		 
 		<tr>
 			<td class="textContent" colspan="5">
 			<textarea name="c" id="textContent" >${vo.drContent }</textarea>
@@ -187,7 +193,16 @@
 	</form>
 </section>
 </main>
-
+ <script>
+  ClassicEditor
+      .create( document.querySelector( '#textContent' ), {
+          // 제거 하고싶은 플러그인 (배열)
+           removePlugins: [ 'ImageUpload' ]
+      } )
+      .catch( error => {
+          console.error( error );
+      } );
+  </script>
      <!-- ======= Footer ======= -->
 <jsp:include page="../footer.jsp" flush="true" />
  
