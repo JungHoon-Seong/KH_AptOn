@@ -28,7 +28,7 @@
 	<mapper resource="mappers/drboard-mapper.xml"/><!-- DrBoard mapper 추가  by SJH 2021.11.16-->
 	<mapper resource="mappers/voteinfo-mapper.xml"/> <!--  VoteInfo mapper 생성 후 등록 by NaHyowon 2021.11.16 -->
 	<mapper resource="mappers/mcost-mapper.xml"/> <!-- mcost mapper 생생 후 등록 by ParkJunYeb 2021.11.19 -->
-
+	<mapper resource="mappers/comusage-mapper.xml"/> <!-- comusage mapper 생생 후 등록 by ParkJunYeb 2021.11.19 -->
 </mappers>
 
 
