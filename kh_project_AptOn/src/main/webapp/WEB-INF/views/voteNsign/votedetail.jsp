@@ -245,7 +245,7 @@ box-shadow: 3px 3px 3px 1px red;
 	</td>
 </tr>
 <tr>
-	<td colspan="4" id="td_copy">
+	<td colspan="4" id="td_copy" style="height:150px;">
 <div>
 <div id="voteresult"><b>투표결과</b><br><c:set var="totalvote" value="0"/><c:set var="voteratio" value="0"/>
 투표수 : ${vo.voteRights }명 중 <c:set var="totalvote" value="${vo.voteY + vo.voteN }"/><c:out value="${totalvote }"/>명 투표<br>

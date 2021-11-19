@@ -246,7 +246,7 @@ box-shadow: 3px 3px 3px 1px red;
 	</td>
 </tr>
 <tr>
-	<td colspan="4" id="td_copy">
+	<td colspan="4" id="td_copy" style="height:150px;">
 <div>
 <div id="voteresult"><b>서명결과</b><br><c:set var="totalvote" value="0"/><c:set var="voteratio" value="0"/>
 서명 대상자 ${vo.voteRights }명 중 ${vo.voteY }명 서명<br>

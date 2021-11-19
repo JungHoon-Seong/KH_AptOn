@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -72,9 +73,9 @@ public class HomeController {
 	
 	// 임시 admin 로그인용 template by NaHyowon 2021.11.15
 	@RequestMapping(value = "adminlogin", method =RequestMethod.GET )
-	public String managerLogin(HttpServletRequest request) {
+	public String managerLogin(HttpServletRequest request, HttpServletResponse response) {
 		Admin admin = new Admin();
-		admin.setAdminId("admin01");
+		admin.setAdminId("admin2");
 		admin.setAdminPwd("pwd01");
 		admin.setAdminLog("20211115"); // 임시로 yyyymmdd 형식 by NaHyowon 2021.11.15
 		request.getSession().setAttribute("admin", admin);

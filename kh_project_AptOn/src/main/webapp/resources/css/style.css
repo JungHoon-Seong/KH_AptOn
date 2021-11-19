@@ -302,7 +302,7 @@ h1, h2, h3, h4, h5, h6 {
   z-index: 1;
   top: 0;
   left: 0;
-  background-color: #0246D0;
+  background-color: #395CC6;
   overflow-x: hidden;
   transition: 0.5s;
   padding-top: 60px;
@@ -310,20 +310,66 @@ h1, h2, h3, h4, h5, h6 {
   opacity: 1;
 
 }
-
+.sidenav{
+	font-size: 20px;
+	 color: white;
+}
 .sidenav a {
-  padding: 8px 8px 8px 32px;
+  margin: 8px 8px 8px 20px;
   text-decoration: none;
-  font-size: 23px;
+  font-size: 20px;
   color: white;
   display: inline-block;
   transition: 0.2s;
   white-space: nowrap;
+  border-radius:5px;
+  padding: 2px;
 }
 
 .sidenav a:hover {
-  font-size: 25px;
-  color: pink;
+  background-color: white;
+  color: #395CC6;
+}
+.sidenav div ul{
+	padding : 0;
+	margin-bottom:0;
+}
+.sidedroplist{
+    cursor:pointer;
+    list-style:none;
+    }
+.dropdown{
+  background-color: #395CC6;
+}
+#mySidenav > div > ul > li > ul > li{
+    cursor:pointer;
+    list-style:none;
+    padding: 2px 2px 2px 28px;
+    font-size:15px;
+    }
+#mySidenav > div > ul > li > ul > li >a{
+	font-size:15px;
+	margin:0;
+	padding: 1px 3px 1px 3px;
+	color: white;
+	background-color: #395CC6;
+    }
+#mySidenav > div > ul > li > ul > li >a:hover{
+	color: #395CC6;
+	background-color: white;
+}
+.sidedroplist a{
+	cursor:pointer;
+	-webkit-user-select: none;
+}
+.sidedroplist .hide{
+    display:none;
+}
+.sidedroplist >a::after{
+	content: " \22EF";
+}
+.sidedroplist >a.special::after{
+	content: " \22EE";
 }
 
 .sidenav .closebtn {
@@ -334,14 +380,10 @@ h1, h2, h3, h4, h5, h6 {
   margin-left: 50px;
 }
 .sidenav .closebtn:hover {
-  position: absolute;
-  top: 0;
-  right: 25px;
-  font-size: 38px;
-  margin-left: 50px;
-}
-
-
+	color: white;
+	background-color: #395CC6;
+	font-size: 38px;
+    }
 #main {
   transition: margin-left .5s;
   padding: 16px;

@@ -19,7 +19,7 @@
 	
 	<select id="votelist" resultType="map">
 	<![CDATA[
-		select "vote_no","category","admin_id","vote_title","vote_desc","vote_rights","vote_Y","vote_N",TO_CHAR("vote_startdate", 'YYYY/MM/DD') as startdate ,TO_CHAR("vote_deadline", 'YYYY/MM/DD') as deadline from vote_info order by "vote_no" desc
+		select vote_no,"category",admin_id,vote_title,TO_CHAR(vote_startdate, 'YYYY/MM/DD') as startdate ,TO_CHAR(vote_deadline, 'YYYY/MM/DD') as deadline from vote_info order by vote_no desc
 	 ]]>
 	</select>
 	
@@ -48,12 +48,12 @@ INSERT INTO VOTE_INFO VALUES(
 	
 		<select id="selectvotedetail" parameterType="_int" resultMap="VoteInfoMap">
 	<![CDATA[
-		select "vote_no","category","admin_id"
-			,"vote_title","vote_desc","vote_rights"
-			,"vote_Y","vote_N"
-			,TO_CHAR("vote_startdate", 'YYYY/MM/DD') as vote_startdate
-			,TO_CHAR("vote_deadline", 'YYYY/MM/DD') as vote_deadline
-			 from vote_info where "vote_no" = #{vote_no} 
+		select vote_no,"category",admin_id
+			,vote_title,vote_desc,vote_rights
+			,vote_Y,vote_N
+			,TO_CHAR(vote_startdate, 'YYYY/MM/DD') as vote_startdate
+			,TO_CHAR(vote_deadline, 'YYYY/MM/DD') as vote_deadline
+			 from vote_info where vote_no = #{vote_no} 
 	 ]]>
 	</select>
 </mapper>

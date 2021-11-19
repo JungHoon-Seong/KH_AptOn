@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>투표/결재 목록</title>
+<title>투표/서명 목록</title>
 <!-- 공통 css 및 글꼴 입력 부분 시작, title바로 밑에 삽입  -->
   <meta content="" name="description">
   <meta content="" name="keywords">
@@ -41,10 +41,10 @@
   <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
   <script src="//cdn.quilljs.com/1.3.6/quill.js"></script>
   
+  
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
-
 <style>
 header{
 font-family: 'Noto Sans KR', sans-serif;
@@ -197,7 +197,7 @@ font-family: 'Noto Sans KR', sans-serif;
         </tr>
        <c:forEach var="map" items="${volist}">
 		<tr>
-		  <td>${map["vote_no"] }</td>
+		  <td>${map['VOTE_NO'] }</td>
 		  <td> <!-- category가 0이면 서명, 1이면 투표  -->
 		  <c:choose>
 			<c:when test="${map['category'] eq '0'}">서명</c:when>
@@ -206,12 +206,12 @@ font-family: 'Noto Sans KR', sans-serif;
 		 </td>
 		  <td> <!-- DEADLINE과 today 비교  -->
 		  <c:choose>
-			<c:when test="${today <=  map['DEADLINE'] && today >=  map['STARTDATE']}"><span style="color:#EB87CE;">진행중</span></c:when>
-			<c:when test="${today <  map['STARTDATE'] }"><span style="color:#6ACFE1;">대기중</span></c:when>
+			<c:when test="${today <=  map['DEADLINE'] && today >=  map['STARTDATE']}"><span style="color:rgb(216, 31, 31);">진행중</span><b> ~</b></c:when>
+			<c:when test="${today <  map['STARTDATE'] }"><span style="color:#6ACFE1;">대기중</span> &#x0221E;</c:when>
 			<c:otherwise><span style="color:#EBA487;">종료</span> <b>&check;</b></c:otherwise>
 		</c:choose>
 		  </td>
-		  <td><a href="votedetail?vote_no=${map['vote_no'] }"><nobr>${map["vote_title"] }<nobr></a></td>
+		  <td><a href="votedetail?vote_no=${map['VOTE_NO'] }"><nobr>${map['VOTE_TITLE'] }<nobr></a></td>
 		  <td>${map["STARTDATE"] }</td>
 		  <td>${map["DEADLINE"] }</td>
 		</tr>
@@ -247,7 +247,7 @@ font-family: 'Noto Sans KR', sans-serif;
 			<li><a href="javascript:PageMove(${endPage+1})" class="arrowbtn">&#10095;</a></li>
 			</c:if>
 			<li id="enrollbtn">
-			<button onclick="goenroll()">투표/결재 등록</button>
+			<button onclick="goenroll()">투표/서명 등록</button>
 			</li>
       </ul>
 </span>

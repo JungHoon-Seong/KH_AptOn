@@ -6,7 +6,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>투표/결재 등록</title>
+  <title>투표/서명 등록</title>
 <!-- 공통 css 및 글꼴 입력 부분 시작, title바로 밑에 삽입  -->
   <meta content="" name="description">
   <meta content="" name="keywords">
@@ -53,7 +53,6 @@ footer{
 font-family: 'Noto Sans KR', sans-serif;
 }
 </style>
-
 <!-- 공통 css 및 글꼴 입력 부분 끝  -->
 
 
@@ -211,10 +210,10 @@ width:600px;
 </style>
 
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
  <!-- 제이쿼리 날짜 선택 api 등록 -->
-  <script> 
+<script> 
   $( function() {
 	  $(".datepicker").datepicker({ 
 		  changeMonth: true, 
@@ -328,8 +327,8 @@ function golist(){
 <div id="editor">
   <p><br></p>
 </div>
-<button onclick="goenroll();" id="enrollbtn">투표/결재 등록</button>
-<button onclick="golist();" id="enrollbtn">취소</button>
+<button onclick="goenroll();" id="enrollbtn">등록하기</button>
+<button onclick="golist();" id="enrollbtn">취소하기</button>
 </section>
 </main>
 
