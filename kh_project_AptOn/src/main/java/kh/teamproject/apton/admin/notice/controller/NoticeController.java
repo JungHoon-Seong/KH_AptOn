@@ -20,7 +20,7 @@ public class NoticeController {
 	private NoticeService noticeService;    
 	
 	@RequestMapping(value = "/noticelist", method = RequestMethod.GET)
-	public ModelAndView selectBoardList(ModelAndView mv, String clickedPage, @RequestParam(value = "p", defaultValue = "1")String pageNum) {
+	public ModelAndView selectNoticeList(ModelAndView mv, String clickedPage, @RequestParam(value = "p", defaultValue = "1")String pageNum) {
 		String viewPage = "error/commonError"; //기본페이지 에러페이지로 동일하게 설정함
 		
 		final int PAGE_SIZE = 6;
@@ -30,7 +30,7 @@ public class NoticeController {
 		int pageCount = 0;
 		try {
 			listCount =noticeService.getListCount();
-			viewPage = "/notice/adminnotice";
+			viewPage = "/notice/noticelist";
 			
 		} catch (Exception e) {
 			mv.addObject("msg", "게시판 오류발생");
@@ -68,7 +68,7 @@ public class NoticeController {
 		List<Notice> noticelist = null;
 		try {
 			noticelist = noticeService.selectNoticeList(currentPage, PAGE_SIZE);
-			viewPage= "/notice/adminnotice";
+			viewPage= "/notice/noticelist";
 		} catch (Exception e) {
 			viewPage= "error/commonError";
 			mv.addObject("msg" , "게시판 오류 발생");
@@ -90,13 +90,13 @@ public class NoticeController {
 	}
 	
 	@RequestMapping(value = "notice-detail", method = RequestMethod.GET)
-	public ModelAndView selectContentView(ModelAndView mv, @RequestParam(value="no" , defaultValue = "0")int noticenum ) {
+	public ModelAndView selectContentView(ModelAndView mv, @RequestParam(value="no" , defaultValue = "0")int notice_num ) {
 		String viewPage = "error/commonError"; //기본페이지 에러페이지로 동일하게 설정함
 		
-		
+		System.out.println("글 번호: ->"+ notice_num);
 		List<Notice> noticelist = null;
 		try {
-			noticelist = noticeService.selectContentView(noticenum);
+			noticelist = noticeService.selectContentView(notice_num);
 			viewPage= "/notice/noticedetail";
 		} catch (Exception e) {
 			viewPage= "error/commonError";
@@ -104,8 +104,78 @@ public class NoticeController {
 			mv.addObject("url" , "index");
 			e.printStackTrace();
 		}
+		System.out.println("noticedetail: -->"+noticelist);
+		mv.addObject("noticelist",noticelist);
+		mv.setViewName(viewPage);
+		return mv;
+	}
+	
+	@RequestMapping(value = "/adnoticelist", method = RequestMethod.GET)
+	public ModelAndView selectAdNoticelist(ModelAndView mv, String clickedPage, @RequestParam(value = "p", defaultValue = "1")String pageNum) {
+		String viewPage = "error/commonError"; //기본페이지 에러페이지로 동일하게 설정함
+		
+		final int PAGE_SIZE = 6;
+		final int PAGE_BLOCK = 5;
+		int currentPage = 1;
+		int listCount = 0;
+		int pageCount = 0;
+		try {
+			listCount =noticeService.getListCount();
+			viewPage = "/notice/admin_notice";
+			
+		} catch (Exception e) {
+			mv.addObject("msg", "게시판 오류발생");
+			mv.addObject("url", "index");
+			e.printStackTrace();
+		}
+		
+		if (pageNum != null) {
+			clickedPage = pageNum;
+		}
+		
+		int startPage = ((int)((double)currentPage / PAGE_SIZE + 0.9) - 1) * PAGE_SIZE  + 1;
+		
+		pageCount = (listCount / PAGE_SIZE) + (listCount % PAGE_SIZE == 0 ? 0 : 1);
+		
+		int endPage = startPage + PAGE_SIZE - 1;
+		if(endPage > pageCount) endPage=pageCount;
+		int maxPage = (int)((double)listCount / PAGE_SIZE + 0.9);
+		if (clickedPage != null) {
+			if (Integer.parseInt(clickedPage) <= 0) {
+				currentPage = 1;
+			} else if(Integer.parseInt(clickedPage) > maxPage){
+				currentPage = maxPage;
+			}else {
+				currentPage = Integer.parseInt(clickedPage);
+			}
+		}
+		
+		if (currentPage % PAGE_BLOCK == 0) {
+			startPage = (currentPage / PAGE_BLOCK - 1) * PAGE_BLOCK + 1;
+		}else {
+			startPage = (currentPage / PAGE_BLOCK) * PAGE_BLOCK + 1;
+		}
+		
+		List<Notice> noticelist = null;
+		try {
+			noticelist = noticeService.selectNoticeList(currentPage, PAGE_SIZE);
+			viewPage= "/notice/admin_notice";
+		} catch (Exception e) {
+			viewPage= "error/commonError";
+			mv.addObject("msg" , "게시판 오류 발생");
+			mv.addObject("url" , "index");
+			e.printStackTrace();
+		}
+		
 		
 		mv.addObject("noticelist",noticelist);
+		mv.addObject("currentPage",currentPage);
+		mv.addObject("pageCount",pageCount);
+		mv.addObject("startPage",startPage);
+		mv.addObject("endPage",endPage);
+		mv.addObject("maxPage",maxPage);
+		
+		System.out.println("notice: -->"+noticelist);
 		mv.setViewName(viewPage);
 		return mv;
 	}

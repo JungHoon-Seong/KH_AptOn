@@ -11,6 +11,12 @@ public class Notice {
 	private String notice_image;
 	private Date notice_date;
 	
+	
+	public Notice(int notice_num) {
+		this.notice_num = notice_num;
+	}
+
+	
 	@Override
 	public String toString() {
 		return "Notice [notice_num=" + notice_num + ", admin_id=" + admin_id + ", notice_title=" + notice_title

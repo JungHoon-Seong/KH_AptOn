@@ -135,7 +135,7 @@
 				<c:forEach var="notice" items="${noticelist}">
 					<tr id = "Value">
 						<td class = "line">${notice.notice_num}</td>
-						<td class = "line"><a href = "view-noticelist?no=${notice.notice_num } ">${notice.notice_title}</a></td>
+						<td class = "line"><a href = "notice-detail?no=${notice.notice_num } ">${notice.notice_title}</a></td>
 						<td class = "line">${notice.admin_id}</td>
 						<td class = "line">${notice.notice_date}</td>
 					</tr>

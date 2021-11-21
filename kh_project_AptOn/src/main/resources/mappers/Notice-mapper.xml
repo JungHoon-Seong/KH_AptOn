@@ -26,7 +26,7 @@
 	
 	<select id="selectContentView" resultMap="NoticeMap">
 		<![CDATA[
-		SELECT * from NOTICE WHERE notice_num = #{noticenum}
+		SELECT notice_num,admin_id,notice_title,notice_date, notice_content from NOTICE WHERE notice_num = #{notice_num}
 		]]>
 	</select>
 	
