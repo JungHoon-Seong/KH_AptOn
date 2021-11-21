@@ -205,7 +205,9 @@ width:600px;
 	left:2px;
 	}
 
-
+.ck-editor__editable_inline {
+    min-height: 300px;
+}
 
 </style>
 
@@ -235,15 +237,17 @@ width:600px;
 
   </script>
 <!-- 데이터 보내기 -->
+<script src="https://cdn.ckeditor.com/ckeditor5/30.0.0/classic/ckeditor.js"></script>
 <script type="text/javascript">
 function goenroll(){
 	var result = confirm("등록하시겠습니까?");
 	if(result == false){
 		return;		
 	} else{
-	
-	console.log(quill.getContents());
-	console.log(JSON.stringify(quill.root.innerHTML));
+	var ckdata = $(".ck-editor__editable_inline").html();
+	console.log(ckdata);
+/* 	console.log(quill.getContents());
+	console.log(JSON.stringify(quill.root.innerHTML)); */
 	var adminid = "${admin.adminId }";
 /* 	private String voteTitle;
 	private String voteDesc;
@@ -258,7 +262,7 @@ function goenroll(){
 			category : $("#choosecat").val(),
 			adminId : adminid,
 			voteTitle : $("#title").val(),
-			voteDesc : JSON.stringify(quill.root.innerHTML), //html타입을 string으로
+			voteDesc : JSON.stringify(ckdata), //html타입을 string으로
 			voteStartDate : $("#startdate").val(),
 			voteDeadLine : $("#enddate").val()
 		},
@@ -324,7 +328,6 @@ function golist(){
 </fieldset>
 <!-- Create the editor container -->
 <div id="editor">
-  <p></p>
 </div>
 <span style="font-size:12px;">남은 글자 수 : <input value="200" id="txtlim" style="font-size:12px; border:none; width:25px;" readonly>자</span>
 <button onclick="goenroll();" id="enrollbtn">등록하기</button>
@@ -336,10 +339,9 @@ function golist(){
 <jsp:include page="../footer.jsp" flush="true" />
 
 <!-- Include the Quill library -->
-<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
-
+<!-- <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script> -->
 <!-- Initialize Quill editor -->
-<script>
+<!-- <script>
 //Quill editor 기능 구현
   var toolbarOptions =[ ['bold', 'italic', 'underline', 'strike'],
   [{ 'list': 'ordered'}, { 'list': 'bullet' }] ];
@@ -355,6 +357,15 @@ function golist(){
 	    quill.deleteText(200, quill.getLength());
 	  }
 	});
+</script> -->
+
+<script>
+    ClassicEditor
+        .create( document.querySelector( '#editor' ) )
+
+        .catch( error => {
+            console.error( error );
+        } );
 </script>
 <script> 
 // 투표와 서명 중 선택하는 기능 구현
