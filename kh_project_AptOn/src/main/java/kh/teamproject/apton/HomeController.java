@@ -72,6 +72,7 @@ public class HomeController {
 	}
 	
 	// 임시 admin 로그인용 template by NaHyowon 2021.11.15
+	//http://localhost:8090/apton/adminlogin?id=admin2&&pwd=pwd2
 	@RequestMapping(value = "adminlogin", method =RequestMethod.GET )
 	public String managerLogin(HttpServletRequest request, HttpServletResponse response) {
 		Admin admin = new Admin();

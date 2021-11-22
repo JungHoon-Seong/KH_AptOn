@@ -11,7 +11,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import kh.teamproject.apton.admin.notice.service.NoticeService;
 import kh.teamproject.apton.admin.notice.vo.Notice;
-import kh.teamproject.apton.defectreception.model.vo.DrBoard;
 
 @Controller
 public class NoticeController {
@@ -175,8 +174,30 @@ public class NoticeController {
 		mv.addObject("endPage",endPage);
 		mv.addObject("maxPage",maxPage);
 		
-		System.out.println("notice: -->"+noticelist);
+		System.out.println("adnotice: -->"+noticelist);
 		mv.setViewName(viewPage);
 		return mv;
 	}
+	
+	//삭제
+//	@RequestMapping(value = "/adnoticelist", method = RequestMethod.GET)
+//	public ModelAndView deleteNotice(ModelAndView mv, @RequestParam(value="no" , defaultValue = "0")int notice_num ) {
+//		String viewPage = "error/commonError"; //기본페이지 에러페이지로 동일하게 설정함
+//		
+//		System.out.println("글 번호: ->"+ notice_num);
+//		int noticenum = 0;
+//		try {
+//			noticenum = noticeService.deleteNotice(notice_num);
+//			viewPage= "/notice/admin_notice";
+//		} catch (Exception e) {
+//			viewPage= "error/commonError";
+//			mv.addObject("msg" , "게시판 오류 발생");
+//			mv.addObject("url" , "index");
+//			e.printStackTrace();
+//		}
+//		System.out.println("noticedetail: -->"+noticenum);
+//		mv.addObject("noticelist",noticenum);
+//		mv.setViewName(viewPage);
+//		return mv;
+//	}
 }

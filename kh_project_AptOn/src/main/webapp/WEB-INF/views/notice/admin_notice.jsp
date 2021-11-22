@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -41,6 +42,10 @@
   #adminmain{
 	margin-top:100px;
 }
+ #mainsection {
+ 	float: left;
+ 	width: 1200px;
+ }
   
   </style>
   
@@ -52,63 +57,43 @@
 <jsp:include page="../header4admin.jsp" flush="true" />
 
 <main id="adminmain">
-<section>
-어드민 화면은 main의 id를 adminmain으로 하면 style.css 에서 margin-top : 70px; 이 적용되고 <br>
-header4admin.jsp에서 자바스크립트가 사이드바 버튼 클릭시 mainadmin의 margin-left를 200px로 만들어서 밀립니다.<br>
-그리고 그 메인 안에 섹션을 만들어서 화면을 구성하면 됩니다.
-footer가 adminmain과 너무 붙어있지 않도록 margin-bottom:50px; 적용했습니다<br>
-<br>
-<textarea style="width:800px;height:1000px;">
-<!-- 공통 css 및 글꼴 입력 부분 시작, title바로 밑에 삽입  -->
-  <meta content="" name="description">
-  <meta content="" name="keywords">
+<section id="mainsection">
+<table id = "list">
+        <thead>
+            <tr id = "toplist">
+                <th>  </th>
+                <th>번호</th>
+                <th>제목</th>
+                <th>작성자</th>
+                <th>작성일</th>
+            </tr>
+        </thead>
+        <tbody>
 
-  <!-- Favicons -->
-  <link href="resources/img/favicon.png" rel="icon">
-  <link href="resources/img/apple-touch-icon.png" rel="apple-touch-icon">
+            <c:forEach var="notice" items="${noticelist}">
+                <tr id = "Value">
+                    <td><input type="checkbox" id="delete" name="deletecheck" value="${notice.notice_num}"></td>
+                    <td class = "line">${notice.notice_num}</td>
+                    <td class = "line"><a href = "notice-detail?no=${notice.notice_num } ">${notice.notice_title}</a></td>
+                    <td class = "line">${notice.admin_id}</td>
+                    <td class = "line">${notice.notice_date}</td>
+                </tr>
+            </c:forEach>
 
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
-  <!-- Vendor CSS Files -->
-  <link href="resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="resources/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="resources/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  <link href="resources/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-  <link href="resources/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-
-  <!-- Template Main CSS File -->
-  <link href="resources/css/style.css" rel="stylesheet">
-
-  <!-- =======================================================
-  * Template Name: Lumia - v4.6.0
-  * Template URL: https://bootstrapmade.com/lumia-bootstrap-business-template/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
-
-  <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
-  
-  <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
-  <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
-  <script src="//cdn.quilljs.com/1.3.6/quill.js"></script>
-  
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
-
-<style>
-header{
-font-family: 'Noto Sans KR', sans-serif;
-}
-footer{
-font-family: 'Noto Sans KR', sans-serif;
-}
-</style>
-
-<!-- 공통 css 및 글꼴 입력 부분 끝  -->
-
-</textarea>
+            
+        </tbody>
+    </table>
+    
+	<div id="paging">
+		<c:if test="${startPage > 1 }" >이전</c:if>
+		<c:forEach begin="${startPage }" end="${endPage }" step="1" var="i">
+			<a href="adnoticelist?p=${i}">${i}</a>
+		</c:forEach>
+		<c:if test="${endPage < pageCount }"> 다음 </c:if>
+	</div>
+	
+	
 </section>
 </main>
 <br>

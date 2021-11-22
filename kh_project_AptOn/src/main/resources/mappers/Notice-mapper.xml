@@ -30,4 +30,10 @@
 		]]>
 	</select>
 	
+	<delete id="deleteNotice" parameterType="int">
+			<![CDATA[
+		DELETE FROM NOTICE WHERE notice_num = ${notice_num}
+		]]>
+	</delete>
+	
 </mapper>

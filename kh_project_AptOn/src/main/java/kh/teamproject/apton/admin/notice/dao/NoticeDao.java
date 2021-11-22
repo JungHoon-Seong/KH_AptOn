@@ -40,4 +40,12 @@ public class NoticeDao {
 		return noticelist;
 	}
 	
+	public int deleteNotice(int noticenum) {
+		int result = 0;
+		result = sqlSession.delete("Notice.deleteNotice", noticenum);
+		if (result == 0) {
+			System.out.println("dao단오류발생");
+		}
+		return result;
+	}
 }
