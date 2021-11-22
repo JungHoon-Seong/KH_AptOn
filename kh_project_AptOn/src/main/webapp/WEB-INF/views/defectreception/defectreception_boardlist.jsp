@@ -66,6 +66,10 @@
  footer {
  	clear: both;
  }
+ img {
+ 	width: 120px;
+ 	height: 80px;
+ }
  #btnWriteBox {
  	float: right;
  }
@@ -132,7 +136,7 @@
 	<c:forEach items="${drbList}" var="vo">
 		<tr>
 			<td>${vo.drNo }</td>
-			<td>이미지</td>
+			<td class="img"><img src="${vo.drImage }" onerror="this.src='resources/img/logo.png'" alt='' /> </td>
 			<td>
 			<a href="view-defectreception?no=${vo.drNo }">${vo.drTitle }</a>
 			</td>

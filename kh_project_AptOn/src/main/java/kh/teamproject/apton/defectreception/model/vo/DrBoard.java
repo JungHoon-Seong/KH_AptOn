@@ -11,6 +11,7 @@ public class DrBoard {
 	private int drState;
 	private String drProcessingDate; //db에는 Date이기 때문에 to_char로 출력 , to_date로 입력을 sql구문에 적어줘야함.
 	private String drProcessingDetail;
+	private String drImage;
 
 
 	public DrBoard() {
@@ -147,6 +148,16 @@ public class DrBoard {
 
 	public void setDrProcessingDetail(String drProcessingDetail) {
 		this.drProcessingDetail = drProcessingDetail;
+	}
+
+
+	public String getDrImage() {
+		return drImage;
+	}
+
+
+	public void setDrImage(String drImage) {
+		this.drImage = drImage;
 	}
 	
 	

@@ -78,6 +78,10 @@
  	width: 240px;
  	height: 200px;
  }
+ img {
+ 	width: 240px;
+ 	height: 200px;
+ }
   #btnUpdate {
 	 broder: none;
 	 border-radius: 5px;
@@ -156,7 +160,7 @@
 		
 	
 		<tr>	
-			<td class="img">이미지1</td>
+			<td class="img"><img src="${vo.drImage }"> </td>
 			<td class="img">이미지2</td>
 			<td class="img">이미지3</td>
 			<td class="img">이미지4</td>
