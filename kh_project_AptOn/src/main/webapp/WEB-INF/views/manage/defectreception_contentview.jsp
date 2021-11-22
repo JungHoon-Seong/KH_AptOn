@@ -156,7 +156,7 @@
 		
 	
 		<tr>	
-			<td class="img">이미지1</td>
+			<td ><img src="${vo.drImage }" class="img" onerror="this.src='resources/img/logo.png'" alt='' /> </td>
 			<td class="img">이미지2</td>
 			<td class="img">이미지3</td>
 			<td class="img">이미지4</td>

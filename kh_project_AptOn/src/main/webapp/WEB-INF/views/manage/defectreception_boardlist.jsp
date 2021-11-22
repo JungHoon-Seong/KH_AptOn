@@ -66,6 +66,10 @@
  footer {
  	clear: both;
  }
+  .img {
+ 	width: 120px;
+ 	height: 80px;
+ }
  #btnPermitBox {
  	float: right;
  }
@@ -137,7 +141,7 @@
 		<tr>
 			<td><input type="checkbox" class="chkbox" /></td>
 			<td>${vo.drNo }</td>
-			<td>이미지</td>
+			<td ><img src="${vo.drImage }" class="img" onerror="this.src='resources/img/logo.png'" alt='' /> </td>
 			<td>
 			<a href="manage-drview?no=${vo.drNo }">${vo.drTitle }</a>
 			</td>

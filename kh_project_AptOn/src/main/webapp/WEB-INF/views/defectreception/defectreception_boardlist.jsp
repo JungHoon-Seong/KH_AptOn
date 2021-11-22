@@ -66,7 +66,7 @@
  footer {
  	clear: both;
  }
- img {
+ .img {
  	width: 120px;
  	height: 80px;
  }
@@ -136,7 +136,7 @@
 	<c:forEach items="${drbList}" var="vo">
 		<tr>
 			<td>${vo.drNo }</td>
-			<td class="img"><img src="${vo.drImage }" onerror="this.src='resources/img/logo.png'" alt='' /> </td>
+			<td ><img src="${vo.drImage }" class="img" onerror="this.src='resources/img/logo.png'" alt='' /> </td>
 			<td>
 			<a href="view-defectreception?no=${vo.drNo }">${vo.drTitle }</a>
 			</td>
