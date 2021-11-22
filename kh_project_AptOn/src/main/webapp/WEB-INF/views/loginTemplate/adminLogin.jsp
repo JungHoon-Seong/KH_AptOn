@@ -9,6 +9,7 @@
 <body>
 
 ${admin }
-
+<br>
+<a href="adminmain">어드민 메인으로</a>
 </body>
 </html>

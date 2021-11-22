@@ -279,9 +279,9 @@ box-shadow: 3px 3px 3px 1px red;
 window.onload = function() {
 	$("#votedesc").html(${vo.voteDesc });
 	
-	var result = $("#voteresult").text();
+/* 	var result = $("#voteresult").text();
 	console.log(result);
-	$("#textresult").text(result);
+	$("#textresult").text(result); */
 	
 };
 </script>
@@ -317,6 +317,9 @@ function drawBasic() {
 	
 function copyresult() {
 		console.log("복사버튼");
+		var result = $("#voteresult").text();
+		console.log(result);
+		$("#textresult").text(result);
 		const textArea = document.getElementById("textresult");
 		textArea.select();
 		document.execCommand('copy');

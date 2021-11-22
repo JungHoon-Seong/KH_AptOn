@@ -176,6 +176,7 @@ font-family: 'Noto Sans KR', sans-serif;
 	top:2px;
 	left:2px;
 	}
+	
 </style>
 <!-- jquery cdn -->
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>

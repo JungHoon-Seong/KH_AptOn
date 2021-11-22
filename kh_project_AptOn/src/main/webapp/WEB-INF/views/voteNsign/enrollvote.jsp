@@ -166,12 +166,15 @@ width:600px;
 	outline:none;
 	padding:8px;
 	font-size:15px;
-	height:35px
+	height:35px;
+	cursor : Default;
 }
 #dateul li:nth-of-type(3){
 	width:210px;
 }
-
+#enddate{
+	width:180px;
+}
 #enrollbtn{
 	font-size:13px;
 	border : 1px solid rgba(159,220,120,0.5);
@@ -255,6 +258,12 @@ function goenroll(){
 		$("#title").focus();
 		return;
 	};
+	var blank_pattern = /^\s+|\s+$/g;
+	if($("#title").val().replace(blank_pattern)==""){
+		alert("제목에 공백만 적을 수는 없습니다.");
+		$("#title").focus();
+		return;
+	}
 	// 4. 내용입력
 	if(!(CKEDITOR.instances['editor'].getData())){
 		alert("내용을 입력해주세요.");
@@ -333,12 +342,12 @@ function golist(){
       <li class="datetitle">
       <img src="resources/img/calendaricon.png" width="30px" class="cld" onclick="focusto(event);" id="sttcld">
       </li>
-      <li><input type="text" class="datepicker" id="startdate" autocomplete="off">
+      <li><input type="text" class="datepicker" id="startdate" autocomplete="off" readonly>
       <li class="datetitle"><strong>마감일</strong></li>
       <li class="datetitle">
       <img src="resources/img/calendaricon.png" width="30px" class="cld" onclick="focusto(event);" id="endcld">
       </li>
-      <li><input type="text" class="datepicker" id="enddate" autocomplete="off"></li>
+      <li><input type="text" class="datepicker" id="enddate" autocomplete="off" readonly></li>
     </ul>
   </div>
   <div id="divinput">

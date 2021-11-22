@@ -288,9 +288,9 @@ window.onload = function() {
 	console.log(${vo.voteDesc });
 	$("#votedesc").html(${vo.voteDesc });
 	
-	var result = $("#voteresult").text();
+/* 	var result = $("#voteresult").text();
 	console.log(result);
-	$("#textresult").text(result);
+	$("#textresult").text(result); */
 };
 </script>
 <script type="text/javascript">
@@ -313,6 +313,9 @@ function drawChart() {
 	
 function copyresult() {
 		console.log("복사버튼");
+		var result = $("#voteresult").text();
+		console.log(result);
+		$("#textresult").text(result);
 		const textArea = document.getElementById("textresult");
 		textArea.select();
 		document.execCommand('copy');

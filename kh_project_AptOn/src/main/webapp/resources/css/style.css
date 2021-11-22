@@ -363,7 +363,15 @@ h1, h2, h3, h4, h5, h6 {
 	-webkit-user-select: none;
 }
 .sidedroplist .hide{
-    display:none;
+  /*  display:none; */
+    transition: opacity 1s ease-out;
+    opacity: 0;
+    height: 0;
+    overflow: hidden;
+}
+.sidedroplist .hide.special{
+	opacity: 1;
+    height: auto;
 }
 .sidedroplist >a::after{
 	content: " \22EF";

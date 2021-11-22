@@ -37,7 +37,31 @@
   <div>
     <ul>
 		<li class="sidedroplist">
-           <a class="dropdown">공지사항</a>
+           <a class="dropdown" onclick="dropdown();">공지사항</a>
+            <ul class="hide">
+                <li><a href="adnoticelist">공지사항 목록</a></li>
+                <li><a href="#" class="submenu">메뉴2</a></li>
+                <li><a href="#" class="submenu">메뉴3</a></li>
+                <li><a href="#" class="submenu">메뉴4</a></li>
+            </ul>
+        </li>
+    </ul>
+</div>
+<div>
+    <ul>
+		<li class="sidedroplist">
+           <a class="dropdown" onclick="dropdown();">투표/서명</a>
+            <ul class="hide">
+                <li><a href="votelist" class="submenu">투표/서명 목록</a></li>
+                <li><a href="enrollvote" class="submenu">투표/서명 등록</a></li>
+            </ul>
+        </li>
+    </ul>
+</div>
+<div>
+    <ul>
+		<li class="sidedroplist">
+           <a class="dropdown" onclick="dropdown();">관리비</a>
             <ul class="hide">
                 <li><a href="#">메뉴1</a></li>
                 <li><a href="#">메뉴2</a></li>
@@ -50,33 +74,9 @@
 <div>
     <ul>
 		<li class="sidedroplist">
-           <a class="dropdown">투표/서명</a>
+           <a class="dropdown" onclick="dropdown();">민원 관리</a>
             <ul class="hide">
-                <li><a href="votelist">투표/서명 목록</a></li>
-                <li><a href="enrollvote">투표/서명 등록</a></li>
-            </ul>
-        </li>
-    </ul>
-</div>
-<div>
-    <ul>
-		<li class="sidedroplist">
-           <a class="dropdown">관리비</a>
-            <ul class="hide">
-                <li><a href="#">메뉴1</a></li>
-                <li><a href="#">메뉴2</a></li>
-                <li><a href="#">메뉴3</a></li>
-                <li><a href="#">메뉴4</a></li>
-            </ul>
-        </li>
-    </ul>
-</div>
-<div>
-    <ul>
-		<li class="sidedroplist">
-           <a class="dropdown">민원 관리</a>
-            <ul class="hide">
-                <li><a href="#">메뉴1</a></li>
+                <li><a href="manage-dr">민원접수 목록</a></li>
                 <li><a href="#">메뉴2</a></li>
                 <li><a href="#">메뉴3</a></li>
                 <li><a href="#">메뉴4</a></li>
@@ -88,7 +88,7 @@
 <div>
     <ul>
 		<li class="sidedroplist">
-           <a class="dropdown">입주민 관리</a>
+           <a class="dropdown" onclick="dropdown();">입주민 관리</a>
             <ul class="hide">
                 <li><a href="#">메뉴1</a></li>
                 <li><a href="#">메뉴2</a></li>
@@ -122,19 +122,24 @@ $(document).ready(function(){
 		if('${admin.adminId }' == null ||'${admin.adminId}' == ""){
 			alert('${admin.adminId}');
 			location.href="error?msg=관리자 계정이 아닙니다.";
-		};
-		
-	    // memu 클래스 바로 하위에 있는 a 태그를 클릭했을때
-	    $(".sidedroplist>a").click(function(){
+};
+
+
+});
+// memu 클래스 바로 하위에 있는 a 태그를 클릭했을때
+function dropdown(){
+	    	console.log("여기");
+	    	console.log(event.target);
+	    	console.log(event.target.nextSibling.nextSibling);
+	    	event.target.classList.toggle('special');
+	    	event.target.nextSibling.nextSibling.classList.toggle('special');
 	    	
 	        // 현재 클릭한 태그가 a 이기 때문에
 	        // a 옆의 태그중 ul 태그에 hide 클래스 태그를 넣던지 빼던지 한다.
-	        $(this).next("ul").toggle(200);
-	        $(this).toggleClass('special');
+	       // this.nextElementSibling("ul").toggle(200);
+/* 	        this.toggleClass('special'); */
 	        
-	    });
-});
-
+};
 </script>
 
   
