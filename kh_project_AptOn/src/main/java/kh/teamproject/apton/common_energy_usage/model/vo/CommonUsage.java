@@ -30,6 +30,9 @@ public class CommonUsage {
 	private int householdNum;
 	private int price;
 	
+	public CommonUsage() {
+		
+	}
 	public CommonUsage(int maintenanceCost, int mCost, int cleanCost, int secuCost, int elevatorCost, int disinCost,
 			int comWtCost, int comElCost, Date today, int householdNum, int price) {
 		super();

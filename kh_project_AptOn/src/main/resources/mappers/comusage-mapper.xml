@@ -17,5 +17,8 @@
 		<result property="price" column="PRICE"/>
 	</resultMap>
 	
-	
+	<select id ="selectOne" parameterType="int" resultMap="ComUsageMap">
+		select * from common_energy_usage
+		where maintenance_cost = #{cost_num}
+	</select>
 </mapper>

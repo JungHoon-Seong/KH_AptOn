@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -53,13 +52,8 @@ font-family: 'Noto Sans KR', sans-serif;
 }
 </style>
 
-<!-- 공통 css 및 글꼴 입력 부분 끝  -->
-
-
 </head>
 <body>
-
-	공동 관리비 ${vo}
 
 </body>
 </html>
