@@ -9,14 +9,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import kh.teamproject.apton.defectreception.model.vo.DrBoard;
-import kh.teamproject.apton.defectreception.service.BoardDefectreceptionService;
+import kh.teamproject.apton.manage.service.ManageDefectreceptionService;
 
 @Controller
 public class ManageDefectreceptionController {
 	
 	//SJH TODO 관리자단은 서비스 DAO 따로만들어야하나 임시로 연결시킴
 	@Autowired
-	private BoardDefectreceptionService boardService;
+	private ManageDefectreceptionService manageDfboardService;
 	
 	@RequestMapping(value = "manage-dr", method = RequestMethod.GET)
 	public ModelAndView selectBoardList(ModelAndView mv, String clickedPage, @RequestParam(value = "p", defaultValue = "1")String pageNum) {
@@ -29,8 +29,8 @@ public class ManageDefectreceptionController {
 		int listCount = 0;
 		int pageCount = 0;
 		try {
-			listCount = boardService.getListCount();
-			viewPage = "/defectreception/defectreception_boardlist";
+			listCount = manageDfboardService.getListCount();
+			viewPage = "/manage/defectreception_boardlist";
 			
 		} catch (Exception e) {
 			mv.addObject("msg", "게시판 오류발생");
@@ -67,7 +67,7 @@ public class ManageDefectreceptionController {
 		
 		List<DrBoard> drbList = null;
 		try {
-			drbList = boardService.selectBoardList(currentPage, PAGE_SIZE);
+			drbList = manageDfboardService.selectBoardList(currentPage, PAGE_SIZE);
 			viewPage= "/manage/defectreception_boardlist";
 		} catch (Exception e) {
 			viewPage= "error/commonError";
