@@ -36,7 +36,8 @@
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
   <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
-  
+  <!-- SJH TODO ck에디터 CDN 향후 변경될 수 있음 -->
+  <script src="https://cdn.ckeditor.com/ckeditor5/11.0.1/classic/ckeditor.js"></script>
  <style>
  ul {
  list-style-type: none;
@@ -51,14 +52,14 @@
  	width: 1200px;
  }
  table {
-	 border: 1px solid black;
-	 width: 1200px;
-	 text-align: center;
+	border: 1px solid black;
+	width: 1200px;
+	text-align: center;
+	background-color: #ccc;
  }
- #rowheader {
-	 font-weight: bold;
-	 text-align: center;
-	 background-color: #ccc;
+ td {
+ 	border: 1px solid black;
+ 	width: 240px;
  }
  .completestate {
 	 font-weight: bold;
@@ -66,32 +67,59 @@
  footer {
  	clear: both;
  }
- #btnPermitBox {
+ #btnBox {
  	float: right;
  }
- #btnPermit {
+ .textContent {
+ 	text-align: justify;
+ }
+ .ck-content {
+ 	height: 375px;
+ }  
+ .img {
+ 	width: 240px;
+ 	height: 200px;
+ }
+  #btnUpdate {
 	 broder: none;
 	 border-radius: 5px;
 	 color: white;
-	 padding: 15px 32px;
+	 padding: 7px 16px;
 	 text-align: center;
 	 font-size: 16px;
 	 margin: 4px 2px;
 	 cursor: pointer;
 	 background-color: #008CBA;
  }
+ #textNo {
+ border: none;
+ width: 200px;
+ }
  
- h2 {
+ #textTitle {
+ border: none;
+ width: 1200px;
+ height: 2em;
+ }
+ #textContent {
+ border: none;
+ width: 1200px;
+ height: 375px;
+ }
+ .readonlyHeader {
+ 	border: none;
+ 	width: 300px;
+ 	background-color: #ccc;
+ 	border-bottom: 1px solid #ccc;
+ 	text-align: center;
+ }
+  h2 {
  margin-top: 200px;
  margin-left: 200px;
  }
  </style>
-  
-  <script>
-  function permitscript(){
-	  
-  }
-  </script>
+ 
+ 
   
 </head>
 
@@ -107,7 +135,7 @@
 
 
 <main id="main">
-<h2>관리자 노원 롯데 캐슬 - <a href="./manage-dr">아파트 민원 접수</a></h2>
+<h2>노원 롯데 캐슬 - <a href="./manage-dr">아파트 민원 접수</a></h2>
 
 <aside id="aside">
 <!-- 메뉴이름 및 링크는 추후 결정 -->
@@ -121,60 +149,60 @@
 
 <section id="mainsection">
 	<table id="maintable">
-	<tr id="rowheader">
-		<td> </td>
-		<td>No.</td>
-		<td>이미지</td>
-		<td>제목</td>
-		<td>작성일자</td>
-		<td>가구번호</td>
-		<td>처리상태</td>
-	</tr>
-	
-	<!-- Todo drImage는 다른 테이블에 있다 해결이 필요함 -->
-	<c:if test="${drbList != null }">
-	<c:forEach items="${drbList}" var="vo">
+	<form action="./manage-drupdate"  method="post" enctype="multipart/form-data">
+		<c:forEach items="${drbList}" var="vo">
 		<tr>
-			<td><input type="checkbox" class="chkbox" /></td>
-			<td>${vo.drNo }</td>
-			<td>이미지</td>
-			<td>
-			<a href="manage-drview?no=${vo.drNo }">${vo.drTitle }</a>
-			</td>
-			<td>${vo.drDate }</td>
-			<td>${vo.houseNo }</td>
-			
+			<td><input type="text" class="readonlyHeader" name="no" value="${vo.drNo }" readonly /></td>
+			<td>${vo.drDate}</td>
+			<td>${vo.houseNo} </td>
 			<c:choose>
 			<c:when test="${vo.drState == 1}">
-				<td class="completestate">처리완료</td>
+				<td class="completestate readonlyHeader" >처리완료</td>
 			</c:when>
 			<c:when test="${vo.drState == 0}">
-				<td class="">처리중</td>
+				<td class="" >처리중</td>
 			</c:when>
 			</c:choose>
+		</tr>
+		<tr>
+			<td class="textContent" colspan="5">
+				<input type="text" name="t" id="textTitle" value="${vo.drTitle}" />
+			<!-- <textarea name="t" id="textTitle" >${vo.drTitle }</textarea> -->
+			</td>
 			
 		</tr>
-	</c:forEach>
-</c:if>
-	</table>
-	<div id="paging">
-		<c:if test="${startPage > 1 }" >
-			<a href="manage-dr?p=${startPage - 1}">이전</a> </c:if>
-		<c:forEach begin="${startPage }" end="${endPage }" step="1" var="i">
-			<a href="manage-dr?p=${i}">${i}</a>
+		<!-- form으로 보낼려면 name이 필요한대 에디터에서 제공해주는 플러그인이 name이 없어서 아래 input file을 사용-->
+		<tr>
+			<td><input type="file" name="imgs[]" id="imageUpload"/></td>	
+		</tr>
+		 
+		<tr>
+			<td class="textContent" colspan="5">
+			<textarea name="c" id="textContent" >${vo.drContent }</textarea>
+			</td>
+		</tr>
 		</c:forEach>
-		<c:if test="${endPage < pageCount }">
-			<a href="manage-dr?p=${endPage +1 }"> 다음 </a></c:if>
-	</div>
-	<!-- SJH TODO 관리자 세션일경우만 보이도록 보완필요 -->
-	 
-		<div id="btnPermitBox">
-			<button type='button' id='btnPermit' onclick='permitscript()'>민원 허가</button>
+	</table>
+		<div>
 		</div>
-	
+	<!-- SJH TODO 회원 세션일경우만 보이도록 보완필요 -->
+		<div id="btnBox">
+			<button type="submit" id="btnUpdate">수정하기</button>
+			
+		</div>
+	</form>
 </section>
 </main>
-
+ <script>
+  ClassicEditor
+      .create( document.querySelector( '#textContent' ), {
+          // 제거 하고싶은 플러그인 (배열)
+           removePlugins: [ 'ImageUpload' ]
+      } )
+      .catch( error => {
+          console.error( error );
+      } );
+  </script>
      <!-- ======= Footer ======= -->
 <jsp:include page="../footer.jsp" flush="true" />
  

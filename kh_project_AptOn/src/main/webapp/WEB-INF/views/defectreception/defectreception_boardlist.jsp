@@ -153,11 +153,13 @@
 </c:if>
 	</table>
 	<div id="paging">
-		<c:if test="${startPage > 1 }" >이전</c:if>
+		<c:if test="${startPage > 1 }" >
+			<a href="board-defectreception?p=${startPage-1}">이전</a> </c:if>
 		<c:forEach begin="${startPage }" end="${endPage }" step="1" var="i">
 			<a href="board-defectreception?p=${i}">${i}</a>
 		</c:forEach>
-		<c:if test="${endPage < pageCount }"> 다음 </c:if>
+		<c:if test="${endPage < pageCount }">
+			<a href="board-defectreception?p=${endPage+1}">다음</a> </c:if>
 	</div>
 	<!-- SJH TODO 회원 세션일경우만 보이도록 보완필요 -->
 	 

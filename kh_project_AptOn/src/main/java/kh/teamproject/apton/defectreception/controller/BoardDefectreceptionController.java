@@ -183,7 +183,7 @@ public class BoardDefectreceptionController {
 	
 	@RequestMapping(value = "update-defectreception", method = RequestMethod.POST)
 	public ModelAndView updateContent(ModelAndView mv, @RequestParam(value="t" , defaultValue = "0")String title,
-			@RequestParam(value="c" , defaultValue = "0")String Content,
+			@RequestParam(value="c" , defaultValue = "0")String content,
 			@RequestParam(value="no" , defaultValue = "0")int drno,
 			@RequestParam(value="imgs[]")MultipartFile imgs,
 			 HttpServletRequest request){
@@ -197,7 +197,7 @@ public class BoardDefectreceptionController {
 	saveFile(imgs, request);
 	
 	//보안 높일려면 가구번호랑 세션아디 비교하여 확인기능 필요할듯
-	DrBoard bvo = new DrBoard(drno, title,Content);
+	DrBoard bvo = new DrBoard(drno, title,content);
 	drBoardResult = boardService.updateBoard(bvo);
 		
 	if (drBoardResult == 0) {
@@ -235,8 +235,8 @@ public class BoardDefectreceptionController {
 	}
 
 	 // 파일 업로드 정보 출력
-	private void printInfo(String studentNumber, MultipartFile img) {
-		System.out.println(studentNumber + "번째 게시물의 파일: " + img.getOriginalFilename());
+	private void printInfo(String contentNumber, MultipartFile img) {
+		System.out.println(contentNumber + "번째 게시물의 파일: " + img.getOriginalFilename());
 	}
 
 	// 실제 파일 업로드 메소드 구현

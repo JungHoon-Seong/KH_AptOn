@@ -51,14 +51,14 @@
  	width: 1200px;
  }
  table {
-	 border: 1px solid black;
-	 width: 1200px;
-	 text-align: center;
+	border: 1px solid black;
+	
+	text-align: center;
+	background-color: #ccc;
  }
- #rowheader {
-	 font-weight: bold;
-	 text-align: center;
-	 background-color: #ccc;
+ td {
+ 	border: 1px solid black;
+ 	width: 240px;
  }
  .completestate {
 	 font-weight: bold;
@@ -66,32 +66,48 @@
  footer {
  	clear: both;
  }
- #btnPermitBox {
+ #btnBox {
  	float: right;
  }
- #btnPermit {
+ .textContent {
+ 	text-align: justify;
+ 	vertical-align: top;
+ 	height: 375px;
+ }
+ .img {
+ 	width: 240px;
+ 	height: 200px;
+ }
+  #btnUpdate {
 	 broder: none;
 	 border-radius: 5px;
 	 color: white;
-	 padding: 15px 32px;
+	 padding: 7px 16px;
 	 text-align: center;
 	 font-size: 16px;
 	 margin: 4px 2px;
 	 cursor: pointer;
 	 background-color: #008CBA;
  }
- 
- h2 {
+ #btnDelete {
+	 broder: none;
+	 border-radius: 5px;
+	 color: white;
+	 padding: 7px 16px;
+	 text-align: center;
+	 font-size: 16px;
+	 margin: 4px 2px;
+	 cursor: pointer;
+	 background-color: #f44336;
+ }
+  h2 {
  margin-top: 200px;
  margin-left: 200px;
  }
  </style>
-  
-  <script>
-  function permitscript(){
-	  
-  }
-  </script>
+
+	
+
   
 </head>
 
@@ -107,7 +123,7 @@
 
 
 <main id="main">
-<h2>관리자 노원 롯데 캐슬 - <a href="./manage-dr">아파트 민원 접수</a></h2>
+<h2>노원 롯데 캐슬 - <a href="./manage-dr">아파트 민원 접수</a></h2>
 
 <aside id="aside">
 <!-- 메뉴이름 및 링크는 추후 결정 -->
@@ -121,57 +137,59 @@
 
 <section id="mainsection">
 	<table id="maintable">
-	<tr id="rowheader">
-		<td> </td>
-		<td>No.</td>
-		<td>이미지</td>
-		<td>제목</td>
-		<td>작성일자</td>
-		<td>가구번호</td>
-		<td>처리상태</td>
-	</tr>
-	
-	<!-- Todo drImage는 다른 테이블에 있다 해결이 필요함 -->
-	<c:if test="${drbList != null }">
 	<c:forEach items="${drbList}" var="vo">
 		<tr>
-			<td><input type="checkbox" class="chkbox" /></td>
-			<td>${vo.drNo }</td>
-			<td>이미지</td>
-			<td>
-			<a href="manage-drview?no=${vo.drNo }">${vo.drTitle }</a>
-			</td>
+			<td id ="boardNo">${vo.drNo }</td>
+			<td>${vo.drTitle }</td>
 			<td>${vo.drDate }</td>
-			<td>${vo.houseNo }</td>
-			
+			<td id = "houseno">${vo.houseNo }</td>
 			<c:choose>
-			<c:when test="${vo.drState == 1}">
-				<td class="completestate">처리완료</td>
-			</c:when>
-			<c:when test="${vo.drState == 0}">
-				<td class="">처리중</td>
-			</c:when>
+				<c:when test="${vo.drState == 1}">
+					<td class="completestate">처리완료</td>
+				</c:when>
+				<c:when test="${vo.drState == 0}">
+					<td class="">처리중</td>
+				</c:when>
 			</c:choose>
-			
 		</tr>
-	</c:forEach>
-</c:if>
-	</table>
-	<div id="paging">
-		<c:if test="${startPage > 1 }" >
-			<a href="manage-dr?p=${startPage - 1}">이전</a> </c:if>
-		<c:forEach begin="${startPage }" end="${endPage }" step="1" var="i">
-			<a href="manage-dr?p=${i}">${i}</a>
-		</c:forEach>
-		<c:if test="${endPage < pageCount }">
-			<a href="manage-dr?p=${endPage +1 }"> 다음 </a></c:if>
-	</div>
-	<!-- SJH TODO 관리자 세션일경우만 보이도록 보완필요 -->
-	 
-		<div id="btnPermitBox">
-			<button type='button' id='btnPermit' onclick='permitscript()'>민원 허가</button>
-		</div>
+		
+		
 	
+		<tr>	
+			<td class="img">이미지1</td>
+			<td class="img">이미지2</td>
+			<td class="img">이미지3</td>
+			<td class="img">이미지4</td>
+			<td class="img">이미지5</td>
+				
+		</tr>
+		<tr>
+			<td class="textContent" colspan="5">${vo.drContent }</td>
+		</tr>
+	
+	</table>
+		<div>
+		</div>
+	<!-- SJH TODO 회원 세션과 houseno id가 같을 경우만 보이도록 보완필요 -->
+		<div id="btnBox">
+			<button type="button" id="btnUpdate" onclick="btnUpdate()">강제수정</button>
+			<button type="button" id="btnDelete" onclick="btnDelete()">강제삭제</button>
+		</div>
+		<script>
+			function btnUpdate(){
+				location.href="./manage-drupdate?no=${vo.drNo}";
+			}
+			function btnDelete(){
+				
+				var confirmDelete = confirm("삭제하시겠습니까?");
+				if(confirmDelete == true){ <!-- 알림창의 확인 버튼 눌러야지 이동됨 -->
+					location.href="./manage-drdelete?no=${vo.drNo}"
+				}
+			}
+	</script>
+	
+		
+	</c:forEach>
 </section>
 </main>
 

@@ -1,12 +1,18 @@
 package kh.teamproject.apton.manage.controller;
 
+import java.io.File;
 import java.util.List;
+
+import javax.print.attribute.standard.PrinterInfo;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import kh.teamproject.apton.defectreception.model.vo.DrBoard;
 import kh.teamproject.apton.manage.service.ManageDefectreceptionService;
@@ -87,4 +93,131 @@ public class ManageDefectreceptionController {
 		mv.setViewName(viewPage);
 		return mv;
 	}
+	
+	@RequestMapping(value = "manage-drview", method = RequestMethod.GET)
+	public ModelAndView selectContentView(ModelAndView mv, @RequestParam(value="no" , defaultValue = "0")int drno ) {
+		String viewPage = "error/commonError"; //기본페이지 에러페이지로 동일하게 설정함
+		
+		
+		List<DrBoard> drbList = null;
+		try {
+			drbList = manageDfboardService.selectContentView(drno);
+			viewPage= "/manage/defectreception_contentview";
+		} catch (Exception e) {
+			viewPage= "error/commonError";
+			mv.addObject("msg" , "게시판 오류 발생");
+			mv.addObject("url" , "index");
+			e.printStackTrace();
+		}
+		
+		mv.addObject("drbList",drbList);
+		mv.setViewName(viewPage);
+		return mv;
+	}
+	
+	
+	@RequestMapping(value = "manage-drupdate", method = RequestMethod.GET)
+	public ModelAndView updateContent(ModelAndView mv, @RequestParam(value="no", defaultValue = "0")int drno) {
+		String viewPage = "error/commonError";
+		
+		List<DrBoard> drbList = null;
+		
+		try {
+			drbList = manageDfboardService.selectContentView(drno);
+			viewPage = "./manage/defectreception_update";
+		} catch (Exception e) {
+			viewPage = "error/commonError";
+			mv.addObject("msg", "게시판 오류 발생");
+			mv.addObject("url", "index");
+		}
+		
+		mv.addObject("drbList", drbList);
+		mv.setViewName(viewPage);
+		
+		return mv;
+	}
+	
+	@RequestMapping(value = "manage-drupdate", method = RequestMethod.POST)
+	public ModelAndView updateContentForceful(ModelAndView mv, @RequestParam(value = "t", defaultValue = "0")String title,
+			@RequestParam(value = "c", defaultValue = "0")String content,
+			@RequestParam(value = "no", defaultValue = "0")int drno,
+			@RequestParam(value ="imgs[]") MultipartFile imgs,
+			HttpServletRequest request) {
+		String viewPage = "error/commonError";
+		
+		int drBoardResult = 0;
+		
+		printInfo(Integer.toString(drno), imgs);
+		
+		saveFile(imgs, request);
+		
+		DrBoard bvo = new DrBoard(drno, title, content);
+		drBoardResult = manageDfboardService.updateBoardForceful(bvo);
+		
+		if (drBoardResult == 0) {
+			viewPage = "error/commonError";
+			mv.addObject("msg", "게시글 오류 발생");
+			mv.addObject("url", "index");
+		}else {
+			viewPage = "redirect: ./manage-dr";
+		}
+		
+		mv.addObject("result", drBoardResult);
+		mv.setViewName(viewPage);
+		return mv;
+	}
+	
+	@RequestMapping(value = "manage-drdelete", method = RequestMethod.GET)
+	public String deleteContentForceful(ModelAndView mv, @RequestParam(value = "no", defaultValue = "0" ) int drno) {
+		
+		String viewPage = "error/commonError";
+		int drBoardResult = 0;
+		DrBoard bvo = new DrBoard(drno);
+		drBoardResult = manageDfboardService.deleteBoardForceful(bvo);
+		
+		if(drBoardResult == 0) {
+			viewPage = "error/commonError";
+			mv.addObject("msg", "게시글 오류 발생");
+			mv.addObject("url", "index");
+		}else {
+			viewPage ="./manage-dr";
+		}
+		
+		return "redirect: ./manage-dr";
+	}
+	
+	 // 파일 업로드 정보 출력
+		private void printInfo(String contentNumber, MultipartFile img) {
+			System.out.println(contentNumber + "번째 게시물의 파일: " + img.getOriginalFilename());
+		}
+
+		// 실제 파일 업로드 메소드 구현
+		private void saveFile(MultipartFile img, HttpServletRequest request) {
+
+			
+			//todo 포로젝트의 리소스 폴더가  아닌 다른 로컬 위치의 폴더로 저장되는 문제점이있다. 
+			String root = request.getSession().getServletContext().getRealPath("\\resources");
+			System.out.println("root : "+ root);
+			//.getRealPath("/src/main/webapp/resources/img");
+			String savePath = root + "/uploadFiles";
+			String filePath = null;
+			File folder = new File(savePath);
+			if (!folder.exists()) {
+//				folder.mkdir(); // 폴더가 없다면 생성한다.
+			}
+
+			try {
+				// 파일 저장
+				System.out.println(img.getOriginalFilename() + "을 저장합니다.");
+				System.out.println("저장 경로 : " + savePath);
+				filePath = folder + "\\" + img.getOriginalFilename();
+
+				img.transferTo(new File(filePath)); // 파일을 저장한다
+				System.out.println("파일 명 : " + img.getOriginalFilename());
+				System.out.println("파일 경로 : " + filePath);
+				System.out.println("파일 전송이 완료되었습니다.");
+			} catch (Exception e) {
+				System.out.println("파일 전송 에러 : " + e.getMessage());
+			}
+		}
 }

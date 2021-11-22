@@ -28,4 +28,31 @@ public class ManageDefectreceptionDao {
 		drblist = sqlSession.selectList("DrBoard.selectBoardList", null, row);
 		return drblist;
 	}
+	
+	public List<DrBoard> selectContentView(int drno) {
+		List<DrBoard> drblist;
+		
+		drblist = sqlSession.selectList("DrBoard.selectContentView",drno);
+		return drblist;
+	}
+	
+	public int updateBoardForceful(DrBoard bvo) {
+		int result = 0;
+		result = sqlSession.update("DrBoard.updateContent", bvo);
+		if (result == 0) {
+			System.out.println("dao단오류발생");
+		}
+		return result;
+	}
+	
+	public int deleteBoardForceful(DrBoard bvo) {
+		int result = 0;
+		result = sqlSession.delete("DrBoard.deleteContent", bvo);
+		if (result == 0) {
+			System.out.println("dao단오류발생");
+		}
+		return result;
+	}
+
+	
 }

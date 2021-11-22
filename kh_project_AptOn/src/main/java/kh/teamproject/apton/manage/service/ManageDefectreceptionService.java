@@ -28,4 +28,19 @@ public class ManageDefectreceptionService {
 		return vo;
 	}
 	
+	public List<DrBoard> selectContentView(int drno) {
+		return manageDfboardDao.selectContentView(drno);
+	}
+	
+	public int updateBoardForceful(DrBoard bvo) {
+		return manageDfboardDao.updateBoardForceful(bvo);
+	}
+	
+	public int deleteBoardForceful(DrBoard bvo) {
+		return manageDfboardDao.deleteBoardForceful(bvo);
+	}
+
+	
+	
+	
 }
