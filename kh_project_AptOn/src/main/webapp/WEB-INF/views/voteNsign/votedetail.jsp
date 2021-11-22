@@ -195,6 +195,14 @@ box-shadow: 3px 3px 3px 1px red;
 	#textresult:focus{
 	outline:none;
 	}
+	td div{
+		word-break:break-all;
+		word-wrap:break-word;
+	}
+	td{
+		word-break:break-all;
+		word-wrap:break-word;
+	}
 
 </style>
 <!-- 구글 파이 차트 api -->

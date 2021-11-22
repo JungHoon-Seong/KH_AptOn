@@ -205,9 +205,6 @@ width:600px;
 	left:2px;
 	}
 
-.ck-editor__editable_inline {
-    min-height: 300px;
-}
 
 </style>
 
@@ -237,25 +234,47 @@ width:600px;
 
   </script>
 <!-- 데이터 보내기 -->
-<script src="https://cdn.ckeditor.com/ckeditor5/30.0.0/classic/ckeditor.js"></script>
 <script type="text/javascript">
 function goenroll(){
+	
+	// 유효성 검사
+	// 1. 종류 선택 
+	// console.log($("#choosecat").val());
+	if(!($("#choosecat").val()=='1'|| $("#choosecat").val()=='0')){
+		alert("종류를 선택해주세요.");
+		return;
+	}
+	// 2. 시작일, 마감일 선택 startdate enddate
+	if(!$("#startdate").val() || !$("#enddate").val()){
+		alert("시작일 또는 마감일을 선택해주세요.");
+		return;
+	};
+	// 3. 제목 입력
+	if(!$("#title").val()){
+		alert("제목을 입력해주세요.");
+		$("#title").focus();
+		return;
+	};
+	// 4. 내용입력
+	if(!(CKEDITOR.instances['editor'].getData())){
+		alert("내용을 입력해주세요.");
+		$('.cke_wysiwyg_frame').contents().find('.cke_editable').focus();
+		return;
+	};
+	// 5. 내용입력제한 초과 
+	if($("#txtlim").val()<0){
+		alert("입력 제한을 초과했습니다.");
+		$('.cke_wysiwyg_frame').contents().find('.cke_editable').focus();
+		return;
+	}
+	
 	var result = confirm("등록하시겠습니까?");
 	if(result == false){
 		return;		
 	} else{
-	var ckdata = $(".ck-editor__editable_inline").html();
+	var ckdata = CKEDITOR.instances['editor'].getData();
 	console.log(ckdata);
-/* 	console.log(quill.getContents());
-	console.log(JSON.stringify(quill.root.innerHTML)); */
 	var adminid = "${admin.adminId }";
-/* 	private String voteTitle;
-	private String voteDesc;
-	private int voteRights; //투표 및 서명 대상자 수
-	private int voteY; 
-	private int voteN;
-	private String voteStartDate;
-	private String voteDeadLine;  */
 	$.ajax({
 		url : "enrollvote.do",
 		data : { 
@@ -323,13 +342,14 @@ function golist(){
     </ul>
   </div>
   <div id="divinput">
-    <input type="text" placeholder="제목을 입력해주세요" id="title">
+    <input type="text" placeholder="제목을 입력해주세요. (20자 제한)" id="title">
   </div>
 </fieldset>
 <!-- Create the editor container -->
 <div id="editor">
+<textarea name="editor" id="editor"></textarea>
 </div>
-<span style="font-size:12px;">남은 글자 수 : <input value="200" id="txtlim" style="font-size:12px; border:none; width:25px;" readonly>자</span>
+<span style="font-size:12px;">남은 bytes : <input value="1500" id="txtlim" style="font-size:12px; border:none; width:35px;" readonly>bytes</span>
 <button onclick="goenroll();" id="enrollbtn">등록하기</button>
 <button onclick="golist();" id="enrollbtn">취소하기</button>
 
@@ -337,43 +357,54 @@ function golist(){
 </main>
 
 <jsp:include page="../footer.jsp" flush="true" />
-
-<!-- Include the Quill library -->
-<!-- <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script> -->
-<!-- Initialize Quill editor -->
-<!-- <script>
-//Quill editor 기능 구현
-  var toolbarOptions =[ ['bold', 'italic', 'underline', 'strike'],
-  [{ 'list': 'ordered'}, { 'list': 'bullet' }] ];
-  var quill = new Quill('#editor', {
-    modules :{ 
-      toolbar:toolbarOptions
-    },
-    theme: 'snow'
-  });
-  quill.on('text-change', function (delta, old, source) {
-	  document.getElementById("txtlim").value = 201 - quill.getLength();
-	  if (quill.getLength() > 200) {
-	    quill.deleteText(200, quill.getLength());
-	  }
-	});
-</script> -->
-
+<script src="https://cdn.ckeditor.com/4.17.1/basic/ckeditor.js"></script>
 <script>
-    ClassicEditor
-        .create( document.querySelector( '#editor' ) )
+CKEDITOR.replace( 'editor',{
+	uiColor: '#ffebcd',
+	height : '300px',
+	on: {
+		//글자수제한 기능
+        change: function() {
+        	var txt = CKEDITOR.instances['editor'].getData();
+        	var len = CKEDITOR.instances['editor'].getData().length;
+        	
+        	var stringByteLength = 0;
+        	//console.log(len);
+        	for(var i=0; i<len; i++) {
+        	    if(escape(txt.charAt(i)).length >= 4)
+        	        stringByteLength += 3;
+        	    else if(escape(txt.charAt(i)) == "%A7")
+        	        stringByteLength += 3;
+        	    else
+        	        if(escape(txt.charAt(i)) != "%0D")
+        	            stringByteLength++;
+        	}
+        	//console.log(txt);
+        	//console.log(stringByteLength + " Bytes")
+        	 document.getElementById('txtlim').value = 1500 - stringByteLength;
+        	
+        	if(stringByteLength >= 1500){
+        		alert("더 이상 입력할 수 없습니다.");
+        		document.getElementById('txtlim').value = 1500 - stringByteLength;
+        		document.getElementById('txtlim').style.color='red';
+        	} else {
+        		document.getElementById('txtlim').value = 1500 - stringByteLength;
+        		document.getElementById('txtlim').style.color='black';
+        	}
+        	
+        }
+  }
 
-        .catch( error => {
-            console.error( error );
-        } );
+});
+
 </script>
 <script> 
 // 투표와 서명 중 선택하는 기능 구현
 function setCatClass(event){ 
-	console.log("여기");
-	console.log($(event.target));
+	// console.log("여기");
+	// console.log($(event.target));
 	var thisEle = $(event.target);
-	console.log(thisEle.attr("id"));
+	// console.log(thisEle.attr("id"));
 	
 	if(thisEle.attr("id")=="li_vote"){
 		$(thisEle).html("&nbsp;&#10004; 투표&nbsp")
@@ -399,6 +430,17 @@ function focusto(event){
 		$('#enddate').focus();
 	}
 };
+// 제목 글자 수 제한
+$('#title').on("change keyup paste",function(){
+	if($("#title").val().length > 20){
+		alert("제목이 20자를 초과했습니다.");
+		var titletxt = $("#title").val();
+		$("#title").val(titletxt.substring(0,20));
+		return false;
+	};
+	
+	
+});
 //시작날짜 날짜 입력되면 오늘이랑 비교하기
 $("#startdate").on("change keyup paste", function() {
     var currentVal = $(this).val();
