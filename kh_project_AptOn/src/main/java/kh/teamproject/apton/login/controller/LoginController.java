@@ -40,9 +40,11 @@ public class LoginController {
 			System.out.println("회원 로그인 정보  -> "+ login);
 		
 			if(login == null) {
+				System.out.println("로그인 실패");
 				session.setAttribute("result", "로그인 실패");
 				viewName= "login";
 			} else{
+				System.out.println("로그인 성공");
 				session.setAttribute("member", vo);
 				viewName= "index";
 			}

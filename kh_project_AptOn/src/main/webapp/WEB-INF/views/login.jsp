@@ -35,7 +35,96 @@
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
   <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
-  
+  <style>
+  *{
+  margin: 0px;
+  padding: 0px;
+  text-decoration: none;
+  font-family:sans-serif;
+
+}
+
+body {
+  background-image: #34495e;
+}
+
+.loginForm {
+  position:absolute;
+  width:300px;
+  height:400px;
+  padding: 30px, 20px;
+  background-color:#FFFFFF;
+  text-align:center;
+  top:50%;
+  left:50%;
+  transform: translate(-50%,-50%);
+  border-radius: 15px;
+  border: 1px;
+}
+
+.loginForm h2{
+  text-align: center;
+  margin: 30px;
+}
+
+.idForm{
+  border-bottom: 2px solid #adadad;
+  margin: 30px;
+  padding: 10px 10px;
+}
+
+.passForm{
+  border-bottom: 2px solid #adadad;
+  margin: 30px;
+  padding: 10px 10px;
+}
+
+.id {
+  width: 100%;
+  border:none;
+  outline:none;
+  color: #636e72;
+  font-size:16px;
+  height:25px;
+  background: none;
+}
+
+.pw {
+  width: 100%;
+  border:none;
+  outline:none;
+  color: #636e72;
+  font-size:16px;
+  height:25px;
+  background: none;
+}
+
+.btn {
+  position:relative;
+  left:40%;
+  transform: translateX(-50%);
+  margin-bottom: 40px;
+  width:80%;
+  height:40px;
+  background: linear-gradient(125deg,#81ecec,#6c5ce7,#81ecec);
+  background-position: left;
+  background-size: 200%;
+  color:white;
+  font-weight: bold;
+  border:none;
+  cursor:pointer;
+  transition: 0.4s;
+  display:inline;
+}
+
+.btn:hover {
+  background-position: right;
+}
+
+.bottomText {
+  text-align: center;
+}
+  </style>
 </head>
 
 <body>
@@ -44,27 +133,20 @@
 <jsp:include page="header.jsp" flush="true" />
 <!-- ========header.jsp 삽입해주세요 -->
 <!-- ======= Hero Section ======= -->
-  <section id="hero" class="d-flex flex-column justify-content-center align-items-center">
-    <div class="container text-center text-md-left" data-aos="fade-up">
-      <h1>노원 롯데 캐슬 <span>시그니처</span></h1>
-      <h2>with 아파트온</h2>
-      <a href="boardlistRB123" class="btn-get-started scrollto">우리 아파트 소식 보러가기</a>
-    </div>
-  </section><!-- End Hero -->
-
-	<form name="form-log" method="post" action="login">
-	<h2>로그인</h2>
-		<div>
-			<input type="text" id="houseNum" placeholder="아이디" name="houseNum">
+	<div class= "container">
+	<form name="form-log"  class="loginForm" method="post" action="login">
+	<h2>Login</h2>
+		<div class="idForm">
+			<input type="text" id="houseNum" class="id" placeholder="아이디" name="houseNum">
+		</div>
+		<div class="passForm">
+			<input type="password" id="pwd" class="pw" placeholder="비밀번호" name="pwd">
 		</div>
 		<div>
-			<input type="password" id="pwd" placeholder="비밀번호" name="pwd">
-		</div>
-		<div>
-			<input type="submit" id="log-btn" value="로그인">
+			<input type="submit" id="btn" class="btn" value="로그인">
 		</div>
 		
 	</form>
-
+	</div>
 </body>
 </html>
