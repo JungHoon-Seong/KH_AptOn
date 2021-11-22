@@ -14,6 +14,7 @@
       ${admin.adminId }
       ${member.houseNum }
         <ul>
+        <li><a href="login">회원로그인</a>
         <li><a href="adminlogin">어드민로그인</a></li>
           <li><a class="nav-link scrollto active" href="/apton">Home</a></li>
           <li><a class="nav-link scrollto" href="#about">아파트 소식</a></li>
