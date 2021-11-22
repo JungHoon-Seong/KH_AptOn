@@ -2,6 +2,8 @@ package kh.teamproject.apton.admin.notice.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -180,24 +182,25 @@ public class NoticeController {
 	}
 	
 	//삭제
-//	@RequestMapping(value = "/adnoticelist", method = RequestMethod.GET)
-//	public ModelAndView deleteNotice(ModelAndView mv, @RequestParam(value="no" , defaultValue = "0")int notice_num ) {
-//		String viewPage = "error/commonError"; //기본페이지 에러페이지로 동일하게 설정함
-//		
-//		System.out.println("글 번호: ->"+ notice_num);
-//		int noticenum = 0;
-//		try {
-//			noticenum = noticeService.deleteNotice(notice_num);
-//			viewPage= "/notice/admin_notice";
-//		} catch (Exception e) {
-//			viewPage= "error/commonError";
-//			mv.addObject("msg" , "게시판 오류 발생");
-//			mv.addObject("url" , "index");
-//			e.printStackTrace();
-//		}
-//		System.out.println("noticedetail: -->"+noticenum);
-//		mv.addObject("noticelist",noticenum);
-//		mv.setViewName(viewPage);
-//		return mv;
-//	}
+	@RequestMapping(value = "/noticedelete", method = RequestMethod.GET)
+	public ModelAndView deleteNotice(ModelAndView mv,HttpServletRequest request, @RequestParam(value="no" , defaultValue = "0")String pageNum ,
+			@RequestParam(value = "notice_num") int notice_num ) {
+		String viewPage = "error/commonError"; //기본페이지 에러페이지로 동일하게 설정함
+		
+		System.out.println("삭제 글 번호: ->"+ notice_num);
+		int noticenum = 0;
+		try {
+			noticenum = noticeService.deleteNotice(notice_num);
+			viewPage= "/notice/admin_notice";
+		} catch (Exception e) {
+			viewPage= "error/commonError";
+			mv.addObject("msg" , "게시판 오류 발생");
+			mv.addObject("url" , "index");
+			e.printStackTrace();
+		}
+		System.out.println("noticedetail: -->"+noticenum);
+		mv.addObject("noticelist",noticenum);
+		mv.setViewName(viewPage);
+		return mv;
+	}
 }

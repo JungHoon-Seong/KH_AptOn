@@ -58,6 +58,7 @@
 
 <main id="adminmain">
 <section id="mainsection">
+<form action="adnoticelist" method="get" name="noticeinfo">
 <table id = "list">
         <thead>
             <tr id = "toplist">
@@ -92,6 +93,33 @@
 		</c:forEach>
 		<c:if test="${endPage < pageCount }"> 다음 </c:if>
 	</div>
+	<button id="deletebtn" onclick="deleteMsg()">삭제</button>
+	<button>글쓰기</button>
+	
+	</form>
+<script type="text/javascript">
+
+var d = document.noticeinfo;
+function deletenotice(){        	
+ 	console.log(d.deletecheck.value);
+
+     d.submit(); 
+		
+	}
+
+
+
+function deleteMsg() {
+    if (!confirm("정말 삭제하시겠습니까?")) {
+        alert("취소 되었습니다.");
+        	return false;
+    } else {		
+    	deletenotice();
+
+    }
+}     
+
+</script>	
 	
 	
 </section>
