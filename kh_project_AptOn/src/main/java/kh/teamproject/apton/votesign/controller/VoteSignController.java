@@ -151,4 +151,14 @@ public class VoteSignController {
 		return mv;
 	}
 	
+	@RequestMapping(value ="dovote", method = RequestMethod.GET)
+	public ModelAndView dovotepage(ModelAndView mv) {
+		String viewpage = "error/commonError"; //viewpage는 미리 에러로 지정
+
+		viewpage = "voteNsign/dovote";
+		mv.setViewName(viewpage);
+		
+		return mv;
+	}
+	
 }

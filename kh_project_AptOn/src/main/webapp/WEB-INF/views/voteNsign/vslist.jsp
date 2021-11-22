@@ -75,13 +75,15 @@ font-family: 'Noto Sans KR', sans-serif;
 		padding: 8px;
 		text-align: center;
 		border-bottom: 1px solid #ddd;
-		text-overflow:ellipsis; overflow:hidden
+		text-overflow:ellipsis; overflow:hidden;
+		
 	}
 	td:nth-of-type(4){
 		padding: 8px;
 		text-align: left;
 		border-bottom: 1px solid #ddd;
-		text-overflow:ellipsis; overflow:hidden	
+		text-overflow:ellipsis; overflow:hidden;
+		display: block;
 	}
         
 	tr:not(#trofth):hover {background-color: rgb(207,252,236);}
@@ -129,6 +131,7 @@ font-family: 'Noto Sans KR', sans-serif;
 	display: block;
 	text-overflow: ellipsis;
 	}
+
 	th:nth-of-type(3){
 	width:100px;
 	}
@@ -214,6 +217,9 @@ font-family: 'Noto Sans KR', sans-serif;
 		  <td><a href="votedetail?vote_no=${map['VOTE_NO'] }"><nobr>${map['VOTE_TITLE'] }<nobr></a></td>
 		  <td>${map["STARTDATE"] }</td>
 		  <td>${map["DEADLINE"] }</td>
+		   <c:choose>
+		  <c:when test="${today <  map['STARTDATE'] }"><td><a href="#" onclick="delvote();" style="color:#6ACFE1;">삭제</a></td></c:when>
+			</c:choose>
 		</tr>
        </c:forEach>
 	<!-- 	mv.addObject("volist",volist);
@@ -223,8 +229,6 @@ font-family: 'Noto Sans KR', sans-serif;
 		mv.addObject("endPage",endPage);
 		mv.addObject("maxPage",maxPage); -->
       </table>
-      
-
 			
 			
 <span id=paging>
@@ -264,6 +268,11 @@ function PageMove(page){
 function goenroll(){
 	location.href = "enrollvote";
 };
+
+function delvote(){
+	console.log("진입");
+	console.log($(this)); //TODO 선택자로 번호 찾기 -> post로 보내기
+}
 
 </script>
 </body>

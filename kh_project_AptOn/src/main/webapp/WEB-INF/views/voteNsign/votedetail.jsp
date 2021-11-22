@@ -161,7 +161,58 @@ box-shadow: 3px 3px 3px 1px red;
   opacity: 1;
   right: 0;
 }
-	#tolist{
+#copylink {
+  display: inline-block;
+  border-radius: 4px;
+  background-color: #ff7b00;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 12px;
+  padding: 5px;
+  width: 150px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+  box-shadow: 3px 3px 3px #ff7b00;
+  margin-bottom:10px;
+  margin-left:50px;
+}
+#copylink:hover {
+border: 1px solid rgba(255, 0, 0, 0.25);
+transform: translateY(-3px);
+color: #ff7b00;
+background-color: #FFFFFF;
+box-shadow: 3px 3px 3px 1px #ff7b00;
+}
+
+#copylink span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+#copylink span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+  
+}
+
+#copylink:hover span {
+  padding-right: 25px;
+}
+
+#copylink:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+#tolist{
 	margin-top:15px;
 	font-size:13px;
 	border : 1px solid rgba(159,220,120,0.5);
@@ -175,14 +226,14 @@ box-shadow: 3px 3px 3px 1px red;
 	display: block;
 	text-overflow: ellipsis;
 	}
-	#tolist:hover{
+#tolist:hover{
 	font-size:13px;
 	border : 1px solid rgba(159,220,120,1);
 	border-radius:5px;
 	background-color: rgba(159,220,120,1);
 	box-shadow: 3px 3px 0 #D04B4D;
 	}
-	#tolist:active{
+#tolist:active{
 	font-size:13px;
 	border : 1px solid rgba(159,220,120,1);
 	border-radius:5px;
@@ -192,10 +243,10 @@ box-shadow: 3px 3px 3px 1px red;
 	top:2px;
 	left:2px;
 	}
-	#textresult:focus{
+#textresult:focus{
 	outline:none;
 	}
-	td div{
+td div{
 		word-break:break-all;
 		word-wrap:break-word;
 	}
@@ -261,6 +312,7 @@ box-shadow: 3px 3px 3px 1px red;
 찬성 : ${vo.voteY }표, 반대 : ${vo.voteN }표<br>
 </div>
 <button id = "copyresult" onclick="copyresult();"><span><b>결과 복사하기</b></span></button>
+<button id = "copylink" onclick="copylink();"><span><b>투표 링크 복사하기</b></span></button>
 </div>
 	</td>
 </tr>
@@ -322,6 +374,20 @@ function copyresult() {
 		alert(textArea.value+"위의 내용이 복사되었습니다.");
 		$(':focus').blur();  // textarea 포커스된거 없애기
 		};
+		
+function copylink(){
+	console.log("링크복사버튼");
+	window.screen.width;
+	window.screen.height;
+	var popupWidth = 640;
+	var popupHeight = 400;
+	var popupX = (window.screen.width / 2) - (popupWidth / 2);
+	var popupY= (window.screen.height / 2) - (popupHeight / 2);
+	var myWindow = window.open("dovote", "window ", 'height=' + popupHeight  + ', width=' + popupWidth  + ', left='+ popupX + ', top='+ popupY);
+};
+
+
+
 </script>
 </body>
 </html>

@@ -32,7 +32,7 @@
 	<insert id="enrollvote" parameterType="VoteInfo">
 		<![CDATA[
 INSERT INTO VOTE_INFO VALUES(
-	SEQ_VOTESIGN.NEXTVAL
+	VOTE_SEQ.NEXTVAL
 	, #{category}
 	, #{adminId}
 	, #{voteTitle}
