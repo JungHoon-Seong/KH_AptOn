@@ -345,9 +345,8 @@ window.onload = function() {
 	$("#textresult").text(result); */
 };
 </script>
-<script type="text/javascript">
-	
 
+<script type="text/javascript">
 google.load("visualization", "1", {packages:["corechart"]});
 google.setOnLoadCallback(drawChart);
 function drawChart() { 
@@ -383,7 +382,7 @@ function copylink(){
 	var popupHeight = 400;
 	var popupX = (window.screen.width / 2) - (popupWidth / 2);
 	var popupY= (window.screen.height / 2) - (popupHeight / 2);
-	var myWindow = window.open("dovote", "window ", 'height=' + popupHeight  + ', width=' + popupWidth  + ', left='+ popupX + ', top='+ popupY);
+	var myWindow = window.open("dovote?voteNo=${vo.voteNo}", "window ", 'height=' + popupHeight  + ', width=' + popupWidth  + ', left='+ popupX + ', top='+ popupY);
 };
 
 

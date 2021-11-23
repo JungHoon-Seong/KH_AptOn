@@ -9,21 +9,25 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 
 import kh.teamproject.apton.votesign.model.service.VoteSignService;
+import kh.teamproject.apton.votesign.model.service.VoteSignServiceInterface;
 import kh.teamproject.apton.votesign.model.vo.VoteInfo;
+import kh.teamproject.apton.votesign.model.vo.VoteRecords;
 import oracle.security.crypto.cert.ext.DeltaCRLIndicatorExtension;
 
 @Controller
 public class VoteSignController {
 
 	@Autowired
-	private VoteSignService votesignservice;
+	private VoteSignServiceInterface votesignservice;
 	
 	@RequestMapping(value ="votelist", method = RequestMethod.GET)
 	public ModelAndView listOfVoteSign(ModelAndView mv, String clickedPage) {
@@ -151,14 +155,96 @@ public class VoteSignController {
 		return mv;
 	}
 	
+	
+	@RequestMapping(value ="deletevote.do", method = RequestMethod.POST)
+	@ResponseBody
+	public int deletevote(String delNum, String adminId) {
+		//responsebody로 보내기
+		int voteNo = Integer.parseInt(delNum);
+//		VoteInfo vo = new VoteInfo(voteNo);
+//		System.out.println(delNum + " 번호 받음");
+//		System.out.println("관리자아이디 : " + adminId);
+		int result=-1;
+		if(adminId != null) {
+			try {
+				//성공
+				result = votesignservice.deleteVote(voteNo);
+			} catch (Throwable e) {
+				e.printStackTrace();
+			}
+		}
+		return result;
+	} //method
+	
 	@RequestMapping(value ="dovote", method = RequestMethod.GET)
-	public ModelAndView dovotepage(ModelAndView mv) {
+	public ModelAndView dovotepage(ModelAndView mv, String voteNo) {
 		String viewpage = "error/commonError"; //viewpage는 미리 에러로 지정
-
-		viewpage = "voteNsign/dovote";
-		mv.setViewName(viewpage);
+//		System.out.println("voteNO : "+voteNo);
+		int vno = 0;
+		VoteInfo vo = new VoteInfo();
+		try {
+		  vno = Integer.parseInt(voteNo);
+		} catch (Exception e) {
+			e.printStackTrace();
+			mv.setViewName(viewpage);
+			return mv;
+		}
 		
+		try {
+			vo = votesignservice.selectvotedetail(vno);
+			viewpage = "voteNsign/dovote";
+		} catch (Throwable e) {
+			e.printStackTrace();
+		}
+		mv.addObject("vo", vo);
+		mv.setViewName(viewpage);
 		return mv;
 	}
 	
-}
+	@RequestMapping(value ="dovote.do", method = RequestMethod.POST)
+	@ResponseBody
+	public String doVote(VoteRecords vo, String YN) {
+		
+		System.out.println("dovote.do 진입");
+		String result = "fail";
+		System.out.println(vo.toString());
+		
+		//TODO 1. Vote_records insert
+		//TODO 1-1 투표했는지 확인하는 method
+		try {
+			int check = votesignservice.checkVote(vo);
+			System.out.println("투표여부 카운트 : " + check);
+			if(check >= 1) {
+				return result;
+			} else if(check == 0){
+				votesignservice.doVote(vo);
+				result= "success";
+			}
+		} catch (Throwable e) {
+			e.printStackTrace();
+		}
+		
+		
+		//TODO 2. vote_info update
+		try {
+			int yesNo = Integer.parseInt(YN);
+			if(yesNo == 1) {
+				//TODO 찬성 update method
+				System.out.println("yes 진입");
+				votesignservice.updateYes(vo.getVoteNo());
+				result = "yes";
+			} else if(yesNo == 0){
+				//TODO 반대 update method
+				System.out.println("no 진입");
+				votesignservice.updateNo(vo.getVoteNo());
+				result = "no";
+			}
+		} catch (Throwable e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	} // method
+	
+	
+} //class

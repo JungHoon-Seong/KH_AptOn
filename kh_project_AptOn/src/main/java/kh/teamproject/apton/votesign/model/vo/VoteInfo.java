@@ -30,6 +30,16 @@ public class VoteInfo {
 	public VoteInfo() {
 		super();
 	}
+	
+	
+	public VoteInfo(int voteNo) {
+		super();
+		this.voteNo = voteNo;
+	}
+	
+	
+
+
 	public VoteInfo(int voteNo, int category, String adminId, String voteTitle, String voteDesc, int voteRights,
 			int voteY, int voteN, String voteStartDate, String voteDeadLine) {
 		super();

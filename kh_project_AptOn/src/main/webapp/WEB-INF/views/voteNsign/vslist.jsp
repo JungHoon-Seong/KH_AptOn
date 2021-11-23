@@ -270,9 +270,33 @@ function goenroll(){
 };
 
 function delvote(){
-	console.log("진입");
-	console.log($(this)); //TODO 선택자로 번호 찾기 -> post로 보내기
-}
+	//console.log("진입");
+	var slt = $(event.target);
+	var delNum = slt.parents('tr').children().first().text();
+	
+	console.log("삭제할 번호 : " + delNum);
+	
+	$.ajax({
+		url : "deletevote.do",
+		data : { delNum : delNum, adminId : '${admin.adminId }' },
+		type : "post",
+		success : function(result){
+			alert(result);
+			location.reload();
+		},
+		error : function(request, status, errorData){
+			alert("error code : " + request.status + "\n"
+				+ "message : " + request.responseText + "\n"
+				+ "error : " + errorData
+			);
+			alert("삭제 실패");
+			location.reload();
+		}
+	}); //ajax
+			
+	}; // delvote();
+	
+
 
 </script>
 </body>

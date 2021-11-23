@@ -351,7 +351,7 @@ function golist(){
     </ul>
   </div>
   <div id="divinput">
-    <input type="text" placeholder="제목을 입력해주세요. (20자 제한)" id="title">
+    <input type="text" placeholder="제목을 입력해주세요. (25자 제한)" id="title">
   </div>
 </fieldset>
 <!-- Create the editor container -->
@@ -442,7 +442,7 @@ function focusto(event){
 // 제목 글자 수 제한
 $('#title').on("change keyup paste",function(){
 	if($("#title").val().length > 20){
-		alert("제목이 20자를 초과했습니다.");
+		alert("제목이 25자를 초과했습니다.");
 		var titletxt = $("#title").val();
 		$("#title").val(titletxt.substring(0,20));
 		return false;
@@ -456,9 +456,19 @@ $("#startdate").on("change keyup paste", function() {
     var sltdate=new Date($(this).val());
     var today = new Date();
     var today2 = new Date(today.toLocaleDateString());
+    var endDate = new Date($("#enddate").val());
+    
     if(sltdate < today2){
     	 alert("이미 지난 날을 시작일로 선택할 수 없습니다.");
     	 $(this).val("");
+    }else if(endDate != null && endDate != ""){
+    	if(sltdate > endDate){
+    		alert("마감일이 지난 날로 시작일을 선택할 수 없습니다.");
+    		$(this).val("");
+    	} else if(sltdate.getTime() == endDate.getTime()){
+    		alert("투표 진행일수는 최소 하루이상이어야 합니다.");
+    		$(this).val("");
+    	}
     }
     });
 //마감날짜 입력되면 시작날짜 먼저 입력하라 --> 시작날짜와 비교

@@ -16,6 +16,7 @@
 	<typeAlias type="kh.teamproject.apton.admin.notice.vo.Notice" alias="Notice"/>
 	<typeAlias type="kh.teamproject.apton.maintenancecost.model.vo.MaintenanceCost" alias="Mcost"/> <!-- mcost mapper 생생 후 등록 by ParkJunYeb 2021.11.19 -->
 	<typeAlias type="kh.teamproject.apton.common_energy_usage.model.vo.CommonUsage" alias="ComUsage"/> <!-- comusage mapper 생생 후 등록 by ParkJunYeb 2021.11.19 -->
+	<typeAlias type="kh.teamproject.apton.votesign.model.vo.VoteRecords" alias="VoteRecords"/> <!--  VoteRecords mapper 생성 후 등록 by NaHyowon 2021.11.23 -->
 </typeAliases>
 
 <!-- 추가 및 수정 시 작성자와 날짜, 내용 등을 주석으로 남기기 -->
@@ -29,6 +30,7 @@
 	<mapper resource="mappers/voteinfo-mapper.xml"/> <!--  VoteInfo mapper 생성 후 등록 by NaHyowon 2021.11.16 -->
 	<mapper resource="mappers/mcost-mapper.xml"/> <!-- mcost mapper 생생 후 등록 by ParkJunYeb 2021.11.19 -->
 	<mapper resource="mappers/comusage-mapper.xml"/> <!-- comusage mapper 생생 후 등록 by ParkJunYeb 2021.11.19 -->
+	<mapper resource="mappers/voterecords-mapper.xml"/> <!--  VoteRecords mapper 생성 후 등록 by NaHyowon 2021.11.23 -->
 </mappers>
 
 

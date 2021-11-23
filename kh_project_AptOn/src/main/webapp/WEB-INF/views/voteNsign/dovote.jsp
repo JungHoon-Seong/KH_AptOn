@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -22,7 +23,7 @@
         h3 {
             text-align: center;
         }
-        #votetext {
+        #votedesc {
             width: 600px;
             border: 1px solid rgb(172, 162, 148);
             margin-bottom: 10px;
@@ -64,23 +65,30 @@
             background-color: #f44336;
             color: white;
         }
+#vno{
+	font-size:10px;
+	margin-bottom:0px;
+}
+h3{
+margin-top:0px;
+}
     </style>
 
 </head>
 
 <body>
+<c:if test="${empty member.houseNum }">
+		<script>
+			alert("로그인 상태가 아닙니다.");
+			location.href="index";
+			window.close();
+		</script>
+	</c:if>
+	
     <div id="votemain">
-        <h3>아파트 경비원 증원 관련 투표</h3>
-        <div id="votetext">
-            <p>최근 아파트의 오래된 조경이 미관을 해친다고 하는 민원이 다수 제기되어</p>
-            <p>보수공사를 위한 주민 투표가 진행되어 과반수 세대가 참여하고 과반수가 찬성하면</p>
-            <p>새로운 조경을 위한 공사가 진행될 예정입니다. 아래는 공사에 대한 정보입니다.</p>
-            <ul>
-                <li>보수 공사 업체 : kh인테리어</li>
-                <li>예상 비용 : 2,000만원</li>
-                <li>예상 공사 기간 : 12월 5일 ~ 12월 10일</li>
-                <li>각 세대별 부담금 : 약 2만원이 1월 관리비에 계상될 예정입니다</li>
-            </ul>
+    <p id="vno">투표번호 : ${vo.voteNo }</p>
+        <h3>${vo.voteTitle }</h3>
+        <div id="votedesc">
         </div>
         <span id="btndiv1">
             <button class="button button1">찬성</button>
@@ -90,18 +98,51 @@
         </span>
     </div>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-    <script>
+<script>
+    console.log(${vo.voteDesc } );
+    $("#votedesc").html(${vo.voteDesc } );
+     
 	$(".button1").on("click", function(){
-		confirm("찬성 하시겠습니까?");
-		alert("찬성하셨습니다.");
-		window.close();
+		if(confirm("찬성 하시겠습니까?")){
+			doVote(1);
+		};
 	});
 	$(".button2").on("click", function(){
-		confirm("반대 하시겠습니까?");
-		alert("반대하셨습니다.");
-		window.close();
+		if(confirm("반대 하시겠습니까?")){
+			doVote(0);
+		};
 	});
-    </script>
+function doVote(yn){
+	console.log(${vo.voteNo });
+	console.log(${member.houseNum });
+	console.log(yn);
+	//var jArray = {"voteNo" : ${vo.voteNo }, "houseNum" : ${member.houseNum } , "YN" : yn };
+	$.ajax({
+		url : "dovote.do",
+		data :{
+			voteNo : ${vo.voteNo },
+			houseNum : ${member.houseNum },
+			YN : yn
+		} ,
+		type : "post",
+		success : function(result){
+			if(result == 'yes'){
+				alert("찬성하셨습니다.");
+				window.close();
+			} else if(result == 'no'){
+				alert("반대하셨습니다.");
+				window.close();
+			};
+		},
+		error : function(request, status, errorData){
+			alert("error code : " + request.status + "\n"
+				+ "message : " + request.responseText + "\n"
+				+ "error : " + errorData
+			);
+		}
+	}); //ajax
+}
+</script>
 
 </body>
 

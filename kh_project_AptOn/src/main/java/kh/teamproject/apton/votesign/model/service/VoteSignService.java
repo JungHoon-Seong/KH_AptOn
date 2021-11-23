@@ -8,30 +8,59 @@ import org.springframework.stereotype.Service;
 
 import kh.teamproject.apton.votesign.model.dao.VoteSignDao;
 import kh.teamproject.apton.votesign.model.vo.VoteInfo;
+import kh.teamproject.apton.votesign.model.vo.VoteRecords;
 
 @Service("votesignservice")
-public class VoteSignService {
+public class VoteSignService implements VoteSignServiceInterface{
 	
 	@Autowired
 	private VoteSignDao votesigndao;
 	
-	public List<Map> votelist(int currentPage, int limit) throws Throwable,Exception{
+	@Override
+	public List<Map> votelist(int currentPage, int limit) throws Throwable{
 		
 		return votesigndao.votelist(currentPage, limit);
 	}
-	public int getListCount() throws Throwable,Exception{
+	@Override
+	public int getListCount() throws Throwable{
 		
 		return votesigndao.getListCount();
 	}
-	public int enrollvote(VoteInfo vo) throws Throwable,Exception{
+	@Override
+	public int enrollvote(VoteInfo vo) throws Throwable{
 		
 		return votesigndao.enrollvote(vo);
 	}
-	public VoteInfo selectvotedetail(int vote_no) throws Throwable,Exception{
+	@Override
+	public VoteInfo selectvotedetail(int vote_no) throws Throwable{
 		
 		return votesigndao.selectvotedetail(vote_no);
 	}
+	@Override
+	public int deleteVote(int voteNo) throws Throwable{
+		
+		return votesigndao.deleteVote(voteNo);
+	}
+	@Override
+	public int doVote(VoteRecords vo) throws Throwable {
+			
+			return votesigndao.doVote(vo);
+	}
+	@Override
+	public int checkVote(VoteRecords vo) throws Throwable {
+		
+		return votesigndao.checkVote(vo);
+	}
+	@Override
+	public int updateYes(int voteNo) throws Throwable {
+
+		return votesigndao.updateYes(voteNo);
+	}
+	@Override
+	public int updateNo(int voteNo) throws Throwable {
+		
+		return votesigndao.updateNo(voteNo);
+	}
 	
 
-
-}
+}//class

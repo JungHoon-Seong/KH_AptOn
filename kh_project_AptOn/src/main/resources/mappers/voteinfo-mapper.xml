@@ -56,4 +56,22 @@ INSERT INTO VOTE_INFO VALUES(
 			 from vote_info where vote_no = #{vote_no} 
 	 ]]>
 	</select>
+	
+	<select id="deleteVote" parameterType="_int">
+	<![CDATA[
+		delete from vote_info where vote_no = #{voteNo}
+	 ]]>
+	</select>
+
+	<update id="updateYes" parameterType="_int">
+		<![CDATA[
+			update vote_info set VOTE_Y = VOTE_Y+1 where vote_no = #{voteNo}
+		 ]]>
+	</update>
+	
+	<update id="updateNo" parameterType="_int">
+		<![CDATA[
+			update vote_info set VOTE_N = VOTE_N+1 where vote_no = #{voteNo}
+		 ]]>
+	</update>
 </mapper>
