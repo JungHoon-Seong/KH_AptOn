@@ -19,6 +19,12 @@ public class Admin {
 		this.adminPwd = adminPwd;
 		this.adminLog = adminLog;
 	}
+	
+	public Admin(String adminId, String adminPwd) {
+		super();
+		this.adminId = adminId;
+		this.adminPwd = adminPwd;
+	}
 
 	public String getAdminId() {
 		return adminId;
