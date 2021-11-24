@@ -390,14 +390,16 @@ CKEDITOR.replace( 'editor',{
         	}
         	//console.log(txt);
         	//console.log(stringByteLength + " Bytes")
-        	 document.getElementById('txtlim').value = 1500 - stringByteLength;
+        	 document.getElementById('txtlim').value = 1507 - stringByteLength;
         	
-        	if(stringByteLength >= 1500){
+        	if(stringByteLength >= 1507){
         		alert("더 이상 입력할 수 없습니다.");
-        		document.getElementById('txtlim').value = 1500 - stringByteLength;
+        		document.getElementById('txtlim').value = 1507 - stringByteLength;
         		document.getElementById('txtlim').style.color='red';
+        	} else if(document.getElementById('txtlim').value==1507){
+        		document.getElementById('txtlim').value =1500;
         	} else {
-        		document.getElementById('txtlim').value = 1500 - stringByteLength;
+        		document.getElementById('txtlim').value = 1507 - stringByteLength;
         		document.getElementById('txtlim').style.color='black';
         	}
         	
@@ -441,13 +443,12 @@ function focusto(event){
 };
 // 제목 글자 수 제한
 $('#title').on("change keyup paste",function(){
-	if($("#title").val().length > 20){
+	if($("#title").val().length > 25){
 		alert("제목이 25자를 초과했습니다.");
 		var titletxt = $("#title").val();
-		$("#title").val(titletxt.substring(0,20));
+		$("#title").val(titletxt.substring(0,25));
 		return false;
 	};
-	
 	
 });
 //시작날짜 날짜 입력되면 오늘이랑 비교하기

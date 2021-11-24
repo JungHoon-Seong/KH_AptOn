@@ -1,7 +1,11 @@
 package kh.teamproject.apton.votesign.controller;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Base64;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -16,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-
+import kh.teamproject.apton.member.model.vo.Member;
 import kh.teamproject.apton.votesign.model.service.VoteSignService;
 import kh.teamproject.apton.votesign.model.service.VoteSignServiceInterface;
 import kh.teamproject.apton.votesign.model.vo.VoteInfo;
@@ -189,9 +193,15 @@ public class VoteSignController {
 			mv.setViewName(viewpage);
 			return mv;
 		}
-		
 		try {
 			vo = votesignservice.selectvotedetail(vno);
+			//날짜 유효성 검사
+			String voteStatus = compareDate(vo.getVoteStartDate(), vo.getVoteDeadLine());
+			if(voteStatus.equals("notyet")) {
+				mv.addObject("alertmsg", "투표가 시작되지 않았습니다.");
+			} else if(voteStatus.equals("done")) {
+				mv.addObject("alertmsg", "투표가 종료되었습니다.");
+			}
 			viewpage = "voteNsign/dovote";
 		} catch (Throwable e) {
 			e.printStackTrace();
@@ -215,6 +225,7 @@ public class VoteSignController {
 			int check = votesignservice.checkVote(vo);
 			System.out.println("투표여부 카운트 : " + check);
 			if(check >= 1) {
+				result = "already";
 				return result;
 			} else if(check == 0){
 				votesignservice.doVote(vo);
@@ -245,6 +256,98 @@ public class VoteSignController {
 		
 		return result;
 	} // method
+	
+	@RequestMapping(value ="dosign", method = RequestMethod.GET)
+	public ModelAndView dosignpage(ModelAndView mv, String voteNo) {
+		String viewpage = "error/commonError"; //viewpage는 미리 에러로 지정
+//		System.out.println("voteNO : "+voteNo);
+		int vno = 0;
+		VoteInfo vo = new VoteInfo();
+		try {
+		  vno = Integer.parseInt(voteNo);
+		} catch (Exception e) {
+			e.printStackTrace();
+			mv.setViewName(viewpage);
+			return mv;
+		}
+		try {
+			vo = votesignservice.selectvotedetail(vno);
+			//날짜 유효성 검사
+			String voteStatus = compareDate(vo.getVoteStartDate(), vo.getVoteDeadLine());
+			if(voteStatus.equals("notyet")) {
+				mv.addObject("alertmsg", "서명이 시작되지 않았습니다.");
+			} else if(voteStatus.equals("done")) {
+				mv.addObject("alertmsg", "서명이 종료되었습니다.");
+			}
+			
+			viewpage = "voteNsign/dosign";
+		} catch (Throwable e) {
+			e.printStackTrace();
+		}
+		mv.addObject("vo", vo);
+		mv.setViewName(viewpage);
+		return mv;
+	}
+	
+	// 날짜 유효성 검사를 위한 메소드
+	private String compareDate(String strStart, String strEnd) throws Exception{
+		SimpleDateFormat transFormat = new SimpleDateFormat("yyyy/MM/dd");
+		Date std = transFormat.parse(strStart);// 시작일
+		Date end = transFormat.parse(strEnd); // 마감일
+		Calendar c1 = Calendar.getInstance();
+		String strToday = transFormat.format(c1.getTime());
+		Date today = transFormat.parse(strToday); // 오늘
+		if(today.before(std)) {
+			return "notyet";
+		} else if (today.after(end)){
+			return "done";
+		} else {
+			return "ongoing";
+		}
+	} // method
+	
+	@RequestMapping(value = "submitSign.do", method = RequestMethod.POST)
+	@ResponseBody
+	public String submitSign(@RequestParam String signBase64) {
+		System.out.println(signBase64);
+		String result = "success";
+		
+		byte[] memberSign = signBase64.getBytes();
+		
+		Member vo = new Member(202111191010101L, memberSign);
+		try {
+			votesignservice.submitSign(vo);
+		} catch (Throwable e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
+	@RequestMapping(value = "loadSign.do", method = RequestMethod.POST)
+	@ResponseBody
+	public byte[] loadSign(@RequestParam String hNum) {
+		System.out.println("loadSign진입");
+		String result = "success";
+		byte[] imgbyte = null;
+		long houseNum = Long.parseLong(hNum);
+		
+		
+		
+		try {
+		 imgbyte = votesignservice.loadSign(houseNum);
+		 System.out.println(new String(imgbyte));
+		} catch (Throwable e) {
+			e.printStackTrace();
+		}
+		
+		return imgbyte;
+	}
+	
+	
+	
+	
+	
 	
 	
 } //class

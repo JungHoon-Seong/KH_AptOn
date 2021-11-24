@@ -120,7 +120,7 @@ function openNav() {
 //관리자 계정으로 접속하지 않았습니다. 멘트와 함께 이동		
 $(document).ready(function(){
 		if('${admin.adminId }' == null ||'${admin.adminId}' == ""){
-			alert('${admin.adminId}');
+			alert('관리자 계정으로 접속해 주세요.');
 			location.href="error?msg=관리자 계정이 아닙니다.";
 };
 

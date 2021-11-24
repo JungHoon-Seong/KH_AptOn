@@ -21,6 +21,14 @@ public class Member {
 	public Member() {
 		super();
 	}
+	
+	public Member(long houseNum, byte[] memberSign) {
+		super();
+		this.houseNum = houseNum;
+		this.memberSign = memberSign;
+	}
+
+
 
 	public Member(int houseNum, String pwd, String name, String phone, byte[] memberSign) {
 		super();

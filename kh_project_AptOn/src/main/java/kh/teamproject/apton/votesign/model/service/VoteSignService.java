@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import kh.teamproject.apton.member.model.vo.Member;
 import kh.teamproject.apton.votesign.model.dao.VoteSignDao;
 import kh.teamproject.apton.votesign.model.vo.VoteInfo;
 import kh.teamproject.apton.votesign.model.vo.VoteRecords;
@@ -60,6 +61,16 @@ public class VoteSignService implements VoteSignServiceInterface{
 	public int updateNo(int voteNo) throws Throwable {
 		
 		return votesigndao.updateNo(voteNo);
+	}
+	@Override
+	public int submitSign(Member vo) throws Throwable {
+		
+		
+		return votesigndao.submitSign(vo);
+	}
+	@Override
+	public byte[] loadSign(long HouseNum) throws Throwable {
+		return votesigndao.loadSign(HouseNum);
 	}
 	
 

@@ -77,13 +77,21 @@ margin-top:0px;
 </head>
 
 <body>
+<script>
 <c:if test="${empty member.houseNum }">
-		<script>
+		
 			alert("로그인 상태가 아닙니다.");
 			location.href="index";
 			window.close();
-		</script>
+		
 	</c:if>
+	<c:if test="${!empty alertmsg}">
+		alert("${alertmsg}");
+		location.href="index";
+		window.close();
+		<c:remove var="alertmsg"/>
+	</c:if>
+</script>
 	
     <div id="votemain">
     <p id="vno">투표번호 : ${vo.voteNo }</p>
@@ -99,6 +107,7 @@ margin-top:0px;
     </div>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script>
+
     console.log(${vo.voteDesc } );
     $("#votedesc").html(${vo.voteDesc } );
      
@@ -131,6 +140,9 @@ function doVote(yn){
 				window.close();
 			} else if(result == 'no'){
 				alert("반대하셨습니다.");
+				window.close();
+			} else if(result == 'already'){
+				alert("이미 투표하셨습니다.");
 				window.close();
 			};
 		},

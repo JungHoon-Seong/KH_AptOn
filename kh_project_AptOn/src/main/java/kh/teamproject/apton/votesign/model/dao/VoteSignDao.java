@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kh.teamproject.apton.member.model.vo.Member;
 import kh.teamproject.apton.votesign.model.vo.VoteInfo;
 import kh.teamproject.apton.votesign.model.vo.VoteRecords;
 
@@ -63,7 +64,17 @@ public class VoteSignDao {
 	}
 	public int updateNo(int voteNo) throws Throwable{
 		
-		return sqlsession.update("VoteInfo.updateYes", voteNo);
+		return sqlsession.update("VoteInfo.updateNo", voteNo);
+	}
+	
+	public int submitSign(Member vo) throws Throwable {
+		
+		return sqlsession.update("Member.submitSign", vo);
+	}
+	
+	public byte[] loadSign(long HouseNum) throws Throwable {
+		
+		return sqlsession.selectOne("Member.loadSign", HouseNum);
 	}
 	
 

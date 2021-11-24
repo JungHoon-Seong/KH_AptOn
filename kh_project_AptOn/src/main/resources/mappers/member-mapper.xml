@@ -16,5 +16,15 @@
 	select house_num, pwd from member 
 	where house_num = #{houseNum} and pwd = #{pwd}
 	</select>
+	
+	<!-- 서명 제출 쿼리문 작성 by NaHyowon 2021.11.24 -->
+	<update id="submitSign" parameterType="Member">
+		update member set MEMBER_SIGN = #{memberSign} where house_num=#{houseNum}
+	</update>
+	
+	<!-- 서명 불러오기 쿼리문 작성 by NaHyowon 2021.11.24 -->
+	<select id="loadSign" parameterType="_long" resultType="_byte[]">
+		select member_sign from member where house_num = #{houseNum}
+	</select>
 
 </mapper>
