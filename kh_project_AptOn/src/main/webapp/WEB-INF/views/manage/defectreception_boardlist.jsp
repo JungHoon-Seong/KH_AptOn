@@ -116,9 +116,9 @@
 <aside id="aside">
 <!-- 메뉴이름 및 링크는 추후 결정 -->
 <ul>
-	<li><a href="#">서브메뉴1</a></li>
-	<li><a href="#">서브메뉴2</a></li>
-	<li><a href="#">서브메뉴3</a></li>
+	<li><a href="#" hidden="hidden">서브메뉴1</a></li>
+	<li><a href="#"hidden="hidden">서브메뉴2</a></li>
+	<li><a href="#"hidden="hidden">서브메뉴3</a></li>
 </ul>
 </aside>
 

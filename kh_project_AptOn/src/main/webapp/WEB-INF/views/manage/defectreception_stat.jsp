@@ -36,7 +36,7 @@
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
   <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
-  
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
  <style>
  ul {
  list-style-type: none;
@@ -51,14 +51,14 @@
  	width: 1200px;
  }
  table {
-	border: 1px solid black;
-	
-	text-align: center;
-	background-color: #ccc;
+	 border: 1px solid black;
+	 width: 1200px;
+	 text-align: center;
  }
- td {
- 	border: 1px solid black;
- 	width: 240px;
+ #rowheader {
+	 font-weight: bold;
+	 text-align: center;
+	 background-color: #ccc;
  }
  .completestate {
 	 font-weight: bold;
@@ -66,48 +66,39 @@
  footer {
  	clear: both;
  }
- #btnBox {
+  .img {
+ 	width: 120px;
+ 	height: 80px;
+ }
+ #btnPermitBox {
  	float: right;
  }
- .textContent {
- 	text-align: justify;
- 	vertical-align: top;
- 	height: 375px;
- }
- .img {
- 	width: 240px;
- 	height: 200px;
- }
-  #btnUpdate {
+ #btnPermit {
 	 broder: none;
 	 border-radius: 5px;
 	 color: white;
-	 padding: 7px 16px;
+	 padding: 15px 32px;
 	 text-align: center;
 	 font-size: 16px;
 	 margin: 4px 2px;
 	 cursor: pointer;
 	 background-color: #008CBA;
  }
- #btnDelete {
-	 broder: none;
-	 border-radius: 5px;
-	 color: white;
-	 padding: 7px 16px;
-	 text-align: center;
-	 font-size: 16px;
-	 margin: 4px 2px;
-	 cursor: pointer;
-	 background-color: #f44336;
- }
-  h2 {
+ 
+ h2 {
  margin-top: 200px;
  margin-left: 200px;
  }
  </style>
-
-	
-
+  
+  <script>
+  function permitscript(){
+	  
+  }
+  
+  google.charts.load('current', {'packages':['bar']});
+  google.charts.setOnLoadCallback(drawChart);
+  </script>
   
 </head>
 
@@ -123,73 +114,20 @@
 
 
 <main id="main">
-<h2>노원 롯데 캐슬 - <a href="./manage-dr">아파트 민원 접수</a></h2>
+<h2>관리자 노원 롯데 캐슬 - <a href="./manage-dr">아파트 민원 접수</a></h2>
 
 <aside id="aside">
-<!-- 메뉴이름 및 링크는 추후 결정 -->
-<ul>
-	<li><a href="#" hidden="hidden">서브메뉴1</a></li>
-	<li><a href="#"hidden="hidden">서브메뉴2</a></li>
-	<li><a href="#"hidden="hidden">서브메뉴3</a></li>
-</ul>
+<!-- 대체됨 -->
+
 </aside>
 
 
 <section id="mainsection">
-	<table id="maintable">
-	<c:forEach items="${drbList}" var="vo">
-		<tr>
-			<td id ="boardNo">${vo.drNo }</td>
-			<td>${vo.drTitle }</td>
-			<td>${vo.drDate }</td>
-			<td id = "houseno">${vo.houseNo }</td>
-			<c:choose>
-				<c:when test="${vo.drState == 1}">
-					<td class="completestate">처리완료</td>
-				</c:when>
-				<c:when test="${vo.drState == 0}">
-					<td class="">처리중</td>
-				</c:when>
-			</c:choose>
-		</tr>
-		
-		
+
 	
-		<tr>	
-			<td ><img src="${vo.drImage }" class="img" onerror="this.src='resources/img/logo.png'" alt='' /> </td>
-			<td class="img">이미지2</td>
-			<td class="img">이미지3</td>
-			<td class="img">이미지4</td>
-			<td class="img">이미지5</td>
-				
-		</tr>
-		<tr>
-			<td class="textContent" colspan="5">${vo.drContent }</td>
-		</tr>
+	<!-- Todo 데이터를 본격적으로 그려야함 -->
+	 <div id="datachart" style="width: 800px; height: 500px;"></div>
 	
-	</table>
-		<div>
-		</div>
-	<!-- SJH TODO 회원 세션과 houseno id가 같을 경우만 보이도록 보완필요 -->
-		<div id="btnBox">
-			<button type="button" id="btnUpdate" onclick="btnUpdate()">강제수정</button>
-			<button type="button" id="btnDelete" onclick="btnDelete()">강제삭제</button>
-		</div>
-		<script>
-			function btnUpdate(){
-				location.href="./manage-drupdate?no=${vo.drNo}";
-			}
-			function btnDelete(){
-				
-				var confirmDelete = confirm("삭제하시겠습니까?");
-				if(confirmDelete == true){ <!-- 알림창의 확인 버튼 눌러야지 이동됨 -->
-					location.href="./manage-drdelete?no=${vo.drNo}"
-				}
-			}
-	</script>
-	
-		
-	</c:forEach>
 </section>
 </main>
 
