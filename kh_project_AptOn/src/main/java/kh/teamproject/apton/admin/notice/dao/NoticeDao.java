@@ -33,16 +33,17 @@ public class NoticeDao {
 		return noticelist;
 	}
 
-	public List<Notice> selectContentView(int noticenum) {
+	public List<Notice> selectContentView(int noticenum) throws Exception {
 		List<Notice> noticelist;
 		
 		noticelist = sqlSession.selectList("Notice.selectContentView",noticenum);
 		return noticelist;
 	}
 	
-	public int deleteNotice(int noticenum) {
+	public int deleteNotice(String notice_num) throws Exception {
 		int result = 0;
-		result = sqlSession.delete("Notice.deleteNotice", noticenum);
+		System.out.println("daonum: "+ notice_num);
+		result = sqlSession.delete("Notice.deleteNotice", notice_num);
 		if (result == 0) {
 			System.out.println("dao단오류발생");
 		}

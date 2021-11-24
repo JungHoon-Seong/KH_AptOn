@@ -58,7 +58,7 @@
 
 <main id="adminmain">
 <section id="mainsection">
-<form action="adnoticelist" method="get" name="noticeinfo">
+<form action="noticedelete" method="post" name="noticeinfo">
 <table id = "list">
         <thead>
             <tr id = "toplist">
@@ -97,11 +97,13 @@
 	<button>글쓰기</button>
 	
 	</form>
+		  <input type="text" name="keyword" id="keywordInput" />
+    <button id="searchBtn" type="button">검색</button>
 <script type="text/javascript">
 
 var d = document.noticeinfo;
 function deletenotice(){        	
- 	console.log(d.deletecheck.value);
+
 
      d.submit(); 
 		

@@ -4,7 +4,7 @@ import java.sql.Date;
 
 public class Notice {
 
-	private int notice_num;
+	private String notice_num;
 	private String admin_id;
 	private String notice_title;
 	private String notice_content;
@@ -12,7 +12,7 @@ public class Notice {
 	private Date notice_date;
 	
 	
-	public Notice(int notice_num) {
+	public Notice(String notice_num) {
 		this.notice_num = notice_num;
 	}
 
@@ -24,11 +24,11 @@ public class Notice {
 				+ notice_date + "]";
 	}
 
-	public int getNotice_num() {
+	public String getNotice_num() {
 		return notice_num;
 	}
 
-	public void setNotice_num(int notice_num) {
+	public void setNotice_num(String notice_num) {
 		this.notice_num = notice_num;
 	}
 

@@ -182,15 +182,16 @@ public class NoticeController {
 	}
 	
 	//삭제
-	@RequestMapping(value = "/noticedelete", method = RequestMethod.GET)
-	public ModelAndView deleteNotice(ModelAndView mv,HttpServletRequest request, @RequestParam(value="no" , defaultValue = "0")String pageNum ,
-			@RequestParam(value = "notice_num") int notice_num ) {
+	@RequestMapping(value = "/noticedelete", method = RequestMethod.POST)
+	public String deleteNotice(ModelAndView mv, @RequestParam("deletecheck")List<String> deletenum){
 		String viewPage = "error/commonError"; //기본페이지 에러페이지로 동일하게 설정함
-		
-		System.out.println("삭제 글 번호: ->"+ notice_num);
-		int noticenum = 0;
+		System.out.println("받아온 삭제 글 번호: ->"+ deletenum);
+		int delete = 0;
 		try {
-			noticenum = noticeService.deleteNotice(notice_num);
+			for(String notice_num : deletenum) {
+				delete = noticeService.deleteNotice(notice_num);
+			System.out.println("삭제하러간 삭제 글 번호"+ notice_num);
+			}
 			viewPage= "/notice/admin_notice";
 		} catch (Exception e) {
 			viewPage= "error/commonError";
@@ -198,9 +199,9 @@ public class NoticeController {
 			mv.addObject("url" , "index");
 			e.printStackTrace();
 		}
-		System.out.println("noticedetail: -->"+noticenum);
-		mv.addObject("noticelist",noticenum);
+		System.out.println("noticedetail: -->"+delete);
+		mv.addObject("noticelist",delete);
 		mv.setViewName(viewPage);
-		return mv;
+		return "redirect: ./adnoticelist";
 	}
 }

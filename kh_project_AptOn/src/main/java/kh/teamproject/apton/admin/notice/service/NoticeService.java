@@ -57,8 +57,8 @@ public class NoticeService {
 
 
 	
-	public int deleteNotice(int noticenum) {
-		return NoticeDao.deleteNotice(noticenum);
+	public int deleteNotice(String num) throws Exception {
+		return NoticeDao.deleteNotice(num);
 	}
 
 }

@@ -153,7 +153,8 @@
 		<c:if test="${endPage < pageCount }"> 다음 </c:if>
 	</div>
 	
-	
+	  <input type="text" name="keyword" id="keywordInput" />
+    <button id="searchBtn" type="button">검색</button>
 </section>
 </main>
 
