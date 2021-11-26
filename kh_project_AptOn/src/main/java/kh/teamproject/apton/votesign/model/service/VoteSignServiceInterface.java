@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import kh.teamproject.apton.member.model.vo.Member;
+import kh.teamproject.apton.votesign.model.vo.SignRecords;
 import kh.teamproject.apton.votesign.model.vo.VoteInfo;
 import kh.teamproject.apton.votesign.model.vo.VoteRecords;
 
@@ -30,5 +31,10 @@ public interface VoteSignServiceInterface {
 	public int submitSign(Member vo) throws Throwable;
 	
 	public byte[] loadSign(long HouseNum) throws Throwable;
+	
+	public int doSign(SignRecords svo) throws Throwable;
+	
+	public int checkSign(SignRecords svo) throws Throwable;
+	
 
 }

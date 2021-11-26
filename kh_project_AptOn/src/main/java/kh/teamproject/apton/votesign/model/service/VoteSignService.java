@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import kh.teamproject.apton.member.model.vo.Member;
 import kh.teamproject.apton.votesign.model.dao.VoteSignDao;
+import kh.teamproject.apton.votesign.model.vo.SignRecords;
 import kh.teamproject.apton.votesign.model.vo.VoteInfo;
 import kh.teamproject.apton.votesign.model.vo.VoteRecords;
 
@@ -72,6 +73,17 @@ public class VoteSignService implements VoteSignServiceInterface{
 	public byte[] loadSign(long HouseNum) throws Throwable {
 		return votesigndao.loadSign(HouseNum);
 	}
+	@Override
+	public int doSign(SignRecords svo) throws Throwable {
+
+		return votesigndao.doSign(svo);
+	}
+	@Override
+	public int checkSign(SignRecords svo) throws Throwable {
+
+		return votesigndao.checkSign(svo);
+	}
+
 	
 
 }//class

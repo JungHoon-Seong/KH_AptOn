@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -87,9 +88,23 @@ h5{
 margin:0;
 }
     </style>
+
 </head>
 <body onload="init()">
-
+<script>
+<c:if test="${empty member.houseNum }">
+			alert("로그인 상태가 아닙니다.");
+			location.href="index";
+			window.close();
+		
+	</c:if>
+	<c:if test="${!empty alertmsg}">
+		alert("${alertmsg}");
+		location.href="index";
+		window.close();
+		<c:remove var="alertmsg"/>
+	</c:if>
+</script>
     
      <div id="votemain">
     <p id="vno">투표번호 : ${vo.voteNo }</p>
@@ -190,11 +205,24 @@ margin:0;
         console.log(typeof canvasValue);
 		$.ajax({
     		url : "submitSign.do",
-    		data : {"signBase64" : canvasValue},
+    		data : {"signBase64" : canvasValue,
+    				"hNum" : 	${member.houseNum},
+    				"voteNo" : ${vo.voteNo }
+    			},
     		type : "post",
     		//contentType: "application/json; charset=utf-8",
     		success : function(result){
     			console.log(result);
+    			if(result == "success"){
+    				alert("서명이 완료되었습니다.");
+    				location.href="index";
+    				window.close();
+    			}else if(result == "already"){
+        				alert("이미 서명하셨습니다.");
+        				location.href="index";
+        				window.close();
+    				}
+    			
     		},
     		error : function(request, status, errorData){
     			alert("error code : " + request.status + "\n"
@@ -206,6 +234,7 @@ margin:0;
     	}); //ajax 
     }
     function loadSign(){
+    	clearSign();
 	   	 var image = new Image();
   		  image.onload = function() {
   		  context.drawImage(image, 0, 0);
@@ -227,8 +256,6 @@ margin:0;
     			//location.reload();
     		}
     	}); //ajax
-  		  
-  		  
   		  //image.src = "data:image/png;base64,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";
     }
     
@@ -239,7 +266,7 @@ margin:0;
         // 컨텍스트 리셋
         context.beginPath();
 
-    }
+    };
     </script>
     </body>
     </html>

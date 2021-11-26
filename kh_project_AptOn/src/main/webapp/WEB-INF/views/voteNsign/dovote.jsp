@@ -79,12 +79,12 @@ margin-top:0px;
 <body>
 <script>
 <c:if test="${empty member.houseNum }">
-		
 			alert("로그인 상태가 아닙니다.");
 			location.href="index";
 			window.close();
 		
 	</c:if>
+	
 	<c:if test="${!empty alertmsg}">
 		alert("${alertmsg}");
 		location.href="index";

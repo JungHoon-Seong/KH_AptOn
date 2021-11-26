@@ -118,14 +118,14 @@ function openNav() {
 <script>
 //adminId가 null이거나 빈 값이면 error 페이지로 이동
 //관리자 계정으로 접속하지 않았습니다. 멘트와 함께 이동		
-$(document).ready(function(){
+/* $(document).ready(function(){
 		if('${admin.adminId }' == null ||'${admin.adminId}' == ""){
 			alert('관리자 계정으로 접속해 주세요.');
 			location.href="error?msg=관리자 계정이 아닙니다.";
 };
 
 
-});
+}); */
 // memu 클래스 바로 하위에 있는 a 태그를 클릭했을때
 function dropdown(){
 	    	console.log("여기");

@@ -304,7 +304,7 @@ box-shadow: 3px 3px 3px 1px #ff7b00;
 서명 참여율 : <c:set var="voteratio" value="${vo.voteY /  vo.voteRights}"/> <fmt:formatNumber value="${voteratio * 100 }" pattern="0"/>%<br>
 </div>
 <button id = "copyresult" onclick="copyresult();"><span><b>결과 복사하기</b></span></button>
-<button id = "copylink" onclick="copylink();"><span><b>투표 링크 복사하기</b></span></button>
+<button id = "copylink" onclick="copylink();"><span><b>서명 링크 복사하기</b></span></button>
 </div>
 	</td>
 </tr>

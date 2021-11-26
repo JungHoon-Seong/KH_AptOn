@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kh.teamproject.apton.member.model.vo.Member;
+import kh.teamproject.apton.votesign.model.vo.SignRecords;
 import kh.teamproject.apton.votesign.model.vo.VoteInfo;
 import kh.teamproject.apton.votesign.model.vo.VoteRecords;
 
@@ -76,6 +77,18 @@ public class VoteSignDao {
 		
 		return sqlsession.selectOne("Member.loadSign", HouseNum);
 	}
+	
+	public int doSign(SignRecords svo) throws Throwable {
+
+		return sqlsession.insert("SignRecords.doSign", svo);
+	}
+	
+	public int checkSign(SignRecords svo) throws Throwable {
+		
+		return sqlsession.selectOne("SignRecords.checkSign", svo);
+	}
+	
+
 	
 
 
