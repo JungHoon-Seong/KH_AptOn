@@ -53,6 +53,19 @@ public class DrBoard {
 	}
 
 
+	public DrBoard(long houseNum, String adminId2, String title, String content, int state, String processingDetail,
+			String imgsrc) {
+			this.houseNo = houseNum;
+			this.adminId = adminId2;
+			this.drTitle = title;
+			this.drContent = content;
+			this.drState = state;
+			this.drProcessingDetail = processingDetail;
+			this.drImage = imgsrc;
+		
+	}
+
+
 	@Override
 	public String toString() {
 		return "DR_Board [drNo=" + drNo + ", houseNo=" + houseNo + ", adminId=" + adminId + ", drTitle=" + drTitle

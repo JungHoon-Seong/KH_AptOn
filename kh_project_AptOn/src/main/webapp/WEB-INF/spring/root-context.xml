@@ -12,21 +12,19 @@
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	<!-- 프로젝트용 db계정이 생성되면 바꿀 것 -->
 	<context:property-placeholder location="classpath:properties/apton.properties" />
-	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
-		<!--  local DB-->
-		<property name="driverClassName" value="${db.driverClassName}"/>
-		<property name="url" value="${db.url}"/> 
-		<property name="username" value="${db.username}"/>
-		<property name="password" value="${db.password}"/>
-		 
-		
-		<!-- Global DB in KH Academy 2021.11.22 by NaHyowon--> 
-     	<!-- <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
-		<property name="url" value="jdbc:oracle:thin:@112.221.156.36:1521:xe"/> 
-		<property name="username" value="apton"/>
-		<property name="password" value="1234"/> -->
-		
-	</bean>
+   <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+      <!--  local DB-->
+      <property name="driverClassName" value="${db.driverClassName}"/>
+      <property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"/> 
+      <property name="username" value="${db.username}"/>
+      <property name="password" value="${db.password}"/> 
+      
+      <!-- Global DB in KH Academy 2021.11.22 by NaHyowon--> 
+        <!-- <property name="driverClassName" value="${db.driverClassName}"/>
+      <property name="url" value="${db.url}"/> 
+      <property name="username" value="${db.username}"/>
+      <property name="password" value="${db.password}"/> -->
+   </bean>
 	
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"/>

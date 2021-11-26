@@ -72,6 +72,12 @@ public class BoardDefectreceptionDao {
 		
 		return result;
 	}
+	
+	public int insertBoardwithImg(DrBoard bvo) {
+		int result = 0;
+		result = sqlSession.insert("DrBoard.insertContentwithImg", bvo);
+		return result;
+	}
 
 	public int updateBoard(DrBoard bvo) {
 		int result = 0;
@@ -90,6 +96,8 @@ public class BoardDefectreceptionDao {
 		}
 		return result;
 	}
+
+
 	
 	
 

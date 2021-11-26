@@ -36,7 +36,7 @@
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
   <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
-  
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
  <style>
  ul {
  list-style-type: none;
@@ -211,6 +211,6 @@
 
   <!-- Template Main JS File -->
   <script src="resources/js/main.js"></script>
-
+  
 </body>
 </html>

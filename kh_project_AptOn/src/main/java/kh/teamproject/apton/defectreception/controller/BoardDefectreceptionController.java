@@ -124,25 +124,29 @@ public class BoardDefectreceptionController {
 	@RequestMapping(value = "insert-defectreception", method = RequestMethod.POST)
 	public ModelAndView insertContent(ModelAndView mv, @RequestParam(value="t" , defaultValue = "0")String title,
 			@RequestParam(value="c" , defaultValue = "0")String Content,
-			@RequestParam(value="imgs[]")MultipartFile imgs,
+			@RequestParam(value="image", defaultValue = "")String imgsrc,
 			HttpServletRequest request) {
 		String viewPage = "error/commonError"; //기본페이지 에러페이지로 동일하게 설정함
 
 		int drBoardResult = 0;
 		
-		// SJH TODO향후 세션의 housenum을 아래의 drno 위치에 넣어야한다
-		//printInfo(Integer.toString(drno), imgs);
-		
-		saveFile(imgs, request);
+		System.out.println("이미지 저장주소: " + imgsrc);
 		
 		//SJHTODO 세션에 따라 호수번호를 입력받아야함 추후 처리
-		int houseNum = 51004;
+		long houseNum = 202111191010102L;
 		String adminId = "admin2";
 		int state = 0;
 		String ProcessingDetail = "처리중";
 		
-		DrBoard dvo = new DrBoard(houseNum, adminId, title,Content,state,ProcessingDetail);
-		drBoardResult = boardService.insertBoard(dvo);
+		if (imgsrc != null) {
+			DrBoard dvo = new DrBoard(houseNum, adminId, title,Content,state,ProcessingDetail,imgsrc);
+			drBoardResult = boardService.insertBoardwithImg(dvo);
+		}else if(imgsrc == null) {
+			DrBoard dvo = new DrBoard(houseNum, adminId, title,Content,state,ProcessingDetail);
+			drBoardResult = boardService.insertBoard(dvo);
+		}
+		
+		
 			
 		if (drBoardResult == 0) {
 			viewPage= "error/commonError";
@@ -185,16 +189,16 @@ public class BoardDefectreceptionController {
 	public ModelAndView updateContent(ModelAndView mv, @RequestParam(value="t" , defaultValue = "0")String title,
 			@RequestParam(value="c" , defaultValue = "0")String content,
 			@RequestParam(value="no" , defaultValue = "0")int drno,
-			@RequestParam(value="imgs[]")MultipartFile imgs,
+			@RequestParam(value="image", defaultValue = "")String imgsrc,
 			 HttpServletRequest request){
 	String viewPage = "error/commonError"; //기본페이지 에러페이지로 동일하게 설정함
 	
 	int drBoardResult = 0;
 	
+	System.out.println("이미지 저장주소: " + imgsrc);
+
 	
-	printInfo(Integer.toString(drno), imgs);
 	
-	saveFile(imgs, request);
 	
 	//보안 높일려면 가구번호랑 세션아디 비교하여 확인기능 필요할듯
 	DrBoard bvo = new DrBoard(drno, title,content);
@@ -233,6 +237,7 @@ public class BoardDefectreceptionController {
 		
 		return "redirect: ./board-defectreception";
 	}
+	
 
 	 // 파일 업로드 정보 출력
 	private void printInfo(String contentNumber, MultipartFile img) {

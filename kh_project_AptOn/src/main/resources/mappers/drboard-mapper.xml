@@ -44,6 +44,13 @@
 		#{houseNo}, #{adminId}, #{drTitle}, #{drContent} , SYSDATE , #{drState}, SYSDATE, #{drProcessingDetail})
 	</insert>
 	
+	<insert id="insertContentwithImg" parameterType="DrBoard" statementType="PREPARED">
+		
+			INSERT INTO DEFECT_RECEPTION VALUES(SEQ_DR_Board_NO.nextval,
+			#{houseNo}, #{adminId}, #{drTitle}, #{drContent} , SYSDATE , #{drState}, SYSDATE, #{drProcessingDetail})
+			<!-- INSERT INTO defectreception_images VALUES(SEQUENCE DEFECT_RECEPTION_seq.nextval ,SEQ_DR_Board_NO.currval, #{drImage}) -->
+	</insert>
+	
 	<update id="updateContent" parameterType="DrBoard" statementType="PREPARED">
 	UPDATE DEFECT_RECEPTION SET DR_TITLE = #{drTitle}, DR_CONTENT = #{drContent} WHERE DR_NO = #{drNo}
 	</update>

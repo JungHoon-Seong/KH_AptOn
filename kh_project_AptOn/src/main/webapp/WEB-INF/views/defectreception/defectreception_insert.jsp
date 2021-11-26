@@ -26,10 +26,11 @@
   <link href="resources/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
   <link href="resources/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
   <link href="resources/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-
+  <link href="resources/css/imgurstyle.css" rel="stylesheet" media="screen">
+      
   <!-- Template Main CSS File -->
   <link href="resources/css/style.css" rel="stylesheet">
-
+  <link href="resources/css/imgurstyle.css" rel="stylesheet" media="screen">
   <!-- =======================================================
   * Template Name: Lumia - v4.6.0
   * Template URL: https://bootstrapmade.com/lumia-bootstrap-business-template/
@@ -39,7 +40,8 @@
   <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
   <!-- SJH TODO ck에디터 CDN 향후 변경될 수 있음 -->
   <script src="https://cdn.ckeditor.com/ckeditor5/11.0.1/classic/ckeditor.js"></script>
- <style>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js"></script>
+<style>
  ul {
  list-style-type: none;
  }
@@ -105,6 +107,7 @@
  margin-top: 200px;
  margin-left: 200px;
  }
+
  </style>
 
 </head>
@@ -131,11 +134,11 @@
 	<li><a href="#">서브메뉴3</a></li>
 </ul>
 </aside>
-
+   
 
 <section id="mainsection">
 	<table id="maintable">
-	<form action="./insert-defectreception"  method="post" method="post" enctype="multipart/form-data">
+	<form id="imgur" action="./insert-defectreception"  method="post">
 	
 		<tr>
 			<td><input type="text" name="t" id="textTitle" placeholder="제목을 입력해주세요"/></td>
@@ -143,7 +146,12 @@
 
 		<!-- form으로 보낼려면 name이 필요한대 에디터에서 제공해주는 플러그인이 name이 없어서 아래 input file을 사용-->
 		<tr>
-			<td><input type="file" name="imgs[]" id="imageUpload"/></td>	
+			<td>
+			<!-- <input type="file" name="imgs[]" class="imgur" accept="image/*" data-max-size="5000" > -->
+				<div class="dropzone">
+					<div class="info"></div>
+				</div>
+			</td>	
 		</tr>
 		<tr>
 			<td class="textContent" colspan="5">
@@ -181,7 +189,8 @@
 
   <!-- Template Main JS File -->
   <script src="resources/js/main.js"></script>
-
+  <!-- imgurupload Js File -->
+  <script src="resources/js/imgur.js"></script>
   <script>
   ClassicEditor
   .create( document.querySelector( '#textContent' ), {

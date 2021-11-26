@@ -50,6 +50,10 @@ public class BoardDefectreceptionService {
 	public int insertBoard(DrBoard bvo) {
 		return boardDao.insertBoard(bvo);
 	}
+	
+	public int insertBoardwithImg(DrBoard dvo) {
+		return boardDao.insertBoardwithImg(dvo);
+	}
 
 
 
@@ -62,6 +66,9 @@ public class BoardDefectreceptionService {
 	public int deleteBoard(DrBoard bvo) {
 		return boardDao.deleteBoard(bvo);
 	}
+
+
+
 
 
 	
