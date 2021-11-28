@@ -26,11 +26,11 @@
   <link href="resources/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
   <link href="resources/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
   <link href="resources/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-  <link href="resources/css/imgurstyle.css" rel="stylesheet" media="screen">
+  
       
   <!-- Template Main CSS File -->
   <link href="resources/css/style.css" rel="stylesheet">
-  <link href="resources/css/imgurstyle.css" rel="stylesheet" media="screen">
+  
   <!-- =======================================================
   * Template Name: Lumia - v4.6.0
   * Template URL: https://bootstrapmade.com/lumia-bootstrap-business-template/
@@ -109,7 +109,59 @@
  }
 
  </style>
+<script>
+    $("document").ready(function () {
 
+        $('input[type=file]').on("change", function () {
+
+            var $files = $(this).get(0).files;
+
+            if ($files.length) {
+
+                // Reject big files
+                if ($files[0].size > $(this).data("max-size") * 1024) {
+                    console.log("Please select a smaller file");
+                    return false;
+                }
+
+                // Replace ctrlq with your own API key
+                var apiUrl = 'https://api.imgur.com/3/image';
+                var apiKey = 'f2cb341d831734c';
+
+                var formData = new FormData();
+                formData.append("image", $files[0]);
+
+                var settings = {
+                    "async": false,
+                    "crossDomain": true,
+                    "url": apiUrl,
+                    "method": "POST",
+                    "datatype": "json",
+                    "headers": {
+                        'Authorization': "Client-ID " + apiKey
+                    },
+                    "processData": false,
+                    "contentType": false,
+                    "data": formData,
+                    beforeSend: function (xhr) {
+                        console.log("Uploading | 업로드 중");
+                    },
+                    success: function (res) {
+                        console.log(res.data.link);
+                        $('input[name=image]').attr('value',res.data.link);
+                        $('body').append('<img src="' + res.data.link + '" />'); 
+                    },
+                    error: function () {
+                        alert("Failed | 실패");
+                    }
+                }
+                $.ajax(settings).done(function (response) {
+                    console.log("Done | 성공");
+                });
+            }
+        });
+    });
+</script>
 </head>
 
 <body>
@@ -148,9 +200,7 @@
 		<tr>
 			<td>
 			<!-- <input type="file" name="imgs[]" class="imgur" accept="image/*" data-max-size="5000" > -->
-				<div class="dropzone">
-					<div class="info"></div>
-				</div>
+			<input type="file" name="image" id="upload" accept="image/*" data-max-size="5000" value="res.data.link" />
 			</td>	
 		</tr>
 		<tr>

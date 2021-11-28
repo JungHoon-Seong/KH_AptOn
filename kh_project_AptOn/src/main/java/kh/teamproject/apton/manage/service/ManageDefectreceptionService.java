@@ -40,6 +40,10 @@ public class ManageDefectreceptionService {
 		return manageDfboardDao.deleteBoardForceful(bvo);
 	}
 
+	public List<String> drstat() {
+		return manageDfboardDao.drstat();
+	}
+
 	
 	
 	

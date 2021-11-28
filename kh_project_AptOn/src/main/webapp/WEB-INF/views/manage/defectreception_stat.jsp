@@ -98,6 +98,25 @@
   
   google.charts.load('current', {'packages':['bar']});
   google.charts.setOnLoadCallback(drawChart);
+  //아래의 함수를 ajax를 통해서 받아온 자료를 가지고 그려야한다. sql문은 작동하나 dao 리턴값이 부분적으로만 받아진다. 
+  function drawChart() {
+      var data = google.visualization.arrayToDataTable([
+        ['월별통계', '신고수', '완료된 민원'],
+        ['202101', 1, 1],
+        ['202110', 7, 4]
+      ]);
+
+      var options = {
+        chart: {
+          title: '노원 롯데캐슬 민원 통계',
+          subtitle: '신고수, 처리완료한 민원',
+        }
+      };
+
+      var chart = new google.charts.Bar(document.getElementById('datachart'));
+
+      chart.draw(data, google.charts.Bar.convertOptions(options));
+    }
   </script>
   
 </head>
@@ -114,11 +133,15 @@
 
 
 <main id="main">
-<h2>관리자 노원 롯데 캐슬 - <a href="./manage-dr">아파트 민원 접수</a></h2>
+<h2>관리자 노원 롯데 캐슬 통계화면 - <a href="./manage-dr">아파트 민원 접수</a></h2>
 
 <aside id="aside">
 <!-- 대체됨 -->
-
+<ul>
+	<li><a href="#" hidden="hidden">서브메뉴1</a></li>
+	<li><a href="#"hidden="hidden">서브메뉴2</a></li>
+	<li><a href="#"hidden="hidden">서브메뉴3</a></li>
+</ul>
 </aside>
 
 

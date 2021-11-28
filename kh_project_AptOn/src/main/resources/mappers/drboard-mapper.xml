@@ -16,6 +16,7 @@
 		<result property="drImage" column="DR_IMAGE"/>
 	</resultMap>
 	
+	
 	<select id="getListCount" resultType="_int">
 		select count(*) from DEFECT_RECEPTION
 
@@ -58,6 +59,9 @@
 	<delete id="deleteContent" parameterType="DrBoard" statementType="PREPARED">
 		DELETE FROM DEFECT_RECEPTION WHERE DR_NO = #{drNo}
 	</delete>
+	
+
+
 	
 	
 

@@ -186,6 +186,29 @@ public class ManageDefectreceptionController {
 		return "redirect: ./manage-dr";
 	}
 	
+	@RequestMapping(value = "manage-drstat", method = RequestMethod.GET)
+	public ModelAndView drstat(ModelAndView mv) {
+		
+		String viewPage = "error/commonError";
+		viewPage ="/manage/defectreception_stat";
+		List<String> drStat=  manageDfboardService.drstat();
+		
+		
+//		DrBoard bvo = new DrBoard(drno);
+//		drBoardResult = manageDfboardService.deleteBoardForceful(bvo);
+//		
+//		if(drBoardResult == 0) {
+//			viewPage = "error/commonError";
+//			mv.addObject("msg", "게시글 오류 발생");
+//			mv.addObject("url", "index");
+//		}else {
+//			viewPage ="/manage/defectreception_stat";
+//		}
+		//System.out.println("cnt 통계를 위한 월별계산 return: " + drStat);
+		mv.setViewName(viewPage);
+		return mv;
+	}
+	
 	 // 파일 업로드 정보 출력
 		private void printInfo(String contentNumber, MultipartFile img) {
 			System.out.println(contentNumber + "번째 게시물의 파일: " + img.getOriginalFilename());

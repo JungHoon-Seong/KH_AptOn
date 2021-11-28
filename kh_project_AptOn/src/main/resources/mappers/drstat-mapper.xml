@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="DrStat">
+	<!-- DrBoard ResultMap 생성 by SJH 2021.11.26 -->
+	
+
+	<!-- 2021년 민원접수 월별 통계를 위한 sql문-->
+	<!--  2021상반기, 하반기, 2020상반기,하반기 이렇게 나눌 계획 -->
+	<!-- 일단 2021 일년 전체의 결과가 나오는 sql문 사용 -->
+	<select id="getFirsthalfComplementCount" resultType="_int">
+	<![CDATA[
+		
+		select count(*) as count, dr_date as monthly from DEFECT_RECEPTION
+		where 1=1
+		 and to_number(to_char(dr_date,'yyyymmdd'))>=20210101 and to_number(to_char(dr_date,'yyyymmdd'))<20220101
+		 group by dr_date
+		 order by monthly
+         
+	]]>
+	</select>
+	
+
+
+
+
+	
+</mapper>

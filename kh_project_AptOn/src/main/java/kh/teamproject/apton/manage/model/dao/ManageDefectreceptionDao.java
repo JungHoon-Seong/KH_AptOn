@@ -1,6 +1,9 @@
 package kh.teamproject.apton.manage.model.dao;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.naming.spi.DirStateFactory.Result;
 
 import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
@@ -8,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kh.teamproject.apton.defectreception.model.vo.DrBoard;
+import kh.teamproject.apton.defectreception.model.vo.DrStat;
 @Repository("manageDfboardDao")
 public class ManageDefectreceptionDao {
 
@@ -52,6 +56,13 @@ public class ManageDefectreceptionDao {
 			System.out.println("dao단오류발생");
 		}
 		return result;
+	}
+
+	public List<String> drstat() {
+		List<String> drStat  = null;
+		List<Object> aString =  sqlSession.selectList("DrStat.getFirsthalfComplementCount");
+		System.out.println("dao 통계를 위한 월별계산 return: " + aString);
+		return drStat;
 	}
 
 	
