@@ -35,5 +35,10 @@
 		DELETE FROM NOTICE WHERE notice_num = #{notice_num}
 	
 	</delete>
+	<insert id="insertNotice" parameterType="Notice">
+	Insert Into NOTICE(notice_num,admin_id,notice_title, notice_content,notice_date) values (NOTICE_seq.NEXTVAL,'admin2','아파트공지입니다','공지내용9',sysdate);
+	
+	</insert>
+	
 	
 </mapper>

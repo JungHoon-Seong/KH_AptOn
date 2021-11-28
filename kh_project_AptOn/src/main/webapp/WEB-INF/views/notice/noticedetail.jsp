@@ -142,6 +142,7 @@
 	
 	</table>
 </c:forEach>	
+<button onclick = "location.href = '/apton/noticelist' ">목록</button>
 </main>
 
      <!-- ======= Footer ======= -->

@@ -181,6 +181,29 @@ public class NoticeController {
 		return mv;
 	}
 	
+	
+	@RequestMapping(value = "adnotice-detail", method = RequestMethod.GET)
+	public ModelAndView selectAdContentView(ModelAndView mv, @RequestParam(value="no" , defaultValue = "0")int notice_num ) {
+		String viewPage = "error/commonError"; //기본페이지 에러페이지로 동일하게 설정함
+		
+		System.out.println("글 번호: ->"+ notice_num);
+		List<Notice> noticelist = null;
+		try {
+			noticelist = noticeService.selectContentView(notice_num);
+			viewPage= "/notice/admin_noticedetail";
+		} catch (Exception e) {
+			viewPage= "error/commonError";
+			mv.addObject("msg" , "게시판 오류 발생");
+			mv.addObject("url" , "index");
+			e.printStackTrace();
+		}
+		System.out.println("admin_noticedetail: -->"+noticelist);
+		mv.addObject("noticelist",noticelist);
+		mv.setViewName(viewPage);
+		return mv;
+	}
+	
+	
 	//삭제
 	@RequestMapping(value = "/noticedelete", method = RequestMethod.POST)
 	public String deleteNotice(ModelAndView mv, @RequestParam("deletecheck")List<String> deletenum){

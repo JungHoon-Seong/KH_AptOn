@@ -7,10 +7,11 @@ import org.springframework.stereotype.Service;
 
 import kh.teamproject.apton.admin.notice.dao.NoticeDao;
 import kh.teamproject.apton.admin.notice.vo.Notice;
+import kh.teamproject.apton.votesign.model.vo.VoteInfo;
 
 
 @Service("noticeService")
-public class NoticeService {
+public class NoticeService implements NoticeInterface{
 	@Autowired
 	private NoticeDao NoticeDao;
 
@@ -48,14 +49,11 @@ public class NoticeService {
 		return 0;
 	}
 
-
-	
-	public int insertNotice(Notice vo) {
-		// TODO Auto-generated method stub
-		return 0;
+	@Override
+	public int NoticeInsert(Notice vo) throws Throwable{
+		
+		return NoticeDao.NoticeInsert(vo);
 	}
-
-
 	
 	public int deleteNotice(String num) throws Exception {
 		return NoticeDao.deleteNotice(num);

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import kh.teamproject.apton.admin.notice.vo.Notice;
 import kh.teamproject.apton.defectreception.model.vo.DrBoard;
+import kh.teamproject.apton.votesign.model.vo.VoteInfo;
 
 
 @Repository("noticeDao")
@@ -48,5 +49,10 @@ public class NoticeDao {
 			System.out.println("dao단오류발생");
 		}
 		return result;
+	}
+	
+	public int NoticeInsert(Notice vo) throws Throwable{
+
+		return sqlSession.insert("Notice.insertNotice", vo);
 	}
 }

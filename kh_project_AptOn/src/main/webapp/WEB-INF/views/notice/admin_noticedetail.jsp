@@ -58,68 +58,36 @@
 
 <main id="adminmain">
 <section id="mainsection">
-<form action="noticedelete" method="post" name="noticeinfo">
-<table id = "list">
-        <thead>
-            <tr id = "toplist">
-                <th>  </th>
-                <th>번호</th>
+	<table id="maintable">
+	<c:forEach items="${noticelist}" var="detail">
+		 <thead>
+            <tr>
                 <th>제목</th>
-                <th>작성자</th>
-                <th>작성일</th>
+                <td>${detail.notice_title }</td>
+            </tr>
+            <tr>
+                <th>글 번호: </th>
+                <td>${detail.notice_num }</td>
+                <th>작성자: </th>
+                <td>${detail.admin_id }</td>
+                <th>작성일: </th>
+                <td>${detail.notice_date }</td> 
             </tr>
         </thead>
         <tbody>
-
-            <c:forEach var="notice" items="${noticelist}">
-                <tr id = "Value">
-                    <td><input type="checkbox" id="delete" name="deletecheck" value="${notice.notice_num}"></td>
-                    <td class = "line">${notice.notice_num}</td>
-                    <td class = "line"><a href = "adnotice-detail?no=${notice.notice_num } ">${notice.notice_title}</a></td>
-                    <td class = "line">${notice.admin_id}</td>
-                    <td class = "line">${notice.notice_date}</td>
+                <tr>
+   
+                <td>${detail.notice_content}</td>
                 </tr>
-            </c:forEach>
-
-
-            
-        </tbody>
-    </table>
-    
-	<div id="paging">
-		<c:if test="${startPage > 1 }" >이전</c:if>
-		<c:forEach begin="${startPage }" end="${endPage }" step="1" var="i">
-			<a href="adnoticelist?p=${i}">${i}</a>
-		</c:forEach>
-		<c:if test="${endPage < pageCount }"> 다음 </c:if>
-	</div>
-	<button id="deletebtn" onclick="deleteMsg()">삭제</button>
-	<button>글쓰기</button>
 	
+	</table>
+</c:forEach>	
 	</form>
-		  <input type="text" name="keyword" id="keywordInput" />
-    <button id="searchBtn" type="button">검색</button>
+	<button>수정</button>
+	<button onclick = "location.href = '/apton/adnoticelist' ">목록</button>
+	
 <script type="text/javascript">
 
-var d = document.noticeinfo;
-function deletenotice(){        	
-
-
-     d.submit(); 
-		
-	}
-
-
-
-function deleteMsg() {
-    if (!confirm("정말 삭제하시겠습니까?")) {
-        alert("취소 되었습니다.");
-        	return false;
-    } else {		
-    	deletenotice();
-
-    }
-}     
 
 </script>	
 	
