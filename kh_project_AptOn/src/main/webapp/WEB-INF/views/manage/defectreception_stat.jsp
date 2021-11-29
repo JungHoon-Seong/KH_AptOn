@@ -37,6 +37,7 @@
   ======================================================== -->
   <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
  <style>
  ul {
  list-style-type: none;
@@ -100,18 +101,19 @@
   google.charts.setOnLoadCallback(drawChart);
   //아래의 함수를 ajax를 통해서 받아온 자료를 가지고 그려야한다. sql문은 작동하나 dao 리턴값이 부분적으로만 받아진다. 
   function drawChart() {
-      var data = google.visualization.arrayToDataTable([
-        ['월별통계', '신고수', '완료된 민원'],
-        ['202101', 1, 1],
-        ['202110', 7, 4]
-      ]);
-
-      var options = {
-        chart: {
-          title: '노원 롯데캐슬 민원 통계',
-          subtitle: '신고수, 처리완료한 민원',
-        }
-      };
+	 
+	  var data = google.visualization.arrayToDataTable([
+	        ['통계', '신고된 민원', '완료된 민원'],
+	        ['2021상반기', ${firstTotalCount}, ${firstComplementCount}],
+	        ['2021하반기', ${secondTotalCount} , ${secondComplementCount}]
+	      ]);
+	  var options = {
+		        chart: {
+		          title: '노원 롯데캐슬 민원 통계',
+		          subtitle: '신고수, 처리완료한 민원',
+		        }
+		      };
+     
 
       var chart = new google.charts.Bar(document.getElementById('datachart'));
 

@@ -1,10 +1,16 @@
 package kh.teamproject.apton.manage.controller;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.print.attribute.standard.PrinterInfo;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +20,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.google.gson.Gson;
+
 import kh.teamproject.apton.defectreception.model.vo.DrBoard;
 import kh.teamproject.apton.manage.service.ManageDefectreceptionService;
 
@@ -187,24 +196,33 @@ public class ManageDefectreceptionController {
 	}
 	
 	@RequestMapping(value = "manage-drstat", method = RequestMethod.GET)
-	public ModelAndView drstat(ModelAndView mv) {
+	public ModelAndView drstat(ModelAndView mv, HttpServletResponse response) throws ServletException, IOException {
 		
 		String viewPage = "error/commonError";
 		viewPage ="/manage/defectreception_stat";
-		List<String> drStat=  manageDfboardService.drstat();
+		List<Object> drStat=  manageDfboardService.drstat();
 		
+//		System.out.println("Controller단 통계를 위한 상/하반기 계산 return: " + drStat );
 		
-//		DrBoard bvo = new DrBoard(drno);
-//		drBoardResult = manageDfboardService.deleteBoardForceful(bvo);
-//		
-//		if(drBoardResult == 0) {
-//			viewPage = "error/commonError";
-//			mv.addObject("msg", "게시글 오류 발생");
-//			mv.addObject("url", "index");
-//		}else {
-//			viewPage ="/manage/defectreception_stat";
-//		}
-		//System.out.println("cnt 통계를 위한 월별계산 return: " + drStat);
+		Map<String, Object> map1 = new HashMap<String,Object>();
+		
+		map1.put("firstTotalCount", drStat.get(1));
+		map1.put("firstComplementCount", drStat.get(2));
+		map1.put("secondTotalCount", drStat.get(3));
+		map1.put("secondComplementCount", drStat.get(4));
+		
+		Gson gson1 = new Gson();
+		String gobStr = gson1.toJson(map1);
+		System.out.println("Controller단 통계를 위한 상/하반기 계산 return: " + gobStr );
+//		PrintWriter out = response.getWriter();
+//		mv.addObject(gobStr);
+//		//out.print(gobStr);
+//		out.flush();
+//		out.close();
+		mv.addObject("firstTotalCount",  Integer.parseInt( String.valueOf(drStat.get(1))) );
+		mv.addObject("firstComplementCount",  Integer.parseInt(String.valueOf(drStat.get(2))) );
+		mv.addObject("secondTotalCount",  Integer.parseInt(String.valueOf(drStat.get(3))) );
+		mv.addObject("secondComplementCount", Integer.parseInt(  String.valueOf(drStat.get(4))) );
 		mv.setViewName(viewPage);
 		return mv;
 	}
@@ -243,4 +261,7 @@ public class ManageDefectreceptionController {
 				System.out.println("파일 전송 에러 : " + e.getMessage());
 			}
 		}
+		
+		
+
 }

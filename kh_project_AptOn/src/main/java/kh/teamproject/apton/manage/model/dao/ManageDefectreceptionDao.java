@@ -1,7 +1,9 @@
 package kh.teamproject.apton.manage.model.dao;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 import javax.naming.spi.DirStateFactory.Result;
 
@@ -12,6 +14,7 @@ import org.springframework.stereotype.Repository;
 
 import kh.teamproject.apton.defectreception.model.vo.DrBoard;
 import kh.teamproject.apton.defectreception.model.vo.DrStat;
+import oracle.net.aso.a;
 @Repository("manageDfboardDao")
 public class ManageDefectreceptionDao {
 
@@ -58,12 +61,31 @@ public class ManageDefectreceptionDao {
 		return result;
 	}
 
-	public List<String> drstat() {
-		List<String> drStat  = null;
-		List<Object> aString =  sqlSession.selectList("DrStat.getFirsthalfComplementCount");
-		System.out.println("dao 통계를 위한 월별계산 return: " + aString);
+	public List<Object> drstat() {
+		//List<String> drStat  = null;
+		List<Object> drStat = new ArrayList<Object>(Arrays.asList(new String[] {""}));
+		
+		//System.out.println("테스트"+sqlSession.selectList("DrStat.getFirsthalfTotalCount"));
+		drStat.add(1, String.valueOf(  sqlSession.selectList("DrStat.getFirsthalfTotalCount")).replaceAll("\\[", "").replaceAll("\\]", "") );
+		drStat.add(2, String.valueOf( sqlSession.selectList("DrStat.getFirsthalfComplementCount")).replaceAll("\\[", "").replaceAll("\\]", "") );
+		drStat.add(3, String.valueOf( sqlSession.selectList("DrStat.getSecondhalfTotalCount")).replaceAll("\\[", "").replaceAll("\\]", "") );
+		drStat.add(4, String.valueOf( sqlSession.selectList("DrStat.getSecondhalfComplementCount")).replaceAll("\\[", "").replaceAll("\\]", "") );
+		
+		
+		
+		//aString = sqlSession.selectList("DrStat.getSecondhalfComplementCount");
+		System.out.println("dao단 통계를 위한 상/하반기 계산 return: " + drStat );
 		return drStat;
 	}
 
+
+	//작동안함
+	public String replace (String str) {
+		
+		
+		str.replaceAll("\\[", "");
+		str.replaceAll("\\]", "");
 	
+	return str;
+	}
 }

@@ -5,11 +5,47 @@
 	
 
 	<!-- 2021년 민원접수 월별 통계를 위한 sql문-->
-	<!--  2021상반기, 하반기, 2020상반기,하반기 이렇게 나눌 계획 -->
-	<!-- 일단 2021 일년 전체의 결과가 나오는 sql문 사용 -->
+	<!--  2021상반기, 하반기 이렇게 나눌 계획 -->
+	
+	<!-- 상반기 처리 완료된 게시물 -->
 	<select id="getFirsthalfComplementCount" resultType="_int">
 	<![CDATA[
-		
+		select count(*) as count from DEFECT_RECEPTION where DR_STATE = 1 and to_number(to_char(dr_date,'yyyymmdd'))>=20210101 and to_number(to_char(dr_date,'yyyymmdd'))<20210701
+         
+	]]>
+	</select>
+	
+	<!-- 후반기 처리 완료된 게시물 -->
+	<select id="getSecondhalfComplementCount" resultType="_int">
+	<![CDATA[
+		select count(*) as count from DEFECT_RECEPTION where DR_STATE = 1 and to_number(to_char(dr_date,'yyyymmdd'))>=20210701 and to_number(to_char(dr_date,'yyyymmdd'))<20220101
+         
+	]]>
+	</select>
+	
+
+	
+	<!-- 상반기 처리 안된 게시물 -->
+	<select id="getFirsthalfTotalCount" resultType="_int">
+	<![CDATA[
+		select count(*) as count from DEFECT_RECEPTION where to_number(to_char(dr_date,'yyyymmdd'))>=20210101 and to_number(to_char(dr_date,'yyyymmdd'))<20210701
+         
+	]]>
+	</select>
+	
+	<!-- 후반기 처리 안된 게시물 -->
+	<select id="getSecondhalfTotalCount" resultType="_int">
+	<![CDATA[
+		select count(*) as count from DEFECT_RECEPTION where to_number(to_char(dr_date,'yyyymmdd'))>=20210701 and to_number(to_char(dr_date,'yyyymmdd'))<20220101
+         
+	]]>
+	</select>
+	
+	
+	
+	<!-- 일단 2021 일년 전체의 결과가 나오는 sql문 사용 -->
+	<select id="get2021TotalDefectionCount" resultType="_int">
+		<![CDATA[
 		select count(*) as count, dr_date as monthly from DEFECT_RECEPTION
 		where 1=1
 		 and to_number(to_char(dr_date,'yyyymmdd'))>=20210101 and to_number(to_char(dr_date,'yyyymmdd'))<20220101
@@ -19,8 +55,6 @@
 	]]>
 	</select>
 	
-
-
 
 
 	
