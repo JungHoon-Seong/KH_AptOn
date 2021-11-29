@@ -14,23 +14,24 @@ import kh.teamproject.apton.votesign.model.vo.VoteInfo;
 public class NoticeService implements NoticeInterface{
 	@Autowired
 	private NoticeDao NoticeDao;
-
+	
+	@Override
 	public int getListCount() {
 		return NoticeDao.getNoticelistCount();
 	}
 	
-	
+	@Override
 	public List<Notice> selectNoticeList(int currentPage, int limit) {
 		List<Notice> vo = null;
 		
-		try {
-			vo = NoticeDao.selectNoticeList(currentPage, limit);
-		} catch (Throwable e) {
-			e.printStackTrace();
-		}
+//		try {
+//			vo = NoticeDao.selectNoticeList(currentPage, limit);
+//		} catch (Throwable e) {
+//			e.printStackTrace();
+//		}
 		return vo;
 	}
-	
+	@Override
 	public List<Notice> selectContentView(int noticenum)  {
 		List<Notice> vo = null;
 		
@@ -54,7 +55,7 @@ public class NoticeService implements NoticeInterface{
 		
 		return NoticeDao.NoticeInsert(vo);
 	}
-	
+	@Override
 	public int deleteNotice(String num) throws Exception {
 		return NoticeDao.deleteNotice(num);
 	}

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import kh.teamproject.apton.admin.notice.service.NoticeInterface;
 import kh.teamproject.apton.admin.notice.service.NoticeService;
 import kh.teamproject.apton.admin.notice.vo.Notice;
 
@@ -18,7 +19,7 @@ import kh.teamproject.apton.admin.notice.vo.Notice;
 public class NoticeController {
 
 	@Autowired
-	private NoticeService noticeService;    
+	private NoticeInterface noticeService;    
 	
 	@RequestMapping(value = "/noticelist", method = RequestMethod.GET)
 	public ModelAndView selectNoticeList(ModelAndView mv, String clickedPage, @RequestParam(value = "p", defaultValue = "1")String pageNum) {
