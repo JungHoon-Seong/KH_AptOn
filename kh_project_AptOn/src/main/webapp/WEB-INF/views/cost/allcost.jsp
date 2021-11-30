@@ -81,7 +81,7 @@
     </script>
 <style>
 #cost-section{
-	
+	padding-top:70px;
 }
 boby{
 	display: block;
@@ -95,6 +95,14 @@ font-family: 'Noto Sans KR', sans-serif;
 footer{
 font-family: 'Noto Sans KR', sans-serif;
 }
+#main{
+	ovarflow: hidden;
+	border: 1px solid #ccc;
+	background-color: blue;
+}
+#nav{
+	background-color:cornflowerblue; 
+}
 </style>
 
 <!-- 공통 css 및 글꼴 입력 부분 끝  -->
@@ -104,15 +112,14 @@ font-family: 'Noto Sans KR', sans-serif;
 <body>
 <jsp:include page="../header.jsp" flush="true" />
 
-<div id= "main">
+<main id="allcostmain">
 <section id="cost-section">
+<div id="nav">
 <h1>공동 관리비</h1>
-<div>
-공동 관리비 ${vo}
 </div>
 
 </section>
-</div>
+</main>
 <div id="columnchart_material" style="width: 800px; height: 500px;"></div>
 	공동 관리비 ${vo}
 
