@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -42,18 +43,86 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+    /*
+      google.charts.load('current', {'packages':['bar']});
+      google.charts.setOnLoadCallback(drawChart);
+	
+      function drawChart() {
+    	  
+        var data = google.visualization.arrayToDataTable([
+          ['Dialogue', '작년', '올해'],
+          ['1월', 54639381, "${vo.price}"],
+          ['2월', 0.7, 0.3],
+          ['3월', 0.4, 0.8],
+          ['4월', 0.2, 1],
+          ['5월', 0.2, 1],
+          ['6월', 0.2, 1],
+          ['7월', 0.2, 1],
+          ['8월', 0.2, 1],
+          ['9월', 0.2, 1],
+          ['10월', 0.2, 1],
+          ['11월', 0.2, 1],
+          ['12월', 0.2, 1]
+        ]);
 
+        var options = {
+          chart: {
+            title: '2021년 관리비 총액',
+            subtitle: '',
+          }
+        };
+
+        var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
+
+        chart.draw(data, google.charts.Bar.convertOptions(options));
+      }
+      */
+    </script>
 <style>
+#cost-section{
+	padding-top:70px;
+}
+boby{
+	display: block;
+}
 header{
 font-family: 'Noto Sans KR', sans-serif;
+}
+#main{
+	top: 500px;
 }
 footer{
 font-family: 'Noto Sans KR', sans-serif;
 }
+#main{
+	ovarflow: hidden;
+	border: 1px solid #ccc;
+	background-color: blue;
+}
+#nav{
+	background-color:cornflowerblue; 
+}
 </style>
+
+<!-- 공통 css 및 글꼴 입력 부분 끝  -->
+
 
 </head>
 <body>
+<jsp:include page="../header.jsp" flush="true" />
 
+<main id="allcostmain">
+<section id="cost-section">
+<div id="nav">
+<h1>공동 관리비</h1>
+</div>
+
+</section>
+</main>
+<div id="columnchart_material" style="width: 800px; height: 500px;"></div>
+	공동 관리비 ${vo}
 </body>
 </html>

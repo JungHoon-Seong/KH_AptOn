@@ -1,5 +1,7 @@
 package kh.teamproject.apton.common_energy_usage.model.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -14,5 +16,9 @@ public class CommonUsageDao {
 
 	public CommonUsage selectOne(int cost_num) {
 		return sqlSession.selectOne("ComUsage.selectOne", cost_num);
+	}
+	
+	public List<CommonUsage> allprice(String date) {
+		return sqlSession.selectList("ComUsage.allprice", date);
 	}
 }

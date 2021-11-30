@@ -1,5 +1,7 @@
 package kh.teamproject.apton.common_energy_usage.model.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +16,10 @@ public class CommonUsageService {
 	
 	public CommonUsage selecet(int cost_num) {
 		return commonUsageDao.selectOne(cost_num);
+	}
+	
+	public List<CommonUsage> price(String date) {
+		return commonUsageDao.allprice(date);
 	}
 
 }

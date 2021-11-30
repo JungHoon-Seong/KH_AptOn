@@ -17,8 +17,18 @@
 		<result property="price" column="PRICE"/>
 	</resultMap>
 	
-	<select id ="selectOne" parameterType="int" resultMap="ComUsageMap">
+	<select id ="selectOne" parameterType="_int" resultMap="ComUsageMap">
+	<![CDATA[
 		select * from common_energy_usage
 		where maintenance_cost = #{cost_num}
+		]]>
 	</select>
+	
+	<select id ="allprice" parameterType="_int" resultMap="ComUsageMap">
+	<![CDATA[
+		select price from common_energy_usage
+		where year(COMMON_ENERGY_DATE) = #{date}
+		]]>
+	</select>
+	
 </mapper>

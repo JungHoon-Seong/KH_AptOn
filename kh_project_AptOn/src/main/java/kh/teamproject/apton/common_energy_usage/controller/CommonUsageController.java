@@ -1,5 +1,8 @@
 package kh.teamproject.apton.common_energy_usage.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -49,13 +52,23 @@ public class CommonUsageController {
 	public ModelAndView comUsage(ModelAndView mv) {
 		String viewpage = "";
 		int cost_num = 20210117;
+		String yearStr = String.valueOf(cost_num);
+		String year = yearStr.substring(0,4);
+		String month = yearStr.substring(4,6);
+		System.out.println("년도 --> " + year);
+		System.out.println("월 --> " + month);
+		
+//		String date = "2021";
+//		List<CommonUsage> vo = new ArrayList<CommonUsage>();
+//		ArrayList<CommonUsage> vo = new ArrayList<CommonUsage>();
 		CommonUsage vo = new CommonUsage();
+//		vo = cUService.price(date);
 		vo = cUService.selecet(cost_num);
 		
 		System.out.println("vo 확인 ->"+vo);
-		System.out.println("공동 관리비 번호->" + vo.getMaintenanceCost());
-		System.out.println("청소비->" + vo.getCleanCost());
-		System.out.println("일반 관리비->" + vo.getmCost());
+//		System.out.println("공동 관리비 번호->" + vo.getMaintenanceCost());
+//		System.out.println("청소비->" + vo.getCleanCost());
+//		System.out.println("일반 관리비->" + vo.getmCost());
 		viewpage = "cost/allcost";
 		mv.setViewName(viewpage);
 		mv.addObject("vo", vo);
