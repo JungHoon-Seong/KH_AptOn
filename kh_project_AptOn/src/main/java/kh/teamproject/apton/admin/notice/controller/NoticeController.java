@@ -5,15 +5,18 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import kh.teamproject.apton.admin.notice.service.NoticeInterface;
 import kh.teamproject.apton.admin.notice.service.NoticeService;
 import kh.teamproject.apton.admin.notice.vo.Notice;
+import kh.teamproject.apton.votesign.model.vo.VoteInfo;
 
 @Controller
 public class NoticeController {
@@ -227,5 +230,35 @@ public class NoticeController {
 		mv.addObject("noticelist",delete);
 		mv.setViewName(viewPage);
 		return "redirect: ./adnoticelist";
+	}
+	
+	// 공지 등록 
+	@RequestMapping(value = "noticeinsert", method = RequestMethod.GET)
+	public String insertnotice() {
+
+		return "notice/admin_notice_insert";
+	}
+
+	
+	@RequestMapping(value = "notice_insert", method = RequestMethod.POST)
+	@ResponseBody
+	public String insertnotice(String msg, HttpServletRequest request) {
+		String noticetitle = request.getParameter("noticetitle");
+		String adminId = request.getParameter("adminId");
+		String content = request.getParameter("content");
+
+
+		System.out.println("noticetitle: " + noticetitle);
+		System.out.println("adminId"+ adminId);
+		System.out.println("content" + content);
+	
+		try {
+			Notice vo = new Notice( adminId, noticetitle ,content);
+			int result = noticeService.NoticeInsert(vo);
+			msg = "success";
+		} catch (Throwable e) {
+			e.printStackTrace();
+		}
+		return msg;
 	}
 }

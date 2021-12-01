@@ -51,8 +51,8 @@ public class NoticeDao {
 		return result;
 	}
 	
-	public int NoticeInsert(Notice vo) throws Throwable{
-
+	public int NoticeInsert(Notice vo) throws Exception{
+		System.out.println("dao값: " + vo);
 		return sqlSession.insert("Notice.insertNotice", vo);
 	}
 }

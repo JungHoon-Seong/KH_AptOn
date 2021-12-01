@@ -9,9 +9,9 @@ public interface NoticeInterface {
 
 	int deleteNotice(String num) throws Exception;
 
-	public List<Notice> selectContentView(int noticenum) throws Exception;;
+	public List<Notice> selectContentView(int noticenum) throws Exception;
 
-	public List<Notice> selectNoticeList(int currentPage, int limit) throws Exception;;
+	public List<Notice> selectNoticeList(int currentPage, int limit) throws Exception;
 
-	int getListCount() throws Exception;;
+	int getListCount() throws Exception;
 }

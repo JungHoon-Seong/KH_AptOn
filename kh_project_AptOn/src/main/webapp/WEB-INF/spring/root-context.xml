@@ -14,16 +14,16 @@
 	<context:property-placeholder location="classpath:properties/apton.properties" />
    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
       <!--  local DB-->
-      <property name="driverClassName" value="${db.driverClassName}"/>
+<!--       <property name="driverClassName" value="${db.driverClassName}"/>
       <property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"/> 
       <property name="username" value="${db.username}"/>
-      <property name="password" value="${db.password}"/> 
+      <property name="password" value="${db.password}"/>  -->
       
       <!-- Global DB in KH Academy 2021.11.22 by NaHyowon--> 
-        <!-- <property name="driverClassName" value="${db.driverClassName}"/>
+     <property name="driverClassName" value="${db.driverClassName}"/>
       <property name="url" value="${db.url}"/> 
       <property name="username" value="${db.username}"/>
-      <property name="password" value="${db.password}"/> -->
+      <property name="password" value="${db.password}"/>
    </bean>
 	
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">

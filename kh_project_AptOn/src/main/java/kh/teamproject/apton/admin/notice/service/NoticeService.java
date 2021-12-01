@@ -24,11 +24,11 @@ public class NoticeService implements NoticeInterface{
 	public List<Notice> selectNoticeList(int currentPage, int limit) {
 		List<Notice> vo = null;
 		
-//		try {
-//			vo = NoticeDao.selectNoticeList(currentPage, limit);
-//		} catch (Throwable e) {
-//			e.printStackTrace();
-//		}
+		try {
+			vo = NoticeDao.selectNoticeList(currentPage, limit);
+	} catch (Throwable e) {
+			e.printStackTrace();
+		}
 		return vo;
 	}
 	@Override

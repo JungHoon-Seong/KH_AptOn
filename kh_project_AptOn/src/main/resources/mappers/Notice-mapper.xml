@@ -14,7 +14,7 @@
 	
 	<select id="Noticelist" resultType="Notice">
 		<![CDATA[
-		select notice_num,admin_id,notice_title,notice_date from NOTICE
+		select notice_num,admin_id,notice_title,notice_date from NOTICE order by notice_num desc
 			 ]]>
 	</select>
 
@@ -36,8 +36,9 @@
 	
 	</delete>
 	<insert id="insertNotice" parameterType="Notice">
-	Insert Into NOTICE(notice_num,admin_id,notice_title, notice_content,notice_date) values (NOTICE_seq.NEXTVAL,'admin2','아파트공지입니다','공지내용9',sysdate);
-	
+	<![CDATA[
+	Insert Into NOTICE(notice_num,admin_id,notice_title, notice_content,notice_date) values (NOTICE_seq.NEXTVAL,#{admin_id},#{notice_title},#{notice_content},sysdate)
+	 ]]>
 	</insert>
 	
 	

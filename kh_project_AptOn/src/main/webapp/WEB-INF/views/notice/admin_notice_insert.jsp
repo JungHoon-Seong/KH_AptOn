@@ -46,80 +46,79 @@
  	float: left;
  	width: 1200px;
  }
+         .ck.ck-editor {
+            max-width: 1500px;
+        }
+
+        .ck-editor__editable {
+            min-height: 400px;
+        }
   
   </style>
   
 <!-- jquery cdn -->
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-
+ <!-- <script src="https://cdn.ckeditor.com/ckeditor5/29.1.0/classic/ckeditor.js"></script> -->
+ <script src="https://cdn.ckeditor.com/4.17.1/basic/ckeditor.js"></script>
 </head>
 <body>
 <jsp:include page="../header4admin.jsp" flush="true" />
 
 <main id="adminmain">
 <section id="mainsection">
-<form action="noticedelete" method="post" name="noticeinfo">
-<table id = "list">
-        <thead>
-            <tr id = "toplist">
-                <th>  </th>
-                <th>번호</th>
-                <th>제목</th>
-                <th>작성자</th>
-                <th>작성일</th>
-            </tr>
-        </thead>
-        <tbody>
+	    <h3>공지사항 등록</h3>
 
-            <c:forEach var="notice" items="${noticelist}">
-                <tr id = "Value">
-                    <td><input type="checkbox" id="delete" name="deletecheck" value="${notice.notice_num}"></td>
-                    <td class = "line">${notice.notice_num}</td>
-                    <td class = "line"><a href = "adnotice-detail?no=${notice.notice_num } ">${notice.notice_title}</a></td>
-                    <td class = "line">${notice.admin_id}</td>
-                    <td class = "line">${notice.notice_date}</td>
+        <table id="maintable">
+            <thead>
+                <tr>
+                    <td>
+                        <input type="text" id="noticetitle" name="noticetitle" placeholder="제목">
+                    </td>
                 </tr>
-            </c:forEach>
+                <tr>
+                    <td>
+                        <textarea id="ckeditor" name="noticecontent" placeholder="내용을 입력하세요"></textarea>
 
+                    </td>
+                </tr>
+            </thead>
+            <tbody>
 
-            
-        </tbody>
-    </table>
-    
-	<div id="paging">
-		<c:if test="${startPage > 1 }" >이전</c:if>
-		<c:forEach begin="${startPage }" end="${endPage }" step="1" var="i">
-			<a href="adnoticelist?p=${i}">${i}</a>
-		</c:forEach>
-		<c:if test="${endPage < pageCount }"> 다음 </c:if>
-	</div>
-	<button id="deletebtn" onclick="deleteMsg()">삭제</button>
+        </table>
+        <button type="button" id="insertbtn" name="insertbtn" >등록</button>
+        <button onclick="location.href = '/apton/adnoticelist' ">목록</button>
+   
+    <script>
+    CKEDITOR.replace( 'ckeditor',{
+    	uiColor: '#ffebcd',
+    	height : '300px',
+    	weight : '500px'
+    });
 	
-	</form>
-	<button onclick = "location.href = '/apton/noticeinsert' ">공지사항 등록</button>
-		  <input type="text" name="keyword" id="keywordInput" />
-    <button id="searchBtn" type="button">검색</button>
-<script type="text/javascript">
-
-var d = document.noticeinfo;
-function deletenotice(){        	
-
-
-     d.submit(); 
-		
-	}
-
-
-
-function deleteMsg() {
-    if (!confirm("정말 삭제하시겠습니까?")) {
-        alert("취소 되었습니다.");
-        	return false;
-    } else {		
-    	deletenotice();
-
-    }
-}     
+$('#insertbtn').on("click",function() {
+	var ckdata = CKEDITOR.instances['ckeditor'].getData();
+	var adminid = "${admin.adminId }";
+	$.ajax({
+		url: "notice_insert",
+		type: "POST",
+		data: {
+			noticetitle : $("#noticetitle").val(),
+			adminId : adminid,
+			content : JSON.stringify(ckdata)
+	},
+	success :function(msg){
+		alert("등록되었습니다.");
+		location.href="adminmain";
+	},
+	error : function(request, status, errorData){
+		alert("error code : " + request.status + "\n"
+			+ "message : " + request.responseText + "\n"
+			+ "error : " + errorData
+		)
+		location.href="error";
+		}
+	})
+})
 
 </script>	
 	
