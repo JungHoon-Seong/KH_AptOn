@@ -9,6 +9,7 @@
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
   <title>노원 롯데캐슬 하자접수 게시판 with APTON</title>
+ <!-- 공통 css 및 글꼴 입력 부분 시작, title바로 밑에 삽입  -->
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -35,9 +36,33 @@
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
+
+  <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+  
+  <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
+  <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+  <script src="//cdn.quilljs.com/1.3.6/quill.js"></script>
+  
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+
+
+
   <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  
+<style>
+header{
+font-family: 'Noto Sans KR', sans-serif;
+}
+footer{
+font-family: 'Noto Sans KR', sans-serif;
+}
+</style>
+
+<!-- 공통 css 및 글꼴 입력 부분 끝  -->
  <style>
  ul {
  list-style-type: none;
@@ -134,7 +159,7 @@
 
 
 
-<main id="main">
+<main id="adminmain">
 <h2>관리자 노원 롯데 캐슬 통계화면 - <a href="./manage-dr">아파트 민원 접수</a></h2>
 
 <aside id="aside">

@@ -5,10 +5,7 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
-
-  <title>노원 롯데캐슬 하자접수 게시판 with APTON</title>
+  <!-- 공통 css 및 글꼴 입력 부분 시작, title바로 밑에 삽입  -->
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -35,9 +32,19 @@
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
+
   <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
-  <!-- SJH TODO ck에디터 CDN 향후 변경될 수 있음 -->
-  <script src="https://cdn.ckeditor.com/ckeditor5/11.0.1/classic/ckeditor.js"></script>
+  
+  <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
+  <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+  <script src="//cdn.quilljs.com/1.3.6/quill.js"></script>
+  
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+<script src="https://cdn.ckeditor.com/4.17.1/standard/ckeditor.js"></script>
+
+
  <style>
  ul {
  list-style-type: none;
@@ -55,7 +62,7 @@
 	border: 1px solid black;
 	width: 1200px;
 	text-align: center;
-	background-color: #ccc;
+	background-color:  #ffebcd;
  }
  td {
  	border: 1px solid black;
@@ -109,7 +116,7 @@
  .readonlyHeader {
  	border: none;
  	width: 300px;
- 	background-color: #ccc;
+ 	background-color: #ffebcd;
  	border-bottom: 1px solid #ccc;
  	text-align: center;
  }
@@ -134,7 +141,7 @@
 
 
 
-<main id="main">
+<main id="adminmain">
 <h2>노원 롯데 캐슬 - <a href="./manage-dr">아파트 민원 접수</a></h2>
 
 <aside id="aside">
@@ -173,7 +180,7 @@
 		</tr>
 		<!-- form으로 보낼려면 name이 필요한대 에디터에서 제공해주는 플러그인이 name이 없어서 아래 input file을 사용-->
 		<tr>
-			<td><input type="file" name="imgs[]" id="imageUpload"/></td>	
+			<td><input type="file" name="imgs[]" id="imageUpload"/></td>
 		</tr>
 		 
 		<tr>
@@ -194,14 +201,45 @@
 </section>
 </main>
  <script>
-  ClassicEditor
-      .create( document.querySelector( '#textContent' ), {
-          // 제거 하고싶은 플러그인 (배열)
-           removePlugins: [ 'ImageUpload' ]
-      } )
-      .catch( error => {
-          console.error( error );
-      } );
+ CKEDITOR.replace( 'textContent',{
+		uiColor: '#ffebcd',
+		height : '300px',
+		on: {
+			//글자수제한 기능
+	        change: function() {
+	        	var txt = CKEDITOR.instances['textContent'].getData();
+	        	var len = CKEDITOR.instances['textContent'].getData().length;
+	        	
+	        	var stringByteLength = 0;
+	        	//console.log(len);
+	        	for(var i=0; i<len; i++) {
+	        	    if(escape(txt.charAt(i)).length >= 4)
+	        	        stringByteLength += 3;
+	        	    else if(escape(txt.charAt(i)) == "%A7")
+	        	        stringByteLength += 3;
+	        	    else
+	        	        if(escape(txt.charAt(i)) != "%0D")
+	        	            stringByteLength++;
+	        	}
+	        	//console.log(txt);
+	        	//console.log(stringByteLength + " Bytes")
+	        	 document.getElementById('txtlim').value = 1507 - stringByteLength;
+	        	
+	        	if(stringByteLength >= 1507){
+	        		alert("더 이상 입력할 수 없습니다.");
+	        		document.getElementById('txtlim').value = 1507 - stringByteLength;
+	        		document.getElementById('txtlim').style.color='red';
+	        	} else if(document.getElementById('txtlim').value==1507){
+	        		document.getElementById('txtlim').value =1500;
+	        	} else {
+	        		document.getElementById('txtlim').value = 1507 - stringByteLength;
+	        		document.getElementById('txtlim').style.color='black';
+	        	}
+	        	
+	        }
+	  }
+
+	});
   </script>
      <!-- ======= Footer ======= -->
 <jsp:include page="../footer.jsp" flush="true" />

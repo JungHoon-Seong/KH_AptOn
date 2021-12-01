@@ -10,6 +10,7 @@
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
   <title>노원 롯데캐슬 하자접수 게시판 with APTON</title>
+  <!-- 공통 css 및 글꼴 입력 부분 시작, title바로 밑에 삽입  -->
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -26,26 +27,47 @@
   <link href="resources/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
   <link href="resources/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
   <link href="resources/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-  
-      
+
   <!-- Template Main CSS File -->
   <link href="resources/css/style.css" rel="stylesheet">
-  
+
   <!-- =======================================================
   * Template Name: Lumia - v4.6.0
   * Template URL: https://bootstrapmade.com/lumia-bootstrap-business-template/
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
+
   <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
-  <!-- SJH TODO ck에디터 CDN 향후 변경될 수 있음 -->
-  <script src="https://cdn.ckeditor.com/ckeditor5/11.0.1/classic/ckeditor.js"></script>
+  
+  <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
+  <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+  <script src="//cdn.quilljs.com/1.3.6/quill.js"></script>
+  
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+
+<style>
+header{
+font-family: 'Noto Sans KR', sans-serif;
+}
+footer{
+font-family: 'Noto Sans KR', sans-serif;
+}
+</style>
+
+<!-- 공통 css 및 글꼴 입력 부분 끝  -->
+  <script src="https://cdn.ckeditor.com/4.17.1/standard/ckeditor.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js"></script>
+
+ <script>CKEDITOR.replace('c',{filebrowserUploadUrl:'/insert-defectreception/${fileName}'});</script>
 <style>
  ul {
  list-style-type: none;
  }
- 
+
+
  #aside {
  	float: left;
  	width: 200px;
@@ -108,6 +130,12 @@
  margin-left: 200px;
  }
 
+header{
+font-family: 'Noto Sans KR', sans-serif;
+}
+footer{
+font-family: 'Noto Sans KR', sans-serif;
+}
  </style>
 <script>
     $("document").ready(function () {
@@ -190,7 +218,12 @@
 
 <jsp:include page="../header.jsp" flush="true" />
 <!-- ========header.jsp 삽입해주세요 -->
+<aside id="aside">
+<!-- 메뉴이름 및 링크는 추후 결정 -->
+<ul>
 
+</ul>
+</aside>
 
 
 

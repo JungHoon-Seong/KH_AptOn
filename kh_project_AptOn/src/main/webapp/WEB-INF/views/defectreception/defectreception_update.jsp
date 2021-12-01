@@ -9,6 +9,7 @@
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
   <title>노원 롯데캐슬 하자접수 게시판 with APTON</title>
+  <!-- 공통 css 및 글꼴 입력 부분 시작, title바로 밑에 삽입  -->
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -35,10 +36,34 @@
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
+
   <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+  
+  <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
+  <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+  <script src="//cdn.quilljs.com/1.3.6/quill.js"></script>
+  
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+
+<style>
+header{
+font-family: 'Noto Sans KR', sans-serif;
+}
+footer{
+font-family: 'Noto Sans KR', sans-serif;
+}
+</style>
+
+<!-- 공통 css 및 글꼴 입력 부분 끝  -->
+
+
   <!-- SJH TODO ck에디터 CDN 향후 변경될 수 있음 -->
-  <script src="https://cdn.ckeditor.com/ckeditor5/11.0.1/classic/ckeditor.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js"></script>
+  <script src="https://cdn.ckeditor.com/4.17.1/standard/ckeditor.js"></script>
+
+
  <style>
  ul {
  list-style-type: none;
@@ -56,7 +81,7 @@
 	border: 1px solid black;
 	width: 1200px;
 	text-align: center;
-	background-color: #ccc;
+	background-color: #ffebcd;
  }
  td {
  	border: 1px solid black;
@@ -110,8 +135,8 @@
  .readonlyHeader {
  	border: none;
  	width: 300px;
- 	background-color: #ccc;
- 	border-bottom: 1px solid #ccc;
+ 	background-color: #ffebcd;
+ 	border-bottom: 1px solid #008CBA;
  	text-align: center;
  }
   h2 {
@@ -193,9 +218,7 @@
 <aside id="aside">
 <!-- 메뉴이름 및 링크는 추후 결정 -->
 <ul>
-	<li><a href="#">서브메뉴1</a></li>
-	<li><a href="#">서브메뉴2</a></li>
-	<li><a href="#">서브메뉴3</a></li>
+
 </ul>
 </aside>
 
@@ -248,16 +271,49 @@
 	</form>
 </section>
 </main>
- <script>
-  ClassicEditor
-      .create( document.querySelector( '#textContent' ), {
-          // 제거 하고싶은 플러그인 (배열)
-           removePlugins: [ 'ImageUpload' ]
-      } )
-      .catch( error => {
-          console.error( error );
-      } );
-  </script>
+
+  <script>
+CKEDITOR.replace( 'textContent',{
+	uiColor: '#ffebcd',
+	height : '300px',
+	on: {
+		//글자수제한 기능
+        change: function() {
+        	var txt = CKEDITOR.instances['textContent'].getData();
+        	var len = CKEDITOR.instances['textContent'].getData().length;
+        	
+        	var stringByteLength = 0;
+        	//console.log(len);
+        	for(var i=0; i<len; i++) {
+        	    if(escape(txt.charAt(i)).length >= 4)
+        	        stringByteLength += 3;
+        	    else if(escape(txt.charAt(i)) == "%A7")
+        	        stringByteLength += 3;
+        	    else
+        	        if(escape(txt.charAt(i)) != "%0D")
+        	            stringByteLength++;
+        	}
+        	//console.log(txt);
+        	//console.log(stringByteLength + " Bytes")
+        	 document.getElementById('txtlim').value = 1507 - stringByteLength;
+        	
+        	if(stringByteLength >= 1507){
+        		alert("더 이상 입력할 수 없습니다.");
+        		document.getElementById('txtlim').value = 1507 - stringByteLength;
+        		document.getElementById('txtlim').style.color='red';
+        	} else if(document.getElementById('txtlim').value==1507){
+        		document.getElementById('txtlim').value =1500;
+        	} else {
+        		document.getElementById('txtlim').value = 1507 - stringByteLength;
+        		document.getElementById('txtlim').style.color='black';
+        	}
+        	
+        }
+  }
+
+});
+
+</script>
      <!-- ======= Footer ======= -->
 <jsp:include page="../footer.jsp" flush="true" />
  
