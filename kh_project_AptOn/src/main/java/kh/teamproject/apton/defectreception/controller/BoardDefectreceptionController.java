@@ -1,29 +1,42 @@
 package kh.teamproject.apton.defectreception.controller;
 
 import java.io.File;
+import java.nio.file.Paths;
 import java.util.List;
 
-import javax.naming.spi.DirStateFactory.Result;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.cloud.storage.BlobId;
+import com.google.cloud.storage.BlobInfo;
+import com.google.cloud.storage.Storage;
+import com.google.api.client.util.Value;
+
 import kh.teamproject.apton.defectreception.model.vo.DrBoard;
+import kh.teamproject.apton.defectreception.model.vo.Message;
 import kh.teamproject.apton.defectreception.service.BoardDefectreceptionService;
-import kh.teamproject.apton.member.model.service.MemberService;
+
 
 @Controller
 public class BoardDefectreceptionController {
 	
 	@Autowired
 	private BoardDefectreceptionService boardService;
+	private Storage storage;	
+	
+	@Value("${file.storage}")
+	private Resource localFilePath;
 	
 	@RequestMapping(value = "board-defectreception", method = RequestMethod.GET)
 	public ModelAndView selectBoardList(ModelAndView mv, String clickedPage, @RequestParam(value = "p", defaultValue = "1")String pageNum) {
@@ -125,12 +138,17 @@ public class BoardDefectreceptionController {
 	public ModelAndView insertContent(ModelAndView mv, @RequestParam(value="t" , defaultValue = "0")String title,
 			@RequestParam(value="c" , defaultValue = "0")String Content,
 			@RequestParam(value="image", defaultValue = "")String imgsrc,
-			HttpServletRequest request) {
+			HttpServletRequest request){
 		String viewPage = "error/commonError"; //기본페이지 에러페이지로 동일하게 설정함
 
 		int drBoardResult = 0;
 		
 		System.out.println("이미지 저장주소: " + imgsrc);
+		
+		
+		
+		
+		
 		
 		//SJHTODO 세션에 따라 호수번호를 입력받아야함 추후 처리
 		long houseNum = 202111191010102L;
@@ -160,6 +178,21 @@ public class BoardDefectreceptionController {
 		mv.addObject("result",drBoardResult);
 		mv.setViewName("redirect: ./board-defectreception");
 		return mv;
+	}
+	
+	
+	@GetMapping("insert-defectreception/{fileName}")
+	public Message writeFileToBucket(@PathVariable(name="fileName")String fileName) throws Exception{
+		BlobId blobId = BlobId.of("apton", fileName);
+		BlobInfo blobInfo = BlobInfo.newBuilder(blobId).build();
+		File fileToRead = new File(localFilePath.getFile(), fileName);
+		byte[] data = java.nio.file.Files.readAllBytes(Paths.get(fileToRead.toURI()));
+		storage.create(blobInfo, data);
+		
+		Message message = new Message();
+		message.setContents(new String(data));
+		return message;
+		
 	}
 	
 	@RequestMapping(value = "update-defectreception", method = RequestMethod.GET)
@@ -274,4 +307,6 @@ public class BoardDefectreceptionController {
 		}
 	}
 	
+	
+
 }
