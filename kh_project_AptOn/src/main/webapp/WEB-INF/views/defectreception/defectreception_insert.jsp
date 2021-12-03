@@ -61,7 +61,7 @@ font-family: 'Noto Sans KR', sans-serif;
   <script src="https://cdn.ckeditor.com/4.17.1/standard/ckeditor.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js"></script>
 
- <script>CKEDITOR.replace('c',{filebrowserUploadUrl:'/insert-defectreception/${fileName}'});</script>
+ 
 <style>
  ul {
  list-style-type: none;
@@ -80,7 +80,7 @@ font-family: 'Noto Sans KR', sans-serif;
 	border: 1px solid black;
 	width: 1200px;
 	text-align: center;
-	background-color: #ccc;
+	background-color: #ffebcd;
  }
  td {
  	border: 1px solid black;
@@ -138,63 +138,13 @@ font-family: 'Noto Sans KR', sans-serif;
 }
  </style>
 <script>
-    $("document").ready(function () {
 
-        $('input[type=file]').on("change", function () {
-
-            var $files = $(this).get(0).files;
-
-            if ($files.length) {
-
-                // Reject big files
-                if ($files[0].size > $(this).data("max-size") * 1024) {
-                    console.log("Please select a smaller file");
-                    return false;
-                }
-
-                // Replace ctrlq with your own API key
-                var apiUrl = 'https://api.imgur.com/3/image';
-                var apiKey = 'f2cb341d831734c';
-
-                var formData = new FormData();
-                formData.append("image", $files[0]);
-
-                var settings = {
-                    "async": false,
-                    "crossDomain": true,
-                    "url": apiUrl,
-                    "method": "POST",
-                    "datatype": "json",
-                    "headers": {
-                        'Authorization': "Client-ID " + apiKey
-                    },
-                    "processData": false,
-                    "contentType": false,
-                    "data": formData,
-                    beforeSend: function (xhr) {
-                        console.log("Uploading | 업로드 중");
-                    },
-                    success: function (res) {
-                        console.log(res.data.link);
-                        $('input[name=image]').attr('value',res.data.link);
-                        $('body').append('<img src="' + res.data.link + '" />'); 
-                    },
-                    error: function () {
-                        alert("Failed | 실패");
-                    }
-                }
-                $.ajax(settings).done(function (response) {
-                    console.log("Done | 성공");
-                });
-            }
-        });
-    });
     
     //구글 클라우드를 웹서버로 이용하기 위해 작성됨
     function uploadFile() {
     	  var bucket = document.forms["putFile"]["bucket"].value;
     	  var filename = document.forms["putFile"]["fileName"].value;
-    	  if (bucket == null || bucket == "" || filename == null || filename == "") {
+    	  if (bucket == null || bucket == "apt_kh_team2" || filename == null || filename == "") {
     	    alert("Both Bucket and FileName are required");
     	    return false;
     	  } else {
@@ -295,14 +245,47 @@ font-family: 'Noto Sans KR', sans-serif;
   <!-- imgurupload Js File -->
   <script src="resources/js/imgur.js"></script>
   <script>
-  ClassicEditor
-  .create( document.querySelector( '#textContent' ), {
-      // 제거 하고싶은 플러그인 (배열)
-       removePlugins: [ 'ImageUpload' ]
-  } )
-  .catch( error => {
-      console.error( error );
-  } );
+  
+  CKEDITOR.replace( 'textContent',{
+		uiColor: '#ffebcd',
+		height : '300px',
+		on: {
+			//글자수제한 기능
+	        change: function() {
+	        	var txt = CKEDITOR.instances['textContent'].getData();
+	        	var len = CKEDITOR.instances['textContent'].getData().length;
+	        	removePlugins: [ 'ImageUpload' ]
+	        	var stringByteLength = 0;
+	        	//console.log(len);
+	        	for(var i=0; i<len; i++) {
+	        	    if(escape(txt.charAt(i)).length >= 4)
+	        	        stringByteLength += 3;
+	        	    else if(escape(txt.charAt(i)) == "%A7")
+	        	        stringByteLength += 3;
+	        	    else
+	        	        if(escape(txt.charAt(i)) != "%0D")
+	        	            stringByteLength++;
+	        	}
+	        	//console.log(txt);
+	        	//console.log(stringByteLength + " Bytes")
+	        	 document.getElementById('txtlim').value = 1507 - stringByteLength;
+	        	
+	        	if(stringByteLength >= 1507){
+	        		alert("더 이상 입력할 수 없습니다.");
+	        		document.getElementById('txtlim').value = 1507 - stringByteLength;
+	        		document.getElementById('txtlim').style.color='red';
+	        	} else if(document.getElementById('txtlim').value==1507){
+	        		document.getElementById('txtlim').value =1500;
+	        	} else {
+	        		document.getElementById('txtlim').value = 1507 - stringByteLength;
+	        		document.getElementById('txtlim').style.color='black';
+	        	}
+	        	
+	        }
+	  }
+
+	});
   </script>
+  
 </body>
 </html>

@@ -183,7 +183,7 @@ public class BoardDefectreceptionController {
 	
 	@GetMapping("insert-defectreception/{fileName}")
 	public Message writeFileToBucket(@PathVariable(name="fileName")String fileName) throws Exception{
-		BlobId blobId = BlobId.of("apton", fileName);
+		BlobId blobId = BlobId.of("apt_kh_team2", fileName);
 		BlobInfo blobInfo = BlobInfo.newBuilder(blobId).build();
 		File fileToRead = new File(localFilePath.getFile(), fileName);
 		byte[] data = java.nio.file.Files.readAllBytes(Paths.get(fileToRead.toURI()));

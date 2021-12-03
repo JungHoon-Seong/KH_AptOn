@@ -77,9 +77,7 @@
            <a class="dropdown" onclick="dropdown();">민원 관리</a>
             <ul class="hide">
                 <li><a href="manage-dr">민원접수 목록</a></li>
-                <li><a href="#">메뉴2</a></li>
-                <li><a href="#">메뉴3</a></li>
-                <li><a href="#">메뉴4</a></li>
+                <li><a href="manage-drstat">민원접수 통계</a></li>
             </ul>
         </li>
     </ul>

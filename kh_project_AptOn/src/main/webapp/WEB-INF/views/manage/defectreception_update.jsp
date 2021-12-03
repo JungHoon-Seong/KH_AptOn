@@ -124,9 +124,44 @@
  margin-top: 200px;
  margin-left: 200px;
  }
+ 
+ .btnState{
+	border-radius: 5px;
+	color: white;
+ 	background-color:  #008CBA;
+ 	border: none;
+ } 
+  
  </style>
  
+ <script>
+//Upload image using http POST & Google Cloud Storage API
+
+ var uploadUrl = 'https://storage.googleapis.com/apt_kh_team2'; // upload with direct HTTP call
+ var tmp_auth = 'Bearer tokenhere123'; // Get Bearer Access token here - https://developers.google.com/oauthplayground
+                                       // Enable access for Cloud Storage v1 & Cloud Storage JSON API
+
+ var fileinput = $('.file-upload-input')[0]; // <input type='file'>
+ var file = fileinput.files[0]; // just support 1st file for now
+
+ // post image into google cloud storage
+ $.ajax({
+   url: uploadUrl,
+   headers: {
+     'Authorization': tmp_auth,
+     'Content-Type': 'image/*' // 모든 이미지 허용
+   },
+   data: file,
+   processData: false,
+   contentType: false,
+   type: 'POST',
+   success: function(data){
+     console.log(data); // Google Cloud Storage response
+   }
+ });
  
+ 
+ </script>
   
 </head>
 
@@ -164,10 +199,10 @@
 			<td>${vo.houseNo} </td>
 			<c:choose>
 			<c:when test="${vo.drState == 1}">
-				<td class="completestate readonlyHeader" >처리완료</td>
+				<td class="completestate" > <button type="button" class="btnState" onclick="">처리완료</button></td>
 			</c:when>
 			<c:when test="${vo.drState == 0}">
-				<td class="" >처리중</td>
+				<td class="completestate" > <button type="button" class="btnState" onclick="">처리중</button></td>
 			</c:when>
 			</c:choose>
 		</tr>
