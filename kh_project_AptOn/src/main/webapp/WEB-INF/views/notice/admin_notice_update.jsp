@@ -46,24 +46,35 @@
  	float: left;
  	width: 1200px;
  }
+         .ck.ck-editor {
+            max-width: 1500px;
+        }
+
+        .ck-editor__editable {
+            min-height: 400px;
+        }
   
   </style>
   
 <!-- jquery cdn -->
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-
+ <!-- <script src="https://cdn.ckeditor.com/ckeditor5/29.1.0/classic/ckeditor.js"></script> -->
+<script src="https://cdn.ckeditor.com/4.17.1/standard/ckeditor.js"></script>
 </head>
 <body>
 <jsp:include page="../header4admin.jsp" flush="true" />
 
 <main id="adminmain">
 <section id="mainsection">
-	<table id="maintable">
+	    <h3>공지사항 수정</h3>
+<table id="maintable">
 	<c:forEach items="${noticelist}" var="detail">
 		 <thead>
             <tr>
                 <th>제목</th>
-                <td>${detail.notice_title }</td>
+                <td>
+                 <input type="text" id="noticetitle" name="noticetitle" placeholder="제목" value= "${detail.notice_title }">
+            	</td>
             </tr>
             <tr>
                 <th>글 번호: </th>
@@ -77,17 +88,49 @@
         <tbody>
                 <tr>
    
-                <td>${detail.notice_content}</td>
+                <td>
+                <textarea id="ckeditor" name="noticecontent" placeholder="내용을 입력하세요" >${detail.notice_content}</textarea>
+                </td>
+                 
                 </tr>
 	
 	</table>
-	<button onclick = "location.href = '/apton/noticeupdate?no=${detail.notice_num}'">수정</button>
-	<button onclick = "location.href = '/apton/adnoticelist' ">목록</button>
 </c:forEach>	
 	</form>
+        <button type="button" id="updatebtn" name="updatebtn" >수정하기</button>
+        <button onclick="location.href = '/apton/adnoticelist' ">목록</button>
+     
+    <script>
+     CKEDITOR.replace( 'ckeditor',{
+    	uiColor: '#ffebcd',
+    	height : '300px',
+    	weight : '500px'
+    }); 
 	
-<script>
-
+$('#insertbtn').on("click",function() {
+	var ckdata = CKEDITOR.instances['ckeditor'].getData();
+	var adminid = "${admin.adminId }";
+	$.ajax({
+		url: "notice_insert",
+		type: "POST",
+		data: {
+			noticetitle : $("#noticetitle").val(),
+			adminId : adminid,
+			content : JSON.stringify(ckdata)
+	},
+	success :function(msg){
+		alert("등록되었습니다.");
+		location.href="adnoticelist";
+	},
+	error : function(request, status, errorData){
+		alert("error code : " + request.status + "\n"
+			+ "message : " + request.responseText + "\n"
+			+ "error : " + errorData
+		)
+		location.href="error";
+		}
+	})
+})
 
 </script>	
 	

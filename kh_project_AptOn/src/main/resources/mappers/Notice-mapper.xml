@@ -35,11 +35,18 @@
 		DELETE FROM NOTICE WHERE notice_num = #{notice_num}
 	
 	</delete>
+	
 	<insert id="insertNotice" parameterType="Notice">
 	<![CDATA[
 	Insert Into NOTICE(notice_num,admin_id,notice_title, notice_content,notice_date) values (NOTICE_seq.NEXTVAL,#{admin_id},#{notice_title},#{notice_content},sysdate)
 	 ]]>
 	</insert>
+	
+	<!-- <update id="updateNotice" parameterType="Notice" >
+		<![CDATA[
+	UPDATE NOTICE SET notice_title = #{notice_title} , notice_content = #{notice_content}, notice_date = SYSDATE WHERE notice_num = #{notice_num} and admin_id = #{admin_id}
+	 ]]>
+	</update> -->
 	
 	
 </mapper>

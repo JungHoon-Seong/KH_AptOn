@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import kh.teamproject.apton.admin.notice.service.NoticeInterface;
 import kh.teamproject.apton.admin.notice.service.NoticeService;
 import kh.teamproject.apton.admin.notice.vo.Notice;
+import kh.teamproject.apton.defectreception.model.vo.DrBoard;
 import kh.teamproject.apton.votesign.model.vo.VoteInfo;
 
 @Controller
@@ -260,5 +261,29 @@ public class NoticeController {
 			e.printStackTrace();
 		}
 		return msg;
+	}
+
+	@RequestMapping(value = "noticeupdate", method = RequestMethod.GET)
+	public ModelAndView updatenotice(ModelAndView mv, @RequestParam(value="no" , defaultValue = "0")int notice_num) {
+		String viewPage = "error/commonError"; //기본페이지 에러페이지로 동일하게 설정함
+		//보안 높일려면 가구번호랑 세션아디 비교하여 확인기능 필요할듯
+		
+		System.out.println("글 번호: ->"+ notice_num);
+		List<Notice> noticelist = null;
+		try {
+			noticelist = noticeService.selectContentView(notice_num);
+			viewPage= "/notice/admin_notice_update";
+		} catch (Exception e) {
+			viewPage= "error/commonError";
+			mv.addObject("msg" , "게시판 오류 발생");
+			mv.addObject("url" , "index");
+		}
+		
+		System.out.println("noticedetail: -->"+noticelist);
+		mv.addObject("noticelist",noticelist);
+		mv.setViewName(viewPage);
+
+		return mv;
+
 	}
 }

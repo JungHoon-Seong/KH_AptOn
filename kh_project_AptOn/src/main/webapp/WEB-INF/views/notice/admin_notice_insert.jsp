@@ -108,7 +108,7 @@ $('#insertbtn').on("click",function() {
 	},
 	success :function(msg){
 		alert("등록되었습니다.");
-		location.href="adminmain";
+		location.href="adnoticelist";
 	},
 	error : function(request, status, errorData){
 		alert("error code : " + request.status + "\n"
