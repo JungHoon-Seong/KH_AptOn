@@ -313,12 +313,15 @@ td div{
 </div>
 <button id = "copyresult" onclick="copyresult();"><span><b>결과 복사하기</b></span></button>
 <button id = "copylink" onclick="copylink();"><span><b>투표 링크 복사하기</b></span></button>
+<button id = "copylink" onclick="showwindow();"><span><b>투표 창 보기</b></span></button>
 </div>
 	</td>
 </tr>
 </table>
 <button id="tolist" onclick="location.href='votelist' ">목록으로</button>
 <textarea id="textresult" style="width:0; height:0;overflow: hidden;resize:none;border:none;outline:none;">
+</textarea>
+<textarea id="textresult2" style="width:0; height:0;overflow: hidden;resize:none;border:none;outline:none;">
 </textarea>
 </div>
 
@@ -376,6 +379,28 @@ function copyresult() {
 		
 function copylink(){
 	console.log("링크복사버튼");
+/* 	window.screen.width;
+	window.screen.height;
+	var popupWidth = 640;
+	var popupHeight = 400;
+	var popupX = (window.screen.width / 2) - (popupWidth / 2);
+	var popupY= (window.screen.height / 2) - (popupHeight / 2);
+	var myWindow = window.open("dovote?voteNo=${vo.voteNo}", "window ", 'height=' + popupHeight  + ', width=' + popupWidth  + ', left='+ popupX + ', top='+ popupY);
+	 */
+	var voteNum = ${vo.voteNo};
+	var result2 = "<a href=\"dovote?voteNo="+voteNum+"\" onclick=\"window.open(this.href,'targetWindow','toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes,width=640,height=400, left=400, top=200'); return false;\">투표하러 가기</a>";
+	console.log(result2);
+	$("#textresult2").text("");
+	$("#textresult2").text(result2);
+	var textArea2 = document.getElementById("textresult2");
+	textArea2.select();
+	document.execCommand('copy');
+	alert(textArea2.value+"위의 내용이 복사되었습니다.");
+	$(':focus').blur();  // textarea 포커스된거 없애기
+
+};
+
+function showwindow(){
 	window.screen.width;
 	window.screen.height;
 	var popupWidth = 640;
@@ -383,7 +408,8 @@ function copylink(){
 	var popupX = (window.screen.width / 2) - (popupWidth / 2);
 	var popupY= (window.screen.height / 2) - (popupHeight / 2);
 	var myWindow = window.open("dovote?voteNo=${vo.voteNo}", "window ", 'height=' + popupHeight  + ', width=' + popupWidth  + ', left='+ popupX + ', top='+ popupY);
-};
+
+}
 
 
 

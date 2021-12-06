@@ -78,7 +78,7 @@ margin-top:0px;
 
 <body>
 <script>
-<c:if test="${empty member.houseNum }">
+<c:if test="${empty member.houseNum && empty admin.adminId }">
 			alert("로그인 상태가 아닙니다.");
 			location.href="index";
 			window.close();
@@ -130,7 +130,7 @@ function doVote(yn){
 		url : "dovote.do",
 		data :{
 			voteNo : ${vo.voteNo },
-			houseNum : ${member.houseNum },
+			houseNum :<c:if test="${empty member.houseNum}">1</c:if> ${member.houseNum },
 			YN : yn
 		} ,
 		type : "post",

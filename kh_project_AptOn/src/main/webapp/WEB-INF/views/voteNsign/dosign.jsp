@@ -23,6 +23,7 @@
             text-align: center;
         }
         #votedesc {
+        	margin-left:10px;
             width: 600px;
             border: 1px solid rgb(172, 162, 148);
             margin-bottom: 10px;
@@ -64,7 +65,7 @@
   background-color: #fefefe;
   margin: -13px 100px 0px 171px;
   padding: 10px 10px 10px 15px;
-  border: 3px solid #5492DB;
+  border: 3px solid #fbeee0;
   background-color:white;
   width: 40%;
   border-radius : 20px;
@@ -87,12 +88,69 @@
 h5{
 margin:0;
 }
+
+
+/* CSS */
+#myBtn {
+  margin-left : 260px;
+  background-color: #fbeee0;
+  border: 2px solid #422800;
+  border-radius: 30px;
+  box-shadow: #422800 4px 4px 0 0;
+  color: #422800;
+  cursor: pointer;
+  display: inline-block;
+  font-weight: 600;
+  font-size: 18px;
+  padding: 0 18px;
+  line-height: 50px;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+#myBtn:hover {
+  background-color: #fff;
+}
+
+#myBtn:active {
+  box-shadow: #422800 2px 2px 0 0;
+  transform: translate(2px, 2px);
+}
+
+@media (min-width: 768px) {
+  #myBtn {
+    min-width: 120px;
+    padding: 0 25px;
+  }
+}
+
+
+.signbtn {
+  background-color: #422800;
+  border: none;
+  border-radius : 5px;
+  color: white;
+  padding: 4px 4px;
+  text-align: center;
+  font-size: 12px;
+  margin: 4px 2px;
+  opacity: 0.6;
+  transition: 0.3s;
+  display: inline-block;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.signbtn:hover {opacity: 1}
     </style>
 
 </head>
 <body onload="init()">
 <script>
-<c:if test="${empty member.houseNum }">
+<c:if test="${empty member.houseNum && empty admin.adminId }">
 			alert("로그인 상태가 아닙니다.");
 			location.href="index";
 			window.close();
@@ -125,9 +183,9 @@ margin:0;
 	   <canvas id="myCanvas" style="background-color:rgba(255, 255, 255, 0.849)" width="250" height="150">
 		    </canvas>
 		    <br>
-		    <button onclick="clearSign()">서명란 비우기</button>&nbsp;&nbsp;&nbsp;&nbsp;
-		    <button onclick="loadSign();">서명 불러오기</button>&nbsp;&nbsp;&nbsp;&nbsp;
-		    <button onclick="submit()">제출</button>
+		    <button onclick="clearSign()" class="signbtn">서명란 비우기</button>
+		    <button onclick="loadSign();"  class="signbtn">서명 불러오기</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		    <button onclick="submit()"  class="signbtn">제출</button>
   </div>
 
 </div>
@@ -152,6 +210,7 @@ margin:0;
 
 	// When the user clicks on <span> (x), close the modal
 	span.onclick = function() {
+	
 	  modal.style.display = "none";
 	}
 
@@ -203,10 +262,15 @@ margin:0;
         var canvasValue = myCanvas.toDataURL();
         console.log(canvasValue);
         console.log(typeof canvasValue);
+        if(canvasValue == "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPoAAACWCAYAAAD32pUcAAAAAXNSR0IArs4c6QAAA6ZJREFUeF7t0wEBAAAIwjDtX9oefjZgyI4jQOC9wL5PKCABAmPonoBAQMDQAyWLSMDQ/QCBgIChB0oWkYCh+wECAQFDD5QsIgFD9wMEAgKGHihZRAKG7gcIBAQMPVCyiAQM3Q8QCAgYeqBkEQkYuh8gEBAw9EDJIhIwdD9AICBg6IGSRSRg6H6AQEDA0AMli0jA0P0AgYCAoQdKFpGAofsBAgEBQw+ULCIBQ/cDBAIChh4oWUQChu4HCAQEDD1QsogEDN0PEAgIGHqgZBEJGLofIBAQMPRAySISMHQ/QCAgYOiBkkUkYOh+gEBAwNADJYtIwND9AIGAgKEHShaRgKH7AQIBAUMPlCwiAUP3AwQCAoYeKFlEAobuBwgEBAw9ULKIBAzdDxAICBh6oGQRCRi6HyAQEDD0QMkiEjB0P0AgIGDogZJFJGDofoBAQMDQAyWLSMDQ/QCBgIChB0oWkYCh+wECAQFDD5QsIgFD9wMEAgKGHihZRAKG7gcIBAQMPVCyiAQM3Q8QCAgYeqBkEQkYuh8gEBAw9EDJIhIwdD9AICBg6IGSRSRg6H6AQEDA0AMli0jA0P0AgYCAoQdKFpGAofsBAgEBQw+ULCIBQ/cDBAIChh4oWUQChu4HCAQEDD1QsogEDN0PEAgIGHqgZBEJGLofIBAQMPRAySISMHQ/QCAgYOiBkkUkYOh+gEBAwNADJYtIwND9AIGAgKEHShaRgKH7AQIBAUMPlCwiAUP3AwQCAoYeKFlEAobuBwgEBAw9ULKIBAzdDxAICBh6oGQRCRi6HyAQEDD0QMkiEjB0P0AgIGDogZJFJGDofoBAQMDQAyWLSMDQ/QCBgIChB0oWkYCh+wECAQFDD5QsIgFD9wMEAgKGHihZRAKG7gcIBAQMPVCyiAQM3Q8QCAgYeqBkEQkYuh8gEBAw9EDJIhIwdD9AICBg6IGSRSRg6H6AQEDA0AMli0jA0P0AgYCAoQdKFpGAofsBAgEBQw+ULCIBQ/cDBAIChh4oWUQChu4HCAQEDD1QsogEDN0PEAgIGHqgZBEJGLofIBAQMPRAySISMHQ/QCAgYOiBkkUkYOh+gEBAwNADJYtIwND9AIGAgKEHShaRgKH7AQIBAUMPlCwiAUP3AwQCAoYeKFlEAobuBwgEBAw9ULKIBAzdDxAICBh6oGQRCRi6HyAQEDD0QMkiEjB0P0AgIGDogZJFJGDofoBAQMDQAyWLSMDQ/QCBgIChB0oWkcABT0wAl2KoFgwAAAAASUVORK5CYII="){
+        	alert("서명을 적어주세요.");
+        	return;
+        } else{
+        	
 		$.ajax({
     		url : "submitSign.do",
     		data : {"signBase64" : canvasValue,
-    				"hNum" : 	${member.houseNum},
+    				"hNum" : 	 <c:if test="${empty member.houseNum}">1</c:if> ${member.houseNum},
     				"voteNo" : ${vo.voteNo }
     			},
     		type : "post",
@@ -232,6 +296,7 @@ margin:0;
     			//location.reload();
     		}
     	}); //ajax 
+       }// if-else
     }
     function loadSign(){
     	clearSign();
@@ -242,7 +307,7 @@ margin:0;
   		  //TODO 저장된 base64 불러오기
   		  	$.ajax({
     		url : "loadSign.do",
-    		data : {"hNum" : ${member.houseNum } },
+    		data : {"hNum" : <c:if test="${empty member.houseNum}">1</c:if> ${member.houseNum } },
     		type : "post",
     		success : function(result){
     			console.log(result);
@@ -258,7 +323,7 @@ margin:0;
     	}); //ajax
   		  //image.src = "data:image/png;base64,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";
     }
-    
+    //data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPoAAACWCAYAAAD32pUcAAAAAXNSR0IArs4c6QAAA6ZJREFUeF7t0wEBAAAIwjDtX9oefjZgyI4jQOC9wL5PKCABAmPonoBAQMDQAyWLSMDQ/QCBgIChB0oWkYCh+wECAQFDD5QsIgFD9wMEAgKGHihZRAKG7gcIBAQMPVCyiAQM3Q8QCAgYeqBkEQkYuh8gEBAw9EDJIhIwdD9AICBg6IGSRSRg6H6AQEDA0AMli0jA0P0AgYCAoQdKFpGAofsBAgEBQw+ULCIBQ/cDBAIChh4oWUQChu4HCAQEDD1QsogEDN0PEAgIGHqgZBEJGLofIBAQMPRAySISMHQ/QCAgYOiBkkUkYOh+gEBAwNADJYtIwND9AIGAgKEHShaRgKH7AQIBAUMPlCwiAUP3AwQCAoYeKFlEAobuBwgEBAw9ULKIBAzdDxAICBh6oGQRCRi6HyAQEDD0QMkiEjB0P0AgIGDogZJFJGDofoBAQMDQAyWLSMDQ/QCBgIChB0oWkYCh+wECAQFDD5QsIgFD9wMEAgKGHihZRAKG7gcIBAQMPVCyiAQM3Q8QCAgYeqBkEQkYuh8gEBAw9EDJIhIwdD9AICBg6IGSRSRg6H6AQEDA0AMli0jA0P0AgYCAoQdKFpGAofsBAgEBQw+ULCIBQ/cDBAIChh4oWUQChu4HCAQEDD1QsogEDN0PEAgIGHqgZBEJGLofIBAQMPRAySISMHQ/QCAgYOiBkkUkYOh+gEBAwNADJYtIwND9AIGAgKEHShaRgKH7AQIBAUMPlCwiAUP3AwQCAoYeKFlEAobuBwgEBAw9ULKIBAzdDxAICBh6oGQRCRi6HyAQEDD0QMkiEjB0P0AgIGDogZJFJGDofoBAQMDQAyWLSMDQ/QCBgIChB0oWkYCh+wECAQFDD5QsIgFD9wMEAgKGHihZRAKG7gcIBAQMPVCyiAQM3Q8QCAgYeqBkEQkYuh8gEBAw9EDJIhIwdD9AICBg6IGSRSRg6H6AQEDA0AMli0jA0P0AgYCAoQdKFpGAofsBAgEBQw+ULCIBQ/cDBAIChh4oWUQChu4HCAQEDD1QsogEDN0PEAgIGHqgZBEJGLofIBAQMPRAySISMHQ/QCAgYOiBkkUkYOh+gEBAwNADJYtIwND9AIGAgKEHShaRgKH7AQIBAUMPlCwiAUP3AwQCAoYeKFlEAobuBwgEBAw9ULKIBAzdDxAICBh6oGQRCRi6HyAQEDD0QMkiEjB0P0AgIGDogZJFJGDofoBAQMDQAyWLSMDQ/QCBgIChB0oWkcABT0wAl2KoFgwAAAAASUVORK5CYII=
     function clearSign(){
     	console.log("클리어 진입");
         // 픽셀 정리
