@@ -71,7 +71,7 @@ font-family: 'Noto Sans KR', sans-serif;
  }
  #mainsection {
  	float: left;
- 	width: 1200px;
+ 	width: 1000px;
  }
  table {
 	border: 1px solid black;
@@ -173,10 +173,11 @@ font-family: 'Noto Sans KR', sans-serif;
 	
 		<tr>	
 			<td ><img src="${vo.drImage }" class="img" onerror="this.src='resources/img/logo.png'" alt='' /> </td>
-			<td class="img">이미지2</td>
+			<!-- x<td class="img">이미지2</td>
 			<td class="img">이미지3</td>
 			<td class="img">이미지4</td>
-			<td class="img">이미지5</td>
+			<td class="img">이미지5</td> -->
+				
 				
 		</tr>
 		<tr>

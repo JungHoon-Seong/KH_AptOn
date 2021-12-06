@@ -70,11 +70,11 @@ font-family: 'Noto Sans KR', sans-serif;
  }
  #mainsection {
  	float: left;
- 	width: 1200px;
+ 	width: 1000px;
  }
  table {
 	 border: 1px solid black;
-	 width: 1200px;
+	 width: 1000px;
 	 text-align: center;
  }
  #rowheader {

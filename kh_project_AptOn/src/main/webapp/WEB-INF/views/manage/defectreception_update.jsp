@@ -43,7 +43,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
 <script src="https://cdn.ckeditor.com/4.17.1/standard/ckeditor.js"></script>
-
+<script src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
 
  <style>
  ul {
@@ -52,15 +52,15 @@
  
  #aside {
  	float: left;
- 	width: 200px;
+ 	width: 0px;
  }
  #mainsection {
  	float: left;
- 	width: 1200px;
+ 	width: 1000px;
  }
  table {
 	border: 1px solid black;
-	width: 1200px;
+	width: 1000px;
 	text-align: center;
 	background-color:  #ffebcd;
  }
@@ -100,17 +100,17 @@
  }
  #textNo {
  border: none;
- width: 200px;
+ width: 0px;
  }
  
  #textTitle {
  border: none;
- width: 1200px;
+ width: 1000px;
  height: 2em;
  }
  #textContent {
  border: none;
- width: 1200px;
+ width: 1000px;
  height: 375px;
  }
  .readonlyHeader {
@@ -199,10 +199,12 @@
 			<td>${vo.houseNo} </td>
 			<c:choose>
 			<c:when test="${vo.drState == 1}">
-				<td class="completestate" > <button type="button" class="btnState" onclick="">처리완료</button></td>
+				<td class="completestate" > <button type="button" class="btnState" onclick="">처리완료</button>
+				<input type="text" name="state" id="state" value ="${vo.drState}" hidden></td>
 			</c:when>
 			<c:when test="${vo.drState == 0}">
-				<td class="completestate" > <button type="button" class="btnState" onclick="">처리중</button></td>
+				<td class="completestate" > <button type="button" class="btnState" onclick="">처리중</button>
+				<input type="number" name="state" id="state" value ="${vo.drState}" hidden></td>
 			</c:when>
 			</c:choose>
 		</tr>
@@ -275,6 +277,18 @@
 	  }
 
 	});
+ 
+ 
+ $('.btnState').click(function(){
+	 if($('#state').val() == 0){
+		 $('.btnState').text('처리완료');
+	 	$('#state').val('1');
+	 	$('#state').change();
+	 }else{
+		 $('.btnState').text('처리중');
+		 $('#state').val('0');
+	 }
+ })
   </script>
      <!-- ======= Footer ======= -->
 <jsp:include page="../footer.jsp" flush="true" />

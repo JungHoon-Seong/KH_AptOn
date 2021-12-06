@@ -75,11 +75,11 @@ font-family: 'Noto Sans KR', sans-serif;
  }
  #mainsection {
  	float: left;
- 	width: 1200px;
+ 	width: 1000px;
  }
  table {
 	border: 1px solid black;
-	width: 1200px;
+	width: 1000px;
 	text-align: center;
 	background-color: #ffebcd;
  }
@@ -124,12 +124,12 @@ font-family: 'Noto Sans KR', sans-serif;
  
  #textTitle {
  border: none;
- width: 1200px;
+ width: 1000px;
  height: 2em;
  }
  #textContent {
  border: none;
- width: 1200px;
+ width: 1000px;
  height: 375px;
  }
  .readonlyHeader {

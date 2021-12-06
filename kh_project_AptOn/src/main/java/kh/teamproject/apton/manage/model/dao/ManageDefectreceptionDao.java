@@ -45,7 +45,7 @@ public class ManageDefectreceptionDao {
 	
 	public int updateBoardForceful(DrBoard bvo) {
 		int result = 0;
-		result = sqlSession.update("DrBoard.updateContent", bvo);
+		result = sqlSession.update("DrBoard.updateContentForceful", bvo);
 		if (result == 0) {
 			System.out.println("dao단오류발생");
 		}

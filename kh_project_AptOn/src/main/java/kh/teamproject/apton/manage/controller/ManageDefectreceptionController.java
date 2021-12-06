@@ -147,6 +147,7 @@ public class ManageDefectreceptionController {
 	public ModelAndView updateContentForceful(ModelAndView mv, @RequestParam(value = "t", defaultValue = "0")String title,
 			@RequestParam(value = "c", defaultValue = "0")String content,
 			@RequestParam(value = "no", defaultValue = "0")int drno,
+			@RequestParam(value = "state")int drState,
 			@RequestParam(value ="imgs[]") MultipartFile imgs,
 			HttpServletRequest request) {
 		String viewPage = "error/commonError";
@@ -157,7 +158,7 @@ public class ManageDefectreceptionController {
 		
 		saveFile(imgs, request);
 		
-		DrBoard bvo = new DrBoard(drno, title, content);
+		DrBoard bvo = new DrBoard(drno, title, content,drState);
 		drBoardResult = manageDfboardService.updateBoardForceful(bvo);
 		
 		if (drBoardResult == 0) {

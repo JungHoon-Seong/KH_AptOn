@@ -70,15 +70,15 @@ font-family: 'Noto Sans KR', sans-serif;
 
  #aside {
  	float: left;
- 	width: 200px;
+ 	width: 0px;
  }
  #mainsection {
  	float: left;
- 	width: 1200px;
+ 	width: 1000px;
  }
  table {
 	border: 1px solid black;
-	width: 1200px;
+	width: 1000px;
 	text-align: center;
 	background-color: #ffebcd;
  }
@@ -118,11 +118,11 @@ font-family: 'Noto Sans KR', sans-serif;
  }
  #textTitle {
  border: none;
- width: 1200px;
+ width: 1000px;
  }
  #textContent {
  border: none;
- width: 1200px;
+ width: 1000px;
  height: 375px;
  }
   h2 {
@@ -139,9 +139,11 @@ font-family: 'Noto Sans KR', sans-serif;
  </style>
 <script>
 
-    
+$("document").ready(function () {
+
+    $('input[type=file]').on("change", function () {
     //구글 클라우드를 웹서버로 이용하기 위해 작성됨
-    function uploadFile() {
+
     	  var bucket = document.forms["putFile"]["bucket"].value;
     	  var filename = document.forms["putFile"]["fileName"].value;
     	  if (bucket == null || bucket == "apt_kh_team2" || filename == null || filename == "") {
@@ -156,8 +158,9 @@ font-family: 'Noto Sans KR', sans-serif;
     	    request.setRequestHeader("Content-Type", "text/plain;charset=UTF-8");
     	    request.send(postData);
     	  }
-    	}
-    
+    	
+    });
+});
     
 </script>
 </head>

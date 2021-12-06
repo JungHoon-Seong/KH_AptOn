@@ -42,10 +42,11 @@ public class DrBoard {
 		this.drProcessingDetail = processingDetail;
 	}
 
-	public DrBoard(int boardno, String title, String content) {
+	public DrBoard(int boardno, String title, String content, int drState2) {
 		this.drNo = boardno;
 		this.drTitle = title;
 		this.drContent = content;
+		this.drState = drState2;
 	}
 
 	public DrBoard(int drno) {

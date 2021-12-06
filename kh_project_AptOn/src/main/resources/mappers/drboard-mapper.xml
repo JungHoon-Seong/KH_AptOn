@@ -56,6 +56,10 @@
 	UPDATE DEFECT_RECEPTION SET DR_TITLE = #{drTitle}, DR_CONTENT = #{drContent} WHERE DR_NO = #{drNo}
 	</update>
 	
+	<update id="updateContentForceful" parameterType="DrBoard" statementType="PREPARED">
+	UPDATE DEFECT_RECEPTION SET DR_TITLE = #{drTitle}, DR_CONTENT = #{drContent}, DR_STATE = #{drState} WHERE DR_NO = #{drNo}
+	</update>
+	
 	<delete id="deleteContent" parameterType="DrBoard" statementType="PREPARED">
 		DELETE FROM DEFECT_RECEPTION WHERE DR_NO = #{drNo}
 	</delete>
