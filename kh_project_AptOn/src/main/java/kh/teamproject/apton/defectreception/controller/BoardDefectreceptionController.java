@@ -1,7 +1,9 @@
 package kh.teamproject.apton.defectreception.controller;
 
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Paths;
+import java.time.LocalDate;
 import java.util.List;
 
 
@@ -19,21 +21,27 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.cloud.storage.BlobId;
-import com.google.cloud.storage.BlobInfo;
-import com.google.cloud.storage.Storage;
 import com.google.api.client.util.Value;
 
 import kh.teamproject.apton.defectreception.model.vo.DrBoard;
 import kh.teamproject.apton.defectreception.model.vo.Message;
 import kh.teamproject.apton.defectreception.service.BoardDefectreceptionService;
 
+import com.google.cloud.storage.BlobInfo;
+import com.google.cloud.storage.Storage;
+import com.google.cloud.storage.Storage.BlobTargetOption;
+import com.google.cloud.storage.Storage.PredefinedAcl;
+import com.google.cloud.storage.StorageOptions;
+
 
 @Controller
 public class BoardDefectreceptionController {
 	
+	private static Storage storage = StorageOptions.getDefaultInstance().getService(); 
+	
 	@Autowired
 	private BoardDefectreceptionService boardService;
-	private Storage storage;	
+	//private Storage storage;	
 	
 	@Value("${file.storage}")
 	private Resource localFilePath;
@@ -137,17 +145,18 @@ public class BoardDefectreceptionController {
 	@RequestMapping(value = "insert-defectreception", method = RequestMethod.POST)
 	public ModelAndView insertContent(ModelAndView mv, @RequestParam(value="t" , defaultValue = "0")String title,
 			@RequestParam(value="c" , defaultValue = "0")String Content,
-			@RequestParam(value="image", defaultValue = "")String imgsrc,
+			@RequestParam("image") MultipartFile image,
 			HttpServletRequest request){
 		String viewPage = "error/commonError"; //기본페이지 에러페이지로 동일하게 설정함
-
+		String imgsrc ="";
 		int drBoardResult = 0;
 		
+		
+
+		
+		imgsrc =  googleCloudPlatformUpload(image);
+
 		System.out.println("이미지 저장주소: " + imgsrc);
-		
-		
-		
-		
 		
 		
 		//SJHTODO 세션에 따라 호수번호를 입력받아야함 추후 처리
@@ -306,6 +315,21 @@ public class BoardDefectreceptionController {
 			System.out.println("파일 전송 에러 : " + e.getMessage());
 		}
 	}
+	
+	public String googleCloudPlatformUpload(MultipartFile file) {
+		LocalDate now = LocalDate.now();
+		try {			
+			BlobInfo blobInfo = storage.create(
+				BlobInfo.newBuilder("apt_kh_team2", file.getOriginalFilename()).build(), //get original file name
+				file.getBytes(), // the file
+				BlobTargetOption.predefinedAcl(PredefinedAcl.PUBLIC_READ) // Set file permission
+			);
+			return blobInfo.getMediaLink(); // Return file url
+		}catch(IllegalStateException | IOException e){
+			throw new RuntimeException(e);
+		} 
+		
+  	}
 	
 	
 

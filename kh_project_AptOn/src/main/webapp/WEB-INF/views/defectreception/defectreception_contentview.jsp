@@ -161,7 +161,6 @@ font-family: 'Noto Sans KR', sans-serif;
 	<c:forEach items="${drbList}" var="vo">
 		<tr>
 			<td id ="boardNo">${vo.drNo }</td>
-			<td>${vo.drTitle }</td>
 			<td>${vo.drDate }</td>
 			<td id = "houseno">${vo.houseNo }</td>
 			<c:choose>
@@ -173,11 +172,13 @@ font-family: 'Noto Sans KR', sans-serif;
 				</c:when>
 			</c:choose>
 		</tr>
-		
+				<tr>
+		<td colspan="4">${vo.drTitle }</td>
+		</tr>
 		
 	
 		<tr>
-			<td colspan="5"><img src="${vo.drImage }" class="img" onerror="this.src='resources/img/logo.png'" alt='' /> </td>
+			<td colspan="4"><img src="${vo.drImage }" class="img" onerror="this.src='resources/img/logo.png'" alt='' /> </td>
 			<!-- x<td class="img">이미지2</td>
 			<td class="img">이미지3</td>
 			<td class="img">이미지4</td>

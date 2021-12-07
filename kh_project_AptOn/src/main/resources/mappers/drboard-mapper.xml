@@ -47,9 +47,11 @@
 	
 	<insert id="insertContentwithImg" parameterType="DrBoard" statementType="PREPARED">
 		
-			INSERT INTO DEFECT_RECEPTION VALUES(SEQ_DR_Board_NO.nextval,
+			INSERT ALL  
+			INTO DEFECT_RECEPTION VALUES(SEQ_DR_Board_NO.nextval,
 			#{houseNo}, #{adminId}, #{drTitle}, #{drContent} , SYSDATE , #{drState}, SYSDATE, #{drProcessingDetail})
-			<!-- INSERT INTO defectreception_images VALUES(SEQUENCE DEFECT_RECEPTION_seq.nextval ,SEQ_DR_Board_NO.currval, #{drImage}) -->
+			INTO defectreception_images VALUES(DEFECT_RECEPTION_seq.nextval ,SEQ_DR_Board_NO.currval, #{drImage})
+			SELECT * FROM DUAL 
 	</insert>
 	
 	<update id="updateContent" parameterType="DrBoard" statementType="PREPARED">

@@ -188,9 +188,9 @@
 		<!-- 구글 클라우드 api를 이용해 파일업로드 위해 추가 21.11.30 -->
 		<!-- https://mvnrepository.com/artifact/com.google.cloud/google-cloud-storage -->
 		<dependency>
-			<groupId>com.google.cloud</groupId>
-			<artifactId>google-cloud-storage</artifactId>
-			<version>1.12.0</version>
+		    <groupId>com.google.cloud</groupId>
+		    <artifactId>google-cloud-storage</artifactId>
+		    <version>1.14.0</version>
 		</dependency>
 
 	

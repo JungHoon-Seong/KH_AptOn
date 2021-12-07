@@ -137,7 +137,7 @@ footer{
 font-family: 'Noto Sans KR', sans-serif;
 }
  </style>
-<script>
+<!-- <script>
 
 $("document").ready(function () {
 
@@ -146,7 +146,7 @@ $("document").ready(function () {
 
     	  var bucket = document.forms["putFile"]["bucket"].value;
     	  var filename = document.forms["putFile"]["fileName"].value;
-    	  if (bucket == null || bucket == "apt_kh_team2" || filename == null || filename == "") {
+    	  if (bucket == null || bucket == "[apt_kh_team2]" || filename == null || filename == "") {
     	    alert("Both Bucket and FileName are required");
     	    return false;
     	  } else {
@@ -154,7 +154,7 @@ $("document").ready(function () {
     	    document.getElementById("content").value = null;
 
     	    var request = new XMLHttpRequest();
-    	    request.open("POST", "/gcs/" + bucket + "/" + filename, false);
+    	    request.open("GET", "/gcs/" + bucket + "/" + filename, false);
     	    request.setRequestHeader("Content-Type", "text/plain;charset=UTF-8");
     	    request.send(postData);
     	  }
@@ -162,7 +162,7 @@ $("document").ready(function () {
     });
 });
     
-</script>
+</script> -->
 </head>
 
 <body>
@@ -196,7 +196,7 @@ $("document").ready(function () {
 
 <section id="mainsection">
 	<table id="maintable">
-	<form id="imgur" action="./insert-defectreception"  method="post">
+	<form id="imgur" action="./insert-defectreception"  method="post" enctype="multipart/form-data">
 	
 		<tr>
 			<td><input type="text" name="t" id="textTitle" placeholder="제목을 입력해주세요"/></td>
