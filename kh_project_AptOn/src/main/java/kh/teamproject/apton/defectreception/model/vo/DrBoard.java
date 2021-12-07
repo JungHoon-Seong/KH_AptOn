@@ -41,6 +41,12 @@ public class DrBoard {
 		this.drState = state;
 		this.drProcessingDetail = processingDetail;
 	}
+	
+	public DrBoard(int boardno, String title, String content) {
+		this.drNo = boardno;
+		this.drTitle = title;
+		this.drContent = content;
+	}
 
 	public DrBoard(int boardno, String title, String content, int drState2) {
 		this.drNo = boardno;
