@@ -59,7 +59,7 @@
 <!-- jquery cdn -->
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
  <!-- <script src="https://cdn.ckeditor.com/ckeditor5/29.1.0/classic/ckeditor.js"></script> -->
- <script src="https://cdn.ckeditor.com/4.17.1/basic/ckeditor.js"></script>
+  <script src="https://cdn.ckeditor.com/4.17.1/standard/ckeditor.js"></script>
 </head>
 <body>
 <jsp:include page="../header4admin.jsp" flush="true" />
@@ -92,11 +92,46 @@
     CKEDITOR.replace( 'ckeditor',{
     	uiColor: '#ffebcd',
     	height : '300px',
-    	weight : '500px'
+    	on: {
+    		//글자수제한 기능
+            change: function() {
+            	var txt = CKEDITOR.instances['ckeditor'].getData();
+            	var len = CKEDITOR.instances['ckeditor'].getData().length;
+            	
+            	var stringByteLength = 0;
+            	//console.log(len);
+            	for(var i=0; i<len; i++) {
+            	    if(escape(txt.charAt(i)).length >= 4)
+            	        stringByteLength += 3;
+            	    else if(escape(txt.charAt(i)) == "%A7")
+            	        stringByteLength += 3;
+            	    else
+            	        if(escape(txt.charAt(i)) != "%0D")
+            	            stringByteLength++;
+            	}
+            	//console.log(txt);
+            	//console.log(stringByteLength + " Bytes")
+            	 document.getElementById('txtlim').value = 1507 - stringByteLength;
+            	
+            	if(stringByteLength >= 1507){
+            		alert("더 이상 입력할 수 없습니다.");
+            		document.getElementById('txtlim').value = 1507 - stringByteLength;
+            		document.getElementById('txtlim').style.color='red';
+            	} else if(document.getElementById('txtlim').value==1507){
+            		document.getElementById('txtlim').value =1500;
+            	} else {
+            		document.getElementById('txtlim').value = 1507 - stringByteLength;
+            		document.getElementById('txtlim').style.color='black';
+            	}
+            	
+            }
+      }
+
     });
-	
+    
 $('#insertbtn').on("click",function() {
 	var ckdata = CKEDITOR.instances['ckeditor'].getData();
+	ckdata.replace(/<(\/div|div)([^>]*)>/gi,"");
 	var adminid = "${admin.adminId }";
 	$.ajax({
 		url: "notice_insert",
@@ -104,7 +139,7 @@ $('#insertbtn').on("click",function() {
 		data: {
 			noticetitle : $("#noticetitle").val(),
 			adminId : adminid,
-			content : JSON.stringify(ckdata)
+			content : ckdata
 	},
 	success :function(msg){
 		alert("등록되었습니다.");

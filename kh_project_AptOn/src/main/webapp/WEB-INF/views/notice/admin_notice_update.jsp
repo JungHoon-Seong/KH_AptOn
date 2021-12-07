@@ -95,32 +95,65 @@
                 </tr>
 	
 	</table>
-</c:forEach>	
-	</form>
+
         <button type="button" id="updatebtn" name="updatebtn" >수정하기</button>
         <button onclick="location.href = '/apton/adnoticelist' ">목록</button>
      
     <script>
-     CKEDITOR.replace( 'ckeditor',{
+    CKEDITOR.replace( 'ckeditor',{
     	uiColor: '#ffebcd',
     	height : '300px',
-    	weight : '500px'
-    }); 
-	
-$('#insertbtn').on("click",function() {
+    	on: {
+    		//글자수제한 기능
+            change: function() {
+            	var txt = CKEDITOR.instances['ckeditor'].getData();
+            	var len = CKEDITOR.instances['ckeditor'].getData().length;
+            	
+            	var stringByteLength = 0;
+            	//console.log(len);
+            	for(var i=0; i<len; i++) {
+            	    if(escape(txt.charAt(i)).length >= 4)
+            	        stringByteLength += 3;
+            	    else if(escape(txt.charAt(i)) == "%A7")
+            	        stringByteLength += 3;
+            	    else
+            	        if(escape(txt.charAt(i)) != "%0D")
+            	            stringByteLength++;
+            	}
+            	//console.log(txt);
+            	//console.log(stringByteLength + " Bytes")
+            	 document.getElementById('txtlim').value = 1507 - stringByteLength;
+            	
+            	if(stringByteLength >= 1507){
+            		alert("더 이상 입력할 수 없습니다.");
+            		document.getElementById('txtlim').value = 1507 - stringByteLength;
+            		document.getElementById('txtlim').style.color='red';
+            	} else if(document.getElementById('txtlim').value==1507){
+            		document.getElementById('txtlim').value =1500;
+            	} else {
+            		document.getElementById('txtlim').value = 1507 - stringByteLength;
+            		document.getElementById('txtlim').style.color='black';
+            	}
+            	
+            }
+      }
+
+    });
+$('#updatebtn').on("click",function() {
 	var ckdata = CKEDITOR.instances['ckeditor'].getData();
 	var adminid = "${admin.adminId }";
 	$.ajax({
-		url: "notice_insert",
+		url: "noticeupdate1",
 		type: "POST",
 		data: {
+			notice_num : ${detail.notice_num },
 			noticetitle : $("#noticetitle").val(),
 			adminId : adminid,
-			content : JSON.stringify(ckdata)
+			content : ckdata
 	},
 	success :function(msg){
-		alert("등록되었습니다.");
-		location.href="adnoticelist";
+		alert("수정되었습니다.");
+		location.href="/apton/adnotice-detail?no=${detail.notice_num}";
 	},
 	error : function(request, status, errorData){
 		alert("error code : " + request.status + "\n"
@@ -133,7 +166,8 @@ $('#insertbtn').on("click",function() {
 })
 
 </script>	
-	
+	</c:forEach>	
+	</form>
 	
 </section>
 </main>

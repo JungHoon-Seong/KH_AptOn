@@ -19,6 +19,14 @@ public class Notice {
 		this.notice_title = notice_title;
 		this.notice_content = notice_content;
 	}
+	public Notice(String notice_num, String admin_id, String notice_title, String notice_content) {
+		super();
+		this.notice_num = notice_num;
+		this.admin_id = admin_id;
+		this.notice_title = notice_title;
+		this.notice_content = notice_content;
+	}
+	
 	public Notice(String notice_num) {
 		this.notice_num = notice_num;
 	}

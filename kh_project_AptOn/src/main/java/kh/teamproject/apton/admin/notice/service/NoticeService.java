@@ -59,5 +59,9 @@ public class NoticeService implements NoticeInterface{
 	public int deleteNotice(String num) throws Exception {
 		return NoticeDao.deleteNotice(num);
 	}
-
+	@Override
+	public int NoticeUpdate(Notice vo) throws Throwable{
+		
+		return NoticeDao.NoticeUpdate(vo);
+	}
 }

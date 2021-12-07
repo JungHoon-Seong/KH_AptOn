@@ -286,4 +286,28 @@ public class NoticeController {
 		return mv;
 
 	}
+	
+	@RequestMapping(value = "noticeupdate1", method = RequestMethod.POST)
+	@ResponseBody
+	public String updatenotice(String msg, HttpServletRequest request) {
+		String noticenum = request.getParameter("notice_num");
+		String noticetitle = request.getParameter("noticetitle");
+		String adminId = request.getParameter("adminId");
+		String content = request.getParameter("content");
+
+
+		System.out.println("updatenotice_num: " + noticenum);
+		System.out.println("updatenoticetitle: " + noticetitle);
+		System.out.println("updateadminId"+ adminId);
+		System.out.println("updatecontent" + content);
+	
+		try {
+			Notice vo = new Notice(noticenum ,adminId, noticetitle ,content);
+			int result = noticeService.NoticeUpdate(vo);
+			msg = "success";
+		} catch (Throwable e) {
+			e.printStackTrace();
+		}
+		return msg;
+	}
 }

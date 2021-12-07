@@ -6,6 +6,8 @@ import kh.teamproject.apton.admin.notice.vo.Notice;
 
 public interface NoticeInterface {
 	public int NoticeInsert(Notice vo) throws Throwable;
+	
+	public int NoticeUpdate(Notice vo) throws Throwable;
 
 	int deleteNotice(String num) throws Exception;
 

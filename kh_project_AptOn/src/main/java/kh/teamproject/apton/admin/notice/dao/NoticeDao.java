@@ -55,4 +55,9 @@ public class NoticeDao {
 		System.out.println("dao값: " + vo);
 		return sqlSession.insert("Notice.insertNotice", vo);
 	}
+	
+	public int NoticeUpdate(Notice vo) throws Exception{
+		System.out.println("update dao값: " + vo);
+		return sqlSession.update("Notice.updateNotice", vo);
+	}
 }
