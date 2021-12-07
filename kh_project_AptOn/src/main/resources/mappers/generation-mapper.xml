@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="Generation">
+	<!-- Generation ResultMap 생성 by ParkJunyub 2021.12.06 -->
+		<resultMap type="Generation" id="GenerationMap">
+		<id property="eNo" column="E_NO"/>
+		<result property="houseNum" column="HOUSE_NUM"/>
+		<result property="eElec" column="E_ELEC"/>
+		<result property="eWater" column="E_WATER"/>
+		<result property="eHotWater" column="E_HOT_WATER"/>
+		<result property="eHeation" column="E_HEATING"/>
+		<result property="eGas" column="E_GAS"/>
+		<result property="eDate" column="E_DATE"/>
+		</resultMap>
+</mapper>
