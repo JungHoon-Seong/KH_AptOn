@@ -35,7 +35,36 @@
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
   <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
   
+  <style>
+  #wrapchart{
+  	margin:auto;
+  }
+  
+  #chart_div3{
+  		text-align:right;		
+		font-size:10px;
+  }
+  #covidtable{
+  	margin:auto;
+  }
+  	#covidtable th{
+  		text-align:center;
+  		width:130px;
+  	}
+  	#covidtable td{
+  		text-align:center;
+  	}
+  	#covidtable td:nth-of-type(1){
+		color:red;  		
+  	}
+  	#covidtable #tablefoot{
+		text-align:right;		
+		color:black;
+		font-size:10px;
+  	}
+  </style>
 </head>
 
 <body>
@@ -111,18 +140,7 @@
               <li><i class="bx bx-check-double"></i>노원 롯데캐슬 1163세대 대단지로 노원구의 새로운 랜드마크가 된 노원 롯데캐슬 시그니처</li>
               <li><i class="bx bx-check-double"></i>아름다운 조경과 각종 커뮤니티 시설로 인한 삶의 질 향상</li>
             </ul>
-            <div class="row icon-boxes">
-              <div class="col-md-6">
-                <i class="bx bx-receipt"></i>
-                <h4>Corporis voluptates sit</h4>
-                <p>Consequuntur sunt aut quasi enim aliquam quae harum pariatur laboris nisi ut aliquip</p>
-              </div>
-              <div class="col-md-6 mt-4 mt-md-0">
-                <i class="bx bx-cube-alt"></i>
-                <h4>Ullamco laboris nisi</h4>
-                <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt</p>
-              </div>
-            </div>
+
           </div>
         </div>
 
@@ -134,51 +152,74 @@
       <div class="container">
 
         <div class="section-title">
-          <h2>노원 롯데캐슬 시그니처는....</h2>
-          <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem</p>
         </div>
 
         <div class="row">
           <div class="col-md-6">
             <div class="icon-box">
-              <i class="bi bi-briefcase"></i>
-              <h4><a href="#">Lorem Ipsum</a></h4>
-              <p>Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident</p>
+              
+              <h4 id ="airstats" style="margin-left:0px; margin-bottom:0px"><img width="30" src="https://img.icons8.com/fluency/48/000000/dust.png"/>&emsp;<a href="#">노원구 대기환경 현황</a></h4>
+              <div>
+              <div id="wrapchart">
+	              <div id="chart_div" style="display:inline-block;"></div>
+	              <div id="chart_div2" style="display:inline-block;"></div>
+	              <div id="chart_div3" style="display:inline-block;font-size:12px;">
+	              	<b>미세먼지</b>(PM10) : <b>81㎍/m3</b> 이상이면 <b style="color:red;">나쁨</b><br>
+	              	<b>초미세먼지</b>(PM2.5): <b>36㎍/m3</b> 이상이면 <b style="color:red;">나쁨</b><br><br>
+	              </div>
+	          </div>
+	              <div id="chart_div3"> 서울특별시 제공</div>
+             
+              </div>
             </div>
           </div>
           <div class="col-md-6 mt-4 mt-lg-0">
             <div class="icon-box">
-              <i class="bi bi-card-checklist"></i>
-              <h4><a href="#">Dolor Sitema</a></h4>
-              <p>Minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat tarad limino ata</p>
+             
+              <h4 style="margin-left:0px; margin-bottom:0px"><img src="https://img.icons8.com/ultraviolet/40/000000/coronavirus.png"/>&emsp;<a href="#">노원구 코로나 현황</a></h4>
+              
+              <table id="covidtable">
+              	<tr>
+              		<th>신규 확진자</th>
+              		<th>누적 확진자</th>
+              	</tr>
+              	<tr>
+              		<td id="newcvd"></td>
+              		<td id="allcvd"></td>
+              	</tr>
+              	<tr>
+              		<td colspan="2" id="tablefoot">서울특별시 제공</td>
+              	</tr>
+              	
+              </table>
             </div>
           </div>
           <div class="col-md-6 mt-4">
             <div class="icon-box">
               <i class="bi bi-bar-chart"></i>
-              <h4><a href="#">Sed ut perspiciatis</a></h4>
-              <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</p>
+              <h4 style="margin-left:0px; margin-bottom:0px"><a href="#">노원역 지하철 혼잡도</a></h4>
+              <p id="openData3">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</p>
             </div>
           </div>
           <div class="col-md-6 mt-4">
             <div class="icon-box">
               <i class="bi bi-binoculars"></i>
               <h4><a href="#">Nemo Enim</a></h4>
-              <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
+              <p  id="openData4">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
             </div>
           </div>
           <div class="col-md-6 mt-4">
             <div class="icon-box">
               <i class="bi bi-brightness-high"></i>
               <h4><a href="#">Magni Dolore</a></h4>
-              <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque</p>
+              <p  id="openData5">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque</p>
             </div>
           </div>
           <div class="col-md-6 mt-4">
             <div class="icon-box">
               <i class="bi bi-calendar4-week"></i>
               <h4><a href="#">Eiusmod Tempor</a></h4>
-              <p>Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi</p>
+              <p  id="openData6">Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi</p>
             </div>
           </div>
         </div>
@@ -204,7 +245,103 @@
   <script src="resources/vendor/waypoints/noframework.waypoints.js"></script>
 
   <!-- Template Main JS File -->
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
   <script src="resources/js/main.js"></script>
+
+  <script>
+//인증키 : 676f6f6569776f6e38374b6756756b
+    $.ajax({
+      type:"GET",
+      url : "http://openAPI.seoul.go.kr:8088/676f6f6569776f6e38374b6756756b/json/RealtimeCityAir/1/5/동북권/노원구",
+      success : function(data){
+        let dust_data = data['RealtimeCityAir']['row'];
+        console.log(dust_data);
+        var airstat = dust_data[0]['IDEX_NM'];
+        if(airstat=='보통' || airstat=='좋음'){
+        $("#airstats").append("<span style='color:green;'> - <strong>"+airstat+"</strong></span>");
+        } else {
+        $("#airstats").append("<span style='color:red;'> - "+airstat+"</span>");
+        }
+        
+        
+        google.charts.load('current', {'packages':['gauge']});
+        google.charts.setOnLoadCallback(drawChart);
+        google.charts.setOnLoadCallback(drawChart2);
+
+        function drawChart() {
+
+          var data = google.visualization.arrayToDataTable([
+            ['Label', 'Value'],
+            ['미세먼지', dust_data[0]['PM10']],
+          ]);
+          
+          var formatter = new google.visualization.NumberFormat(
+        		    {suffix: '㎍/㎥',pattern:'#'}
+        		);
+        		    formatter.format(data,1);
+
+          var options = {
+            width: 200, height: 120,
+            greenFrom : 0, greenTo:80,
+            redFrom: 151, redTo: 1000,
+            yellowFrom:81, yellowTo: 150,
+            max : 200,
+            minorTicks: 5
+          };
+
+          var chart = new google.visualization.Gauge(document.getElementById('chart_div'));
+
+          chart.draw(data, options);
+        }
+        
+        function drawChart2() {
+
+          var data = google.visualization.arrayToDataTable([
+            ['Label', 'Value'],
+            ['초미세먼지', dust_data[0]['PM25']],
+          ]);
+          var formatter = new google.visualization.NumberFormat(
+      		    {suffix: '㎍/㎥',pattern:'#'}
+      		);
+      		    formatter.format(data,1);
+
+          var options = {
+           width: 200, height: 120,
+            greenFrom : 0, greenTo:35,
+            yellowFrom:36, yellowTo: 75,
+            redFrom: 76, redTo: 1000,
+            max : 100,
+            minorTicks: 5
+          };
+
+          var chart = new google.visualization.Gauge(document.getElementById('chart_div2'));
+
+          chart.draw(data, options);
+        }
+        
+        
+      }
+    });
+  
+    var now = new Date();
+    var year = now.getFullYear();
+    var month = ('0' + (now.getMonth() +1)).slice(-2);
+    var date = ('0' + (now.getDate())).slice(-2)+".00";
+    var today = year+"."+month+"."+date;
+
+    $.ajax({
+      type:"GET",
+      url : "http://openapi.seoul.go.kr:8088/676f6f6569776f6e38374b6756756b/json/TbCorona19CountStatusJCG/1/5/"+today,
+      success : function(data){
+        let covid_data = data['TbCorona19CountStatusJCG']['row'];
+        console.log(covid_data);
+        var txt = year +"년 " + (now.getMonth()+1)+"월 "+ now.getDate()+"일 <br>+"+ covid_data[0]['NOWONADD']+"명";
+          $('#newcvd').html(txt);
+          $('#allcvd').html(covid_data[0]['NOWON']+"명");
+      }
+    });
+
+  </script>
 
 </body>
 
