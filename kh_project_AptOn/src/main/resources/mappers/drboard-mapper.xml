@@ -62,23 +62,12 @@
 	</update>
 	
 	<!-- PL/SQL IF문을 통해 이미지가 없으면 업데이트와 INSERT문 이미지가 이미 있으면 두테이블다 업데이트  -->
-	<update id="updateContentwithImg" parameterType="DrBoard" statementType="PREPARED">
-		MERGE INTO defectreception_images 
-	USING DUAL 
-		ON (DR_NO = #{drNo} IS NOT NULL) 
-	WHEN MATCHED THEN 
+	<update id="updateContentwithImg" parameterType="DrBoard" statementType="PREPARED"> 
 		UPDATE defectreception_images SET DR_IMAGE = #{drImage} WHERE DR_NO = #{drNo} 
-	WHEN NOT MATCHED THEN 
-		INSERT INTO defectreception_images VALUES(DEFECT_RECEPTION_seq.nextval ,#{drNo}, #{drImage})
+	
 
 	</update>
 	<insert id="insertforUpdateContentwithImg" parameterType="DrBoard" statementType="PREPARED">
-	MERGE INTO defectreception_images 
-	USING DUAL 
-		ON (DR_NO = #{drNo} IS NOT NULL) 
-	WHEN MATCHED THEN 
-		UPDATE defectreception_images SET DR_IMAGE = #{drImage} WHERE DR_NO = #{drNo} 
-	WHEN NOT MATCHED THEN 
 		INSERT INTO defectreception_images VALUES(DEFECT_RECEPTION_seq.nextval ,#{drNo}, #{drImage})
 	</insert>
 	
