@@ -103,7 +103,7 @@
 
 var d = document.noticeinfo;
 function deletenotice(){        	
-
+	
 
      d.submit(); 
 		
@@ -112,10 +112,12 @@ function deletenotice(){
 
 
 function deleteMsg() {
+	
     if (!confirm("정말 삭제하시겠습니까?")) {
         alert("취소 되었습니다.");
         	return false;
-    } else {		
+    } else {
+    	
     	deletenotice();
 
     }

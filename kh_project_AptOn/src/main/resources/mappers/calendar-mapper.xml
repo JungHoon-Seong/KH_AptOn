@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="Calendar">
+
+	<!-- Calendar ResultMap 생성 by 2021.12.08 -->
+	<resultMap id="CalendarMap" type="Calendar">
+		<id property="calendar_num" column="calendar_num" />
+		<result property="admin_id" column="admin_id" />
+		<result property="calendar_title" column="calendar_title" />
+		<result property="calendar_content" column="calendar_content" />
+		<result property="calendar_startdate" column="calendar_startdate" />
+		<result property="calendar_enddate" column="calendar_enddate" />
+	</resultMap>
+	
+	
+	
+	
+</mapper>
