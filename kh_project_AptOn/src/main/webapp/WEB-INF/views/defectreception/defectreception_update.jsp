@@ -62,7 +62,7 @@ font-family: 'Noto Sans KR', sans-serif;
   <!-- SJH TODO ck에디터 CDN 향후 변경될 수 있음 -->
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js"></script>
   <script src="https://cdn.ckeditor.com/4.17.1/standard/ckeditor.js"></script>
-
+  <script src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
 
  <style>
  ul {
@@ -74,7 +74,7 @@ font-family: 'Noto Sans KR', sans-serif;
  	width: 200px;
  }
  #mainsection {
- 	float: left;
+ 	margin: auto;
  	width: 1000px;
  }
  table {
@@ -143,6 +143,11 @@ font-family: 'Noto Sans KR', sans-serif;
  margin-top: 200px;
  margin-left: 200px;
  }
+ 
+ .cke_button.cke_button__image.cke_button_off{
+	display: none;
+	disabled;
+}
  </style>
  
  
@@ -257,7 +262,9 @@ CKEDITOR.replace( 'textContent',{
   }
 
 });
-
+$(document).ready(function () {
+    CKEDITOR.config.removeButtons = 'Image'; 
+});
 </script>
      <!-- ======= Footer ======= -->
 <jsp:include page="../footer.jsp" flush="true" />

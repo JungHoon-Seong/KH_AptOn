@@ -60,6 +60,7 @@ font-family: 'Noto Sans KR', sans-serif;
 <!-- 공통 css 및 글꼴 입력 부분 끝  -->
   <script src="https://cdn.ckeditor.com/4.17.1/standard/ckeditor.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js"></script>
+  <script src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
 
  
 <style>
@@ -73,7 +74,7 @@ font-family: 'Noto Sans KR', sans-serif;
  	width: 0px;
  }
  #mainsection {
- 	float: left;
+ 	margin: auto;
  	width: 1000px;
  }
  table {
@@ -136,33 +137,12 @@ font-family: 'Noto Sans KR', sans-serif;
 footer{
 font-family: 'Noto Sans KR', sans-serif;
 }
+.cke_button.cke_button__image.cke_button_off{
+	display: none;
+	disabled;
+}
  </style>
-<!-- <script>
 
-$("document").ready(function () {
-
-    $('input[type=file]').on("change", function () {
-    //구글 클라우드를 웹서버로 이용하기 위해 작성됨
-
-    	  var bucket = document.forms["putFile"]["bucket"].value;
-    	  var filename = document.forms["putFile"]["fileName"].value;
-    	  if (bucket == null || bucket == "[apt_kh_team2]" || filename == null || filename == "") {
-    	    alert("Both Bucket and FileName are required");
-    	    return false;
-    	  } else {
-    	    var postData = document.forms["putFile"]["content"].value;
-    	    document.getElementById("content").value = null;
-
-    	    var request = new XMLHttpRequest();
-    	    request.open("GET", "/gcs/" + bucket + "/" + filename, false);
-    	    request.setRequestHeader("Content-Type", "text/plain;charset=UTF-8");
-    	    request.send(postData);
-    	  }
-    	
-    });
-});
-    
-</script> -->
 </head>
 
 <body>
@@ -257,7 +237,7 @@ $("document").ready(function () {
 	        change: function() {
 	        	var txt = CKEDITOR.instances['textContent'].getData();
 	        	var len = CKEDITOR.instances['textContent'].getData().length;
-	        	removePlugins: [ 'ImageUpload' ]
+
 	        	var stringByteLength = 0;
 	        	//console.log(len);
 	        	for(var i=0; i<len; i++) {
@@ -288,6 +268,19 @@ $("document").ready(function () {
 	  }
 
 	});
+  
+  
+  $("form").submit(function(){
+	  if( document.getElementById("upload").files.length == 0 ){
+		    alert("사진을 반드시 첨부해야 합니다.");
+		    return false;
+		}  
+	});  
+  
+  
+  $(document).ready(function () {
+      CKEDITOR.config.removeButtons = 'Image'; 
+  });
   </script>
   
 </body>

@@ -55,12 +55,13 @@
  	width: 0px;
  }
  #mainsection {
- 	float: left;
+ 	margin: auto;
  	width: 1000px;
  }
  table {
 	border: 1px solid black;
 	width: 1000px;
+	margin: auto;
 	text-align: center;
 	background-color:  #ffebcd;
  }
@@ -131,37 +132,13 @@
  	background-color:  #008CBA;
  	border: none;
  } 
-  
+ .cke_button.cke_button__image.cke_button_off{
+	display: none;
+	disabled;
+}
  </style>
  
- <script>
-//Upload image using http POST & Google Cloud Storage API
 
- var uploadUrl = 'https://storage.googleapis.com/apt_kh_team2'; // upload with direct HTTP call
- var tmp_auth = 'Bearer tokenhere123'; // Get Bearer Access token here - https://developers.google.com/oauthplayground
-                                       // Enable access for Cloud Storage v1 & Cloud Storage JSON API
-
- var fileinput = $('.file-upload-input')[0]; // <input type='file'>
- var file = fileinput.files[0]; // just support 1st file for now
-
- // post image into google cloud storage
- $.ajax({
-   url: uploadUrl,
-   headers: {
-     'Authorization': tmp_auth,
-     'Content-Type': 'image/*' // 모든 이미지 허용
-   },
-   data: file,
-   processData: false,
-   contentType: false,
-   type: 'POST',
-   success: function(data){
-     console.log(data); // Google Cloud Storage response
-   }
- });
- 
- 
- </script>
   
 </head>
 
@@ -179,14 +156,7 @@
 <main id="adminmain">
 <h2>노원 롯데 캐슬 - <a href="./manage-dr">아파트 민원 접수</a></h2>
 
-<aside id="aside">
-<!-- 메뉴이름 및 링크는 추후 결정 -->
-<ul>
-	<li><a href="#" hidden="hidden">서브메뉴1</a></li>
-	<li><a href="#"hidden="hidden">서브메뉴2</a></li>
-	<li><a href="#"hidden="hidden">서브메뉴3</a></li>
-</ul>
-</aside>
+
 
 
 <section id="mainsection">
@@ -289,6 +259,10 @@
 		 $('#state').val('0');
 	 }
  })
+ 
+   $(document).ready(function () {
+      CKEDITOR.config.removeButtons = 'Image'; 
+  });
   </script>
      <!-- ======= Footer ======= -->
 <jsp:include page="../footer.jsp" flush="true" />

@@ -69,7 +69,7 @@ font-family: 'Noto Sans KR', sans-serif;
  	width: 200px;
  }
  #mainsection {
- 	float: left;
+ 	margin: auto;
  	width: 1000px;
  }
  table {
