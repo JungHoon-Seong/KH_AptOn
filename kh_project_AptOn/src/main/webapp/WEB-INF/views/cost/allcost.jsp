@@ -66,7 +66,7 @@
 	
 	function drawChart() {
 		data = google.visualization.arrayToDataTable([
-				[ 'Dialogue', '작년', '올해' ], [ '1월', 54639381, ${allPrice[0].price} ],
+				[ '공동관리비 총 금액', '작년', '올해' ], [ '1월', 54639381, ${allPrice[0].price} ],
 				[ '2월', 0.7, ${allPrice[1].price}], [ '3월', 0.4, ${allPrice[2].price}],
 				[ '4월', 0.2, ${allPrice[3].price} ], [ '5월', 0.2, ${allPrice[4].price} ],
 				[ '6월', 0.2, ${allPrice[5].price} ], [ '7월', 0.2, ${allPrice[6].price} ], [ '8월', 0.2, ${allPrice[7].price} ],
@@ -79,7 +79,6 @@
 				}
 			};
 		
-		${allprice}
 		chart = new google.charts.Bar(document
 				.getElementById('columnchart_material'));
 		chart.draw(data, google.charts.Bar.convertOptions(options));
@@ -87,8 +86,9 @@
 </script>
 
 <style>
-#cost_section {
-	padding-top: 70px;
+#contentsection{
+	font-family: 'Noto Sans KR', sans-serif;
+	width : 1300px;
 }
 
 boby {
@@ -99,37 +99,36 @@ header {
 	font-family: 'Noto Sans KR', sans-serif;
 }
 
-#main {
-	top: 500px;
-}
-
 footer {
 	font-family: 'Noto Sans KR', sans-serif;
 }
 
-#main {
-	ovarflow: hidden;
-	border: 1px solid #ccc;
-	background-color: blue;
-}
+
 
 #nav {
+	width: 100%;
 	background-color: cornflowerblue;
 }
-
+#main-box{
+	text-align: center;
+}
 #mCost_table {
+	width: 500px;
+	height: 500px;
 	border: 1px solid #444444;
 	border-collapse: collapse;
 }
 
 #mcost {
-	width: 700px;
+	margin-top: 30px;
+	margin-left: 50px;
+	width: 500px;
 	height: 500px;
 	float: left;
 }
 
 #columnchart_material {
-	width: 700px;
+	width: 600px;
 	height: 500px;
 	float: left;
 }
@@ -151,15 +150,14 @@ th, td {
 <body>
 	<jsp:include page="../header.jsp" flush="true" />
 
-	<main id="allcostmain">
-		<section id="cost_section">
+<main id="adminmain">
+<section id="contentsection">
 			<div id="nav">
 				<h1>공동 관리비</h1>
 			</div>
-		</section>
-	</main>
+		
 
-	<div>
+	<div id="main-box">
 		<div id="mcost">
 			<table id="mCost_table">
 				<tr>
@@ -223,10 +221,14 @@ th, td {
 		<div id="columnchart_material"></div>
 
 	</div>
-
+</section>
+</main>
 </body>
 <script>
-
+function changeSelection() {
+	var year = $("#selectBoxTest").val();
+	console.log(year);
+};
 </script>
 
 </html>

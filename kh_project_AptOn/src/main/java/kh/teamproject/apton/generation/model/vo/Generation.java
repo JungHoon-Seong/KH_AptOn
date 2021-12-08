@@ -11,9 +11,9 @@ import java.sql.Date;
 //E_GAS                NUMBER 
 //E_DATE               DATE  
 public class Generation {
-
+	private static final long serialVersionUID = 1111L;
 	private int eNo;
-	private int houseNum;
+	private long houseNum;
 	private int eElec;
 	private int eWater;
 	private int eHotWater;
@@ -21,8 +21,9 @@ public class Generation {
 	private int eGas;
 	private Date eDate;
 	
+	public Generation() {}
 	
-	public Generation(int eNo, int houseNum, int eElec, int eWater, int eHotWater, int eHeation, int eGas, Date eDate) {
+	public Generation(int eNo, long houseNum, int eElec, int eWater, int eHotWater, int eHeation, int eGas, Date eDate) {
 		super();
 		this.eNo = eNo;
 		this.houseNum = houseNum;
@@ -46,10 +47,10 @@ public class Generation {
 	public void seteNo(int eNo) {
 		this.eNo = eNo;
 	}
-	public int getHouseNum() {
+	public long getHouseNum() {
 		return houseNum;
 	}
-	public void setHouseNum(int houseNum) {
+	public void setHouseNum(long houseNum) {
 		this.houseNum = houseNum;
 	}
 	public int geteElec() {

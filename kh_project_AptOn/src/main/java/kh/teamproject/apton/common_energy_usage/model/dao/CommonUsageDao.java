@@ -12,7 +12,6 @@ import org.springframework.stereotype.Repository;
 import kh.teamproject.apton.common_energy_usage.model.vo.CommonUsage;
 
 @Repository("commonUsageDao")
-
 public class CommonUsageDao {
 
 	@Autowired

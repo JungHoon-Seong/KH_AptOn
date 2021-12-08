@@ -13,7 +13,7 @@ import java.sql.Date;
 //HOUSE_WATER_COST      NOT NULL NUMBER 세대수도료
 //MAINTENANCE_COST_DATE NOT NULL DATE  날짜
 public class MaintenanceCost {
-	private int houseNum;
+	private long houseNum;
 	private int maintenanceCost;
 	private int mCost;
 	private int cleanCost;
@@ -24,7 +24,7 @@ public class MaintenanceCost {
 	private int houseWaterCost;
 	private Date maintenanceCostDate;
 	
-	public MaintenanceCost(int houseNum, int maintenanceCost, int mCost, int cleanCost, int secuCost, int elevatorCost,
+	public MaintenanceCost(long houseNum, int maintenanceCost, int mCost, int cleanCost, int secuCost, int elevatorCost,
 			int disinCost, int elecCost, int houseWaterCost, Date maintenanceCostDate) {
 		super();
 		this.houseNum = houseNum;
@@ -39,11 +39,11 @@ public class MaintenanceCost {
 		this.maintenanceCostDate = maintenanceCostDate;
 	}
 
-	public int getHouseNum() {
+	public long getHouseNum() {
 		return houseNum;
 	}
 
-	public void setHouseNum(int houseNum) {
+	public void setHouseNum(long houseNum) {
 		this.houseNum = houseNum;
 	}
 

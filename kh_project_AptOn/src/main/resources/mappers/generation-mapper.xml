@@ -12,4 +12,11 @@
 		<result property="eGas" column="E_GAS"/>
 		<result property="eDate" column="E_DATE"/>
 		</resultMap>
+		
+		<select id="selectOne" parameterType="Generation" resultMap="GenerationMap">
+		<![CDATA[
+			select * from generation_usage
+			where house_num = #{house_num}
+		]]>
+		</select>
 </mapper>
