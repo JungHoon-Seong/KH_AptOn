@@ -3,9 +3,6 @@ package kh.teamproject.apton.manage.model.dao;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
-
-import javax.naming.spi.DirStateFactory.Result;
 
 import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
@@ -13,8 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kh.teamproject.apton.defectreception.model.vo.DrBoard;
-import kh.teamproject.apton.defectreception.model.vo.DrStat;
-import oracle.net.aso.a;
+
 @Repository("manageDfboardDao")
 public class ManageDefectreceptionDao {
 
@@ -31,7 +27,6 @@ public class ManageDefectreceptionDao {
 		int startRow = (currentPage - 1) * limit;
 		
 		RowBounds row = new RowBounds(startRow, limit);
-		//todo ""안에 문자열은 추후바뀔 수 있음 
 		drblist = sqlSession.selectList("DrBoard.selectBoardList", null, row);
 		return drblist;
 	}
@@ -47,7 +42,7 @@ public class ManageDefectreceptionDao {
 		int result = 0;
 		result = sqlSession.update("DrBoard.updateContentForceful", bvo);
 		if (result == 0) {
-			System.out.println("dao단오류발생");
+			System.out.println("updateContentForceful dao단오류발생");
 		}
 		return result;
 	}
@@ -56,7 +51,7 @@ public class ManageDefectreceptionDao {
 		int result = 0;
 		result = sqlSession.delete("DrBoard.deleteContent", bvo);
 		if (result == 0) {
-			System.out.println("dao단오류발생");
+			System.out.println("deleteContent dao단오류발생");
 		}
 		return result;
 	}
@@ -87,5 +82,16 @@ public class ManageDefectreceptionDao {
 		str.replaceAll("\\]", "");
 	
 	return str;
+	}
+
+	public int updateBoardForcefulwithImg(DrBoard bvo) {
+		int result = 0;
+		result = sqlSession.update("DrBoard.updateContentForceful", bvo);
+		
+		result += sqlSession.insert("DrBoard.insertforUpdateContentwithImg",bvo);
+		if (result == 0) {
+			System.out.println("updateBoardForcefulwithImg dao단오류발생");
+		}
+		return result;
 	}
 }

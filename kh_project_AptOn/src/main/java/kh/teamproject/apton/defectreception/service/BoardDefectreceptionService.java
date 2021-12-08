@@ -61,11 +61,18 @@ public class BoardDefectreceptionService {
 	public int updateBoard(DrBoard bvo) {
 		return boardDao.updateBoard(bvo);
 	}
+	
+	public int updateBoardwithImg(DrBoard bvo) {
+		return boardDao.updateBoardwithImg(bvo);
+	}
 
 
 	public int deleteBoard(DrBoard bvo) {
 		return boardDao.deleteBoard(bvo);
 	}
+
+
+	
 
 
 

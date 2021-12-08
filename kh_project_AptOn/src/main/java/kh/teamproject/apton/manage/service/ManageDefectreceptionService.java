@@ -44,6 +44,10 @@ public class ManageDefectreceptionService {
 		return manageDfboardDao.drstat();
 	}
 
+	public int updateBoardForcefulwithImg(DrBoard bvo) {
+		return manageDfboardDao.updateBoardForcefulwithImg(bvo);
+	}
+
 	
 	
 	

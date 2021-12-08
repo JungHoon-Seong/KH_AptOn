@@ -145,60 +145,7 @@ font-family: 'Noto Sans KR', sans-serif;
  }
  </style>
  
-<script>
-    $("document").ready(function () {
-
-        $('input[type=file]').on("change", function () {
-
-            var $files = $(this).get(0).files;
-
-            if ($files.length) {
-
-                // Reject big files
-                if ($files[0].size > $(this).data("max-size") * 1024) {
-                    console.log("Please select a smaller file");
-                    return false;
-                }
-
-                // Replace ctrlq with your own API key
-                var apiUrl = 'https://api.imgur.com/3/image';
-                var apiKey = 'f2cb341d831734c';
-
-                var formData = new FormData();
-                formData.append("image", $files[0]);
-
-                var settings = {
-                    "async": false,
-                    "crossDomain": true,
-                    "url": apiUrl,
-                    "method": "POST",
-                    "datatype": "json",
-                    "headers": {
-                        'Authorization': "Client-ID " + apiKey
-                    },
-                    "processData": false,
-                    "contentType": false,
-                    "data": formData,
-                    beforeSend: function (xhr) {
-                        console.log("Uploading | 업로드 중");
-                    },
-                    success: function (res) {
-                        console.log(res.data.link);
-                        $('input[name=image]').attr('value',res.data.link);
-                        $('body').append('<img src="' + res.data.link + '" />'); 
-                    },
-                    error: function () {
-                        alert("Failed | 실패");
-                    }
-                }
-                $.ajax(settings).done(function (response) {
-                    console.log("Done | 성공");
-                });
-            }
-        });
-    });
-</script>
-  
+ 
 </head>
 
 <body>
@@ -225,7 +172,7 @@ font-family: 'Noto Sans KR', sans-serif;
 
 <section id="mainsection">
 	<table id="maintable">
-	<form action="./update-defectreception"  method="post">
+	<form action="./update-defectreception"  method="post" enctype="multipart/form-data">
 		<c:forEach items="${drbList}" var="vo">
 		<tr>
 			<td><input type="text" class="readonlyHeader" name="no" value="${vo.drNo }" readonly /></td>
@@ -249,9 +196,7 @@ font-family: 'Noto Sans KR', sans-serif;
 		</tr>
 		<!-- form으로 보낼려면 name이 필요한대 에디터에서 제공해주는 플러그인이 name이 없어서 아래 input file을 사용-->
 		<tr>
-			<td><input type="file" name="image" id="upload" accept="image/*" data-max-size="5000" value="res.data.link" />
-			</td>
-				
+			<td><input type="file" name="image" id="upload" accept="image/*" data-max-size="5000" value="res.data.link" /></td>
 		</tr>
 		 
 		<tr>

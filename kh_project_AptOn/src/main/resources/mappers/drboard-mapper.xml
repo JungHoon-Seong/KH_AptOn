@@ -19,7 +19,6 @@
 	
 	<select id="getListCount" resultType="_int">
 		select count(*) from DEFECT_RECEPTION
-
 	</select>
 	
 	
@@ -34,8 +33,7 @@
 	<select id="selectContentView" resultMap="DrBoardMap">
 		<![CDATA[
 		SELECT t1.dr_no, t2.dr_image,  HOUSE_NUM, ADMIN_ID, dr_TITLE, DR_CONTENT, to_char(DR_DATE, 'YY/MM/DD') DR_DATE
-		, DR_STATE, DR_PROCESSINGDATE, DR_PROCESSINGDETAIL FROM DEFECT_RECEPTION t1 left join DEFECTRECEPTION_IMAGES t2 ON (t1.dr_no = t2.dr_no) where t1.DR_NO = #{drNo} 
-		  
+		, DR_STATE, DR_PROCESSINGDATE, DR_PROCESSINGDETAIL FROM DEFECT_RECEPTION t1 left join DEFECTRECEPTION_IMAGES t2 ON (t1.dr_no = t2.dr_no) where t1.DR_NO = #{drNo}  
 		]]>
 	</select>
 	<!-- , t2.dr_image,  t1 join DEFECTRECEPTION_IMAGES t2 ON (t1.dr_no = t2.dr_no) where DR_NO = #{drNo} -->
@@ -46,20 +44,34 @@
 	</insert>
 	
 	<insert id="insertContentwithImg" parameterType="DrBoard" statementType="PREPARED">
-		
-			INSERT ALL  
-			INTO DEFECT_RECEPTION VALUES(SEQ_DR_Board_NO.nextval,
-			#{houseNo}, #{adminId}, #{drTitle}, #{drContent} , SYSDATE , #{drState}, SYSDATE, #{drProcessingDetail})
-			INTO defectreception_images VALUES(DEFECT_RECEPTION_seq.nextval ,SEQ_DR_Board_NO.currval, #{drImage})
-			SELECT * FROM DUAL 
+		INSERT ALL  
+		INTO DEFECT_RECEPTION VALUES(SEQ_DR_Board_NO.nextval,
+		#{houseNo}, #{adminId}, #{drTitle}, #{drContent} , SYSDATE , #{drState}, SYSDATE, #{drProcessingDetail})
+		INTO defectreception_images VALUES(DEFECT_RECEPTION_seq.nextval ,SEQ_DR_Board_NO.currval, #{drImage})
+		SELECT * FROM DUAL 
 	</insert>
 	
 	<update id="updateContent" parameterType="DrBoard" statementType="PREPARED">
-	UPDATE DEFECT_RECEPTION SET DR_TITLE = #{drTitle}, DR_CONTENT = #{drContent} WHERE DR_NO = #{drNo}
+		UPDATE DEFECT_RECEPTION SET DR_TITLE = #{drTitle}, DR_CONTENT = #{drContent} WHERE DR_NO = #{drNo}
 	</update>
 	
+	<!-- 작동안됨 -->
+	<update id="updateContentwithImgFromNullImg" parameterType="DrBoard" statementType="PREPARED">
+		UPDATE DEFECT_RECEPTION AS A RIGHT JOIN defectreception_images B ON(A.DR_NO = B.DR_NO) SET A.DR_TITLE = #{drTitle}, A.DR_CONTENT = #{drContent}, B.DR_IMAGE = #{drImage}  WHERE DR_NO = #{drNo}
+		INSERT INTO defectreception_images VALUES(DEFECT_RECEPTION_seq.nextval ,#{drNo}, #{drImage})
+	</update>
+	
+	<!-- PL/SQL IF문을 통해 이미지가 없으면 업데이트와 INSERT문 이미지가 이미 있으면 두테이블다 업데이트  -->
+	<update id="updateContentwithImg" parameterType="DrBoard" statementType="PREPARED">
+		UPDATE defectreception_images SET DR_IMAGE = #{drImage} WHERE DR_NO = #{drNo}
+
+	</update>
+	<insert id="insertforUpdateContentwithImg" parameterType="DrBoard" statementType="PREPARED">
+	INSERT INTO defectreception_images VALUES(DEFECT_RECEPTION_seq.nextval ,#{drNo}, #{drImage})
+	</insert>
+	
 	<update id="updateContentForceful" parameterType="DrBoard" statementType="PREPARED">
-	UPDATE DEFECT_RECEPTION SET DR_TITLE = #{drTitle}, DR_CONTENT = #{drContent}, DR_STATE = #{drState} WHERE DR_NO = #{drNo}
+		UPDATE DEFECT_RECEPTION SET DR_TITLE = #{drTitle}, DR_CONTENT = #{drContent}, DR_STATE = #{drState} WHERE DR_NO = #{drNo}
 	</update>
 	
 	<delete id="deleteContent" parameterType="DrBoard" statementType="PREPARED">

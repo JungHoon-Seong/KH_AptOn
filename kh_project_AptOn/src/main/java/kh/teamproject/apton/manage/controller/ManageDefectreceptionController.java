@@ -2,6 +2,7 @@ package kh.teamproject.apton.manage.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,6 +19,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.cloud.storage.BlobInfo;
+import com.google.cloud.storage.Storage;
+import com.google.cloud.storage.StorageOptions;
+import com.google.cloud.storage.Storage.BlobTargetOption;
+import com.google.cloud.storage.Storage.PredefinedAcl;
 import com.google.gson.Gson;
 
 import kh.teamproject.apton.defectreception.model.vo.DrBoard;
@@ -25,6 +31,8 @@ import kh.teamproject.apton.manage.service.ManageDefectreceptionService;
 
 @Controller
 public class ManageDefectreceptionController {
+	
+	private static Storage storage = StorageOptions.getDefaultInstance().getService(); 
 	
 	//SJH TODO 관리자단은 서비스 DAO 따로만들어야하나 임시로 연결시킴
 	@Autowired
@@ -148,19 +156,23 @@ public class ManageDefectreceptionController {
 			@RequestParam(value = "c", defaultValue = "0")String content,
 			@RequestParam(value = "no", defaultValue = "0")int drno,
 			@RequestParam(value = "state")int drState,
-			@RequestParam(value ="imgs[]") MultipartFile imgs,
+			@RequestParam("image") MultipartFile image,
 			HttpServletRequest request) {
 		String viewPage = "error/commonError";
 		
 		int drBoardResult = 0;
 		
-		printInfo(Integer.toString(drno), imgs);
-		
-		saveFile(imgs, request);
-		
-		DrBoard bvo = new DrBoard(drno, title, content,drState);
-		drBoardResult = manageDfboardService.updateBoardForceful(bvo);
-		
+		String imgsrc ="";
+		imgsrc =  googleCloudPlatformUpload(image);
+		System.out.println("이미지 저장주소: " + imgsrc);
+
+		if (image == null) {
+			DrBoard bvo = new DrBoard(drno, title, content,drState);
+			drBoardResult = manageDfboardService.updateBoardForceful(bvo);
+		}else if(image != null) {
+			DrBoard bvo = new DrBoard(drno, title, content,drState,imgsrc);
+			drBoardResult = manageDfboardService.updateBoardForcefulwithImg(bvo);
+		}
 		if (drBoardResult == 0) {
 			viewPage = "error/commonError";
 			mv.addObject("msg", "게시글 오류 발생");
@@ -212,11 +224,6 @@ public class ManageDefectreceptionController {
 		Gson gson1 = new Gson();
 		String gobStr = gson1.toJson(map1);
 		System.out.println("Controller단 통계를 위한 상/하반기 계산 return: " + gobStr );
-//		PrintWriter out = response.getWriter();
-//		mv.addObject(gobStr);
-//		//out.print(gobStr);
-//		out.flush();
-//		out.close();
 		mv.addObject("firstTotalCount",  Integer.parseInt( String.valueOf(drStat.get(1))) );
 		mv.addObject("firstComplementCount",  Integer.parseInt(String.valueOf(drStat.get(2))) );
 		mv.addObject("secondTotalCount",  Integer.parseInt(String.valueOf(drStat.get(3))) );
@@ -225,41 +232,25 @@ public class ManageDefectreceptionController {
 		return mv;
 	}
 	
-	 // 파일 업로드 정보 출력
-		private void printInfo(String contentNumber, MultipartFile img) {
-			System.out.println(contentNumber + "번째 게시물의 파일: " + img.getOriginalFilename());
-		}
 
-		// 실제 파일 업로드 메소드 구현
-		private void saveFile(MultipartFile img, HttpServletRequest request) {
+	public String googleCloudPlatformUpload(MultipartFile file) {
+		//reName 규칙 설정
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmssSSS");
+        int rdv = (int)(Math.random()*1000);
+        String reName = sdf.format(System.currentTimeMillis())+"_"+rdv;
 
-			
-			//todo 포로젝트의 리소스 폴더가  아닌 다른 로컬 위치의 폴더로 저장되는 문제점이있다. 
-			String root = request.getSession().getServletContext().getRealPath("\\resources");
-			System.out.println("root : "+ root);
-			//.getRealPath("/src/main/webapp/resources/img");
-			String savePath = root + "/uploadFiles";
-			String filePath = null;
-			File folder = new File(savePath);
-			if (!folder.exists()) {
-//				folder.mkdir(); // 폴더가 없다면 생성한다.
-			}
-
-			try {
-				// 파일 저장
-				System.out.println(img.getOriginalFilename() + "을 저장합니다.");
-				System.out.println("저장 경로 : " + savePath);
-				filePath = folder + "\\" + img.getOriginalFilename();
-
-				img.transferTo(new File(filePath)); // 파일을 저장한다
-				System.out.println("파일 명 : " + img.getOriginalFilename());
-				System.out.println("파일 경로 : " + filePath);
-				System.out.println("파일 전송이 완료되었습니다.");
-			} catch (Exception e) {
-				System.out.println("파일 전송 에러 : " + e.getMessage());
-			}
-		}
+		try {			
+			BlobInfo blobInfo = storage.create(
+				BlobInfo.newBuilder("apt_kh_team2", reName+file.getOriginalFilename()).build(), //get original file name
+				file.getBytes(), // the file
+				BlobTargetOption.predefinedAcl(PredefinedAcl.PUBLIC_READ) // Set file permission
+			);
+			return blobInfo.getMediaLink(); // Return file url
+		}catch(IllegalStateException | IOException e){
+			throw new RuntimeException(e);
+		} 
 		
+  	}	
 		
 
 }

@@ -1,5 +1,7 @@
 package kh.teamproject.apton.defectreception.model.vo;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class DrBoard {
 	
 	private int drNo;
@@ -70,6 +72,27 @@ public class DrBoard {
 			this.drProcessingDetail = processingDetail;
 			this.drImage = imgsrc;
 		
+	}
+
+
+	//이미지있는 게시물 업데이트용
+	public DrBoard(int drno2, String title, String content, String imgsrc) {
+		this.drNo = drno2;
+		this.drTitle = title;
+		this.drContent = content;
+		this.drImage = imgsrc;
+	}
+
+
+
+
+
+	public DrBoard(int drno2, String title, String content, int drState2, String imgsrc) {
+		this.drNo = drno2;
+		this.drTitle = title;
+		this.drContent = content;
+		this.drState = drState2;
+		this.drImage = imgsrc;
 	}
 
 

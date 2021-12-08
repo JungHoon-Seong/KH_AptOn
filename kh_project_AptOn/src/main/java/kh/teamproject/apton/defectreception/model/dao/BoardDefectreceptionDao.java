@@ -83,7 +83,21 @@ public class BoardDefectreceptionDao {
 		int result = 0;
 		result = sqlSession.update("DrBoard.updateContent", bvo);
 		if (result == 0) {
-			System.out.println("dao단오류발생");
+			System.out.println("dao단 이미지 없는 글 업데이트 중 오류발생");
+		}
+		return result;
+	}
+	
+	public int updateBoardwithImg(DrBoard bvo) {
+		int result = 0;
+		result = sqlSession.update("DrBoard.updateContent",bvo);
+		result = sqlSession.update("DrBoard.updateContentwithImg",bvo);
+		
+		//되기는하나 이미 이미지가 있을경우 오류발생
+		//result += sqlSession.insert("DrBoard.insertforUpdateContentwithImg",bvo);
+		
+		if (result == 0) {
+			System.out.println("dao단 이미지업데이트 중 오류발생");
 		}
 		return result;
 	}
@@ -96,6 +110,8 @@ public class BoardDefectreceptionDao {
 		}
 		return result;
 	}
+
+	
 
 
 	
