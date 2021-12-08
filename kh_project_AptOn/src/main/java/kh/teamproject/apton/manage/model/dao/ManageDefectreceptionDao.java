@@ -87,8 +87,8 @@ public class ManageDefectreceptionDao {
 	public int updateBoardForcefulwithImg(DrBoard bvo) {
 		int result = 0;
 		result = sqlSession.update("DrBoard.updateContentForceful", bvo);
+		result = sqlSession.update("DrBoard.updateContentwithImg",bvo);
 		
-		result += sqlSession.insert("DrBoard.insertforUpdateContentwithImg",bvo);
 		if (result == 0) {
 			System.out.println("updateBoardForcefulwithImg dao단오류발생");
 		}
