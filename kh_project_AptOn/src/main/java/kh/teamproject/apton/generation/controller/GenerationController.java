@@ -1,10 +1,14 @@
 package kh.teamproject.apton.generation.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -20,9 +24,29 @@ public class GenerationController {
 	@Autowired
 	private GenerationService gService;
 	
-	@RequestMapping(value = "generation")
-	public String genrationUsage() {
-		return "generation/generation";
+	@RequestMapping(value = "generation", method = RequestMethod.GET)
+	public ModelAndView genrationUsage(ModelAndView mv, HttpServletRequest request, Model model) {
+		String viewpage = "";
+		String msg = null;
+		Member member = (Member)request.getSession().getAttribute("member");
+		if(member == null) {
+			msg = "로그인 후 이용하세요";
+			viewpage = "login";
+			model.addAttribute("msg", msg);
+			mv.setViewName(viewpage);
+			return mv;
+		} else {
+			long house_num = member.getHouseNum();
+			System.out.println("세션 id 확인 --> "+ house_num);
+			List<Generation> vo = new ArrayList<Generation>();
+			vo = gService.select(house_num);
+			System.out.println("에너지 사용량 값 조회--> " + vo);
+			viewpage = "generation/generation";
+			mv.setViewName(viewpage);
+			mv.addObject("gener", vo);
+		}
+		
+		return mv;
 	}
 //	@RequestMapping(value = "generation", method = RequestMethod.GET)
 //	public ModelAndView generation(ModelAndView mv, HttpServletRequest request) {

@@ -58,12 +58,14 @@ header {
 footer {
 	font-family: 'Noto Sans KR', sans-serif;
 }
-
+#nav {
+	width: 100%;
+	background-color: cornflowerblue;
+}
 #main {
 	ovarflow: hidden;
 	top: 500px;
-	border: 1px solid #ccc;
-	background-color: blue;
+	text-align: center;
 }
 </style>
 <script type="text/javascript">
@@ -73,12 +75,12 @@ footer {
       function drawChart() {
 
         var data = google.visualization.arrayToDataTable([
-          ['Task', 'Hours per Day'],
-          ['Work',     11],
-          ['Eat',      2],
-          ['Commute',  2],
-          ['Watch TV', 2],
-          ['Sleep',    7]
+          ['Task', '에너지 사용량'],
+          ['전기',   3],
+          ['수도',      2],
+          ['온수',  2],
+          ['난방', 2],
+          ['가스',    7]
         ]);
 
         var options = {
@@ -97,11 +99,12 @@ footer {
 		<section id="cost_section">
 			<div id="nav">
 				<h1>에너지 사용량 조회</h1>
+				 ${gener}
 			</div>
 		</section>
 	</main>
-	
+	<div id="main">
     <div id="piechart" style="width: 900px; height: 500px;"></div>
-  
+  	</div>
 </body>
 </html>

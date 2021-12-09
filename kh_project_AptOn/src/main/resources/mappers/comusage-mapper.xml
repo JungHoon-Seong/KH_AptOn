@@ -36,7 +36,7 @@
 	<select id ="allprice" parameterType="string" resultMap="ComUsageMap">
 	<![CDATA[
 		select MAINTENANCE_COST, price
-		from (select to_char(maintenance_cost, 'FM99999999') costNum, price, MAINTENANCE_COST from common_energy_usage)
+		from (select to_char(maintenance_cost, 'FM99999999') costNum, m_cost, price, MAINTENANCE_COST from common_energy_usage)
 		where costNum like #{cost_num}||'%'
 		]]>
 	</select>

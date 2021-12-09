@@ -20,7 +20,6 @@ public class CommonUsageDao {
 
 	public CommonUsage selectOne(int cost_num) {
 		return sqlSession.selectOne("ComUsage.selectOne", cost_num);
-
 	}
 
 	
@@ -31,7 +30,7 @@ public class CommonUsageDao {
 
 
 	public List<CommonUsage> price(int cost_num) {
-		System.out.println("요기 cost_num : "+cost_num );
+		System.out.println("요기 cost_num : "+ cost_num );
 		List<CommonUsage> result = sqlSession.selectList("ComUsage.allprice", String.valueOf(cost_num));
 		System.out.println("여기 몇개 읽은겨 : "+ result.size());
 		return result;

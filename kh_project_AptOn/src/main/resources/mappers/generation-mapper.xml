@@ -19,4 +19,5 @@
 			where house_num = #{house_num}
 		]]>
 		</select>
+		
 </mapper>
