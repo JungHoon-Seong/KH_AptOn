@@ -37,6 +37,17 @@
   ======================================================== -->
   <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
   
+  
+  <!-- 캘린더  -->
+  <!-- 화면 해상도에 따라 글자 크기 대응(모바일 대응) -->
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+  <!-- jquery CDN -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <!-- fullcalendar CDN -->
+  <link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.min.css' rel='stylesheet' />
+  <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.min.js'></script>
+  <!-- fullcalendar 언어 CDN -->
+  <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/locales-all.min.js'></script>
  <style>
  ul {
  list-style-type: none;
@@ -82,12 +93,20 @@
  }
  </style>
   
-  <script>
-  function writescript(){
-	  
+<style>
+  /* 캘린더 body 스타일 */
+/*   html, body {
+    overflow: hidden;
+    font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+    font-size: 14px;
+  } */
+  /* 캘린더 위의 해더 스타일(날짜가 있는 부분) */
+  .fc-header-toolbar {
+    padding-top: 1em;
+    padding-left: 1em;
+    padding-right: 1em;
   }
-  </script>
-  
+</style>
 </head>
 
 <body>
@@ -109,52 +128,91 @@
 
 
 <main id="main">
-<h2>노원 롯데 캐슬 - <a href="#">아파트 공지사항</a></h2>
+<h2>노원 롯데 캐슬 - <a href="#">아파트 일정</a></h2>
 
 <aside id="aside">
 <!-- 메뉴이름 및 링크는 추후 결정 -->
 <ul>
 	<li><a href="./noticelist">공지사항</a></li>
 	<li><a href="./board-defectreception">민원접수</a></li>
-	<li><a href="./calendarlist">일정</a></li>
+	<li><a href="./calendarlist">일정 </a></li>
 </ul>
 </aside>
 
 <section id="mainsection">
-	<table id = "list">
-			<thead>
-				<tr id = "toplist">
-					<th>번호</th>
-					<th>제목</th>
-					<th>작성자</th>
-					<th>작성일</th>
-				</tr>
-			</thead>
-			<tbody>
-
-				<c:forEach var="notice" items="${noticelist}">
-					<tr id = "Value">
-						<td class = "line">${notice.notice_num}</td>
-						<td class = "line"><a href = "notice-detail?no=${notice.notice_num } ">${notice.notice_title}</a></td>
-						<td class = "line">${notice.admin_id}</td>
-						<td class = "line">${notice.notice_date}</td>
-					</tr>
-				</c:forEach>
-
-
-				
-			</tbody>
-		</table>
-	<div id="paging">
-		<c:if test="${startPage > 1 }" >이전</c:if>
-		<c:forEach begin="${startPage }" end="${endPage }" step="1" var="i">
-			<a href="noticelist?p=${i}">${i}</a>
-		</c:forEach>
-		<c:if test="${endPage < pageCount }"> 다음 </c:if>
-	</div>
-	
-	  <input type="text" name="keyword" id="keywordInput" />
-    <button id="searchBtn" type="button">검색</button>
+ <!-- calendar 태그 -->
+  <div id='calendar-container'>
+    <div id='calendar'></div>
+  </div>
+  <script>
+  (function(){
+    $(function(){
+      // calendar element 취득
+      var calendarEl = $('#calendar')[0];
+      // full-calendar 생성하기
+      var calendar = new FullCalendar.Calendar(calendarEl, {
+        height: '700px', // calendar 높이 설정
+        expandRows: true, // 화면에 맞게 높이 재설정
+        slotMinTime: '08:00', // Day 캘린더에서 시작 시간
+        slotMaxTime: '20:00', // Day 캘린더에서 종료 시간
+        // 해더에 표시할 툴바
+        headerToolbar: {
+          left: 'prev,next today',
+          center: 'title',
+          right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+        },
+        initialView: 'dayGridMonth', // 초기 로드 될때 보이는 캘린더 화면(기본 설정: 달)
+        //initialDate: '2021-07-15', // 초기 날짜 설정 (설정하지 않으면 오늘 날짜가 보인다.)
+        navLinks: true, // 날짜를 선택하면 Day 캘린더나 Week 캘린더로 링크
+        editable: false, // 수정 가능?
+        selectable: false, // 달력 일자 드래그 설정가능
+        nowIndicator: true, // 현재 시간 마크
+        dayMaxEvents: true, // 이벤트가 오버되면 높이 제한 (+ 몇 개식으로 표현)
+        locale: 'ko', // 한국어 설정
+        eventAdd: function(obj) { // 이벤트가 추가되면 발생하는 이벤트
+          console.log(obj);
+        },
+        eventChange: function(obj) { // 이벤트가 수정되면 발생하는 이벤트
+          console.log(obj);
+        },
+        eventRemove: function(obj){ // 이벤트가 삭제되면 발생하는 이벤트
+          console.log(obj);
+        },
+        select: function(arg) { // 캘린더에서 드래그로 이벤트를 생성할 수 있다.
+          var title = prompt('Event Title:');
+          if (title) {
+            calendar.addEvent({
+              title: title,
+              start: arg.start,
+              end: arg.end,
+              allDay: arg.allDay
+            })
+          }
+          calendar.unselect()
+        },
+        //이벤트 
+        events: [
+          {
+            title: 'All Day Event',
+            start: '2021-12-01',
+          },
+          {
+            title: 'Long Event',
+            start: '2021-07-07',
+            end: '2021-12-10'
+          },
+          {
+            title: 'Click for Google',
+            url: 'http://google.com/', // 클릭시 해당 url로 이동
+            start: '2021-12-28'
+          }
+        ]
+      });
+      // 캘린더 랜더링
+      calendar.render();
+    });
+  })();
+</script>
 </section>
 </main>
 

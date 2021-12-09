@@ -100,7 +100,7 @@
           <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
             <div class="icon-box">
               <div class="icon"><span style="color: #2490C1;"><i class="far fa-calendar-alt fa-lg"></i></span></div>
-              <h4><a href="">아파트 소식</a></h4>
+              <h4><a href="./noticelist">아파트 소식</a></h4>
               <p>아파트 공지사항과 각종 행사 및 전자투표/결재에 참여하실 수 있습니다.</p>
             </div>
           </div>

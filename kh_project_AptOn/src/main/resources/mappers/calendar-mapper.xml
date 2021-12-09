@@ -12,7 +12,12 @@
 		<result property="calendar_enddate" column="calendar_enddate" />
 	</resultMap>
 	
-	
+		
+	<select id="calendarlist" resultType="Calendar">
+		<![CDATA[
+		select calendar_num,admin_id,calendar_title,calendar_content,calendar_startdate,calendar_enddate from calendar order by calendar_num desc
+			 ]]>
+	</select>
 	
 	
 </mapper>

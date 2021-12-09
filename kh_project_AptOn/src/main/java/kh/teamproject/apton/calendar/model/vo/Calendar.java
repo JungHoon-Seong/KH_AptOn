@@ -7,8 +7,8 @@ public class Calendar {
 	private String admin_id;
 	private String calendar_title;
 	private String calendar_content;
-	private Date calendar_startdate;
-	private Date calendar_enddate;
+	private String calendar_startdate;
+	private String calendar_enddate;
 	
 	public int getCalendar_num() {
 		return calendar_num;
@@ -34,16 +34,22 @@ public class Calendar {
 	public void setCalendar_content(String calendar_content) {
 		this.calendar_content = calendar_content;
 	}
-	public Date getCalendar_startdate() {
+	public String getCalendar_startdate() {
 		return calendar_startdate;
 	}
-	public void setCalendar_startdate(Date calendar_startdate) {
+	@Override
+	public String toString() {
+		return "Calendar [calendar_num=" + calendar_num + ", admin_id=" + admin_id + ", calendar_title="
+				+ calendar_title + ", calendar_content=" + calendar_content + ", calendar_startdate="
+				+ calendar_startdate + ", calendar_enddate=" + calendar_enddate + "]";
+	}
+	public void setCalendar_startdate(String calendar_startdate) {
 		this.calendar_startdate = calendar_startdate;
 	}
-	public Date getCalendar_enddate() {
+	public String getCalendar_enddate() {
 		return calendar_enddate;
 	}
-	public void setCalendar_enddate(Date calendar_enddate) {
+	public void setCalendar_enddate(String calendar_enddate) {
 		this.calendar_enddate = calendar_enddate;
 	}
 }

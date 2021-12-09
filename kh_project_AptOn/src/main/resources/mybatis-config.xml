@@ -20,6 +20,7 @@
 	<typeAlias type="kh.teamproject.apton.votesign.model.vo.SignRecords" alias="SignRecords"/> <!--  SignRecords mapper 생성 후 등록 by NaHyowon 2021.11.26 -->
 	<typeAlias type="kh.teamproject.apton.defectreception.model.vo.DrStat" alias="DrStat"/> <!--  DrStat mapper 생성 후 등록 by SJH 2021.11.26 -->
 	<typeAlias type="kh.teamproject.apton.generation.model.vo.Generation" alias="Generation"/> <!-- Generation mapper 생성 후 등록 by ParkJunYub 2021.12.06 -->
+	<typeAlias type="kh.teamproject.apton.calendar.model.vo.Calendar" alias="Calendar"/> <!-- calendar-mapper 생성 후 등록 by kimyongmin 2021.12.08 -->
 </typeAliases>
 
 <!-- 추가 및 수정 시 작성자와 날짜, 내용 등을 주석으로 남기기 -->
@@ -37,7 +38,7 @@
 	<mapper resource="mappers/signrecords-mapper.xml"/> <!--  signrecords mapper 생성 후 등록 by NaHyowon 2021.11.26 -->
 	<mapper resource="mappers/drstat-mapper.xml"/> <!--  drStat mapper 생성 후 등록 by NaHyowon 2021.11.27 -->
 	<mapper resource="mappers/generation-mapper.xml"/> <!-- Generation mapper 생성 후 등록 by ParkJunYub 2021.12.06 -->
-	<!-- <mapper resource="mappers/calendar-mapper.xml"/> calendar-mapper 생성 후 등록 by kimyongmin 2021.12.08 -->
+	<mapper resource="mappers/calendar-mapper.xml"/><!-- calendar-mapper 생성 후 등록 by kimyongmin 2021.12.08 -->
 </mappers>
 
 
