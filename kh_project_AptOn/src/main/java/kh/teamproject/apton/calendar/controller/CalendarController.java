@@ -20,15 +20,18 @@ public class CalendarController {
 	@Autowired
 	private CalendarServicelmpl calendarservice;   
 	
-	// 일정 보기 
-	@RequestMapping(value = "calendar", method = RequestMethod.GET)
-	public String calendar() {
+//	// 일정 보기 
+//	@RequestMapping(value = "calendar", method = RequestMethod.GET)
+//	public String calendar() {
+//
+//		return "calendar/calendar";
+//	}
 
-		return "calendar/calendar";
-	}
 
+	
+	//일정보기
 	@RequestMapping(value = "/calendarlist", method = RequestMethod.GET)
-	public ModelAndView selectAdNoticelist(ModelAndView mv) {
+	public ModelAndView selectCalendar(ModelAndView mv) {
 		String viewPage = "error/commonError"; //기본페이지 에러페이지로 동일하게 설정함
 					
 		List<Calendar> calendar = null;
@@ -44,6 +47,29 @@ public class CalendarController {
 		
 		
 		System.out.println("달력 정보 calendar: -->"+calendar);
+		mv.addObject("calendar",calendar);
+		mv.setViewName(viewPage);
+		return mv;
+	}
+	// 관리자 일정 보기 	
+	@RequestMapping(value = "/admincalendarlist", method = RequestMethod.GET)
+	public ModelAndView selectadminCalendar(ModelAndView mv) {
+		String viewPage = "error/commonError"; //기본페이지 에러페이지로 동일하게 설정함
+					
+		List<Calendar> calendar = null;
+		try {
+			calendar = calendarservice.getCalendar();
+			viewPage= "calendar/admin_calendar";
+		} catch (Exception e) {
+			viewPage= "error/commonError";
+			mv.addObject("msg" , "게시판 오류 발생");
+			mv.addObject("url" , "index");
+			e.printStackTrace();
+		}
+		
+		
+		System.out.println("달력 정보 calendar: -->"+calendar);
+		mv.addObject("calendar",calendar);
 		mv.setViewName(viewPage);
 		return mv;
 	}
