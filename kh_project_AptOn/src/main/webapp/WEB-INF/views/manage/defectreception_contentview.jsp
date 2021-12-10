@@ -150,10 +150,10 @@ font-family: 'Noto Sans KR', sans-serif;
 
 
 
-
 <section id="mainsection">
 	<table id="maintable">
 	<c:forEach items="${drbList}" var="vo">
+		
 		<tr>
 			<td id ="boardNo">${vo.drNo }</td>
 			
@@ -202,10 +202,13 @@ font-family: 'Noto Sans KR', sans-serif;
 			function btnDelete(){
 				
 				var confirmDelete = confirm("삭제하시겠습니까?");
-				if(confirmDelete == true){ <!-- 알림창의 확인 버튼 눌러야지 이동됨 -->
+				<!-- 알림창의 확인 버튼 눌러야지 이동됨 -->
+				if(confirmDelete == true){ 
 					location.href="./manage-drdelete?no=${vo.drNo}"
 				}
 			}
+	console.log('${memberId}');
+	console.log("왜 안나오지");
 	</script>
 	
 		

@@ -2,11 +2,14 @@ package kh.teamproject.apton.defectreception.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Controller;
@@ -19,6 +22,7 @@ import com.google.api.client.util.Value;
 
 import kh.teamproject.apton.defectreception.model.vo.DrBoard;
 import kh.teamproject.apton.defectreception.service.BoardDefectreceptionService;
+import kh.teamproject.apton.member.model.vo.Member;
 
 import com.google.cloud.storage.BlobInfo;
 import com.google.cloud.storage.Storage;
@@ -40,9 +44,24 @@ public class BoardDefectreceptionController {
 	private Resource localFilePath;
 	
 	@RequestMapping(value = "board-defectreception", method = RequestMethod.GET)
-	public ModelAndView selectBoardList(ModelAndView mv, String clickedPage, @RequestParam(value = "p", defaultValue = "1")String pageNum) {
+	public ModelAndView selectBoardList(ModelAndView mv, String clickedPage, 
+			@RequestParam(value = "p", defaultValue = "1")String pageNum,
+			HttpServletRequest request,
+			HttpServletResponse response) throws Exception{
 		String viewPage = "error/commonError"; //기본페이지 에러페이지로 동일하게 설정함
 		
+		Member member = (Member)request.getSession().getAttribute("member");
+		
+		//회원로그인 확인 조건문
+		if(member == null) {
+			response.setContentType("text/html; charset=UTF-8");
+			 
+			PrintWriter out = response.getWriter();
+			 
+			out.println("<script>alert('로그인이 필요합니다'); location.href='./login';</script>");
+			 
+			out.flush();
+		} 
 		
 		final int PAGE_SIZE = 6;
 		final int PAGE_BLOCK = 3;
@@ -110,23 +129,29 @@ public class BoardDefectreceptionController {
 	}
 	
 	@RequestMapping(value = "view-defectreception", method = RequestMethod.GET)
-	public ModelAndView selectContentView(ModelAndView mv, @RequestParam(value="no" , defaultValue = "0")int drno ) {
+	public ModelAndView selectContentView(ModelAndView mv, @RequestParam(value="no" , defaultValue = "0")int drno, 
+			HttpServletRequest request) {
 		String viewPage = "error/commonError"; //기본페이지 에러페이지로 동일하게 설정함
+		
+		Member memberId = (Member)request.getSession().getAttribute("member");
+		
 		
 		
 		List<DrBoard> drbList = null;
 		try {
 			drbList = boardService.selectContentView(drno);
 			viewPage= "/defectreception/defectreception_contentview";
+			
 		} catch (Exception e) {
 			viewPage= "error/commonError";
 			mv.addObject("msg" , "게시판 오류 발생");
 			mv.addObject("url" , "index");
 			e.printStackTrace();
 		}
-		
 		mv.addObject("drbList",drbList);
+		mv.addObject("memberId",memberId.getHouseNum());
 		mv.setViewName(viewPage);
+		
 		return mv;
 	}
 	
@@ -149,8 +174,9 @@ public class BoardDefectreceptionController {
 		System.out.println("이미지 저장주소: " + imgsrc);
 		
 		
-		//SJHTODO 세션에 따라 호수번호를 입력받아야함 추후 처리
-		long houseNum = 202111191010102L;
+		//가구번호에 따라 다르게 글쓴이가 생기도록 함
+		Member member = (Member)request.getSession().getAttribute("member");
+		long houseNum = member.getHouseNum();
 		String adminId = "admin2";
 		int state = 0;
 		String ProcessingDetail = "처리중";

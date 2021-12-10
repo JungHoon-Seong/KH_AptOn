@@ -156,6 +156,8 @@ font-family: 'Noto Sans KR', sans-serif;
 </aside>
 
 
+
+
 <section id="mainsection">
 	<table id="maintable">
 	<c:forEach items="${drbList}" var="vo">
