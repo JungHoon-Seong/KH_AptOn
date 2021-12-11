@@ -7,4 +7,6 @@ import kh.teamproject.apton.calendar.model.vo.Calendar;
 public interface CalendarServicelmpl {
 	
 	public List<Calendar> getCalendar() throws Exception;
+	
+	public int insertCalendar(Calendar vo) throws Exception;
 }

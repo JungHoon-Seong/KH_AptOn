@@ -20,4 +20,10 @@ public List<Calendar> getCalendar() throws Exception{
 	return calendardao.getCalendar();
 }
 
+public int insertCalendar(Calendar vo) throws Exception{
+	System.out.println("Calendardao값: " + vo);	
+	return calendardao.insertCalendar(vo);
+}
+
+
 }

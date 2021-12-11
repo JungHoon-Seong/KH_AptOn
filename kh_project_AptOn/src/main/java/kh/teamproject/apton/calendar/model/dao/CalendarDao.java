@@ -27,8 +27,8 @@ public class CalendarDao {
 		
 	}
 	
-//	
-//	public void addSchedule(Calendar vo) throws Exception  {
-//		sqlSession.insertCalendar( vo);
-//	}
+	public int insertCalendar(Calendar vo) throws Exception{
+		System.out.println("dao값: " + vo);
+		return sqlSession.insert("Calendar.insertCalendar", vo);
+	}
 }

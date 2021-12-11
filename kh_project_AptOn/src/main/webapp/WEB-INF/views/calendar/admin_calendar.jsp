@@ -102,8 +102,25 @@
         headerToolbar: {
           left: 'prev,next today',
           center: 'title',
-          right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+          right: 'custom dayGridMonth,timeGridWeek,timeGridDay,listWeek'
         },
+        customButtons: {
+            custom: {
+              text: '일정 추가',
+              click: function() {
+                //alert('clicked custom button 1!');
+                var popupWidth = 600;
+                var popupHeight = 200;
+
+      var popupX = (window.screen.width / 2) - (popupWidth / 2);
+    // 만들 팝업창 width 크기의 1/2 만큼 보정값으로 빼주었음
+
+    var popupY= (window.screen.height / 2) - (popupHeight / 2);
+    // 만들 팝업창 height 크기의 1/2 만큼 보정값으로 빼주었음
+    window.open('', '', 'status=no, height=' + popupHeight  + ', width=' + popupWidth  + ', left='+ popupX + ', top='+ popupY);
+                //window.open('windowOpen.html', 'windowPop', 'width=600, height=100, left=50%, top=50%, resizable = yes')
+              }
+            }},
         initialView: 'dayGridMonth', // 초기 로드 될때 보이는 캘린더 화면(기본 설정: 달)
         //initialDate: '2021-07-15', // 초기 날짜 설정 (설정하지 않으면 오늘 날짜가 보인다.)
         navLinks: true, // 날짜를 선택하면 Day 캘린더나 Week 캘린더로 링크
