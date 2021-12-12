@@ -110,14 +110,14 @@
               click: function() {
                 //alert('clicked custom button 1!');
                 var popupWidth = 600;
-                var popupHeight = 200;
+                var popupHeight = 350;
 
       var popupX = (window.screen.width / 2) - (popupWidth / 2);
     // 만들 팝업창 width 크기의 1/2 만큼 보정값으로 빼주었음
 
     var popupY= (window.screen.height / 2) - (popupHeight / 2);
     // 만들 팝업창 height 크기의 1/2 만큼 보정값으로 빼주었음
-    window.open('', '', 'status=no, height=' + popupHeight  + ', width=' + popupWidth  + ', left='+ popupX + ', top='+ popupY);
+    window.open('calendarpop', '', 'status=no, height=' + popupHeight  + ', width=' + popupWidth  + ', left='+ popupX + ', top='+ popupY);
                 //window.open('windowOpen.html', 'windowPop', 'width=600, height=100, left=50%, top=50%, resizable = yes')
               }
             }},
