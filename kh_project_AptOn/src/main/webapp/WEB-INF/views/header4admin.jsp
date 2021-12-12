@@ -14,19 +14,21 @@
       <nav id="navbar" class="navbar order-last order-lg-0">
       관리자 : ${admin.adminId } 님 접속중
         <ul>
+          <li><a href="logout">로그아웃</a>
           <li><a class="nav-link scrollto active" href="/apton">Home</a></li>
-          <li><a class="nav-link scrollto " href="memberlist">메뉴1</a></li>
-          <li><a class="nav-link scrollto" href="insertmember">메뉴2</a></li>
+          <li><a class="nav-link scrollto" href="noticelist">아파트 소식</a></li>
+          <li><a class="nav-link scrollto" href="board-defectreception">민원 접수</a></li>
+          <li><a class="nav-link scrollto" href="allcost">우리집 관리</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
 
-      <div class="header-social-links d-flex align-items-center">
+    <!--   <div class="header-social-links d-flex align-items-center">
         <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
         <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
         <a href="insertmember" class="instagram"><i class="bi bi-instagram"></i></a>
         <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></i></a>
-      </div>
+      </div> -->
 
     </div>
   </header><!-- End Header -->
@@ -40,9 +42,7 @@
            <a class="dropdown" onclick="dropdown();">공지사항</a>
             <ul class="hide">
                 <li><a href="adnoticelist">공지사항 목록</a></li>
-                <li><a href="#" class="submenu">메뉴2</a></li>
-                <li><a href="#" class="submenu">메뉴3</a></li>
-                <li><a href="#" class="submenu">메뉴4</a></li>
+                <li><a href="noticeinsert" class="submenu">공지사항 등록</a></li>
             </ul>
         </li>
     </ul>
@@ -63,10 +63,7 @@
 		<li class="sidedroplist">
            <a class="dropdown" onclick="dropdown();">관리비</a>
             <ul class="hide">
-                <li><a href="#">메뉴1</a></li>
-                <li><a href="#">메뉴2</a></li>
-                <li><a href="#">메뉴3</a></li>
-                <li><a href="#">메뉴4</a></li>
+                <li><a href="allcost">공동 관리비 조회</a></li>
             </ul>
         </li>
     </ul>
@@ -88,10 +85,7 @@
 		<li class="sidedroplist">
            <a class="dropdown" onclick="dropdown();">입주민 관리</a>
             <ul class="hide">
-                <li><a href="#">메뉴1</a></li>
-                <li><a href="#">메뉴2</a></li>
-                <li><a href="#">메뉴3</a></li>
-                <li><a href="#">메뉴4</a></li>
+                <li><a href="#">준비중</a></li>
             </ul>
         </li>
     </ul>

@@ -271,28 +271,32 @@ function goenroll(){
 
 function delvote(){
 	//console.log("진입");
-	var slt = $(event.target);
-	var delNum = slt.parents('tr').children().first().text();
-	
-	console.log("삭제할 번호 : " + delNum);
-	
-	$.ajax({
-		url : "deletevote.do",
-		data : { delNum : delNum, adminId : '${admin.adminId }' },
-		type : "post",
-		success : function(result){
-			alert(result);
-			location.reload();
-		},
-		error : function(request, status, errorData){
-			alert("error code : " + request.status + "\n"
-				+ "message : " + request.responseText + "\n"
-				+ "error : " + errorData
-			);
-			alert("삭제 실패");
-			location.reload();
-		}
-	}); //ajax
+ 	if(confirm("해당 투표/서명을 삭제하시겠습니까?")){
+		var slt = $(event.target);
+		var delNum = slt.parents('tr').children().first().text();
+		
+		console.log("삭제할 번호 : " + delNum);
+		
+		$.ajax({
+			url : "deletevote.do",
+			data : { delNum : delNum, adminId : '${admin.adminId }' },
+			type : "post",
+			success : function(result){
+				alert("삭제되었습니다.");
+				location.reload();
+			},
+			error : function(request, status, errorData){
+				alert("error code : " + request.status + "\n"
+					+ "message : " + request.responseText + "\n"
+					+ "error : " + errorData
+				);
+				alert("삭제 실패");
+				location.reload();
+			}
+		}); //ajax
+	} else {
+		
+	};
 			
 	}; // delvote();
 	
