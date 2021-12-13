@@ -26,5 +26,9 @@
 	<select id="loadSign" parameterType="_long" resultType="_byte[]">
 		select member_sign from member where house_num = #{houseNum}
 	</select>
+	
+	<insert id="insertMember" parameterType="Member" statementType="PREPARED">
+		INSERT INTO MEMBER VALUES(#{houseNum}, #{pwd}, #{name} , #{phone}, null)
+	</insert>
 
 </mapper>

@@ -38,6 +38,14 @@ public class Member {
 		this.phone = phone;
 		this.memberSign = memberSign;
 	}
+	
+	public Member(long userHouseNum, String userPassword, String userName, String phone) {
+		this.houseNum = userHouseNum;
+		this.pwd = userPassword;
+		this.name = userName;
+		this.phone = phone;
+	}
+
 
 	public long getHouseNum() {
 		return houseNum;

@@ -85,7 +85,7 @@
  	height: 375px;
  }  
  .img {
- 	width: 240px;
+ 	width: 500px;
  	height: 200px;
  }
   #btnUpdate {
@@ -187,7 +187,10 @@
 		</tr>
 		<!-- form으로 보낼려면 name이 필요한대 에디터에서 제공해주는 플러그인이 name이 없어서 아래 input file을 사용-->
 		<tr>
-			<td><input type="file" name="image" id="upload" accept="image/*" data-max-size="5000" value="res.data.link" /></td>
+			<td colspan="4">
+				<img src="${vo.drImage }" class="img" onerror="this.src='resources/img/logo.png'" alt='' />
+				<!--  <input type="file" name="image" id="upload" accept="image/*" data-max-size="5000" value="res.data.link" />-->
+			</td>
 		</tr>
 		 
 		<tr>

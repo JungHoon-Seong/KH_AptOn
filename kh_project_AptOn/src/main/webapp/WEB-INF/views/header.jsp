@@ -15,6 +15,7 @@
       <!--  -->
       <c:if test="${member == null and admin == null}" >
         <ul>
+        <li><a href="userjoin">회원가입</a></li>
         <li><a href="login">로그인</a>
           <li><a class="nav-link scrollto active" href="/apton">Home</a></li>
           <li><a class="nav-link scrollto" href="#about">아파트 소식</a></li>

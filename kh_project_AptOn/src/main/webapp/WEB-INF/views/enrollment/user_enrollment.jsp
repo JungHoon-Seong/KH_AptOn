@@ -8,7 +8,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>노원 롯데캐슬 하자접수 게시판 with APTON</title>
+  <title>노원 롯데캐슬 회원가입 with APTON</title>
   <!-- 공통 css 및 글꼴 입력 부분 시작, title바로 밑에 삽입  -->
   <meta content="" name="description">
   <meta content="" name="keywords">
@@ -46,7 +46,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
-<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
 <style>
 header{
 font-family: 'Noto Sans KR', sans-serif;
@@ -67,6 +67,10 @@ font-family: 'Noto Sans KR', sans-serif;
  #aside {
  	float: left;
  	width: 200px;
+ }
+ #main {
+ 	margin: auto;
+ 	width: 1000px;
  }
  #mainsection {
  	margin: auto;
@@ -95,7 +99,8 @@ font-family: 'Noto Sans KR', sans-serif;
  #btnWriteBox {
  	float: right;
  }
- #btnwrite {
+ button{
+ 	 width: 150px;
 	 broder: none;
 	 border-radius: 5px;
 	 color: white;
@@ -107,9 +112,17 @@ font-family: 'Noto Sans KR', sans-serif;
 	 background-color: #008CBA;
  }
   h2 {
- margin-top: 200px;
- margin-left: 200px;
+	 margin-top: 200px;
+	 margin-left: 200px;
  }
+span {
+	font-size: 12px;
+	color: gray;
+}
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
  </style>
   
   <script>
@@ -130,7 +143,7 @@ font-family: 'Noto Sans KR', sans-serif;
 
 
 <main id="main">
-<h2>노원 롯데 캐슬 - <a href="./board-defectreception">아파트 민원 접수</a></h2>
+<h2>노원 롯데 캐슬 - 회원가입</h2>
 
 <aside id="aside">
 <!-- 메뉴이름 및 링크는 추후 결정 -->
@@ -141,53 +154,42 @@ font-family: 'Noto Sans KR', sans-serif;
 
 
 <section id="mainsection">
-	<table id="maintable">
-	<tr id="rowheader">
-		<td>No.</td>
-		<td>이미지</td>
-		<td>제목</td>
-		<td>작성일자</td>
-		<td>가구번호</td>
-		<td>처리상태</td>
-	</tr>
-	
-	<!-- Todo drImage는 다른 테이블에 있다 해결이 필요함 -->
-	<c:if test="${drbList != null }">
-	<c:forEach items="${drbList}" var="vo">
-		<tr>
-			<td>${vo.drNo }</td>
-			<td ><img src="${vo.drImage }" class="img" onerror="this.src='resources/img/logo.png'" alt='' /> </td>
-			<td>
-			<a href="view-defectreception?no=${vo.drNo }">${vo.drTitle }</a>
-			</td>
-			<td>${vo.drDate }</td>
-			<td>${vo.houseNo }</td>
-			
-			<c:choose>
-			<c:when test="${vo.drState == 1}">
-				<td class="completestate">처리완료</td>
-			</c:when>
-			<c:when test="${vo.drState == 0}">
-				<td class="">처리중</td>
-			</c:when>
-			</c:choose>
-			
-		</tr>
-	</c:forEach>
-</c:if>
-	</table>
-	<div id="paging">
-		<c:if test="${startPage > 1 }" >
-			<a href="board-defectreception?p=${startPage-1}">이전</a> </c:if>
-		<c:forEach begin="${startPage }" end="${endPage }" step="1" var="i">
-			<a href="board-defectreception?p=${i}">${i}</a>
-		</c:forEach>
-		<c:if test="${endPage < pageCount }">
-			<a href="board-defectreception?p=${endPage+1}">다음</a> </c:if>
-	</div>
-		<div id="btnWriteBox">
-			<button type='button' id='btnwrite' onclick='writescript()'>민원 작성</button>
-		</div>
+	<form action="userjoin" method="post">
+<fieldset>
+<legend></legend>
+<ul>
+	<li><label for='userHouseNum'>가구번호</label></li>
+	<!-- 7자리인 이유는 동수 3자리 호수4자리이므로 -->
+	<li><input type="number" name='userHouseNum' maxlength="7" id="userHouseNum" size='7' oninput="maxLengthCheck(this)" required /></li>
+	<span>동호수를 입력해주세요</span>
+	<br>
+	<br>
+	<!-- 일단 기존회원 비밀번호에 조건이 없으므로 정규표현식을 스크립트에 적용하지 않았음-->
+	<li><label for="userPassword">비밀번호</label></li>
+	<li><input type="password" name='userPassword' id="userPassword" minlength="4" maxlength="20" size='20' required /></li>
+	<span>4글자이상 20자 이하로 작성해주세요</span>
+	<br>
+	<br>
+	<li><label for="userPasswordChk">비밀번호 확인</label></li>
+	<li><input type="password" name='userPasswordChk' id="userPasswordChk" minlength="4" maxlength="20" size='20' required /></li>
+	<span>비밀번호와 동일하게 작성해주세요</span>
+	<br>
+	<br>
+	<li><label for='userName'>이름</label></li>
+	<li><input type="text" name='userName' id="userName" maxlength="20" size='20' required /></li>
+	<br>
+	<br>
+	<li><label for='phone'>전화번호</label></li>
+	<li><input type="text" name='phone' id="phone" maxlength="11" placeholder="0*[*]***[*]****" required></li>
+	<br>
+	<br>
+	<li>
+<button>회원가입</button>   
+<button type="reset">취소</button>
+</li>
+</ul>
+</fieldset>
+</form>
 	
 </section>
 </main>
@@ -211,5 +213,39 @@ font-family: 'Noto Sans KR', sans-serif;
   <!-- Template Main JS File -->
   <script src="resources/js/main.js"></script>
 
+<script>
+$("form").submit(function(){
+    var id = $("#userId").val();
+    var name = $("#userName").val();
+
+    if(id == name){
+        alert("아이디와 이름의 값은 일치하면 안됩니다.")
+        return false;
+    }
+    
+    var id = $("#userPassword").val();
+    var name = $("#userPasswordChk").val();
+
+    if(id != name){
+        alert("패스워드와 패스워드 확인값이 일치하지 않습니다.")
+        return false;
+    }
+
+
+    var reg = /^[0][0-9]{1,2}-[0-9]{3,4}-[0-9]{4}$/;
+        var val = $('#phone').val().trim();
+        if(!reg.test(val)){
+            alert("전화번호 형식을 확인하세요");
+            $('#phone').val("");
+            return false;
+        }
+});
+
+function maxLengthCheck(object){
+    if (object.value.length > object.maxLength){
+      object.value = object.value.slice(0, object.maxLength);
+    }    
+  }
+</script>
 </body>
 </html>

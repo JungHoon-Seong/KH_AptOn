@@ -156,20 +156,20 @@ public class ManageDefectreceptionController {
 			@RequestParam(value = "c", defaultValue = "0")String content,
 			@RequestParam(value = "no", defaultValue = "0")int drno,
 			@RequestParam(value = "state")int drState,
-			@RequestParam("image") MultipartFile image,
+			@RequestParam(value="image", required = false) MultipartFile image,
 			HttpServletRequest request) {
 		String viewPage = "error/commonError";
 		
 		int drBoardResult = 0;
-		
-		String imgsrc ="";
-		imgsrc =  googleCloudPlatformUpload(image);
-		System.out.println("이미지 저장주소: " + imgsrc);
+
 
 		if (image == null) {
 			DrBoard bvo = new DrBoard(drno, title, content,drState);
 			drBoardResult = manageDfboardService.updateBoardForceful(bvo);
 		}else if(image != null) {
+			String imgsrc ="";
+			imgsrc =  googleCloudPlatformUpload(image);
+			System.out.println("이미지 저장주소: " + imgsrc);
 			DrBoard bvo = new DrBoard(drno, title, content,drState,imgsrc);
 			drBoardResult = manageDfboardService.updateBoardForcefulwithImg(bvo);
 		}

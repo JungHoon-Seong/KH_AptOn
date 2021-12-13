@@ -1,5 +1,7 @@
 package kh.teamproject.apton.member.model.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +17,10 @@ public class MemberService {
 	
 	public Member login(Member vo) {
 		return memberDao.login(vo);
+	}
+
+	public int insertMember(Member vo) {
+		return memberDao.insertMember(vo);
 	}
 	
 }
