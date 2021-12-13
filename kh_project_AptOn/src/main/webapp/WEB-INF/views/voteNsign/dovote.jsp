@@ -108,23 +108,30 @@ margin-top:0px;
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script>
 
-    console.log(${vo.voteDesc } );
+    //console.log(${vo.voteDesc } );
     $("#votedesc").html(${vo.voteDesc } );
      
 	$(".button1").on("click", function(){
+		 <c:if test="${!empty admin.adminId }">
+		  return alert("관리자는 투표할 수 없습니다.");
+		  </c:if>
 		if(confirm("찬성 하시겠습니까?")){
 			doVote(1);
 		};
 	});
 	$(".button2").on("click", function(){
+		 <c:if test="${!empty admin.adminId }">
+		  return alert("관리자는 투표할 수 없습니다.");
+		  </c:if>
 		if(confirm("반대 하시겠습니까?")){
+
 			doVote(0);
 		};
 	});
 function doVote(yn){
-	console.log(${vo.voteNo });
-	console.log(${member.houseNum });
-	console.log(yn);
+	//console.log(${vo.voteNo });
+	//console.log(${member.houseNum });
+	//console.log(yn);
 	//var jArray = {"voteNo" : ${vo.voteNo }, "houseNum" : ${member.houseNum } , "YN" : yn };
 	$.ajax({
 		url : "dovote.do",

@@ -205,6 +205,9 @@ margin:0;
 
 	// When the user clicks the button, open the modal 
 	btn.onclick = function() {
+	  <c:if test="${!empty admin.adminId }">
+	  return alert("관리자는 서명할 수 없습니다.");
+	  </c:if>
 	  modal.style.display = "block";
 	}
 

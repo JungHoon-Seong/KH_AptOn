@@ -411,7 +411,8 @@ select:hover {border: 1px solid #aaa;} /* 마우스오버 */
     var str3Arr;
 
     function cycle(){
-    	
+    	//option 태그 삭제 후 다시 생성
+    	$("#cycleOption").children().remove();
     $.ajax({
       type: "GET",
       url : "http://openapi.seoul.go.kr:8088/676f6f6569776f6e38374b6756756b/json/bikeList/1160/1190/",
@@ -451,7 +452,7 @@ select:hover {border: 1px solid #aaa;} /* 마우스오버 */
 			break;
 		}
 	}
-    // 세 개 중에 선택하면 정보 보이게
+    // 선택하면 정보 보이게
     $("#cycleOption").on('change', function(){
     	for(var i=0;i<30;i++){
     		if(cycleData[i]['stationName'].includes($.trim($("#cycleOption option:selected").val()))){
@@ -498,16 +499,26 @@ select:hover {border: 1px solid #aaa;} /* 마우스오버 */
       success : function(data){
         var len = (data)['errorMessage']['total'];
         console.log((data)['errorMessage']['total']);
-        for(var i=0;i<len;i++){
+        var subtxt = "";
+        var a = 0;
+        for(var i=0;i<len-1;i++){
           //console.log(JSON.stringify(data['realtimeArrivalList'][i]));
-          $("#subwayup").text(data['realtimeArrivalList'][i]['recptnDt']);
+          //console.log(i);
+          //console.log(data['realtimeArrivalList'][i]['recptnDt']);
+          
+          if(i>0 && data['realtimeArrivalList'][i-1]['recptnDt'] > data['realtimeArrivalList'][i]['recptnDt']){
+          	$("#subwayup").text(data['realtimeArrivalList'][i-1]['recptnDt']);
+          } else{
+        	$("#subwayup").text(data['realtimeArrivalList'][i]['recptnDt']);  
+          }
           var min = Math.round(data['realtimeArrivalList'][i]['barvlDt']/60);
-          $("#openData4").html(
-        		 (i+1)+". " + data['realtimeArrivalList'][i]['trainLineNm'] + " "+
-        		  "<b>"+min+"분</b> 후 도착<br>"
-        		  
-        		  );
+          
+          subtxt += (i+1)+". " + data['realtimeArrivalList'][i]['trainLineNm'] + " "+
+		  "<b>"+min+"분</b> 후 도착<br>";
+		  a++;
         }
+        
+          $("#openData4").html(subtxt);
 
       }
     }); // ajax

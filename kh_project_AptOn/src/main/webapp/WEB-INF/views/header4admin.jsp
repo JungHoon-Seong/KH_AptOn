@@ -39,10 +39,11 @@
   <div>
     <ul>
 		<li class="sidedroplist">
-           <a class="dropdown" onclick="dropdown();">공지사항</a>
+           <a class="dropdown" onclick="dropdown();">공지사항/일정</a>
             <ul class="hide">
                 <li><a href="adnoticelist">공지사항 목록</a></li>
                 <li><a href="noticeinsert" class="submenu">공지사항 등록</a></li>
+                <li><a href="admincalendarlist" class="submenu">일정관리</a></li>
             </ul>
         </li>
     </ul>
