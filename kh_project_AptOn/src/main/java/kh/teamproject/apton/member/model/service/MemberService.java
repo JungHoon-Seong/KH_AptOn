@@ -22,5 +22,9 @@ public class MemberService {
 	public int insertMember(Member vo) {
 		return memberDao.insertMember(vo);
 	}
+
+	public Member idChk(long idParam) {
+		return memberDao.idChk(idParam);
+	}
 	
 }

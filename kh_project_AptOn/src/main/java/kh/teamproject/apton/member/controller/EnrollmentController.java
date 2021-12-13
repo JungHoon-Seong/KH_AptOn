@@ -4,8 +4,9 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
+import java.util.HashMap;
 import java.util.List;
-
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -31,6 +33,7 @@ import com.google.cloud.storage.Storage;
 import com.google.cloud.storage.Storage.BlobTargetOption;
 import com.google.cloud.storage.Storage.PredefinedAcl;
 import com.google.cloud.storage.StorageOptions;
+import com.google.gson.Gson;
 
 
 @Controller
@@ -87,7 +90,43 @@ public class EnrollmentController {
 		}
 		mv.setViewName(viewPage);
 		
+				
+		
 		return mv;
+	}
+	
+	@RequestMapping(value = "idchk", method = RequestMethod.POST)
+	@ResponseBody
+	public int idchk(ModelAndView mv, 
+			@RequestParam(value = "userHousenum", required = false)long houseNumParam,
+			HttpServletResponse response) {
+		int result = 0;
+
+		try {
+		
+			
+			Member vo = new Member(houseNumParam);
+			vo = memberService.idChk(houseNumParam);
+			
+			System.out.println("컨트롤단 결과:"+ vo);
+					if (vo == null) {
+						System.out.println("사용 가능한 가구번호입니다.");
+						result = 1;
+
+						
+					}else {
+						System.out.println("이미 존재하는 가구번호입니다.");
+						result = 0;
+					}
+					
+					
+
+					
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+		
 	}
 		
 	

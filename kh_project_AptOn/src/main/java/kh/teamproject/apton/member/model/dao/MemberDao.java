@@ -19,4 +19,8 @@ public class MemberDao {
 	public int insertMember(Member vo) {
 		return sqlSession.insert("Member.insertMember",vo);
 	}
+
+	public Member idChk(long idParam) {
+		return sqlSession.selectOne("Member.idChk",idParam);
+	}
 }

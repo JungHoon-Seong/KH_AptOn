@@ -46,6 +46,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+<script src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
 
 <style>
 header{
@@ -160,18 +161,21 @@ input[type="number"]::-webkit-inner-spin-button {
 <ul>
 	<li><label for='userHouseNum'>가구번호</label></li>
 	<!-- 7자리인 이유는 동수 3자리 호수4자리이므로 -->
-	<li><input type="number" name='userHouseNum' maxlength="7" id="userHouseNum" size='7' oninput="maxLengthCheck(this)" required /></li>
+	<li>
+		<input type="number" name='userHouseNum' maxlength="7" id="userHouseNum" size='7' oninput="maxLengthCheck(this)" required /> 
+		<font id = "idChkText" size ="2"></font>	
+	</li>
 	<span>동호수를 입력해주세요</span>
 	<br>
 	<br>
 	<!-- 일단 기존회원 비밀번호에 조건이 없으므로 정규표현식을 스크립트에 적용하지 않았음-->
 	<li><label for="userPassword">비밀번호</label></li>
-	<li><input type="password" name='userPassword' id="userPassword" minlength="4" maxlength="20" size='20' required /></li>
+	<li><input type="password" name='userPassword' id="userPassword" minlength="4" maxlength="20" size='20' required autocomplete="off"/></li>
 	<span>4글자이상 20자 이하로 작성해주세요</span>
 	<br>
 	<br>
 	<li><label for="userPasswordChk">비밀번호 확인</label></li>
-	<li><input type="password" name='userPasswordChk' id="userPasswordChk" minlength="4" maxlength="20" size='20' required /></li>
+	<li><input type="password" name='userPasswordChk' id="userPasswordChk" minlength="4" maxlength="20" size='20' required autocomplete="off"/></li>
 	<span>비밀번호와 동일하게 작성해주세요</span>
 	<br>
 	<br>
@@ -246,6 +250,31 @@ function maxLengthCheck(object){
       object.value = object.value.slice(0, object.maxLength);
     }    
   }
+  
+  $('#userHouseNum').focusout(function(){
+	  
+	  var userHousenum = $('#userHouseNum').val(); // 입력한 가구번호
+	  
+	  $.ajax({
+		  url : "idchk",
+		  type : "POST",
+		  data : {userHousenum : userHousenum},
+		  success : function(result){
+			  //console.log("결과는?" + result);
+			  if(result == 1){
+				  $("#idChkText").html('사용할 수 있는 가구번호입니다.');
+				  $("#idChkText").attr('color','green');
+			  } else{
+				  $("#idChkText").html('사용할 수 없는 가구번호입니다.');
+				  $("#idChkText").attr('color','red');
+			  }
+		  },
+		  error : function( request, status, error ){
+			  console.log("status : " + request.status + ", message : " + request.responseText + ", error : " + error);
+			  //alert("서버요청실패");
+		  }
+	  })
+  })
 </script>
 </body>
 </html>

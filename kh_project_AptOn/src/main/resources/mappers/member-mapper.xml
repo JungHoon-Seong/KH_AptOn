@@ -27,8 +27,13 @@
 		select member_sign from member where house_num = #{houseNum}
 	</select>
 	
+	<!-- 회원 가입 쿼리문 작성 by SJH 2021.12.13-->
 	<insert id="insertMember" parameterType="Member" statementType="PREPARED">
 		INSERT INTO MEMBER VALUES(#{houseNum}, #{pwd}, #{name} , #{phone}, null)
 	</insert>
+	<!-- 아이디 체크 쿼리문 작성 by SJH 2021.12.13-->
+	<select id="idChk" resultMap="MemberMap" parameterType="Member"> 
+		SELECT house_num FROM MEMBER WHERE house_num = #{houseNum}
+	</select>
 
 </mapper>

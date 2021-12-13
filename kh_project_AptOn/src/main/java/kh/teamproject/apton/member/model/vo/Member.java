@@ -47,6 +47,10 @@ public class Member {
 	}
 
 
+	public Member(long houseNumParam) {
+		this.houseNum = houseNumParam;
+	}
+
 	public long getHouseNum() {
 		return houseNum;
 	}
