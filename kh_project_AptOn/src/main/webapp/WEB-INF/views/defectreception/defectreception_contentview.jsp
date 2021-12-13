@@ -194,11 +194,13 @@ font-family: 'Noto Sans KR', sans-serif;
 	</table>
 		<div>
 		</div>
-	<!-- SJH TODO 회원 세션과 houseno id가 같을 경우만 보이도록 보완필요 -->
+	<!-- 회원 세션과 houseno id가 같을 경우만 보이도록 적용함 -->
+	<c:if test="${vo.houseNo eq  memberId}" >
 		<div id="btnBox">
 			<button type="button" id="btnUpdate" onclick="btnUpdate()">수정</button>
 			<button type="button" id="btnDelete" onclick="btnDelete()">삭제</button>
 		</div>
+	</c:if>
 		<script>
 			function btnUpdate(){
 				location.href="./update-defectreception?no=${vo.drNo}";

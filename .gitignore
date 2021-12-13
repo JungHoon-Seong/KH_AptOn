@@ -12,6 +12,9 @@ apton.properties
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 
+# UML folder
+UML/
+
 # Package Files #
 *.jar
 *.war

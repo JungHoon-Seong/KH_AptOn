@@ -20,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import com.google.api.client.util.Value;
 
+import kh.teamproject.apton.admin.model.vo.Admin;
 import kh.teamproject.apton.defectreception.model.vo.DrBoard;
 import kh.teamproject.apton.defectreception.service.BoardDefectreceptionService;
 import kh.teamproject.apton.member.model.vo.Member;
@@ -51,14 +52,15 @@ public class BoardDefectreceptionController {
 		String viewPage = "error/commonError"; //기본페이지 에러페이지로 동일하게 설정함
 		
 		Member member = (Member)request.getSession().getAttribute("member");
-		
+//		Admin admin = (Admin) request.getSession().getAttribute("admin");
 		//회원로그인 확인 조건문
+//		if((member == null) && (admin == null)) {
 		if(member == null) {
 			response.setContentType("text/html; charset=UTF-8");
 			 
 			PrintWriter out = response.getWriter();
 			 
-			out.println("<script>alert('로그인이 필요합니다'); location.href='./login';</script>");
+			out.println("<script>alert('회원 로그인이 필요합니다'); location.href='./login';</script>");
 			 
 			out.flush();
 		} 
