@@ -150,6 +150,7 @@
           }
           calendar.unselect()
         },
+
         //이벤트 
         events: [
 		<c:forEach var="calendar" items="${calendar}">
@@ -157,7 +158,9 @@
           {
             title: '${calendar.calendar_title}',
             start: '${calendar.calendar_startdate}',
-            end:'${calendar.calendar_enddate}'
+            end:'${calendar.calendar_enddate}',
+           
+            
           },
 		</c:forEach>
         ]

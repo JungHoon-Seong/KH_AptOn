@@ -8,11 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import kh.teamproject.apton.admin.notice.vo.Notice;
 import kh.teamproject.apton.calendar.model.service.CalendarServicelmpl;
 import kh.teamproject.apton.calendar.model.vo.Calendar;
 
@@ -86,24 +84,26 @@ public class CalendarController {
 	}
 
 		
-		@RequestMapping(value = "calendarinsert", method = RequestMethod.POST)
-		@ResponseBody
-		public String insertcalendar(String msg, HttpServletRequest request) {
-			String calendartitle = request.getParameter("calendartitle");
-			String adminId = request.getParameter("adminId");
-			String startdate = request.getParameter("calendarStartDate");
-			String enddate = request.getParameter("calendarenddate");
+	@RequestMapping(value = "calendarinsert", method = RequestMethod.POST)
+	@ResponseBody
+	public String insertcalendar(String msg, HttpServletRequest request) {
+		String calendartitle = request.getParameter("calendartitle");
+		String adminId = request.getParameter("adminId");
+		String startdate = request.getParameter("calendarStartDate");
+		String enddate = request.getParameter("calendarenddate");
 			
 
 
-			System.out.println("calendartitle: " + calendartitle);
-			System.out.println("adminId= "+ adminId);
-			System.out.println("startdate= " + startdate);
-			System.out.println("enddate= " + enddate);
+		System.out.println("calendartitle: " + calendartitle);
+		System.out.println("adminId= "+ adminId);
+		System.out.println("startdate= " + startdate);
+		System.out.println("enddate= " + enddate);
 		
+					
+
 			try {
-//				Notice vo = new Notice( adminId, noticetitle ,content);
-//				int result = noticeService.NoticeInsert(vo);
+				Calendar vo = new Calendar(adminId, calendartitle ,startdate,enddate);
+				int result = calendarservice.insertCalendar(vo);
 				msg = "success";
 			} catch (Throwable e) {
 				e.printStackTrace();

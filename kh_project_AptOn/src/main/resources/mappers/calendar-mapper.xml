@@ -20,7 +20,7 @@
 	
 	<insert id="insertCalendar" parameterType="Calendar">
 	<![CDATA[
-	Insert Into CALENDAR values (CALENDAR_seq.NEXTVAL,#{admin_id},#{calendar_title},#{calendar_startdate},#{calendar_enddate});
+	Insert Into CALENDAR values (CALENDAR_seq.NEXTVAL,#{admin_id},#{calendar_title},#{calendar_startdate},#{calendar_enddate})
 	 ]]>
 	</insert>
 	

@@ -182,7 +182,7 @@ width:600px;
 		  showButtonPanel: true, 
 		  currentText: '오늘 날짜', 
 		  closeText: '닫기', 
-		  dateFormat: "yy/mm/dd", 
+		  dateFormat: "yy-mm-dd", 
 		  showAnim: "slide", 
 		  showMonthAfterYear: true, 
 		  dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'], 
@@ -253,6 +253,7 @@ function insertdata(){
 		type : "post",
 		success : function(msg){
 			alert("등록되었습니다.");
+			opener.parent.location.reload();
 			window.close();  
 		},
 		error : function(request, status, errorData){
