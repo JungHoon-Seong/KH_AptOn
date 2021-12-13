@@ -17,4 +17,8 @@ public class GenerationService {
 	public List<Generation> select(long house_num) {
 		return generationDao.selectOne(house_num);
 	}
+	
+	public Generation genCost(Generation vo) {
+		return generationDao.genCost(vo);
+	}
 }

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@page import="kh.teamproject.apton.generation.model.vo.Generation" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -41,7 +42,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
-
+<%Generation vo = (Generation) request.getAttribute("gener");%>
 <style>
 #cost_section {
 	padding-top: 70px;
@@ -76,15 +77,15 @@ footer {
 
         var data = google.visualization.arrayToDataTable([
           ['Task', '에너지 사용량'],
-          ['전기',   3],
-          ['수도',      2],
-          ['온수',  2],
-          ['난방', 2],
-          ['가스',    7]
+          ['전기', ${gener.eElec}],
+          ['수도', ${gener.eWater}],
+          ['온수', ${gener.eHotWater}],
+          ['난방', ${gener.eHeation}],
+          ['가스', ${gener.eGas}]
         ]);
 
         var options = {
-          title: 'My Daily Activities'
+          title: '에너지 사용량'
         };
 
         var chart = new google.visualization.PieChart(document.getElementById('piechart'));
@@ -99,7 +100,10 @@ footer {
 		<section id="cost_section">
 			<div id="nav">
 				<h1>에너지 사용량 조회</h1>
-				 ${gener}
+				<%String date = vo.geteDate();
+				String ym = date.substring(0, 7);%>
+				<h3><%= ym %></h3>
+				
 			</div>
 		</section>
 	</main>

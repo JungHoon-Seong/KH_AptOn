@@ -17,4 +17,10 @@ public class GenerationDao {
 	public List<Generation> selectOne(long house_num) {
 		return sqlSession.selectList("Generation.selectOne",house_num);
 	}
+	
+	public Generation genCost(Generation vo) {
+		return sqlSession.selectOne("Generation.genCost", vo);
+	}
+
+	
 }

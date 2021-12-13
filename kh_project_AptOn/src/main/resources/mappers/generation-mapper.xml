@@ -16,8 +16,14 @@
 		<select id="selectOne" parameterType="Generation" resultMap="GenerationMap">
 		<![CDATA[
 			select * from generation_usage
-			where house_num = #{house_num}
+			where house_num = #{houseNum}
 		]]>
 		</select>
 		
+		<select id="genCost" parameterType="Generation" resultMap="GenerationMap">
+		<![CDATA[
+			select * from generation_usage
+			where house_num = #{houseNum} and e_date = to_date(#{eDate},'yyyymmdd')
+			]]>
+		</select>
 </mapper>

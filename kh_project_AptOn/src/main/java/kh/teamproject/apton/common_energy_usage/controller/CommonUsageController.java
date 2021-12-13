@@ -1,7 +1,9 @@
 package kh.teamproject.apton.common_energy_usage.controller;
  
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -25,8 +27,14 @@ public class CommonUsageController {
 
 	@RequestMapping(value = "allcost", method = RequestMethod.GET)
 	public ModelAndView comUsage(ModelAndView mv, HttpServletRequest request, Model model) {
+		// 현재 날짜를 년 월 가져오기
+		Date today = new Date();
+		SimpleDateFormat formate = new SimpleDateFormat("yyyyMM");
+		String date = formate.format(today);
+		System.out.println("현재 날짜 값 -- >" +date);
 		String viewpage = "";
 		String msg = null;
+		
 		HttpSession session = request.getSession(false);
 		if(session == null) {
 			msg = "로그인 후 이용하세요.";
@@ -36,32 +44,29 @@ public class CommonUsageController {
 			return mv;
 		} else if(session != null) {
 			
+		String cost_numStr = date + "17";
+		int cost_numInt = Integer.parseInt(cost_numStr);
+		System.out.println("스트링형 들어오는 현재 날짜와 월 --> "+cost_numStr);
+		System.out.println("인트형  들어오는 현재 날짜와 월--> "+cost_numInt );
 		
-		int cost_num = 20210217;
-		String yearStr = String.valueOf(cost_num);
-		String year = yearStr.substring(0,4);
-		String yearMonth = yearStr.substring(4,6);
-		System.out.println("몇월인지 확인 --> "+ yearMonth);
+		String year = date.substring(0,4);
+		String month = date.substring(4,6);
+		System.out.println("몇월인지 확인 --> "+ month);
 		
 		int lastCost_num = 0;
-		if(yearMonth == "01") {
-			lastCost_num = cost_num - 8900;
+		if(month == "01") {
+			lastCost_num = cost_numInt - 8900;
 		} else {
-			lastCost_num = cost_num - 100;
+			lastCost_num = cost_numInt - 100;
 		}
-		String month = yearStr.substring(4,6);
-		int yearInt = cost_num/10000;
+		int yearInt = cost_numInt/10000;
 		System.out.println("년도 --> " + year);
 		System.out.println("월 --> " + month);
-		System.out.println("테스트 년도 int 형 --> "+ yearInt);
-		System.out.println("cost num 테스트 ==> "+cost_num);
-//		String date = "2021";
-//		List<CommonUsage> vo = new ArrayList<CommonUsage>();
-//		ArrayList<CommonUsage> vo = new ArrayList<CommonUsage>();
+		
 		CommonUsage vo = new CommonUsage();
 		CommonUsage lastMonthVo = new CommonUsage();
 		
-		vo = cUService.selecet(cost_num);
+		vo = cUService.selecet(cost_numInt);
 		lastMonthVo = cUService.selecet(lastCost_num);
 		
 		List<CommonUsage> list = new ArrayList<CommonUsage>();

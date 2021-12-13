@@ -1,10 +1,12 @@
 package kh.teamproject.apton.generation.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.text.ParseException;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import jdk.nashorn.internal.ir.RuntimeNode.Request;
+
 import kh.teamproject.apton.generation.model.service.GenerationService;
 import kh.teamproject.apton.generation.model.vo.Generation;
 import kh.teamproject.apton.member.model.vo.Member;
@@ -26,9 +28,18 @@ public class GenerationController {
 	
 	@RequestMapping(value = "generation", method = RequestMethod.GET)
 	public ModelAndView genrationUsage(ModelAndView mv, HttpServletRequest request, Model model) {
+		Date today = new Date();
+		Date test = null;
+		SimpleDateFormat formate = new SimpleDateFormat("yyyyMM");
+		SimpleDateFormat formate1 = new SimpleDateFormat("yyyymmdd");
+		
+		String date = formate.format(today);
+		System.out.println("현재 날짜 값 -- >" +date);
+		System.out.println(today);
 		String viewpage = "";
 		String msg = null;
 		Member member = (Member)request.getSession().getAttribute("member");
+		// 로그인하지 않으면 볼 수 없음
 		if(member == null) {
 			msg = "로그인 후 이용하세요";
 			viewpage = "login";
@@ -37,9 +48,36 @@ public class GenerationController {
 			return mv;
 		} else {
 			long house_num = member.getHouseNum();
+			String dateStr = date+"17";
+			
+			try {
+				test = formate1.parse(dateStr);
+			}catch(ParseException e) {
+				e.printStackTrace();
+			}
+			
+			
+			System.out.println("현재 날짜 -->"+ dateStr);
 			System.out.println("세션 id 확인 --> "+ house_num);
-			List<Generation> vo = new ArrayList<Generation>();
-			vo = gService.select(house_num);
+			System.out.println(test);
+			List<Generation> volist = new ArrayList<Generation>();
+			Generation vo = new Generation();
+			volist = gService.select(house_num);
+			vo.setHouseNum(house_num);
+			vo.seteDate(dateStr);
+			System.out.println("vo 확인 !!!!!!!!!!!!!!!!!!"+vo);
+			vo = gService.genCost(vo);
+			System.out.println("volist 0번째 날짜 --> " + volist.get(0).geteDate());
+			
+//			for(int i=0; i<volist.size(); i++) {
+//				if(volist.get(i).geteDate() == dateStr) {
+//					System.out.println("날짜 매칭 성공!!");
+//					vo = volist.get(i);
+//					System.out.println("volist get i --> "+volist.get(i));
+//					mv.addObject("gener", vo);
+//				} else {}
+//			}
+			System.out.println(volist);
 			System.out.println("에너지 사용량 값 조회--> " + vo);
 			viewpage = "generation/generation";
 			mv.setViewName(viewpage);
@@ -48,25 +86,5 @@ public class GenerationController {
 		
 		return mv;
 	}
-//	@RequestMapping(value = "generation", method = RequestMethod.GET)
-//	public ModelAndView generation(ModelAndView mv, HttpServletRequest request) {
-//		String viewpage = "";
-//		HttpSession session = request.getSession(false);
-//		if(session == null) {
-//			viewpage = "login";
-//			mv.setViewName(viewpage);
-//			return mv;
-//		} else {
-//			Member vo = (Member) session.getAttribute("member");
-//			long house_num = vo.getHouseNum();
-//			Generation gVo = new Generation();
-//			gVo = gService.select(house_num);
-//			System.out.println("여기는 에너지 전체 -->  "+gVo);
-//			viewpage = "generation/generation";
-//			mv.setViewName(viewpage);
-//			mv.addObject("generation", gVo);
-//		}
-//		
-//		return mv;
-//	}
+
 }

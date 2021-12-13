@@ -19,11 +19,11 @@ public class Generation {
 	private int eHotWater;
 	private int eHeation;
 	private int eGas;
-	private Date eDate;
+	private String eDate;
 	
 	public Generation() {}
 	
-	public Generation(int eNo, long houseNum, int eElec, int eWater, int eHotWater, int eHeation, int eGas, Date eDate) {
+	public Generation(int eNo, long houseNum, int eElec, int eWater, int eHotWater, int eHeation, int eGas, String eDate) {
 		super();
 		this.eNo = eNo;
 		this.houseNum = houseNum;
@@ -83,10 +83,10 @@ public class Generation {
 	public void seteGas(int eGas) {
 		this.eGas = eGas;
 	}
-	public Date geteDate() {
+	public String geteDate() {
 		return eDate;
 	}
-	public void seteDate(Date eDate) {
+	public void seteDate(String eDate) {
 		this.eDate = eDate;
 	}
 	
