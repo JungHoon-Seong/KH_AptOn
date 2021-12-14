@@ -9,4 +9,11 @@ public interface CalendarServicelmpl {
 	public List<Calendar> getCalendar() throws Exception;
 	
 	public int insertCalendar(Calendar vo) throws Exception;
+	
+	public List<Calendar> selectCalendarView(int Calendarnum) throws Exception;
+	
+	public int deleteCalendar(int calendarnum) throws Exception;
+	
+	public int updateCalendar(Calendar vo) throws Exception;
+
 }

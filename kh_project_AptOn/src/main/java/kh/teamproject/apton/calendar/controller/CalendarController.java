@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -111,5 +112,76 @@ public class CalendarController {
 			return msg;
 		}
 
+//	// 일정 상세 팝업창 
+//	@RequestMapping(value = "calendar-detail", method = RequestMethod.GET)
+//	public String calendardetail() {
+//
+//		return "calendar/calendardetail";
+//	}
+	
+	
+	@RequestMapping(value = "calendar-detail", method = RequestMethod.GET)
+	public ModelAndView selectCalendarView(ModelAndView mv, @RequestParam(value="no" , defaultValue = "0")int calendar_num ) {
+		String viewPage = "error/commonError"; //기본페이지 에러페이지로 동일하게 설정함
+		
+		System.out.println("일정 번호: ->"+ calendar_num);
+		List<Calendar> calendarlist = null;
+		try {
+			calendarlist = calendarservice.selectCalendarView(calendar_num);
+			viewPage= "calendar/calendardetail";
+		} catch (Exception e) {
+			viewPage= "error/commonError";
+			mv.addObject("msg" , "게시판 오류 발생");
+			mv.addObject("url" , "index");
+			e.printStackTrace();
+		}
+		System.out.println("admin_calendardetail: -->"+calendarlist);
+		mv.addObject("calendarlist",calendarlist);
+		mv.setViewName(viewPage);
+		return mv;
+	}
+	
+	//일정 삭제
+	@RequestMapping(value = "calendardelete", method = RequestMethod.POST)
+	@ResponseBody
+	public String deletecalendar(String msg, HttpServletRequest request) {
+		int calendarnum = Integer.parseInt(request.getParameter("calendarnum"));
 
+		System.out.println("calendarnum: " + calendarnum);
+			try {
+				Calendar vo = new Calendar(calendarnum);
+				int result = calendarservice.deleteCalendar(calendarnum);
+				msg = "success";
+			} catch (Throwable e) {
+				e.printStackTrace();
+			}
+			return msg;
+		}
+	
+	//일정 수정
+	@RequestMapping(value = "updatecalendar", method = RequestMethod.POST)
+	@ResponseBody
+	public String updatecalendar(String msg, HttpServletRequest request) {
+		int calendarnum = Integer.parseInt(request.getParameter("calendarnum"));
+		String calendartitle = request.getParameter("calendartitle");
+		String adminId = request.getParameter("adminId");
+		String startdate = request.getParameter("calendarStartDate");
+		String enddate = request.getParameter("calendarenddate");
+			
+
+		System.out.println("calendarnum: " + calendarnum);
+		System.out.println("calendartitle: " + calendartitle);
+		System.out.println("adminId= "+ adminId);
+		System.out.println("startdate= " + startdate);
+		System.out.println("enddate= " + enddate);
+		
+			try {
+				Calendar vo = new Calendar(calendarnum,adminId, calendartitle ,startdate,enddate);
+				int result = calendarservice.updateCalendar(vo);
+				msg = "success";
+			} catch (Throwable e) {
+				e.printStackTrace();
+			}
+			return msg;
+		}	
 }

@@ -31,4 +31,20 @@ public class CalendarDao {
 		System.out.println("dao값: " + vo);
 		return sqlSession.insert("Calendar.insertCalendar", vo);
 	}
+	
+	public List<Calendar> selectCalendarView(int calendar_num) throws Exception  {
+		System.out.println("dao값: " + calendar_num);
+		return sqlSession.selectList("Calendar.selectCalendarView", calendar_num);
+	}
+	
+	public int deleteCalendar(int calendarnum) throws Exception{
+		System.out.println("삭제dao값: " + calendarnum);
+		return sqlSession.delete("Calendar.deleteCalendar", calendarnum);
+	}
+	
+	public int updateCalendar(Calendar vo) throws Exception{
+		System.out.println("수정dao값: " + vo);
+		return sqlSession.update("Calendar.updateCalendar", vo);
+	}
+	
 }

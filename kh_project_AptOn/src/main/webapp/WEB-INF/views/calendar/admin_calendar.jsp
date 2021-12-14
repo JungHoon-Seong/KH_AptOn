@@ -96,8 +96,8 @@
       var calendar = new FullCalendar.Calendar(calendarEl, {
         height: '700px', // calendar 높이 설정
         expandRows: true, // 화면에 맞게 높이 재설정
-        slotMinTime: '08:00', // Day 캘린더에서 시작 시간
-        slotMaxTime: '20:00', // Day 캘린더에서 종료 시간
+        //slotMinTime: '08:00', // Day 캘린더에서 시작 시간
+       // slotMaxTime: '20:00', // Day 캘린더에서 종료 시간
         // 해더에 표시할 툴바
         headerToolbar: {
           left: 'prev,next today',
@@ -128,6 +128,7 @@
         selectable: false, // 달력 일자 드래그 설정가능
         nowIndicator: true, // 현재 시간 마크
         dayMaxEvents: true, // 이벤트가 오버되면 높이 제한 (+ 몇 개식으로 표현)
+        displayEventTime: false, // 시간 표시 x
         locale: 'ko', // 한국어 설정
         eventAdd: function(obj) { // 이벤트가 추가되면 발생하는 이벤트
           console.log(obj);
@@ -145,7 +146,7 @@
               title: title,
               start: arg.start,
               end: arg.end,
-              allDay: arg.allDay
+              //allDay: arg.allDay
             })
           }
           calendar.unselect()
@@ -158,12 +159,30 @@
           {
             title: '${calendar.calendar_title}',
             start: '${calendar.calendar_startdate}',
-            end:'${calendar.calendar_enddate}',
-           
+            end:'${calendar.calendar_enddate}T23:59:00',
+           	url:'./calendar-detail?no=${calendar.calendar_num}'
             
           },
 		</c:forEach>
-        ]
+        ],
+        
+        eventClick: function(event) {
+        	 var popupWidth = 600;
+             var popupHeight = 350;
+
+  		 var popupX = (window.screen.width / 2) - (popupWidth / 2);
+ 		// 만들 팝업창 width 크기의 1/2 만큼 보정값으로 빼주었음
+
+ 		 var popupY= (window.screen.height / 2) - (popupHeight / 2);
+        	event.jsEvent.preventDefault();
+            if (event.event.url) {
+                window.open(event.event.url,'','status=no, height=' + popupHeight  + ', width=' + popupWidth  + ', left='+ popupX + ', top='+ popupY);
+                return false;
+            }
+        },
+
+
+
       });
       // 캘린더 랜더링
       calendar.render();

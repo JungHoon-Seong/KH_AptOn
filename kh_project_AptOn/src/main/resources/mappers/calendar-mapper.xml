@@ -24,4 +24,22 @@
 	 ]]>
 	</insert>
 	
+		<select id="selectCalendarView" resultMap="CalendarMap">
+		<![CDATA[
+		select calendar_num,admin_id,calendar_title,calendar_startdate,calendar_enddate from calendar WHERE calendar_num = #{calendar_num}
+		]]>
+	</select>
+	
+	
+	<select id="deleteCalendar" parameterType="Calendar" resultType="_int">
+	
+		delete from CALENDAR where calendar_num = #{calendar_num}
+	
+	</select>
+	
+	 <update id="updateCalendar" parameterType="Calendar" >
+
+	UPDATE Calendar SET calendar_title = #{calendar_title} , calendar_startdate = #{calendar_startdate}, calendar_enddate = #{calendar_enddate} WHERE calendar_num = #{calendar_num} 
+	 
+	</update> 
 </mapper>

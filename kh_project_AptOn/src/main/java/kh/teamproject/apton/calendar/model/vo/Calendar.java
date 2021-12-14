@@ -12,6 +12,21 @@ public class Calendar {
 		
 	}
 	
+	public Calendar(int calendar_num, String admin_id, String calendar_title, String calendar_startdate,
+			String calendar_enddate) {
+		super();
+		this.calendar_num = calendar_num;
+		this.admin_id = admin_id;
+		this.calendar_title = calendar_title;
+		this.calendar_startdate = calendar_startdate;
+		this.calendar_enddate = calendar_enddate;
+	}
+
+	public Calendar(int calendar_num) {
+		super();
+		this.calendar_num = calendar_num;
+	}
+
 	public Calendar(String admin_id, String calendar_title, String calendar_startdate, String calendar_enddate) {
 		super();
 		this.admin_id = admin_id;
