@@ -57,51 +57,7 @@
 
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-<script type="text/javascript">
-$(function() {
-	function changeSelection(){
-		var select = $("#year").val();
-		console.log(select);
-	}
-	$("#year").on("change", changeSelection);
-});
 
-	google.charts.load('current', {
-		'packages' : [ 'bar' ]
-	});
-	google.charts.setOnLoadCallback(drawChart);
-	var count = 0;
-	var data;
-	var chart;
-	var options;
-	
-	function drawChart() {
-		data = google.visualization.arrayToDataTable([
-				[ '공동관리비 총 금액', '작년', '올해' ], 
-				[ '1월', ${lastyear[0].price}, ${allPrice[0].price} ],
-				[ '2월', ${lastyear[1].price}, ${allPrice[1].price}], 
-				[ '3월', ${lastyear[2].price}, ${allPrice[2].price}],
-				[ '4월', ${lastyear[3].price}, ${allPrice[3].price} ], 
-				[ '5월', ${lastyear[4].price}, ${allPrice[4].price} ],
-				[ '6월', ${lastyear[5].price}, ${allPrice[5].price} ], 
-				[ '7월', ${lastyear[6].price}, ${allPrice[6].price} ], 
-				[ '8월', ${lastyear[7].price}, ${allPrice[7].price} ],
-				[ '9월', ${lastyear[8].price}, ${allPrice[8].price} ], 
-				[ '10월', ${lastyear[9].price}, ${allPrice[9].price} ], 
-				[ '11월', ${lastyear[10].price}, ${allPrice[10].price} ], 
-				[ '12월', ${lastyear[11].price}, ${allPrice[11].price} ] ]);
-			options = {
-				chart : {
-					title : '2021년 관리비 총액',
-					subtitle : '',
-				}
-			};
-		
-		chart = new google.charts.Bar(document
-				.getElementById('columnchart_material'));
-		chart.draw(data, google.charts.Bar.convertOptions(options));
-	}
-</script>
 
 <style>
 #contentsection{
@@ -259,21 +215,49 @@ th, td {
 			</table>
 		</div>
 		<div>
-			<select name="year" id="year" onchange="javascript:changeSelection(this)">
-				<option value="2019">2019</option>
-				<option value="2020">2020</option>
-				<option value="2021">2021</option>
-			</select>
+			
 		</div>
-		
 		<div id="columnchart_material"></div>
-
 	</div>
 </section>
 </main>
 </body>
-<script>
-
+<script type="text/javascript">
+	google.charts.load('current', {
+		'packages' : [ 'bar' ]
+	});
+	google.charts.setOnLoadCallback(drawChart);
+	var count = 0;
+	var data;
+	var chart;
+	var options;
+	
+	function drawChart() {
+		data = google.visualization.arrayToDataTable([
+				[ '공동관리비 총 금액', '작년', '올해' ], 
+				[ '1월', ${lastyear[0].price}, ${allPrice[0].price} ],
+				[ '2월', ${lastyear[1].price}, ${allPrice[1].price}], 
+				[ '3월', ${lastyear[2].price}, ${allPrice[2].price}],
+				[ '4월', ${lastyear[3].price}, ${allPrice[3].price} ], 
+				[ '5월', ${lastyear[4].price}, ${allPrice[4].price} ],
+				[ '6월', ${lastyear[5].price}, ${allPrice[5].price} ], 
+				[ '7월', ${lastyear[6].price}, ${allPrice[6].price} ], 
+				[ '8월', ${lastyear[7].price}, ${allPrice[7].price} ],
+				[ '9월', ${lastyear[8].price}, ${allPrice[8].price} ], 
+				[ '10월', ${lastyear[9].price}, ${allPrice[9].price} ], 
+				[ '11월', ${lastyear[10].price}, ${allPrice[10].price} ], 
+				[ '12월', ${lastyear[11].price}, ${allPrice[11].price} ] ]);
+			options = {
+				chart : {
+					title : '2021년 관리비 총액',
+					subtitle : '',
+				}
+			};
+		
+		chart = new google.charts.Bar(document
+				.getElementById('columnchart_material'));
+		chart.draw(data, google.charts.Bar.convertOptions(options));
+	}
 </script>
 
 </html>

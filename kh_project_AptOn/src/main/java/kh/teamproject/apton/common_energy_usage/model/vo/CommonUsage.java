@@ -4,7 +4,7 @@ import java.sql.Date;
 
 import org.springframework.stereotype.Component;
 
-//MAINTENANCE_COST   NOT NULL NUMBER 공동 관리비 번호
+//common_cost_num   NOT NULL NUMBER 공동 관리비 번호
 //M_COST             NOT NULL NUMBER 일반 관리비
 //CLEAN_COST         NOT NULL NUMBER 청소비
 //SECU_COST          NOT NULL NUMBER 경비비
@@ -19,7 +19,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class CommonUsage {
 
-	private int maintenanceCost;
+	private int commonCostNum;
 	private int mCost;
 	private int cleanCost;
 	private int secuCost;
@@ -34,10 +34,10 @@ public class CommonUsage {
 	public CommonUsage() {
 		
 	}
-	public CommonUsage(int maintenanceCost, int mCost, int cleanCost, int secuCost, int elevatorCost, int disinCost,
+	public CommonUsage(int commonCostNum, int mCost, int cleanCost, int secuCost, int elevatorCost, int disinCost,
 			int comWtCost, int comElCost, Date today, int householdNum, int price) {
 		super();
-		this.maintenanceCost = maintenanceCost;
+		this.commonCostNum = commonCostNum;
 		this.mCost = mCost;
 		this.cleanCost = cleanCost;
 		this.secuCost = secuCost;
@@ -50,11 +50,11 @@ public class CommonUsage {
 		this.price = price;
 	}
 	
-	public int getMaintenanceCost() {
-		return maintenanceCost;
+	public int getCommonCostNum() {
+		return commonCostNum;
 	}
-	public void setMaintenanceCost(int maintenanceCost) {
-		this.maintenanceCost = maintenanceCost;
+	public void setCommonCostNum(int commonCostNum) {
+		this.commonCostNum = commonCostNum;
 	}
 	public int getmCost() {
 		return mCost;
@@ -119,7 +119,7 @@ public class CommonUsage {
 
 	@Override
 	public String toString() {
-		return "CommonUsage [maintenanceCost=" + maintenanceCost + ", mCost=" + mCost + ", cleanCost=" + cleanCost
+		return "CommonUsage [commonCostNum=" + commonCostNum + ", mCost=" + mCost + ", cleanCost=" + cleanCost
 				+ ", secuCost=" + secuCost + ", elevatorCost=" + elevatorCost + ", disinCost=" + disinCost
 				+ ", comWtCost=" + comWtCost + ", comElCost=" + comElCost + ", today=" + today + ", householdNum="
 				+ householdNum + ", price=" + price + "]";

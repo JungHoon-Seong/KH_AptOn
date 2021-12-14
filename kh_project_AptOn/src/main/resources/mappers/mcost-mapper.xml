@@ -5,7 +5,7 @@
 
 	<resultMap type="Mcost" id="McostMap">
 		<id property="houseNum" column="HOUSE_NUM"/>
-		<result property="maintenanceCost" column="MAINTENANCE_COST"/>
+		<result property="commonCostNum" column="COMMON_COST_NUM"/>
 		<result property="mCost" column="M_COST"/>
 		<result property="cleanCost" column="CLEAN_COST"/>
 		<result property="secuCost" column="SECU_COST"/>
@@ -16,4 +16,11 @@
 		<result property="maintenanceCostDate" column="MAINTENANCE_COST"/>
 		
 	</resultMap>
+	
+	<select id="allcost" parameterType="_int" resultMap="McostMap">
+	<![CDATA[
+		select * from maintenance_cost
+		where house_num = #{houseNum}
+		]]>
+	</select>
 </mapper>

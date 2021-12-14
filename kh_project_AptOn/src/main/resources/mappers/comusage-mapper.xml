@@ -4,7 +4,7 @@
 	<!-- ComUsage ResultMap 생성 by ParkJunyub 2021.11.19 -->
 
 	<resultMap type="ComUsage" id="ComUsageMap">
-		<id property="maintenanceCost" column="MAINTENANCE_COST"/>
+		<id property="commonCostNum" column="COMMON_COST_NUM"/>
 		<result property="mCost" column="M_COST"/>
 		<result property="cleanCost" column="CLEAN_COST"/>
 		<result property="secuCost" column="SECU_COST"/>
@@ -20,7 +20,7 @@
 	<select id ="selectOne" parameterType="_int" resultMap="ComUsageMap">
 	<![CDATA[
 		select * from common_energy_usage
-		where maintenance_cost = #{cost_num}
+		where common_cost_num = #{cost_num}
 		]]>
 	</select>
 	
@@ -35,8 +35,8 @@
 
 	<select id ="allprice" parameterType="string" resultMap="ComUsageMap">
 	<![CDATA[
-		select MAINTENANCE_COST, price
-		from (select to_char(maintenance_cost, 'FM99999999') costNum, m_cost, price, MAINTENANCE_COST from common_energy_usage)
+		select common_cost_num, price
+		from (select to_char(common_cost_num, 'FM99999999') costNum, m_cost, price, common_cost_num from common_energy_usage)
 		where costNum like #{cost_num}||'%'
 		]]>
 	</select>

@@ -3,7 +3,7 @@ package kh.teamproject.apton.maintenancecost.model.vo;
 import java.sql.Date;
 
 //HOUSE_NUM             NOT NULL NUMBER 관리비
-//MAINTENANCE_COST      NOT NULL NUMBER 공동 관리비
+//common_cost_num      NOT NULL NUMBER 공동 관리비
 //M_COST                NOT NULL NUMBER 일반관리비
 //CLEAN_COST            NOT NULL NUMBER 청소비
 //SECU_COST             NOT NULL NUMBER 경비비
@@ -14,7 +14,7 @@ import java.sql.Date;
 //MAINTENANCE_COST_DATE NOT NULL DATE  날짜
 public class MaintenanceCost {
 	private long houseNum;
-	private int maintenanceCost;
+	private int commonCostNum;
 	private int mCost;
 	private int cleanCost;
 	private int secuCost;
@@ -24,11 +24,11 @@ public class MaintenanceCost {
 	private int houseWaterCost;
 	private Date maintenanceCostDate;
 	
-	public MaintenanceCost(long houseNum, int maintenanceCost, int mCost, int cleanCost, int secuCost, int elevatorCost,
+	public MaintenanceCost(long houseNum, int commonCostNum, int mCost, int cleanCost, int secuCost, int elevatorCost,
 			int disinCost, int elecCost, int houseWaterCost, Date maintenanceCostDate) {
 		super();
 		this.houseNum = houseNum;
-		this.maintenanceCost = maintenanceCost;
+		this.commonCostNum = commonCostNum;
 		this.mCost = mCost;
 		this.cleanCost = cleanCost;
 		this.secuCost = secuCost;
@@ -47,12 +47,12 @@ public class MaintenanceCost {
 		this.houseNum = houseNum;
 	}
 
-	public int getMaintenanceCost() {
-		return maintenanceCost;
+	public int getCommonCostNum() {
+		return commonCostNum;
 	}
 
-	public void setMaintenanceCost(int maintenanceCost) {
-		this.maintenanceCost = maintenanceCost;
+	public void setCommonCostNum(int commonCostNum) {
+		this.commonCostNum = commonCostNum;
 	}
 
 	public int getmCost() {
@@ -121,7 +121,7 @@ public class MaintenanceCost {
 
 	@Override
 	public String toString() {
-		return "MaintenanceCost [houseNum=" + houseNum + ", maintenanceCost=" + maintenanceCost + ", mCost=" + mCost
+		return "MaintenanceCost [houseNum=" + houseNum + ", commonCostNum=" + commonCostNum + ", mCost=" + mCost
 				+ ", cleanCost=" + cleanCost + ", secuCost=" + secuCost + ", elevatorCost=" + elevatorCost
 				+ ", disinCost=" + disinCost + ", elecCost=" + elecCost + ", houseWaterCost=" + houseWaterCost
 				+ ", maintenanceCostDate=" + maintenanceCostDate + "]";
