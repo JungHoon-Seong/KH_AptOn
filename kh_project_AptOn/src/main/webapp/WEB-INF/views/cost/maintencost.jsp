@@ -39,48 +39,15 @@
   <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
   <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
   <script src="//cdn.quilljs.com/1.3.6/quill.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
   
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
-    /*
-      google.charts.load('current', {'packages':['bar']});
-      google.charts.setOnLoadCallback(drawChart);
-	
-      function drawChart() {
-    	  
-        var data = google.visualization.arrayToDataTable([
-          ['Dialogue', '작년', '올해'],
-          ['1월', 54639381, "${vo.price}"],
-          ['2월', 0.7, 0.3],
-          ['3월', 0.4, 0.8],
-          ['4월', 0.2, 1],
-          ['5월', 0.2, 1],
-          ['6월', 0.2, 1],
-          ['7월', 0.2, 1],
-          ['8월', 0.2, 1],
-          ['9월', 0.2, 1],
-          ['10월', 0.2, 1],
-          ['11월', 0.2, 1],
-          ['12월', 0.2, 1]
-        ]);
-
-        var options = {
-          chart: {
-            title: '2021년 관리비 총액',
-            subtitle: '',
-          }
-        };
-
-        var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
-
-        chart.draw(data, google.charts.Bar.convertOptions(options));
-      }
-      */
-    </script>
+    
 <style>
 #cost-section{
 	padding-top:70px;
@@ -125,4 +92,40 @@ font-family: 'Noto Sans KR', sans-serif;
 <div id="columnchart_material" style="width: 800px; height: 500px;"></div>
 	공동 관리비 ${vo}
 </body>
+<script type="text/javascript">
+    /*
+      google.charts.load('current', {'packages':['bar']});
+      google.charts.setOnLoadCallback(drawChart);
+	
+      function drawChart() {
+    	  
+        var data = google.visualization.arrayToDataTable([
+          ['Dialogue', '작년', '올해'],
+          ['1월', 54639381, "${vo.price}"],
+          ['2월', 0.7, 0.3],
+          ['3월', 0.4, 0.8],
+          ['4월', 0.2, 1],
+          ['5월', 0.2, 1],
+          ['6월', 0.2, 1],
+          ['7월', 0.2, 1],
+          ['8월', 0.2, 1],
+          ['9월', 0.2, 1],
+          ['10월', 0.2, 1],
+          ['11월', 0.2, 1],
+          ['12월', 0.2, 1]
+        ]);
+
+        var options = {
+          chart: {
+            title: '2021년 관리비 총액',
+            subtitle: '',
+          }
+        };
+
+        var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
+
+        chart.draw(data, google.charts.Bar.convertOptions(options));
+      }
+      */
+    </script>
 </html>

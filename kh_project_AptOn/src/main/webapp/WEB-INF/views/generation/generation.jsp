@@ -38,11 +38,14 @@
   <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
   <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
   <script src="//cdn.quilljs.com/1.3.6/quill.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
   
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
 <%Generation vo = (Generation) request.getAttribute("gener");%>
+
 <style>
 #cost_section {
 	padding-top: 70px;
@@ -68,7 +71,67 @@ footer {
 	top: 500px;
 	text-align: center;
 }
+/* Style the tab */
+.tab {
+  overflow: hidden;
+  border: 1px solid #ccc;
+  background-color: #f1f1f1;
+}
+
+/* Style the buttons inside the tab */
+.tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+  font-size: 17px;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+  background-color: #ccc;
+}
 </style>
+</head>
+<body>
+	<jsp:include page="../header.jsp" flush="true" />
+	
+<main id="allcostmain">
+<section id="cost_section">
+<div class="tab">
+  <button class="w3-bar-item w3-button" onclick="location.href='http://localhost:8090/apton/allcost'">공동 관리비</button>
+  <button class="w3-bar-item w3-button" onclick="location.href='http://localhost:8090/apton/maintencost'">개인 관리비</button>
+  <button class="w3-bar-item w3-button" onclick="location.href='http://localhost:8090/apton/generation'">에너지 사용량</button>
+</div>
+
+			<div id="nav">
+				<h1>에너지 사용량 조회</h1>
+				<%String date = vo.geteDate();
+				String ym = date.substring(0, 7);
+				long houseNum = vo.getHouseNum();
+				String house = Long.toString(houseNum);
+				String d = house.substring(8,11);
+				String h = house.substring(11,15);
+				long hh = Long.parseLong(h);
+				 %>
+				<h3><%=d %>동 <%=hh %>호 <%= ym %></h3>
+				
+			</div>
+		</section>
+</main>
+	<div id="main">
+    <div id="piechart" style="width: 900px; height: 500px;"></div>
+  	</div>
+  	
+</body>
 <script type="text/javascript">
       google.charts.load('current', {'packages':['corechart']});
       google.charts.setOnLoadCallback(drawChart);
@@ -93,22 +156,4 @@ footer {
         chart.draw(data, options);
       }
     </script>
-</head>
-<body>
-	<jsp:include page="../header.jsp" flush="true" />
-	<main id="allcostmain">
-		<section id="cost_section">
-			<div id="nav">
-				<h1>에너지 사용량 조회</h1>
-				<%String date = vo.geteDate();
-				String ym = date.substring(0, 7);%>
-				<h3><%= ym %></h3>
-				
-			</div>
-		</section>
-	</main>
-	<div id="main">
-    <div id="piechart" style="width: 900px; height: 500px;"></div>
-  	</div>
-</body>
 </html>
