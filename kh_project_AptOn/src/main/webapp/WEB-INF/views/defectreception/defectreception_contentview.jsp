@@ -74,13 +74,12 @@ font-family: 'Noto Sans KR', sans-serif;
  	width: 1000px;
  }
  table {
-	border: 1px solid black;
-	
+ 	border-collapse: collapse;
+ 	border-radius: 10px 10px 0 0;
+	box-shadow: 0 0 0 0.5px rgb(233 202 155);
 	text-align: center;
-	background-color:  #ffebcd;
  }
  td {
- 	border: 1px solid black;
  	width: 240px;
  }
  .completestate {
@@ -93,6 +92,7 @@ font-family: 'Noto Sans KR', sans-serif;
  	float: right;
  }
  .textContent {
+ 	box-shadow: 0 0 0 0.5px rgb(233 202 155);
  	text-align: justify;
  	vertical-align: top;
  	height: 375px;
@@ -112,6 +112,7 @@ font-family: 'Noto Sans KR', sans-serif;
 	 cursor: pointer;
 	 background-color: #008CBA;
  }
+
  #btnDelete {
 	 broder: none;
 	 border-radius: 5px;
@@ -123,9 +124,59 @@ font-family: 'Noto Sans KR', sans-serif;
 	 cursor: pointer;
 	 background-color: #f44336;
  }
+ #btnToList {
+ 	float: left;
+ 	border : 1px solid rgba(159,220,120,1);
+	border-radius: 5px;
+	color: #333333;
+	padding: 7px 16px;
+	text-align: center;
+	font-size: 16px;
+	margin: 4px 2px;
+	cursor: pointer;
+	background-color: rgba(159,220,120,0.5);
+ }
+  #btnUpdate:hover{
+	font-size:13px;
+	border : 1px solid rgba(159,220,120,1);
+	border-radius:5px;
+	background-color: #008CBA;
+	box-shadow: 3px 3px 0 #5492DB;
+	transition: all 0.5s;
+	}
+ #btnDelete:hover{
+	font-size:13px;
+	border : 1px solid rgba(159,220,120,1);
+	border-radius:5px;
+	background-color: #f44336;
+	box-shadow: 3px 3px 0 #FF8A00;
+	transition: all 0.5s;
+	}
+ #btnToList:hover{
+	font-size:13px;
+	border : 1px solid rgba(159,220,120,1);
+	border-radius:5px;
+	background-color: rgba(159,220,120,0.5);
+	box-shadow: 3px 3px 0 #9DCB63;
+	transition: all 0.5s;
+	}
   h2 {
- margin-top: 200px;
- margin-left: 200px;
+	 margin-top: 200px;
+	 margin-left: 200px;
+ }
+ th,.header {
+	background-color: #ffebcd;
+ 	border: none;
+ 	font-weight: bold;
+ }
+ th:nth-of-type(1) {
+ 	border-radius: 10px 0 0 0;
+ }
+ th:nth-of-type(4) {
+ 	border-radius: 0 10px 0 0;
+ }
+ #btnTd {
+ 	border: none;
  }
  </style>
 
@@ -160,6 +211,12 @@ font-family: 'Noto Sans KR', sans-serif;
 
 <section id="mainsection">
 	<table id="maintable">
+	<tr>
+	<th>No.</th>
+	<th>작성일</th>
+	<th>가구번호</th>
+	<th>처리상태</th>
+	</tr>
 	<c:forEach items="${drbList}" var="vo">
 		<tr>
 			<td id ="boardNo">${vo.drNo }</td>
@@ -174,34 +231,39 @@ font-family: 'Noto Sans KR', sans-serif;
 				</c:when>
 			</c:choose>
 		</tr>
-				<tr>
-		<td colspan="4">${vo.drTitle }</td>
+		<tr>
+			<td class="header">제목</td>
+			<td colspan="4">${vo.drTitle }</td>
 		</tr>
 		
 	
 		<tr>
-			<td colspan="4"><img src="${vo.drImage }" class="img" onerror="this.src='resources/img/logo.png'" alt='' /> </td>
-			<!-- x<td class="img">이미지2</td>
-			<td class="img">이미지3</td>
-			<td class="img">이미지4</td>
-			<td class="img">이미지5</td> -->
+			<td class="header">이미지</td>
+			<td colspan="3"><img src="${vo.drImage }" class="img" onerror="this.src='resources/img/logo.png'" alt='' /> </td>
 				
 		</tr>
 		<tr>
 			<td class="textContent" colspan="5">${vo.drContent }</td>
 		</tr>
-	
+		<tr>
+			<td colspan="4" id="btnTd">
+				<button type="button" id="btnToList" onclick="btnToList()">목록으로</button>
+				<!-- 회원 세션과 houseno id가 같을 경우만 보이도록 적용함 -->
+				<c:if test="${vo.houseNo eq  memberId}" >
+					<div id="btnBox">
+						<button type="button" id="btnUpdate" onclick="btnUpdate()">수정</button>
+						<button type="button" id="btnDelete" onclick="btnDelete()">삭제</button>
+					</div>
+					
+				</c:if>
+			</td>
+		</tr>
 	</table>
-		<div>
-		</div>
-	<!-- 회원 세션과 houseno id가 같을 경우만 보이도록 적용함 -->
-	<c:if test="${vo.houseNo eq  memberId}" >
-		<div id="btnBox">
-			<button type="button" id="btnUpdate" onclick="btnUpdate()">수정</button>
-			<button type="button" id="btnDelete" onclick="btnDelete()">삭제</button>
-		</div>
-	</c:if>
+	
 		<script>
+			function btnToList(){
+				location.href="./board-defectreception";
+			}	
 			function btnUpdate(){
 				location.href="./update-defectreception?no=${vo.drNo}";
 			}

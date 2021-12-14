@@ -78,14 +78,14 @@ font-family: 'Noto Sans KR', sans-serif;
  	width: 1000px;
  }
  table {
-	border: 1px solid black;
+	border-collapse: collapse;
+ 	border-radius: 10px 10px 0 0;
+	box-shadow: 0 0 0 0.5px rgb(233 202 155);
 	width: 1000px;
 	text-align: center;
-	background-color: #ffebcd;
  }
  td {
- 	border: 1px solid black;
- 	width: 240px;
+ 	width: 200px;
  }
  .completestate {
 	 font-weight: bold;
@@ -117,9 +117,36 @@ font-family: 'Noto Sans KR', sans-serif;
 	 cursor: pointer;
 	 background-color: #008CBA;
  }
+    #btnWrite:hover{
+	font-size:13px;
+	border : 1px solid rgba(159,220,120,1);
+	border-radius:5px;
+	background-color: #008CBA;
+	box-shadow: 3px 3px 0 #5492DB;
+	transition: all 0.5s;
+ }
+  #btnToBack {
+	 broder: none;
+	 border-radius: 5px;
+	 color: white;
+	 padding: 7px 16px;
+	 text-align: center;
+	 font-size: 16px;
+	 margin: 4px 2px;
+	 cursor: pointer;
+	 background-color: #f44336;
+ }
+  #btnToBack:hover{
+	font-size:13px;
+	border : 1px solid rgba(159,220,120,1);
+	border-radius:5px;
+	background-color: #f44336;
+	box-shadow: 3px 3px 0 #FF8A00;
+	transition: all 0.5s;
+ }
  #textTitle {
  border: none;
- width: 1000px;
+ width: 800px;
  }
  #textContent {
  border: none;
@@ -141,6 +168,12 @@ font-family: 'Noto Sans KR', sans-serif;
 	display: none;
 	disabled;
 }
+.header,#uploadTd {
+	width: 200px;
+	background-color: #ffebcd;
+ 	border: none;
+ 	font-weight: bold;
+ }
  </style>
 
 </head>
@@ -174,21 +207,22 @@ font-family: 'Noto Sans KR', sans-serif;
 
 <section id="mainsection">
 	<table id="maintable">
-	<form id="imgur" action="./insert-defectreception"  method="post" enctype="multipart/form-data">
-	
+	<form id="" action="./insert-defectreception"  method="post" enctype="multipart/form-data">
 		<tr>
-			<td><input type="text" name="t" id="textTitle" placeholder="제목을 입력해주세요"/></td>
+		<td class="header">제목</td>
+			<td colspan="">
+			<input type="text" name="t" id="textTitle" placeholder="제목을 입력해주세요"/></td>
 		</tr>
 
 		<!-- form으로 보낼려면 name이 필요한대 에디터에서 제공해주는 플러그인이 name이 없어서 아래 input file을 사용-->
 		<tr>
-			<td>
-			<!-- <input type="file" name="imgs[]" class="imgur" accept="image/*" data-max-size="5000" > -->
-			<input type="file" name="image" id="upload" accept="image/*" data-max-size="5000" value="res.data.link" />
+			<td class="header">이미지</td>
+			<td colspan="" id="uploadTd">
+				<input type="file" name="image" id="upload" accept="image/*" data-max-size="5000" value="res.data.link" />
 			</td>	
 		</tr>
 		<tr>
-			<td class="textContent" colspan="5">
+			<td class="textContent" colspan="2">
 			<textarea name="c" id="textContent" placeholder="내용을 입력해주세요"></textarea>
 			</td>
 		</tr>
@@ -199,9 +233,9 @@ font-family: 'Noto Sans KR', sans-serif;
 	<!-- SJH TODO 회원 세션일경우만 보이도록 보완필요 -->
 		<div id="btnBox">
 			<button type="submit" id="btnWrite">작성</button>
-			
 		</div>
 	</form>
+	<button type="button" id="btnToBack" onclick="btnToBack()">취소</button>
 </section>
 </main>
 
@@ -223,8 +257,6 @@ font-family: 'Noto Sans KR', sans-serif;
 
   <!-- Template Main JS File -->
   <script src="resources/js/main.js"></script>
-  <!-- imgurupload Js File -->
-  <script src="resources/js/imgur.js"></script>
   <script>
   
   CKEDITOR.replace( 'textContent',{
@@ -279,6 +311,9 @@ font-family: 'Noto Sans KR', sans-serif;
   $(document).ready(function () {
       CKEDITOR.config.removeButtons = 'Image'; 
   });
+  function btnToBack(){
+		window.history.go(-1);
+	}	
   </script>
   
 </body>

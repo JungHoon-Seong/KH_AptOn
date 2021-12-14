@@ -61,7 +61,7 @@ font-family: 'Noto Sans KR', sans-serif;
 
  <style>
  ul {
- list-style-type: none;
+ 	list-style-type: none;
  }
  
  #aside {
@@ -73,9 +73,12 @@ font-family: 'Noto Sans KR', sans-serif;
  	width: 1000px;
  }
  table {
-	 border: 1px solid black;
-	 width: 1000px;
-	 text-align: center;
+ 	width: 1000px;
+ 	font-size : 15px;
+	border-collapse: collapse;
+ 	border-radius: 10px 10px 0 0;
+	box-shadow: 0 0 0 0.5px rgb(233 202 155);
+	text-align: center;
  }
  #rowheader {
 	 font-weight: bold;
@@ -96,7 +99,7 @@ font-family: 'Noto Sans KR', sans-serif;
  	float: right;
  }
  #btnwrite {
-	 broder: none;
+	 border: none;
 	 border-radius: 5px;
 	 color: white;
 	 padding: 15px 32px;
@@ -106,10 +109,48 @@ font-family: 'Noto Sans KR', sans-serif;
 	 cursor: pointer;
 	 background-color: #008CBA;
  }
-  h2 {
- margin-top: 200px;
- margin-left: 200px;
+   #btnwrite:hover{
+	font-size:13px;
+	border : 1px solid rgba(159,220,120,1);
+	border-radius:5px;
+	background-color: #008CBA;
+	box-shadow: 3px 3px 0 #5492DB;
+	transition: all 0.5s;
  }
+  h2 {
+	 margin-top: 200px;
+	 margin-left: 200px;
+ }
+ #paging{
+	margin-left: auto;
+	margin-top : 20px;
+	margin-right: auto;
+	display:table;
+	}
+ #paging ul{
+	margin: auto;
+	}
+ #paging a{
+	margin-left:10px;
+	color: black;
+	display:block;
+	border: 1px solid black;
+	padding-left: 7px;
+	padding-right: 7px;
+	opacity: 0.5;
+	}
+ #paging a:hover{
+	background-color:black;
+	color: white;
+	display:block;	
+	border: 1px solid black;
+	padding-left: 7px;
+	padding-right: 7px;
+	opacity: 0.8;
+	}
+  tr:not(#rowheader):hover {
+  	background-color: rgb(207,252,236);
+  }
  </style>
   
   <script>
@@ -177,17 +218,19 @@ font-family: 'Noto Sans KR', sans-serif;
 </c:if>
 	</table>
 	<div id="paging">
-		<c:if test="${startPage > 1 }" >
-			<a href="board-defectreception?p=${startPage-1}">이전</a> </c:if>
-		<c:forEach begin="${startPage }" end="${endPage }" step="1" var="i">
-			<a href="board-defectreception?p=${i}">${i}</a>
-		</c:forEach>
-		<c:if test="${endPage < pageCount }">
-			<a href="board-defectreception?p=${endPage+1}">다음</a> </c:if>
+		<ul class="pagination">
+			<c:if test="${startPage > 1 }" >
+				<li><a href="board-defectreception?p=${startPage-1}">이전</a></li> </c:if>
+			<c:forEach begin="${startPage }" end="${endPage }" step="1" var="i">
+				<li><a href="board-defectreception?p=${i}">${i}</a></li>
+			</c:forEach>
+			<c:if test="${endPage < pageCount }">
+				<li><a href="board-defectreception?p=${endPage+1}">다음</a></li> </c:if>
+		</ul>
 	</div>
-		<div id="btnWriteBox">
-			<button type='button' id='btnwrite' onclick='writescript()'>민원 작성</button>
-		</div>
+	<div id="btnWriteBox">
+		<button type='button' id='btnwrite' onclick='writescript()'>민원 작성</button>
+	</div>
 	
 </section>
 </main>

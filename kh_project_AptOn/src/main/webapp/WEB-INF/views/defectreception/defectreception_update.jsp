@@ -66,7 +66,7 @@ font-family: 'Noto Sans KR', sans-serif;
 
  <style>
  ul {
- list-style-type: none;
+ 	list-style-type: none;
  }
  
  #aside {
@@ -78,13 +78,13 @@ font-family: 'Noto Sans KR', sans-serif;
  	width: 1000px;
  }
  table {
-	border: 1px solid black;
 	width: 1000px;
+	border-collapse: collapse;
+ 	border-radius: 10px 10px 0 0;
+	box-shadow: 0 0 0 0.5px rgb(233 202 155);
 	text-align: center;
-	background-color: #ffebcd;
  }
  td {
- 	border: 1px solid black;
  	width: 240px;
  }
  .completestate {
@@ -117,33 +117,63 @@ font-family: 'Noto Sans KR', sans-serif;
 	 cursor: pointer;
 	 background-color: #008CBA;
  }
+ #btnToBack {
+	 broder: none;
+	 border-radius: 5px;
+	 color: white;
+	 padding: 7px 16px;
+	 text-align: center;
+	 font-size: 16px;
+	 margin: 4px 2px;
+	 cursor: pointer;
+	 background-color: #f44336;
+ }
+  #btnUpdate:hover{
+	font-size:13px;
+	border : 1px solid rgba(159,220,120,1);
+	border-radius:5px;
+	background-color: #008CBA;
+	box-shadow: 3px 3px 0 #5492DB;
+	transition: all 0.5s;
+ }
+ #btnToBack:hover{
+	font-size:13px;
+	border : 1px solid rgba(159,220,120,1);
+	border-radius:5px;
+	background-color: #f44336;
+	box-shadow: 3px 3px 0 #FF8A00;
+	transition: all 0.5s;
+ }
+	
  #textNo {
- border: none;
- width: 200px;
+	 border: none;
+	 width: 200px;
  }
  
  #textTitle {
- border: none;
- width: 1000px;
- height: 2em;
+	 border: none;
+	 width: 100%;
+	 height: 2em;
  }
  #textContent {
- border: none;
- width: 1000px;
- height: 375px;
+	 border: none;
+	 width: 1000px;
+	 height: 375px;
  }
  .readonlyHeader {
  	border: none;
  	width: 300px;
- 	background-color: #ffebcd;
- 	border-bottom: 1px solid #008CBA;
  	text-align: center;
  }
   h2 {
- margin-top: 200px;
- margin-left: 200px;
+	 margin-top: 200px;
+	 margin-left: 200px;
  }
- 
+ th,.header {
+	background-color: #ffebcd;
+ 	border: none;
+ 	font-weight: bold;
+ }
  .cke_button.cke_button__image.cke_button_off{
 	display: none;
 	disabled;
@@ -177,6 +207,12 @@ font-family: 'Noto Sans KR', sans-serif;
 
 <section id="mainsection">
 	<table id="maintable">
+	<tr>
+		<th>No.</th>
+		<th>작성일</th>
+		<th>가구번호</th>
+		<th>처리상태</th>
+	</tr>
 	<form action="./update-defectreception"  method="post" enctype="multipart/form-data">
 		<c:forEach items="${drbList}" var="vo">
 		<tr>
@@ -193,7 +229,8 @@ font-family: 'Noto Sans KR', sans-serif;
 			</c:choose>
 		</tr>
 		<tr>
-			<td class="textContent" colspan="5">
+			<td class="header">제목</td>
+			<td class="textContent" colspan="3">
 				<input type="text" name="t" id="textTitle" value="${vo.drTitle}" />
 			<!-- <textarea name="t" id="textTitle" >${vo.drTitle }</textarea> -->
 			</td>
@@ -201,13 +238,14 @@ font-family: 'Noto Sans KR', sans-serif;
 		</tr>
 		<!-- form으로 보낼려면 name이 필요한대 에디터에서 제공해주는 플러그인이 name이 없어서 아래 input file을 사용-->
 		<tr>
-			<td>
+			<td class="header">이미지</td>
+			<td colspan="3">	
 				<input type="file" name="image" id="upload" accept="image/*" data-max-size="5000" value="res.data.link" />
 			</td>
 		</tr>
 		 
 		<tr>
-			<td class="textContent" colspan="5">
+			<td class="textContent" colspan="4">
 			<textarea name="c" id="textContent" >${vo.drContent }</textarea>
 			</td>
 		</tr>
@@ -217,10 +255,11 @@ font-family: 'Noto Sans KR', sans-serif;
 		</div>
 	<!-- SJH TODO 회원 세션일경우만 보이도록 보완필요 -->
 		<div id="btnBox">
-			<button type="submit" id="btnUpdate">수정하기</button>
 			
+			<button type="submit" id="btnUpdate">수정하기</button>
 		</div>
 	</form>
+	<button type="button" id="btnToBack" onclick="btnToBack()">취소</button>
 </section>
 </main>
 
@@ -267,6 +306,9 @@ CKEDITOR.replace( 'textContent',{
 $(document).ready(function () {
     CKEDITOR.config.removeButtons = 'Image'; 
 });
+function btnToBack(){
+	window.history.go(-1);
+}	
 </script>
      <!-- ======= Footer ======= -->
 <jsp:include page="../footer.jsp" flush="true" />
