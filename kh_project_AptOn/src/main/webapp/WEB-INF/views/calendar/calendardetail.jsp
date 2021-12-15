@@ -200,7 +200,7 @@ width:600px;
 <body>
 <section id="writesection">
 <fieldset>
-<legend>일정 등록</legend>
+<legend>일정 정보</legend>
   <div>
    
     <ul id="dateul">

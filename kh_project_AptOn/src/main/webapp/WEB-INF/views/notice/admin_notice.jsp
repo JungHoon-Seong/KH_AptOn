@@ -93,7 +93,7 @@
 		</c:forEach>
 		<c:if test="${endPage < pageCount }"> 다음 </c:if>
 	</div>
-	<button id="deletebtn" onclick="deleteMsg()">삭제</button>
+	<button type="button" id="deletebtn" onclick="deleteMsg()">삭제</button>
 	
 	</form>
 	<button onclick = "location.href = '/apton/noticeinsert' ">공지사항 등록</button>
@@ -101,24 +101,14 @@
     <button id="searchBtn" type="button">검색</button>
 <script type="text/javascript">
 
-var d = document.noticeinfo;
-function deletenotice(){        	
-	
-
-     d.submit(); 
-		
-	}
-
-
-
+var d = document.noticeinfo;      	
 function deleteMsg() {
 	
     if (!confirm("정말 삭제하시겠습니까?")) {
         alert("취소 되었습니다.");
-        	return false;
-    } else {
-    	
-    	deletenotice();
+        	return;
+    } else {    	
+    	d.submit(); 
 
     }
 }     
@@ -128,8 +118,7 @@ function deleteMsg() {
 	
 </section>
 </main>
-<br>
-adminmain 바깥의 영역입니다. 사이드바에 밀려나지 않습니다.
+
 
 
     

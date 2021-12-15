@@ -37,9 +37,7 @@
 	
 	</select>
 	
-	 <update id="updateCalendar" parameterType="Calendar" >
-
-	UPDATE Calendar SET calendar_title = #{calendar_title} , calendar_startdate = #{calendar_startdate}, calendar_enddate = #{calendar_enddate} WHERE calendar_num = #{calendar_num} 
-	 
+	<update id="updateCalendar" parameterType="Calendar" >
+	UPDATE Calendar SET calendar_title = #{calendar_title} , calendar_startdate = #{calendar_startdate}, calendar_enddate = #{calendar_enddate} WHERE calendar_num = #{calendar_num} 	 
 	</update> 
 </mapper>

@@ -59,7 +59,11 @@
     padding-top: 1em;
     padding-left: 1em;
     padding-right: 1em;
+    text-align: center;
   }  
+  #calendar{
+margin-left:80px;
+  }
   </style>
   
 <!-- jquery cdn -->
@@ -191,9 +195,6 @@
 </script>
 </section>
 </main>
-<br>
-adminmain 바깥의 영역입니다. 사이드바에 밀려나지 않습니다.
-
 
     
 </body>
