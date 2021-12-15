@@ -2,6 +2,8 @@ package kh.teamproject.apton.maintenancecost.model.vo;
 
 import java.sql.Date;
 
+import org.springframework.stereotype.Component;
+
 //HOUSE_NUM             NOT NULL NUMBER 관리비
 //common_cost_num      NOT NULL NUMBER 공동 관리비
 //M_COST                NOT NULL NUMBER 일반관리비
@@ -12,6 +14,7 @@ import java.sql.Date;
 //ELEC_COST             NOT NULL NUMBER 전기료
 //HOUSE_WATER_COST      NOT NULL NUMBER 세대수도료
 //MAINTENANCE_COST_DATE NOT NULL DATE  날짜
+
 public class MaintenanceCost {
 	private long houseNum;
 	private int commonCostNum;

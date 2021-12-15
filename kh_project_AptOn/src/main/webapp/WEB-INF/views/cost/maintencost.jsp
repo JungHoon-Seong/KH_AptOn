@@ -47,10 +47,13 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     
 <style>
-#cost-section{
-	padding-top:70px;
+#contentsection{
+	font-family: 'Noto Sans KR', sans-serif;
+	width : 1300px;
 }
 boby{
 	display: block;
@@ -72,6 +75,34 @@ font-family: 'Noto Sans KR', sans-serif;
 #nav{
 	background-color:cornflowerblue; 
 }
+/* Style the tab */
+.tab {
+  overflow: hidden;
+  border: 1px solid #ccc;
+  background-color: #f1f1f1;
+}
+
+/* Style the buttons inside the tab */
+.tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+  font-size: 17px;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+  background-color: #ccc;
+}
 </style>
 
 <!-- 공통 css 및 글꼴 입력 부분 끝  -->
@@ -81,16 +112,20 @@ font-family: 'Noto Sans KR', sans-serif;
 <body>
 <jsp:include page="../header.jsp" flush="true" />
 
-<main id="allcostmain">
-<section id="cost-section">
+<main id="adminmain">
+<section id="contentsection">
+<div class="tab">
+  <button class="w3-bar-item w3-button" onclick="location.href='http://localhost:8090/apton/allcost'">공동 관리비</button>
+  <button class="w3-bar-item w3-button" onclick="location.href='http://localhost:8090/apton/maintencost'">개인 관리비</button>
+  <button class="w3-bar-item w3-button" onclick="location.href='http://localhost:8090/apton/generation'">에너지 사용량</button>
+</div>
 <div id="nav">
-<h1>공동 관리비</h1>
+<h1>개인 관리비</h1>
 </div>
 
 </section>
 </main>
 <div id="columnchart_material" style="width: 800px; height: 500px;"></div>
-	공동 관리비 ${vo}
 </body>
 <script type="text/javascript">
     /*

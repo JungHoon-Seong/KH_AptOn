@@ -105,9 +105,6 @@ footer {
 	float: left;
 }
 
-#year_option {
-	text-align: center;
-}
 
 th, td {
 	padding: 10px;
