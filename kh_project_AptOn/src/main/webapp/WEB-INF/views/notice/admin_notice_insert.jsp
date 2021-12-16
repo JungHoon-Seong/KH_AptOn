@@ -160,8 +160,7 @@ $('#insertbtn').on("click",function() {
 	
 </section>
 </main>
-<br>
-adminmain 바깥의 영역입니다. 사이드바에 밀려나지 않습니다.
+<jsp:include page="../footer.jsp" flush="true" />
 
 
     

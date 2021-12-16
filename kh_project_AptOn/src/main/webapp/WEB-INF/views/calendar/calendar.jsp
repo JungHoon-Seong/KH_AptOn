@@ -128,16 +128,8 @@
 
 
 <main id="main">
-<h2>노원 롯데 캐슬 - <a href="#">아파트 일정</a></h2>
+<h2>노원 롯데 캐슬 - <a href="/apton/calendarlist">아파트 일정</a></h2>
 
-<aside id="aside">
-<!-- 메뉴이름 및 링크는 추후 결정 -->
-<ul>
-	<li><a href="./noticelist">공지사항</a></li>
-	<li><a href="./board-defectreception">민원접수</a></li>
-	<li><a href="./calendarlist">일정 </a></li>
-</ul>
-</aside>
 
 <section id="mainsection">
  <!-- calendar 태그 -->

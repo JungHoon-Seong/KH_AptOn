@@ -80,12 +80,88 @@
 	 cursor: pointer;
 	 background-color: #008CBA;
  }
- </style>
-  
-  <script>
+ 
+ /*상세페이지  */
+ .tolist{
+    width: 80px;
+    height: 40px;
+	margin-top:50px;
+	font-size:15px;
+	border : 1px solid rgba(159,220,120,0.5);
+	background-color: rgba(159,220,120,0.5);
+	padding-top:4px;
+	padding-bottom:4px;
+	box-shadow: 3px 3px 0 rgba(159,220,120,1);
+	overflow: hidden;
+	white-space: nowrap;
+	display: block;
+	text-overflow: ellipsis;
+	}
+.tolist:hover{
+	font-size:13px;
+	border : 1px solid rgb(233, 202, 155);
+	border-radius:5px;
+	background-color: rgb(233, 202, 155);
+	box-shadow: 3px 3px 0 #D04B4D;
+	}
+    .tolist:active{
+	font-size:13px;
+	border : 1px solid rgb(233, 202, 155);
+	border-radius:5px;
+	background-color: rgb(233, 202, 155);
+	box-shadow: 1px 1px 0 #D04B4D;
+	position: relative;
+	top:2px;
+	left:2px;
+	}
 
-  </script>
-  
+#th1{
+	width:600px;
+	height:35px;
+	text-align:left;
+	padding:0 5px 0 5px;
+	background-color:rgb(201, 242, 252);
+}
+
+td{
+		word-break:break-all;
+		word-wrap:break-word;
+	}
+ #td1{
+     width:800px;
+     text-align:left;
+ }   
+     th,td{
+        
+        border-bottom: 1px solid #b4b1b1;
+        padding: 10px;
+    } 
+    #div1{
+	width: 1100px;
+	margin-left:50px;
+	margin-top:50px;
+	float:left;
+}
+#maintable{
+    border-top: 1px solid #b4b1b1;
+    border-collapse: collapse;
+    border-left: 1px solid #b4b1b1;
+    border-bottom: 1px solid #b4b1b1;
+    border-right: 1px solid #b4b1b1;
+}
+#tolist2{
+    margin-left: 550px;
+    margin-top:15px;
+     margin-bottom:15px;
+}
+#tolist1{
+    margin-left: 1000px;
+}
+#contenttd{
+width:1050px; 
+}
+ </style>
+   
 </head>
 
 <body>
@@ -107,42 +183,34 @@
 
 
 <main id="main">
-<h2>노원 롯데 캐슬 - <a href="#">아파트 공지사항</a></h2>
+<h2>노원 롯데 캐슬 - <a href="/apton/noticelist">아파트 공지사항</a></h2>
 
-<aside id="aside">
-<!-- 메뉴이름 및 링크는 추후 결정 -->
-<ul>
-	<li><a href="#">공지사항</a></li>
-	<li><a href="#">하자접수</a></li>
-	<li><a href="#">달력일정</a></li>
-</ul>
-</aside>
-
-	<table id="maintable">
-	<c:forEach items="${noticelist}" var="detail">
-		 <thead>
-            <tr>
-                <th>제목</th>
-                <td>${detail.notice_title }</td>
-            </tr>
-            <tr>
-                <th>글 번호: </th>
-                <td>${detail.notice_num }</td>
-                <th>작성자: </th>
-                <td>${detail.admin_id }</td>
-                <th>작성일: </th>
-                <td>${detail.notice_date }</td> 
-            </tr>
-        </thead>
-        <tbody>
+	<div id="div1">
+    <table id="maintable" >
+        <c:forEach items="${noticelist}" var="detail">
+             <thead>
                 <tr>
-   
-                <td>${detail.notice_content}</td>
+                    <th id="th1">제목</th>
+                    <td colspan="5" id="td1">${detail.notice_title }</td>
                 </tr>
-	
-	</table>
+                <tr>
+                    <th id="th1">글 번호: </th>
+                    <td id="td1">${detail.notice_num }</td>
+                    <th id="th1">작성자: </th>
+                    <td id="td1">${detail.admin_id }</td>
+                    <th id="th1">작성일: </th>
+                    <td id="td1">${detail.notice_date }</td> 
+                </tr>
+            </thead>
+            <tbody>
+                    <tr>
+       
+                    <td id = "contenttd" colspan="6">${detail.notice_content}</td>
+                    </tr>
+                </table>
+<button class="tolist" id="tolist2" onclick = "location.href = '/apton/noticelist' ">목록</button>
+</div>
 </c:forEach>	
-<button onclick = "location.href = '/apton/noticelist' ">목록</button>
 </main>
 
      <!-- ======= Footer ======= -->

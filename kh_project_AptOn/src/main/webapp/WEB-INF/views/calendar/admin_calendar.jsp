@@ -195,7 +195,7 @@ margin-left:80px;
 </script>
 </section>
 </main>
-
+<jsp:include page="../footer.jsp" flush="true" />
     
 </body>
 </html>

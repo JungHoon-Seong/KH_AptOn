@@ -45,46 +45,116 @@
  #mainsection {
  	float: left;
  	width: 1200px;
+ 	
  }
-  
-  </style>
-  
-<!-- jquery cdn -->
-<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+ .tolist{
+    width: 60px;
+    height: 30px;
+	margin-top:15px;
+	font-size:13px;
+	border : 1px solid rgba(159,220,120,0.5);
+	background-color: rgba(159,220,120,0.5);
+	padding-top:4px;
+	padding-bottom:4px;
+	box-shadow: 3px 3px 0 rgba(159,220,120,1);
+	overflow: hidden;
+	white-space: nowrap;
+	display: block;
+	text-overflow: ellipsis;
+	}
+.tolist:hover{
+	font-size:13px;
+	border : 1px solid rgba(159,220,120,1);
+	border-radius:5px;
+	background-color: rgba(159,220,120,1);
+	box-shadow: 3px 3px 0 #D04B4D;
+	}
+    .tolist:active{
+	font-size:13px;
+	border : 1px solid rgba(159,220,120,1);
+	border-radius:5px;
+	background-color: rgba(159,220,120,1);
+	box-shadow: 1px 1px 0 #D04B4D;
+	position: relative;
+	top:2px;
+	left:2px;
+	}
 
-</head>
+#th1{
+	width:600px;
+	height:35px;
+	text-align:left;
+	padding:0 5px 0 5px;
+	background-color:rgb(201, 242, 252);
+}
+
+td{
+		word-break:break-all;
+		word-wrap:break-word;
+	}
+ #td1{
+     width:800px;
+ }   
+     th,td{
+        
+        border-bottom: 1px solid #b4b1b1;
+        padding: 10px;
+    } 
+    #div1{
+	width: 1100px;
+	margin-left:50px;
+	margin-top:200px;
+	float:left;
+}
+#maintable{
+    border-top: 1px solid #b4b1b1;
+    border-collapse: collapse;
+    border-left: 1px solid #b4b1b1;
+    border-bottom: 1px solid #b4b1b1;
+    border-right: 1px solid #b4b1b1;
+}
+#tolist2{
+    margin-left: 525px;
+    margin-top:-28px;
+}
+#tolist1{
+    margin-left: 1000px;
+}
+#contenttd{
+width:1050px; 
+}
+</style>
 <body>
 <jsp:include page="../header4admin.jsp" flush="true" />
-
-<main id="adminmain">
-<section id="mainsection">
-	<table id="maintable">
-	<c:forEach items="${noticelist}" var="detail">
-		 <thead>
-            <tr>
-                <th>제목</th>
-                <td>${detail.notice_title }</td>
-            </tr>
-            <tr>
-                <th>글 번호: </th>
-                <td>${detail.notice_num }</td>
-                <th>작성자: </th>
-                <td>${detail.admin_id }</td>
-                <th>작성일: </th>
-                <td>${detail.notice_date }</td> 
-            </tr>
-        </thead>
-        <tbody>
+    <div id="div1">
+    <table id="maintable" >
+        <c:forEach items="${noticelist}" var="detail">
+             <thead>
                 <tr>
-   
-                <td>${detail.notice_content}</td>
+                    <th id="th1">제목</th>
+                    <td colspan="5" id="td1">${detail.notice_title }</td>
                 </tr>
-	
-	</table>
-	<button onclick = "location.href = '/apton/noticeupdate?no=${detail.notice_num}'">수정</button>
-	<button onclick = "location.href = '/apton/adnoticelist' ">목록</button>
-</c:forEach>	
-	</form>
+                <tr>
+                    <th id="th1">글 번호: </th>
+                    <td id="td1">${detail.notice_num }</td>
+                    <th id="th1">작성자: </th>
+                    <td id="td1">${detail.admin_id }</td>
+                    <th id="th1">작성일: </th>
+                    <td id="td1">${detail.notice_date }</td> 
+                </tr>
+            </thead>
+            <tbody>
+                    <tr>
+       
+                    <td id = "contenttd" colspan="6">${detail.notice_content}</td>
+                    </tr>
+                </table>
+                <button id="tolist1" class="tolist" onclick = "location.href = '/apton/noticeupdate?no=${detail.notice_num}'">수정</button>
+                <button id="tolist2" class="tolist" onclick = "location.href = '/apton/adnoticelist' ">목록</button>
+            </div>
+
+        </c:forEach>	
+        </form>
 	
 <script>
 
@@ -94,8 +164,7 @@
 	
 </section>
 </main>
-<br>
-adminmain 바깥의 영역입니다. 사이드바에 밀려나지 않습니다.
+<jsp:include page="../footer.jsp" flush="true" />
 
 
     
