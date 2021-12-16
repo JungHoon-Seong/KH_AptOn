@@ -493,7 +493,7 @@ select:hover {border: 1px solid #aaa;} /* 마우스오버 */
     // 지하철 실시간 도착정보
     $.ajax({
       type: "GET",
-      url : "http://swopenAPI.seoul.go.kr/api/subway/464e726f6f776f6e39396279705145/json/realtimeStationArrival/0/5/노원",
+      url : "http://swopenAPI.seoul.go.kr/api/subway/464e726f6f776f6e39396279705145/json/realtimeStationArrival/0/10/노원",
       dataType:'json',
       async:false,
       success : function(data){

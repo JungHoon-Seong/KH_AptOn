@@ -66,7 +66,6 @@ font-family: 'Noto Sans KR', sans-serif;
 		margin : auto;
 		font-size : 15px;
 		font-family: 'Noto Sans KR', sans-serif;
-		border: 1px solid #ddd;
 	}
         
     th{
