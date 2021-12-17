@@ -44,9 +44,119 @@
 }
  #mainsection {
  	float: left;
- 	width: 1200px;
+ 	width: 1100px;
+ 	margin-left: 30px;
+ 	padding: 20px;
+ }
+ 
+ table {
+	 width: 1100px;
+	 text-align: center;
+	  border-collapse: collapse;
+ }
+ 
+  td{
+    border-bottom: solid 1px #ddd;
+}
+   #th1{
+  background-color: #B9E2FA;
+     border-bottom: solid 1px;
+     padding: 10px;
+     color: white;
+     border-top-left-radius: 5px;
+     border-bottom-left-radius: 5px;
+     font-size: 20px;
  }
   
+  #th2{
+  background-color: #B9E2FA;
+     border-bottom: solid 1px;
+     padding: 10px;
+     color: white;
+     font-size: 20px;
+ }
+  
+  #th3{
+  background-color: #B9E2FA;
+     border-bottom: solid 1px;
+     padding: 10px;
+     color: white;
+          border-top-right-radius: 5px;
+     border-bottom-right-radius: 5px;
+     font-size: 20px;
+ }
+ 
+ .line{
+ padding: 20px;
+ font-size: 15px;
+ }
+ 
+ #div1{
+ padding: 20px;
+ }
+ 
+ #paging{
+	margin-left: auto;
+	margin-top : 20px;
+	margin-right: auto;
+	display:table;
+	}
+ #paging ul{
+	margin: auto;
+	}
+ #paging a{
+	margin-left:10px;
+	color: black;
+	display:block;
+	border: 1px solid black;
+	padding-left: 7px;
+	padding-right: 7px;
+	opacity: 0.5;
+	}
+ #paging a:hover{
+	background-color:black;
+	color: white;
+	display:block;	
+	border: 1px solid black;
+	padding-left: 7px;
+	padding-right: 7px;
+	opacity: 0.8;
+	}
+  	.line a:hover {
+  text-decoration: underline;
+}
+
+#deletebtn{
+ width: 100px;
+ height: 40px;
+ 
+ border: 1px solid skyblue; 
+ background-color: rgba(0,0,0,0); 
+ color: skyblue
+
+}
+#insertbtn{
+margin-top: -100px;
+margin-left: 1000px;
+ width: 100px;
+ height: 40px;
+ border: 1px solid skyblue;
+  background-color: rgba(0,0,0,0);
+  color: skyblue
+  }
+  
+ #deletebtn:hover{ 
+  color:white; 
+  background-color: skyblue; 
+  }
+  
+   #insertbtn:hover{ 
+  color:white; 
+  background-color: skyblue; 
+  }
+  
+
+
   </style>
   
 <!-- jquery cdn -->
@@ -62,11 +172,11 @@
 <table id = "list">
         <thead>
             <tr id = "toplist">
-                <th>  </th>
-                <th>번호</th>
-                <th>제목</th>
-                <th>작성자</th>
-                <th>작성일</th>
+                <th id="th1">  </th>
+                <th id="th2">번호</th>
+                <th id="th2">제목</th>
+                <th id="th2">작성자</th>
+                <th id="th3">작성일</th>
             </tr>
         </thead>
         <tbody>
@@ -85,29 +195,46 @@
             
         </tbody>
     </table>
-    
-	<div id="paging">
-		<c:if test="${startPage > 1 }" >이전</c:if>
+   <div id="paging">
+		<ul class="pagination">
+<%-- 		<c:if test="${startPage > 1 }" >이전</c:if>
 		<c:forEach begin="${startPage }" end="${endPage }" step="1" var="i">
-			<a href="adnoticelist?p=${i}">${i}</a>
+			<a href="noticelist?p=${i}">${i}</a>
 		</c:forEach>
-		<c:if test="${endPage < pageCount }"> 다음 </c:if>
-	</div>
-	<button type="button" id="deletebtn" onclick="deleteMsg()">삭제</button>
+		<c:if test="${endPage < pageCount }"> 다음 </c:if> --%>
+			<c:if test="${startPage > 1 }" >
+				<li><a href="adnoticelist?p=${startPage-1}">이전</a></li> </c:if>
+			<c:forEach begin="${startPage }" end="${endPage }" step="1" var="i">
+				<li><a href="adnoticelist?p=${i}">${i}</a></li>
+			</c:forEach>
+			<c:if test="${endPage < pageCount }">
+				<li><a href="adnoticelist?p=${endPage+1}">다음</a></li> </c:if>
+		</ul>
+		
 	
+	
+	</div>
+	
+	<button type="button" id="deletebtn" onclick="deleteMsg()">삭제</button>
 	</form>
-	<button onclick = "location.href = '/apton/noticeinsert' ">공지사항 등록</button>
-		  <input type="text" name="keyword" id="keywordInput" />
-    <button id="searchBtn" type="button">검색</button>
+	
+	<button id="insertbtn" onclick = "location.href = '/apton/noticeinsert' ">공지 등록</button>
+
 <script type="text/javascript">
 
 var d = document.noticeinfo;      	
 function deleteMsg() {
+	var chkList = $("input[name=deletecheck]");
 	
+/* 	if(chkList.prop("checked", true).length == 0){
+		alert("삭제할 게시물을 선택하세요.");
+    	return;
+	} */
     if (!confirm("정말 삭제하시겠습니까?")) {
         alert("취소 되었습니다.");
         	return;
-    } else {    	
+    }
+	 else {
     	d.submit(); 
 
     }
@@ -118,7 +245,7 @@ function deleteMsg() {
 	
 </section>
 </main>
-
+<jsp:include page="../footer.jsp" flush="true" />
 
 
     

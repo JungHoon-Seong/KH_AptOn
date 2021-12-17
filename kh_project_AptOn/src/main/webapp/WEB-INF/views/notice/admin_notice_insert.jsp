@@ -72,7 +72,7 @@ td{
     padding-left: 10px;
  }  
    
- .enrollbtn{
+ /* .enrollbtn{
  	text-align:center;
  	height:30px;
 	width:90px;
@@ -87,8 +87,6 @@ td{
 	white-space: nowrap;
 	display: block;
 	text-overflow: ellipsis;
-/* 	margin-left:500px;
-	margin-top:20px; */
 	}
 .enrollbtn:hover{
 	font-size:15px;
@@ -106,18 +104,41 @@ td{
 	position: relative;
 	top:2px;
 	left:2px;
-	} 
+	}  */
 input:focus, textarea:focus{    
  outline: none; 
  }
 #backbtn{
 	margin-left:500px;
-	margin-top:-30px;
+	
+ width: 100px;
+ height: 40px;
+ border: 1px solid #ffebcd;
+  background-color: rgba(0,0,0,0);
+  color: black; 
 }
 #insertbtn{
 	margin-left:1000px;
-	margin-top:10px;
+	margin-top:40px;
+	 width: 100px;
+ 	height: 40px;
+ 	border: 1px solid #ffebcd; 
+ 	background-color: rgba(0,0,0,0); 
+ 	color: black; 
 }
+#backbtn:hover{ 
+  color:black; 
+  background-color: #ffebcd; 
+  }
+  
+   #insertbtn:hover{ 
+  color:black; 
+  background-color: #ffebcd; 
+  }
+  
+  #inputdiv{
+  float: left;
+  }
 
 
   

@@ -48,13 +48,18 @@
  }
  #mainsection {
  	float: left;
- 	width: 1200px;
+ 	width: 1100px;
+ 	margin-left: 30px;
+ 	padding: 20px;
  }
  table {
-	 border: 1px solid black;
-	 width: 1200px;
+	 width: 1100px;
 	 text-align: center;
+	  border-collapse: collapse;
  }
+ td{
+    border-bottom: solid 1px #ddd;
+}
  #rowheader {
 	 font-weight: bold;
 	 text-align: center;
@@ -80,6 +85,74 @@
 	 cursor: pointer;
 	 background-color: #008CBA;
  }
+ 
+  #th1{
+  background-color: #B9E2FA;
+     border-bottom: solid 1px;
+     padding: 10px;
+     color: white;
+     border-top-left-radius: 5px;
+     border-bottom-left-radius: 5px;
+     font-size: 20px;
+ }
+  
+  #th2{
+  background-color: #B9E2FA;
+     border-bottom: solid 1px;
+     padding: 10px;
+     color: white;
+     font-size: 20px;
+ }
+  
+  #th3{
+  background-color: #B9E2FA;
+     border-bottom: solid 1px;
+     padding: 10px;
+     color: white;
+          border-top-right-radius: 5px;
+     border-bottom-right-radius: 5px;
+     font-size: 20px;
+ }
+ 
+ .line{
+ padding: 20px;
+ font-size: 15px;
+ }
+ 
+ #div1{
+ padding: 20px;
+ }
+ 
+ #paging{
+	margin-left: auto;
+	margin-top : 20px;
+	margin-right: auto;
+	display:table;
+	}
+ #paging ul{
+	margin: auto;
+	}
+ #paging a{
+	margin-left:10px;
+	color: black;
+	display:block;
+	border: 1px solid black;
+	padding-left: 7px;
+	padding-right: 7px;
+	opacity: 0.5;
+	}
+ #paging a:hover{
+	background-color:black;
+	color: white;
+	display:block;	
+	border: 1px solid black;
+	padding-left: 7px;
+	padding-right: 7px;
+	opacity: 0.8;
+	}
+	.line a:hover {
+  text-decoration: underline;
+}
  </style>
   
   <script>
@@ -109,25 +182,20 @@
 
 
 <main id="main">
-<h2>노원 롯데 캐슬 - <a href="#">아파트 공지사항</a></h2>
 
-<aside id="aside">
-<!-- 메뉴이름 및 링크는 추후 결정 -->
-<ul>
-	<li><a href="./noticelist">공지사항</a></li>
-	<li><a href="./board-defectreception">민원접수</a></li>
-	<li><a href="./calendarlist">일정</a></li>
-</ul>
-</aside>
 
 <section id="mainsection">
+<div id="div1">
+
+<h2>노원 롯데 캐슬 - <a href="/apton/noticelist">아파트 공지사항</a></h2>
+</div>
 	<table id = "list">
 			<thead>
 				<tr id = "toplist">
-					<th>번호</th>
-					<th>제목</th>
-					<th>작성자</th>
-					<th>작성일</th>
+					<th id="th1">번호</th>
+					<th id="th2">제목</th>
+					<th id="th2">작성자</th>
+					<th id="th3">작성일</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -146,15 +214,26 @@
 			</tbody>
 		</table>
 	<div id="paging">
-		<c:if test="${startPage > 1 }" >이전</c:if>
+		<ul class="pagination">
+<%-- 		<c:if test="${startPage > 1 }" >이전</c:if>
 		<c:forEach begin="${startPage }" end="${endPage }" step="1" var="i">
 			<a href="noticelist?p=${i}">${i}</a>
 		</c:forEach>
-		<c:if test="${endPage < pageCount }"> 다음 </c:if>
+		<c:if test="${endPage < pageCount }"> 다음 </c:if> --%>
+			<c:if test="${startPage > 1 }" >
+				<li><a href="noticelist?p=${startPage-1}">이전</a></li> </c:if>
+			<c:forEach begin="${startPage }" end="${endPage }" step="1" var="i">
+				<li><a href="noticelist?p=${i}">${i}</a></li>
+			</c:forEach>
+			<c:if test="${endPage < pageCount }">
+				<li><a href="noticelist?p=${endPage+1}">다음</a></li> </c:if>
+		</ul>
+		
+	
+	
+	
 	</div>
 	
-	  <input type="text" name="keyword" id="keywordInput" />
-    <button id="searchBtn" type="button">검색</button>
 </section>
 </main>
 

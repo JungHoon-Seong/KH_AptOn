@@ -1,8 +1,11 @@
 package kh.teamproject.apton.admin.notice.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -13,10 +16,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import kh.teamproject.apton.admin.model.vo.Admin;
 import kh.teamproject.apton.admin.notice.service.NoticeInterface;
 import kh.teamproject.apton.admin.notice.service.NoticeService;
 import kh.teamproject.apton.admin.notice.vo.Notice;
 import kh.teamproject.apton.defectreception.model.vo.DrBoard;
+import kh.teamproject.apton.member.model.vo.Member;
 import kh.teamproject.apton.votesign.model.vo.VoteInfo;
 
 @Controller
@@ -117,7 +122,8 @@ public class NoticeController {
 	}
 	
 	@RequestMapping(value = "/adnoticelist", method = RequestMethod.GET)
-	public ModelAndView selectAdNoticelist(ModelAndView mv, String clickedPage, @RequestParam(value = "p", defaultValue = "1")String pageNum) {
+	public ModelAndView selectAdNoticelist(ModelAndView mv, String clickedPage, @RequestParam(value = "p", defaultValue = "1")String pageNum,
+			HttpServletRequest request,HttpServletResponse response) throws IOException {
 		String viewPage = "error/commonError"; //기본페이지 에러페이지로 동일하게 설정함
 		
 		final int PAGE_SIZE = 6;
@@ -125,6 +131,18 @@ public class NoticeController {
 		int currentPage = 1;
 		int listCount = 0;
 		int pageCount = 0;
+		
+//		Admin admin = (Admin) request.getSession().getAttribute("admin");
+//		//관리자로그인 확인 조건문
+//		if(admin == null) {
+//		PrintWriter out = response.getWriter();
+////		if(member == null) {
+//			response.setContentType("text/html; charset=UTF-8");
+//			 
+//			out.println("<script>alert('관리자 로그인이 필요합니다'); location.href='./login';</script>");
+//			 
+//			out.flush();
+//		} 
 		try {
 			listCount =noticeService.getListCount();
 			viewPage = "/notice/admin_notice";

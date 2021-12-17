@@ -82,39 +82,8 @@
  }
  
  /*상세페이지  */
- .tolist{
-    width: 80px;
-    height: 40px;
-	margin-top:50px;
-	font-size:15px;
-	border : 1px solid rgba(159,220,120,0.5);
-	background-color: rgba(159,220,120,0.5);
-	padding-top:4px;
-	padding-bottom:4px;
-	box-shadow: 3px 3px 0 rgba(159,220,120,1);
-	overflow: hidden;
-	white-space: nowrap;
-	display: block;
-	text-overflow: ellipsis;
-	}
-.tolist:hover{
-	font-size:13px;
-	border : 1px solid rgb(233, 202, 155);
-	border-radius:5px;
-	background-color: rgb(233, 202, 155);
-	box-shadow: 3px 3px 0 #D04B4D;
-	}
-    .tolist:active{
-	font-size:13px;
-	border : 1px solid rgb(233, 202, 155);
-	border-radius:5px;
-	background-color: rgb(233, 202, 155);
-	box-shadow: 1px 1px 0 #D04B4D;
-	position: relative;
-	top:2px;
-	left:2px;
-	}
-
+  
+  
 #th1{
 	width:600px;
 	height:35px;
@@ -154,7 +123,17 @@ td{
     margin-left: 550px;
     margin-top:15px;
      margin-bottom:15px;
+      width: 100px;
+ height: 40px;
+ border: 1px solid skyblue;
+  background-color: rgba(0,0,0,0);
+  color: skyblue
 }
+
+ #tolist2:hover{ 
+  color:white; 
+  background-color: skyblue; 
+  }
 #tolist1{
     margin-left: 1000px;
 }
