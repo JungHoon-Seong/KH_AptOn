@@ -1,14 +1,11 @@
 package kh.teamproject.apton.defectreception.model.dao;
 
-import java.io.IOException;
-import java.io.InputStream;
+
 import java.util.List;
 
-import org.apache.ibatis.io.Resources;
+
 import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
-import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -19,21 +16,7 @@ public class BoardDefectreceptionDao {
 	
 	public static final int deleteBoard = 0;
 
-	//TODO SJH autocommit을 끄기 위해 추가했으나  getSqlSessionFactory메소드를 꼭 써야하는지 확인이 필요함
-	private SqlSessionFactory getSqlSessionFactory() {
-		String resource = "/mybatis-config.xml";
-		SqlSessionFactory factory = null;
-		try {
-			// InputStream으로 Mybatis의 설정 정보를 읽어 온다
-			InputStream inputStream = Resources.getResourceAsStream(resource);
-			// 읽어 온 Mybatis의 설정 정보를 바탕으로 SqlSessionFactoryBuilder를 생성한다
-			SqlSessionFactoryBuilder builder = new SqlSessionFactoryBuilder();
-			factory = builder.build(inputStream);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return factory;
-	}
+	
 	
 	@Autowired
 	private SqlSession sqlSession;

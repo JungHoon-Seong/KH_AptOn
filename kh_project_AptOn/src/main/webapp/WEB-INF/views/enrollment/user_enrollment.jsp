@@ -191,6 +191,8 @@ li {
 <ul>
 	<li id="imgText"><img src="resources/img/logo.png" alt="회원가입이미지" class="img">  with APTON</li>
 	<li id="liTextApartName">노원 롯데 캐슬 회원가입</li>
+	<br>
+	<br>
 	<li class="liText"><label for='userHouseNum'>가구번호</label></li>
 	<!-- 7자리인 이유는 동수 3자리 호수4자리이므로 -->
 	<li>

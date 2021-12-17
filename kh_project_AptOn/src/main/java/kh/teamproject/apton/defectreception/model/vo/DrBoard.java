@@ -1,6 +1,5 @@
 package kh.teamproject.apton.defectreception.model.vo;
 
-import org.springframework.web.multipart.MultipartFile;
 
 public class DrBoard {
 	

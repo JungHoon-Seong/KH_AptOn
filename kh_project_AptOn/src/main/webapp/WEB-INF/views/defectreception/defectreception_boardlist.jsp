@@ -229,9 +229,11 @@ font-family: 'Noto Sans KR', sans-serif;
 				<li><a href="board-defectreception?p=${endPage+1}">다음</a></li> </c:if>
 		</ul>
 	</div>
+	<c:if test="${not empty  memberId}" >
 	<div id="btnWriteBox">
 		<button type='button' id='btnwrite' onclick='writescript()'>민원 작성</button>
 	</div>
+	</c:if>
 	
 </section>
 </main>

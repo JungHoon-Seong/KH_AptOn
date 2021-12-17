@@ -64,9 +64,7 @@ public class EnrollmentController {
 			HttpServletRequest request,
 			HttpServletResponse response) {
 		String viewPage = "error/commonError"; //기본페이지 에러페이지로 동일하게 설정함
-		
-		Member memberId = (Member)request.getSession().getAttribute("member");
-		
+				
 		
 		
 		Member vo = new Member(userHouseNum, userPassword, userName, phone);

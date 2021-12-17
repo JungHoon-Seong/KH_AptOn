@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import kh.teamproject.apton.defectreception.model.dao.BoardDefectreceptionDao;
 import kh.teamproject.apton.defectreception.model.vo.DrBoard;
-import kh.teamproject.apton.member.model.dao.MemberDao;
 
 
 

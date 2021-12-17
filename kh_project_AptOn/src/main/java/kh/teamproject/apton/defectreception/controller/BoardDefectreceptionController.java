@@ -1,6 +1,6 @@
 package kh.teamproject.apton.defectreception.controller;
 
-import java.io.File;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
@@ -52,15 +52,14 @@ public class BoardDefectreceptionController {
 		String viewPage = "error/commonError"; //기본페이지 에러페이지로 동일하게 설정함
 		
 		Member member = (Member)request.getSession().getAttribute("member");
-//		Admin admin = (Admin) request.getSession().getAttribute("admin");
+		Admin admin = (Admin) request.getSession().getAttribute("admin");
 		//회원로그인 확인 조건문
-//		if((member == null) && (admin == null)) {
-		if(member == null) {
+		if((member == null) && (admin == null)) {
+		PrintWriter out = response.getWriter();
+//		if(member == null) {
 			response.setContentType("text/html; charset=UTF-8");
 			 
-			PrintWriter out = response.getWriter();
-			 
-			out.println("<script>alert('회원 로그인이 필요합니다'); location.href='./login';</script>");
+			out.println("<script>alert('로그인이 필요합니다'); location.href='./login';</script>");
 			 
 			out.flush();
 		} 
@@ -151,7 +150,9 @@ public class BoardDefectreceptionController {
 			e.printStackTrace();
 		}
 		mv.addObject("drbList",drbList);
-		mv.addObject("memberId",memberId.getHouseNum());
+		if (memberId != null) {
+			mv.addObject("memberId",memberId.getHouseNum());
+		}
 		mv.setViewName(viewPage);
 		
 		return mv;
@@ -167,7 +168,7 @@ public class BoardDefectreceptionController {
 			@RequestParam(value="c" , defaultValue = "0")String Content,
 			@RequestParam("image") MultipartFile image,
 			HttpServletRequest request){
-		String viewPage = "error/commonError"; //기본페이지 에러페이지로 동일하게 설정함
+		
 		
 		int drBoardResult = 0;
 		
@@ -189,16 +190,6 @@ public class BoardDefectreceptionController {
 		}else if(image == null) {
 			DrBoard dvo = new DrBoard(houseNum, adminId, title,Content,state,ProcessingDetail);
 			drBoardResult = boardService.insertBoard(dvo);
-		}
-		
-		
-			
-		if (drBoardResult == 0) {
-			viewPage= "error/commonError";
-			mv.addObject("msg" , "게시판 오류 발생");
-			mv.addObject("url" , "index");
-		}else {
-			viewPage= "./board-defectreception";
 		}
 		
 		
@@ -276,19 +267,9 @@ public class BoardDefectreceptionController {
 	public String deleteContent(ModelAndView mv, @RequestParam(value="no" , defaultValue = "0")int drno) {
 		
 		//보안 높일려면 가구번호랑 세션아디 비교하여 확인기능 필요할듯  
-		String viewPage = "error/commonError";
-		int drBoardResult = 0;
+		
 		DrBoard bvo = new DrBoard(drno);
-		drBoardResult = boardService.deleteBoard(bvo);
-		
-		if (drBoardResult == 0) {
-			viewPage= "error/commonError";
-			mv.addObject("msg" , "게시판 오류 발생");
-			mv.addObject("url" , "index");
-		}else {
-			viewPage= "./board-defectreception";
-		}
-		
+		boardService.deleteBoard(bvo);
 		
 		return "redirect: ./board-defectreception";
 	}

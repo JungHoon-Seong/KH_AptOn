@@ -1,6 +1,6 @@
 package kh.teamproject.apton.manage.controller;
 
-import java.io.File;
+
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
@@ -189,18 +189,11 @@ public class ManageDefectreceptionController {
 	@RequestMapping(value = "manage-drdelete", method = RequestMethod.GET)
 	public String deleteContentForceful(ModelAndView mv, @RequestParam(value = "no", defaultValue = "0" ) int drno) {
 		
-		String viewPage = "error/commonError";
-		int drBoardResult = 0;
-		DrBoard bvo = new DrBoard(drno);
-		drBoardResult = manageDfboardService.deleteBoardForceful(bvo);
 		
-		if(drBoardResult == 0) {
-			viewPage = "error/commonError";
-			mv.addObject("msg", "게시글 오류 발생");
-			mv.addObject("url", "index");
-		}else {
-			viewPage ="./manage-dr";
-		}
+		DrBoard bvo = new DrBoard(drno);
+		manageDfboardService.deleteBoardForceful(bvo);
+		
+
 		
 		return "redirect: ./manage-dr";
 	}
