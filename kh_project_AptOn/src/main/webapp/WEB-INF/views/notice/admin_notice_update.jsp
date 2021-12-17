@@ -39,13 +39,16 @@
   <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
   
   <style>
-  #adminmain{
-	margin-top:100px;
-}
+
  #mainsection {
- 	float: left;
+ 	 font-family: 'Noto Sans KR', sans-serif;
  	width: 1200px;
- }
+    display: flex;
+    background-color: white;
+    padding-bottom: 100px; 
+    padding-left: 100px;
+    padding-right: 100px; }
+    
          .ck.ck-editor {
             max-width: 1500px;
         }
@@ -53,6 +56,139 @@
         .ck-editor__editable {
             min-height: 400px;
         }
+ .tolist{
+    width: 60px;
+    height: 30px;
+	margin-top:15px;
+	font-size:13px;
+	border : 1px solid rgba(159,220,120,0.5);
+	background-color: rgba(159,220,120,0.5);
+	padding-top:4px;
+	padding-bottom:4px;
+	box-shadow: 3px 3px 0 rgba(159,220,120,1);
+	overflow: hidden;
+	white-space: nowrap;
+	display: block;
+	text-overflow: ellipsis;
+	}
+.tolist:hover{
+	font-size:13px;
+	border : 1px solid rgba(159,220,120,1);
+	border-radius:5px;
+	background-color: rgba(159,220,120,1);
+	box-shadow: 3px 3px 0 #D04B4D;
+	}
+    .tolist:active{
+	font-size:13px;
+	border : 1px solid rgba(159,220,120,1);
+	border-radius:5px;
+	background-color: rgba(159,220,120,1);
+	box-shadow: 1px 1px 0 #D04B4D;
+	position: relative;
+	top:2px;
+	left:2px;
+	}
+
+#th1{
+	width:600px;
+	height:35px;
+	text-align:left;
+	padding:0 5px 0 5px;
+	background-color:#ffebcd;
+	border-bottom: 1px solid #b4b1b1;
+}
+
+td{
+		word-break:break-all;
+		word-wrap:break-word;
+	}
+ #td1{
+     width:800px;
+     border-bottom: 1px solid #b4b1b1;
+ }   
+     th,td{
+        
+        
+        padding: 10px;
+    } 
+    #div1{
+	width: 1100px;
+	margin-left:50px;
+	margin-top:100px;
+	float:left;
+}
+#maintable{
+    border-top: 1px solid #b4b1b1;
+    border-collapse: collapse;
+
+
+}
+#tolist2{
+    margin-left: 525px;
+    margin-top:-28px;
+}
+#tolist1{
+    margin-left: 1000px;
+}
+#contenttd{
+width:1050px; 
+} 
+
+ #noticetitle{
+     width: 100%;
+    border: 0;
+    font-size: 15px;
+    padding-left: 10px;
+ }  
+ 
+ 
+  .enrollbtn{
+ 	text-align:center;
+ 	height:30px;
+	width:90px;
+	font-size:15px;
+	border : 1px solid rgba(159,220,120,0.5);
+	border-radius:5px;
+	background-color: rgba(159,220,120,0.5);
+	padding-top:4px;
+	padding-bottom:4px;
+	box-shadow: 3px 3px 0 rgba(159,220,120,1);
+	overflow: hidden;
+	white-space: nowrap;
+	display: block;
+	text-overflow: ellipsis;
+/* 	margin-left:500px;
+	margin-top:20px; */
+	}
+.enrollbtn:hover{
+	font-size:15px;
+	border : 1px solid rgba(159,220,120,1);
+	border-radius:5px;
+	background-color: rgba(159,220,120,1);
+	box-shadow: 3px 3px 0 #D04B4D;
+	}
+.enrollbtn:active{
+	font-size:15px;
+	border : 1px solid rgba(159,220,120,1);
+	border-radius:5px;
+	background-color: rgba(159,220,120,1);
+	box-shadow: 1px 1px 0 #D04B4D;
+	position: relative;
+	top:2px;
+	left:2px;
+	} 
+
+#backbtn{
+	margin-left:420px;
+	margin-top:-28px;
+}
+#updatebtn{
+	margin-left:920px;
+	margin-top:0px;
+}
+
+ 
+       
   
   </style>
   
@@ -66,29 +202,30 @@
 
 <main id="adminmain">
 <section id="mainsection">
+	    <div id="div1">
 	    <h3>공지사항 수정</h3>
 <table id="maintable">
 	<c:forEach items="${noticelist}" var="detail">
 		 <thead>
             <tr>
-                <th>제목</th>
-                <td>
+                <th id="th1">제목</th>
+                <td colspan="5" id="td1">
                  <input type="text" id="noticetitle" name="noticetitle" placeholder="제목" value= "${detail.notice_title }">
             	</td>
             </tr>
             <tr>
-                <th>글 번호: </th>
-                <td>${detail.notice_num }</td>
-                <th>작성자: </th>
-                <td>${detail.admin_id }</td>
-                <th>작성일: </th>
-                <td>${detail.notice_date }</td> 
+                <th id="th1">글 번호: </th>
+                <td id="td1">${detail.notice_num }</td>
+                <th id="th1">작성자: </th>
+                <td id="td1">${detail.admin_id }</td>
+                <th id="th1">작성일: </th>
+                <td id="td1">${detail.notice_date }</td> 
             </tr>
         </thead>
         <tbody>
                 <tr>
    
-                <td>
+                <td colspan="6">
                 <textarea id="ckeditor" name="noticecontent" placeholder="내용을 입력하세요" >${detail.notice_content}</textarea>
                 </td>
                  
@@ -96,13 +233,14 @@
 	
 	</table>
 
-        <button type="button" id="updatebtn" name="updatebtn" >수정하기</button>
-        <button onclick="location.href = '/apton/adnoticelist' ">목록</button>
+        <button type="button" id="updatebtn" name="updatebtn" class="enrollbtn">수정하기</button>
+        <button onclick="location.href = '/apton/adnoticelist' " id="backbtn" class="enrollbtn">목록</button>
      
     <script>
     CKEDITOR.replace( 'ckeditor',{
     	uiColor: '#ffebcd',
     	height : '300px',
+    	width : '1000px',
     	on: {
     		//글자수제한 기능
             change: function() {
@@ -166,14 +304,13 @@ $('#updatebtn').on("click",function() {
 })
 
 </script>	
+</div>
 	</c:forEach>	
 	</form>
 	
 </section>
 </main>
-<br>
-adminmain 바깥의 영역입니다. 사이드바에 밀려나지 않습니다.
-
+<jsp:include page="../footer.jsp" flush="true" />
 
     
 </body>

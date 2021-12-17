@@ -43,16 +43,83 @@
 	margin-top:100px;
 }
  #mainsection {
- 	float: left;
- 	width: 1200px;
- }
-         .ck.ck-editor {
-            max-width: 1500px;
-        }
+ 	 font-family: 'Noto Sans KR', sans-serif;
+ 	width: 1300px;
+    display: flex;
+    background-color: white;
+    padding-bottom: 100px; 
+    padding-left: 100px;
+    padding-right: 100px; }
+   .th1{
+	width: 100px;
+	height:35px;
+	text-align:left;
+	padding:0 5px 0 5px;
+	background-color:#ffebcd;
+    font-size: 20px;
+}
 
-        .ck-editor__editable {
-            min-height: 400px;
-        }
+td{
+    padding: 0px;
+    
+}
+
+ #title{
+     width: 100%;
+    height: 50px;
+    border: 0;
+    font-size: 15px;
+    padding-left: 10px;
+ }  
+   
+ .enrollbtn{
+ 	text-align:center;
+ 	height:30px;
+	width:90px;
+	font-size:15px;
+	border : 1px solid rgba(159,220,120,0.5);
+	border-radius:5px;
+	background-color: rgba(159,220,120,0.5);
+	padding-top:4px;
+	padding-bottom:4px;
+	box-shadow: 3px 3px 0 rgba(159,220,120,1);
+	overflow: hidden;
+	white-space: nowrap;
+	display: block;
+	text-overflow: ellipsis;
+/* 	margin-left:500px;
+	margin-top:20px; */
+	}
+.enrollbtn:hover{
+	font-size:15px;
+	border : 1px solid rgba(159,220,120,1);
+	border-radius:5px;
+	background-color: rgba(159,220,120,1);
+	box-shadow: 3px 3px 0 #D04B4D;
+	}
+.enrollbtn:active{
+	font-size:15px;
+	border : 1px solid rgba(159,220,120,1);
+	border-radius:5px;
+	background-color: rgba(159,220,120,1);
+	box-shadow: 1px 1px 0 #D04B4D;
+	position: relative;
+	top:2px;
+	left:2px;
+	} 
+input:focus, textarea:focus{    
+ outline: none; 
+ }
+#backbtn{
+	margin-left:500px;
+	margin-top:-30px;
+}
+#insertbtn{
+	margin-left:1000px;
+	margin-top:10px;
+}
+
+
   
   </style>
   
@@ -66,32 +133,33 @@
 
 <main id="adminmain">
 <section id="mainsection">
-	    <h3>공지사항 등록</h3>
-
+ 	<div id="inputdiv">
+	   <h2>공지사항 등록</h2>
         <table id="maintable">
             <thead>
-                <tr>
-                    <td>
-                        <input type="text" id="noticetitle" name="noticetitle" placeholder="제목">
-                    </td>
+                <tr >
+                        <th id="titleth" class="th1" >제목</th>
+                        <td><input id="title" type="text"  name="noticetitle" placeholder="제목을 입력하세요"></td>
+                    
                 </tr>
                 <tr>
+                    <th  class="th1">내용</th>
                     <td>
                         <textarea id="ckeditor" name="noticecontent" placeholder="내용을 입력하세요"></textarea>
-
                     </td>
                 </tr>
             </thead>
             <tbody>
-
         </table>
-        <button type="button" id="insertbtn" name="insertbtn" >등록</button>
-        <button onclick="location.href = '/apton/adnoticelist' ">목록</button>
+        <button type="button" id="insertbtn" name="insertbtn" class="enrollbtn">등록</button>
+        <button onclick="location.href = '/apton/adnoticelist' " id="backbtn" class="enrollbtn">목록</button>
+        </div>
    
     <script>
     CKEDITOR.replace( 'ckeditor',{
     	uiColor: '#ffebcd',
     	height : '300px',
+    	width : '1000px',
     	on: {
     		//글자수제한 기능
             change: function() {
@@ -130,14 +198,32 @@
     });
     
 $('#insertbtn').on("click",function() {
+	// 3. 제목 입력
+	if(!$("#title").val()){
+		alert("제목을 입력해주세요.");
+		$("#title").focus();
+		return;
+	};
+	var blank_pattern = /^\s+|\s+$/g;
+	if($("#title").val().replace(blank_pattern)==""){
+		alert("제목에 공백만 적을 수는 없습니다.");
+		$("#title").focus();
+		return;
+	}
 	var ckdata = CKEDITOR.instances['ckeditor'].getData();
 	ckdata.replace(/<(\/div|div)([^>]*)>/gi,"");
+	
+	// 4. 내용입력
+	if(!(CKEDITOR.instances['ckeditor'].getData())){
+		alert("내용을 입력해주세요.");
+		return;
+	};
 	var adminid = "${admin.adminId }";
 	$.ajax({
 		url: "notice_insert",
 		type: "POST",
 		data: {
-			noticetitle : $("#noticetitle").val(),
+			noticetitle : $("#title").val(),
 			adminId : adminid,
 			content : ckdata
 	},

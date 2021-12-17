@@ -39,9 +39,6 @@
   <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
   
   <style>
-  #adminmain{
-	margin-top:100px;
-}
  #mainsection {
  	float: left;
  	width: 1200px;
@@ -127,6 +124,7 @@ width:1050px;
 <body>
 <jsp:include page="../header4admin.jsp" flush="true" />
     <div id="div1">
+    <h3>공지사항</h3>
     <table id="maintable" >
         <c:forEach items="${noticelist}" var="detail">
              <thead>

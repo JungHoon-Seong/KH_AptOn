@@ -52,7 +52,7 @@
  }
  table {
 	 border: 1px solid black;
-	 width: 1200px;
+	 width: 1100px;
 	 text-align: center;
  }
  #rowheader {
@@ -128,7 +128,7 @@ td{
 		word-wrap:break-word;
 	}
  #td1{
-     width:800px;
+     width:700px;
      text-align:left;
  }   
      th,td{
@@ -137,10 +137,11 @@ td{
         padding: 10px;
     } 
     #div1{
-	width: 1100px;
+	width: 1000px;
 	margin-left:50px;
 	margin-top:50px;
 	float:left;
+	padding-right:  100px;
 }
 #maintable{
     border-top: 1px solid #b4b1b1;
@@ -158,7 +159,7 @@ td{
     margin-left: 1000px;
 }
 #contenttd{
-width:1050px; 
+width:1000px; 
 }
  </style>
    
