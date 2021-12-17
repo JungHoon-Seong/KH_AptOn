@@ -98,8 +98,8 @@ font-family: 'Noto Sans KR', sans-serif;
  	height: 375px;
  }
  .img {
- 	width: 500px;
- 	height: 200px;
+ 	max-width: 100%;
+  	
  }
   #btnUpdate {
 	 broder: none;
@@ -137,7 +137,8 @@ font-family: 'Noto Sans KR', sans-serif;
 	background-color: rgba(159,220,120,0.5);
  }
   #btnUpdate:hover{
-	font-size:13px;
+	font-size:16px;
+	margin: 4px 2px;
 	border : 1px solid rgba(159,220,120,1);
 	border-radius:5px;
 	background-color: #008CBA;
@@ -145,7 +146,8 @@ font-family: 'Noto Sans KR', sans-serif;
 	transition: all 0.5s;
 	}
  #btnDelete:hover{
-	font-size:13px;
+	font-size:16px;
+	margin: 4px 2px;
 	border : 1px solid rgba(159,220,120,1);
 	border-radius:5px;
 	background-color: #f44336;
@@ -153,7 +155,8 @@ font-family: 'Noto Sans KR', sans-serif;
 	transition: all 0.5s;
 	}
  #btnToList:hover{
-	font-size:13px;
+	font-size:16px;
+	margin: 4px 2px;
 	border : 1px solid rgba(159,220,120,1);
 	border-radius:5px;
 	background-color: rgba(159,220,120,0.5);
@@ -238,8 +241,8 @@ font-family: 'Noto Sans KR', sans-serif;
 		
 	
 		<tr>
-			<td class="header">이미지</td>
-			<td colspan="3"><img src="${vo.drImage }" class="img" onerror="this.src='resources/img/logo.png'" alt='' /> </td>
+			
+			<td colspan="4"><img src="${vo.drImage }" class="img" onerror="this.src='resources/img/logo.png'" alt='' /> </td>
 				
 		</tr>
 		<tr>

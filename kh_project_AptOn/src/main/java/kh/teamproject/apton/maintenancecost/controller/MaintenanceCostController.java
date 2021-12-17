@@ -6,13 +6,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import kh.teamproject.apton.maintenancecost.model.service.MaintenanceCostService;
+import kh.teamproject.apton.maintenancecost.model.service.MaintenanceCost;
+
+
 
 @Controller
 public class MaintenanceCostController {
 	
 	@Autowired
-	private MaintenanceCostService mCostService;
+	private MaintenanceCost mCostService;
 	
 	@RequestMapping(value = "maintencost", method = RequestMethod.GET)
 	public ModelAndView mainCost(ModelAndView mv) {

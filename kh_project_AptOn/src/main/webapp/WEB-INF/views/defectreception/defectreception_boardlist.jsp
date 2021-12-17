@@ -102,7 +102,7 @@ font-family: 'Noto Sans KR', sans-serif;
 	 border: none;
 	 border-radius: 5px;
 	 color: white;
-	 padding: 15px 32px;
+	 padding: 10px 20px;
 	 text-align: center;
 	 font-size: 16px;
 	 margin: 4px 2px;
@@ -110,7 +110,8 @@ font-family: 'Noto Sans KR', sans-serif;
 	 background-color: #008CBA;
  }
    #btnwrite:hover{
-	font-size:13px;
+	font-size:16px;
+	margin: 4px 2px;
 	border : 1px solid rgba(159,220,120,1);
 	border-radius:5px;
 	background-color: #008CBA;

@@ -70,22 +70,15 @@ font-family: 'Noto Sans KR', sans-serif;
  	width: 200px;
  }
  #main {
+ 	
  	margin: auto;
+ 	margin-top: 140px;
  	width: 1000px;
  }
  #mainsection {
- 	margin: auto;
+ 	
+ 	text-align: center;
  	width: 1000px;
- }
- table {
-	 border: 1px solid black;
-	 width: 1000px;
-	 text-align: center;
- }
- #rowheader {
-	 font-weight: bold;
-	 text-align: center;
-	 background-color: #ffebcd;
  }
  .completestate {
 	 font-weight: bold;
@@ -101,8 +94,7 @@ font-family: 'Noto Sans KR', sans-serif;
  	float: right;
  }
  button{
- 	 width: 150px;
-	 broder: none;
+ 	 width: 140px;
 	 border-radius: 5px;
 	 color: white;
 	 padding: 15px 32px;
@@ -111,8 +103,23 @@ font-family: 'Noto Sans KR', sans-serif;
 	 margin: 4px 2px;
 	 cursor: pointer;
 	 background-color: #008CBA;
+	 border-color: #008CBA;
  }
+ button[type=reset]{
+ 	 width: 140px;
+	 border-radius: 5px;
+	 color: white;
+	 padding: 15px 32px;
+	 text-align: center;
+	 font-size: 16px;
+	 margin: 4px 2px;
+	 cursor: pointer;
+	 background-color: #f0ad4e;
+	 border-color: #f0ad4e;
+ }
+ 
   h2 {
+  	 text-align: center;
 	 margin-top: 200px;
 	 margin-left: 200px;
  }
@@ -123,6 +130,29 @@ span {
 input[type="number"]::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
+}
+
+.liText {
+	margin-right: 140px;
+}
+#liTextuserPasswordChk {
+	margin-right: 100px;
+}
+#liTextuserName {
+	margin-right: 178px;
+}
+#imgText{
+	color: #3498db;
+}
+
+#liTextApartName { 
+	font-weight: 600;
+	}
+form {
+	text-align: left;
+}
+li {
+	
 }
  </style>
   
@@ -144,7 +174,7 @@ input[type="number"]::-webkit-inner-spin-button {
 
 
 <main id="main">
-<h2>노원 롯데 캐슬 - 회원가입</h2>
+
 
 <aside id="aside">
 <!-- 메뉴이름 및 링크는 추후 결정 -->
@@ -159,7 +189,9 @@ input[type="number"]::-webkit-inner-spin-button {
 <fieldset>
 <legend></legend>
 <ul>
-	<li><label for='userHouseNum'>가구번호</label></li>
+	<li id="imgText"><img src="resources/img/logo.png" alt="회원가입이미지" class="img">  with APTON</li>
+	<li id="liTextApartName">노원 롯데 캐슬 회원가입</li>
+	<li class="liText"><label for='userHouseNum'>가구번호</label></li>
 	<!-- 7자리인 이유는 동수 3자리 호수4자리이므로 -->
 	<li>
 		<input type="number" name='userHouseNum' maxlength="7" id="userHouseNum" size='7' oninput="maxLengthCheck(this)" required /> 
@@ -169,29 +201,32 @@ input[type="number"]::-webkit-inner-spin-button {
 	<br>
 	<br>
 	<!-- 일단 기존회원 비밀번호에 조건이 없으므로 정규표현식을 스크립트에 적용하지 않았음-->
-	<li><label for="userPassword">비밀번호</label></li>
+	<li class="liText"><label for="userPassword">비밀번호</label></li>
 	<li><input type="password" name='userPassword' id="userPassword" minlength="4" maxlength="20" size='20' required autocomplete="off"/></li>
 	<span>4글자이상 20자 이하로 작성해주세요</span>
 	<br>
 	<br>
-	<li><label for="userPasswordChk">비밀번호 확인</label></li>
+	<li class="liText" id="liTextuserPasswordChk"><label for="userPasswordChk">비밀번호 확인</label></li>
 	<li><input type="password" name='userPasswordChk' id="userPasswordChk" minlength="4" maxlength="20" size='20' required autocomplete="off"/></li>
 	<span>비밀번호와 동일하게 작성해주세요</span>
 	<br>
 	<br>
-	<li><label for='userName'>이름</label></li>
+	<li class="liText" id="liTextuserName"><label for='userName'>이름</label></li>
 	<li><input type="text" name='userName' id="userName" maxlength="20" size='20' required /></li>
 	<br>
 	<br>
-	<li><label for='phone'>전화번호</label></li>
+	<li class="liText"><label for='phone'>전화번호</label></li>
 	<li><input type="text" name='phone' id="phone" maxlength="11" placeholder="0*[*]***[*]****" required></li>
 	<br>
 	<br>
 	<li>
-<button>회원가입</button>   
-<button type="reset">취소</button>
+
 </li>
 </ul>
+<div id="btnBox">
+	<button>회원가입</button>   
+	<button type="reset">취소</button>
+</div>
 </fieldset>
 </form>
 	

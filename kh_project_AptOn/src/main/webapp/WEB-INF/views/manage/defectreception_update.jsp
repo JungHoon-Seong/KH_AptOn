@@ -110,7 +110,8 @@ ul {
 	 background-color: #f44336;
  }
   #btnUpdate:hover{
-	font-size:13px;
+	font-size:16px;
+	margin: 4px 2px;
 	border : 1px solid rgba(159,220,120,1);
 	border-radius:5px;
 	background-color: #008CBA;
@@ -118,7 +119,8 @@ ul {
 	transition: all 0.5s;
  }
  #btnToBack:hover{
-	font-size:13px;
+	font-size:16px;
+	margin: 4px 2px;
 	border : 1px solid rgba(159,220,120,1);
 	border-radius:5px;
 	background-color: #f44336;
