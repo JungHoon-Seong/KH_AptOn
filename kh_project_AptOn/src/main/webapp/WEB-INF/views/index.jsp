@@ -37,6 +37,7 @@
   <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
   <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
   
+ 
   <style>
   #wrapchart{
   	margin:auto;
@@ -419,9 +420,11 @@ select:hover {border: 1px solid #aaa;} /* 마우스오버 */
       dataType:'json',
       async:false,
       success : function(data){
+    	
         //3 7 25
-        //console.log(data);
-        //console.log(typeof data['rentBikeStatus']['row']);
+        console.log("따릉이");
+        console.log(data);
+        console.log(typeof data['rentBikeStatus']['row']);
         
         var str = JSON.stringify(data['rentBikeStatus']['row']);
         cycleData = JSON.parse(str);
@@ -442,9 +445,15 @@ select:hover {border: 1px solid #aaa;} /* 마우스오버 */
           };
       },
       error : function(msg){
-        alert(msg);
+    	  console.log(JSON.stringify(msg));
+    	  console.log(msg);
+    	  $("#cycleInfo").html("<b style='color:red'>서버오류가 발생했습니다.</b>");
+    	  cycleData = "500";
       }
     })
+    if(cycleData="500"){
+    	
+    } else{
     $("#cycleOption option").prop("selected", false);
 	for(var i=0;i<30;i++){
 		if(cycleData[i]['stationName'].includes($.trim($("#cycleOption option:selected").val()))){
@@ -452,6 +461,8 @@ select:hover {border: 1px solid #aaa;} /* 마우스오버 */
 			break;
 		}
 	}
+    	
+    }
     // 선택하면 정보 보이게
     $("#cycleOption").on('change', function(){
     	for(var i=0;i<30;i++){
