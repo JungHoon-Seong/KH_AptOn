@@ -13,11 +13,18 @@
 		<result property="disinCost" column="DISIN_COST"/>
 		<result property="elecCost" column="ELEC_COST"/>
 		<result property="houseWaterCost" column="HOUSE_WATER_COST"/>
-		<result property="maintenanceCostDate" column="MAINTENANCE_COST"/>
+		<result property="maintenanceCostDate" column="MAINTENANCE_COST_DATE"/>
+		<result property="price" column="PRICE"/>
 		
 	</resultMap>
+	<select id="house_num" parameterType="Mcost" resultMap="McostMap">
+	<![CDATA[
+		select * from maintenance_cost
+		where house_num = #{houseNum}
+		]]>
+	</select>
 	
-	<select id="allcost" parameterType="_long" resultMap="McostMap">
+	<select id="allcost" parameterType="Mcost" resultMap="McostMap">
 	<![CDATA[
 		select * from maintenance_cost
 		where house_num = #{houseNum}
