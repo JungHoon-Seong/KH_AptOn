@@ -109,17 +109,22 @@ input:focus, textarea:focus{
  outline: none; 
  }
 #backbtn{
+position: absolute;
+	margin-top:22px;
 	margin-left:500px;
-	
  width: 100px;
  height: 40px;
  border: 1px solid #ffebcd;
   background-color: rgba(0,0,0,0);
   color: black; 
+ 
+  
 }
 #insertbtn{
+position: absolute;
+	display:inline;
 	margin-left:1000px;
-	margin-top:40px;
+	margin-top:20px;
 	 width: 100px;
  	height: 40px;
  	border: 1px solid #ffebcd; 
@@ -135,11 +140,6 @@ input:focus, textarea:focus{
   color:black; 
   background-color: #ffebcd; 
   }
-  
-  #inputdiv{
-  float: left;
-  }
-
 
   
   </style>

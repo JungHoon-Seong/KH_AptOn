@@ -142,52 +142,43 @@ width:1050px;
  }  
  
  
-  .enrollbtn{
- 	text-align:center;
- 	height:30px;
-	width:90px;
-	font-size:15px;
-	border : 1px solid rgba(159,220,120,0.5);
-	border-radius:5px;
-	background-color: rgba(159,220,120,0.5);
-	padding-top:4px;
-	padding-bottom:4px;
-	box-shadow: 3px 3px 0 rgba(159,220,120,1);
-	overflow: hidden;
-	white-space: nowrap;
-	display: block;
-	text-overflow: ellipsis;
-/* 	margin-left:500px;
-	margin-top:20px; */
-	}
-.enrollbtn:hover{
-	font-size:15px;
-	border : 1px solid rgba(159,220,120,1);
-	border-radius:5px;
-	background-color: rgba(159,220,120,1);
-	box-shadow: 3px 3px 0 #D04B4D;
-	}
-.enrollbtn:active{
-	font-size:15px;
-	border : 1px solid rgba(159,220,120,1);
-	border-radius:5px;
-	background-color: rgba(159,220,120,1);
-	box-shadow: 1px 1px 0 #D04B4D;
-	position: relative;
-	top:2px;
-	left:2px;
-	} 
-
-#backbtn{
-	margin-left:420px;
-	margin-top:-28px;
+ #backbtn{
+position: absolute;
+	margin-top:22px;
+	margin-left:500px;
+ width: 100px;
+ height: 40px;
+ border: 1px solid #FF8200;
+  background-color: rgba(0,0,0,0);
+  color: black; 
+ 
+  
 }
 #updatebtn{
-	margin-left:920px;
-	margin-top:0px;
+position: absolute;
+	display:inline;
+	margin-left:900px;
+	margin-top:20px;
+	 width: 100px;
+ 	height: 40px;
+ 	border: 1px solid #FF8200; 
+ 	background-color: rgba(0,0,0,0); 
+ 	color: #FF8200; 
 }
+#backbtn:hover{ 
+  color:white; 
+  background-color: #FF8200; 
+  }
+  
+   #updatebtn:hover{ 
+  color:white; 
+  background-color: #FF8200; 
+  }
 
- 
+
+ input:focus, textarea:focus{    
+ outline: none; 
+ }
        
   
   </style>
@@ -233,8 +224,8 @@ width:1050px;
 	
 	</table>
 
-        <button type="button" id="updatebtn" name="updatebtn" class="enrollbtn">수정하기</button>
-        <button onclick="location.href = '/apton/adnoticelist' " id="backbtn" class="enrollbtn">목록</button>
+        <button type="button" id="updatebtn" name="updatebtn" >수정하기</button>
+        <button onclick="location.href = '/apton/adnoticelist' " id="backbtn" >목록</button>
      
     <script>
     CKEDITOR.replace( 'ckeditor',{

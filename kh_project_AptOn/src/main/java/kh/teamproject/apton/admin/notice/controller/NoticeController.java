@@ -132,17 +132,17 @@ public class NoticeController {
 		int listCount = 0;
 		int pageCount = 0;
 		
-//		Admin admin = (Admin) request.getSession().getAttribute("admin");
-//		//관리자로그인 확인 조건문
-//		if(admin == null) {
-//		PrintWriter out = response.getWriter();
-////		if(member == null) {
-//			response.setContentType("text/html; charset=UTF-8");
-//			 
-//			out.println("<script>alert('관리자 로그인이 필요합니다'); location.href='./login';</script>");
-//			 
-//			out.flush();
-//		} 
+		Admin admin = (Admin) request.getSession().getAttribute("admin");
+		//관리자로그인 확인 조건문
+		if(admin == null) {
+		PrintWriter out = response.getWriter();
+//		if(member == null) {
+			response.setContentType("text/html; charset=UTF-8");
+			 
+			out.println("<script>alert('관리자 로그인이 필요합니다'); location.href='./login';</script>");
+			 
+			out.flush();
+		} 
 		try {
 			listCount =noticeService.getListCount();
 			viewPage = "/notice/admin_notice";

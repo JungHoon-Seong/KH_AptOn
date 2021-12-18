@@ -39,43 +39,44 @@
   <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
   
   <style>
+
  #mainsection {
  	float: left;
  	width: 1200px;
+ 	padding-bottom: 100px;
  	
  }
- .tolist{
-    width: 60px;
-    height: 30px;
-	margin-top:15px;
-	font-size:13px;
-	border : 1px solid rgba(159,220,120,0.5);
-	background-color: rgba(159,220,120,0.5);
-	padding-top:4px;
-	padding-bottom:4px;
-	box-shadow: 3px 3px 0 rgba(159,220,120,1);
-	overflow: hidden;
-	white-space: nowrap;
-	display: block;
-	text-overflow: ellipsis;
-	}
-.tolist:hover{
-	font-size:13px;
-	border : 1px solid rgba(159,220,120,1);
-	border-radius:5px;
-	background-color: rgba(159,220,120,1);
-	box-shadow: 3px 3px 0 #D04B4D;
-	}
-    .tolist:active{
-	font-size:13px;
-	border : 1px solid rgba(159,220,120,1);
-	border-radius:5px;
-	background-color: rgba(159,220,120,1);
-	box-shadow: 1px 1px 0 #D04B4D;
-	position: relative;
-	top:2px;
-	left:2px;
-	}
+#backbtn{
+ width: 100px;
+ height: 40px;
+     margin-left: 525px;
+    margin-top:20px;
+ border: 1px solid skyblue; 
+ background-color: rgba(0,0,0,0); 
+ color: skyblue;
+ position: absolute;
+
+}
+#modifybtn{
+margin-left:950px;
+margin-top:20px;
+ width: 100px;
+ height: 40px;
+ border: 1px solid skyblue;
+  background-color: rgba(0,0,0,0);
+  color: skyblue;
+  position: absolute;
+  }
+  
+ #backbtn:hover{ 
+  color:white; 
+  background-color: skyblue; 
+  }
+  
+   #modifybtn:hover{ 
+  color:white; 
+  background-color: skyblue; 
+  }
 
 #th1{
 	width:600px;
@@ -110,19 +111,16 @@ td{
     border-bottom: 1px solid #b4b1b1;
     border-right: 1px solid #b4b1b1;
 }
-#tolist2{
-    margin-left: 525px;
-    margin-top:-28px;
-}
-#tolist1{
-    margin-left: 1000px;
-}
+
 #contenttd{
 width:1050px; 
 }
 </style>
 <body>
+
 <jsp:include page="../header4admin.jsp" flush="true" />
+<main id="adminmain">
+<section id="mainsection">
     <div id="div1">
     <h3>공지사항</h3>
     <table id="maintable" >
@@ -147,8 +145,8 @@ width:1050px;
                     <td id = "contenttd" colspan="6">${detail.notice_content}</td>
                     </tr>
                 </table>
-                <button id="tolist1" class="tolist" onclick = "location.href = '/apton/noticeupdate?no=${detail.notice_num}'">수정</button>
-                <button id="tolist2" class="tolist" onclick = "location.href = '/apton/adnoticelist' ">목록</button>
+                <button id="modifybtn"  onclick = "location.href = '/apton/noticeupdate?no=${detail.notice_num}'">수정</button>
+                <button id="backbtn"  onclick = "location.href = '/apton/adnoticelist' ">목록</button>
             </div>
 
         </c:forEach>	

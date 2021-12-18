@@ -129,20 +129,22 @@
 #deletebtn{
  width: 100px;
  height: 40px;
- 
+ margin-top:-30px;
  border: 1px solid skyblue; 
  background-color: rgba(0,0,0,0); 
- color: skyblue
+ color: skyblue;
+ position: absolute;
 
 }
 #insertbtn{
-margin-top: -100px;
-margin-left: 1000px;
+margin-left:950px;
+margin-top:-30px;
  width: 100px;
  height: 40px;
  border: 1px solid skyblue;
   background-color: rgba(0,0,0,0);
-  color: skyblue
+  color: skyblue;
+  position: absolute;
   }
   
  #deletebtn:hover{ 
@@ -154,7 +156,10 @@ margin-left: 1000px;
   color:white; 
   background-color: skyblue; 
   }
-  
+  #btndiv{
+  float: left;
+  display: inline-block;
+  }
 
 
   </style>
@@ -214,11 +219,12 @@ margin-left: 1000px;
 	
 	
 	</div>
-	
+	<div id="btndiv">
 	<button type="button" id="deletebtn" onclick="deleteMsg()">삭제</button>
+	<button type="button" id="insertbtn" onclick = "location.href = '/apton/noticeinsert' ">공지 등록</button>
+	</div>
 	</form>
 	
-	<button id="insertbtn" onclick = "location.href = '/apton/noticeinsert' ">공지 등록</button>
 
 <script type="text/javascript">
 
