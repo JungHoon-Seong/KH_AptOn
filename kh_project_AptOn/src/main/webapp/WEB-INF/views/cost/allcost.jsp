@@ -85,6 +85,7 @@ boby {
 }
 
 #mcost {
+	margin-right: 20px;
 	width: 500px;
 	height: 500px;
 	float: left;
@@ -143,13 +144,13 @@ th, td {
 	String lcleanCost = formatter.format(lastcu.getCleanCost());
 	String secuCost = formatter.format(cu.getSecuCost());
 	String lsecuCost = formatter.format(lastcu.getSecuCost());
-	String elevatorCost = formatter.format(lastcu.getElevatorCost());
+	String elevatorCost = formatter.format(cu.getElevatorCost());
 	String lelevatorCost = formatter.format(lastcu.getElevatorCost());
-	String disinCost = formatter.format(lastcu.getDisinCost());
+	String disinCost = formatter.format(cu.getDisinCost());
 	String ldisinCost = formatter.format(lastcu.getDisinCost());
-	String comWtCost = formatter.format(lastcu.getComWtCost());
+	String comWtCost = formatter.format(cu.getComWtCost());
 	String lcomWtCost = formatter.format(lastcu.getComWtCost());
-	String comElCost = formatter.format(lastcu.getComElCost());
+	String comElCost = formatter.format(cu.getComElCost());
 	String lcomElCost = formatter.format(lastcu.getComElCost());
 	 %>
 	<jsp:include page="../header.jsp" flush="true" />

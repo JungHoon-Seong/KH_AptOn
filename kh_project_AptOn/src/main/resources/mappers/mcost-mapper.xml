@@ -27,7 +27,7 @@
 	<select id="allcost" parameterType="Mcost" resultMap="McostMap">
 	<![CDATA[
 		select * from maintenance_cost
-		where house_num = #{houseNum}
+		where house_num = #{houseNum} and MAINTENANCE_COST_DATE = to_date(#{maintenanceCostDate},'yyyymmdd')
 		]]>
 	</select>
 </mapper>

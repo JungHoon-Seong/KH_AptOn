@@ -17,4 +17,7 @@ public class MaintenanceCostService {
 	public List<MaintenanceCost> select(long house_num) {
 		return mainCostDao.selectOne(house_num);
 	}
+	public MaintenanceCost selectprice(MaintenanceCost vo) {
+		return mainCostDao.selectprice(vo);
+	}
 }

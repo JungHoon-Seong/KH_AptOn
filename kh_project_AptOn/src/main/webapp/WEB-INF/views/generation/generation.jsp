@@ -47,17 +47,6 @@
 <%Generation vo = (Generation) request.getAttribute("gener");%>
 
 <style>
-#allcostmain {
-	ovarflow: hidden;
-}
-#cost_section {
-	padding-top: 70px;
-}
-
-boby {
-	display: block;
-}
-
 header {
 	font-family: 'Noto Sans KR', sans-serif;
 }
@@ -65,11 +54,32 @@ header {
 footer {
 	font-family: 'Noto Sans KR', sans-serif;
 }
+#adminmain{
+	overflow: hidden;
+}
+#contentsection{
+	font-family: 'Noto Sans KR', sans-serif;
+	width : 1300px;
+	margin: 0 auto;
+}
+
+boby {
+	display: block;
+}
+
 #nav {
 	width: 100%;
 	background-color: cornflowerblue;
 }
-
+#main-box{
+	text-align: center;
+}
+#mcost {
+	margin-right: 20px;
+	width: 500px;
+	height: 500px;
+	float: left;
+}
 /* Style the tab */
 .tab {
   overflow: hidden;
@@ -103,33 +113,21 @@ footer {
 <body>
 	<jsp:include page="../header.jsp" flush="true" />
 	
-<main id="allcostmain">
-<section id="cost_section">
+<main id="adminmain">
+<section id="contentsection">
 <div class="tab">
   <button class="w3-bar-item w3-button" onclick="location.href='http://localhost:8090/apton/allcost'">공동 관리비</button>
   <button class="w3-bar-item w3-button" onclick="location.href='http://localhost:8090/apton/maintencost'">개인 관리비</button>
   <button class="w3-bar-item w3-button" onclick="location.href='http://localhost:8090/apton/generation'">에너지 사용량</button>
 </div>
-
-			<div id="nav">
-				<h1>에너지 사용량 조회</h1>
-				<%String date = vo.geteDate();
-				String ym = date.substring(0, 7);
-				long houseNum = vo.getHouseNum();
-				String house = Long.toString(houseNum);
-				String d = house.substring(8,11);
-				String h = house.substring(11,15);
-				long hh = Long.parseLong(h);
-				 %>
-				<h3><%=d %>동 <%=hh %>호 <%= ym %></h3>
-			</div>
 			
-</section>
+	<div id="main-box">
+		<div id="mcost">
+		<div id="piechart" style="width: 900px; height: 500px;"></div>
+		</div>
+	</div>
+  </section>
 </main>
-    		<div id="generation-graph">
-				<div id="piechart" style="width: 900px; height: 500px;"></div>
-			</div>
-  	
 </body>
 <script type="text/javascript">
       google.charts.load('current', {'packages':['corechart']});

@@ -25,12 +25,12 @@ public class MaintenanceCost {
 	private int disinCost;
 	private int elecCost;
 	private int houseWaterCost;
-	private Date maintenanceCostDate;
+	private String maintenanceCostDate;
 	private int price;
 	
 	public MaintenanceCost() {}
 	public MaintenanceCost(long houseNum, int commonCostNum, int mCost, int cleanCost, int secuCost, int elevatorCost,
-			int disinCost, int elecCost, int houseWaterCost, Date maintenanceCostDate, int price) {
+			int disinCost, int elecCost, int houseWaterCost, String maintenanceCostDate, int price) {
 		super();
 		this.houseNum = houseNum;
 		this.commonCostNum = commonCostNum;
@@ -117,11 +117,11 @@ public class MaintenanceCost {
 		this.houseWaterCost = houseWaterCost;
 	}
 
-	public Date getMaintenanceCostDate() {
+	public String getMaintenanceCostDate() {
 		return maintenanceCostDate;
 	}
 
-	public void setMaintenanceCostDate(Date maintenanceCostDate) {
+	public void setMaintenanceCostDate(String maintenanceCostDate) {
 		this.maintenanceCostDate = maintenanceCostDate;
 	}
 

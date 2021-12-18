@@ -4,9 +4,11 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.io.PrintWriter;
 import java.text.ParseException;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,7 +29,7 @@ public class GenerationController {
 	private GenerationService gService;
 	
 	@RequestMapping(value = "generation", method = RequestMethod.GET)
-	public ModelAndView genrationUsage(ModelAndView mv, HttpServletRequest request, Model model) {
+	public ModelAndView genrationUsage(ModelAndView mv, HttpServletRequest request, HttpServletResponse response) throws Exception{
 		Date today = new Date();
 		Date test = null;
 		SimpleDateFormat formate = new SimpleDateFormat("yyyyMM");
@@ -37,16 +39,15 @@ public class GenerationController {
 		System.out.println("현재 날짜 값 -- >" +date);
 		System.out.println(today);
 		String viewpage = "";
-		String msg = null;
 		Member member = (Member)request.getSession().getAttribute("member");
 		// 로그인하지 않으면 볼 수 없음
 		if(member == null) {
-			msg = "로그인 후 이용하세요";
-			viewpage = "login";
-			model.addAttribute("msg", msg);
-			mv.setViewName(viewpage);
-			return mv;
-		} else {
+			PrintWriter out = response.getWriter();
+				response.setContentType("text/html; charset=UTF-8");
+				out.println("<script>alert('로그인이 필요합니다'); location.href='./login';</script>");
+				out.flush();
+				out.close();
+			}  else {
 			long house_num = member.getHouseNum();
 			String dateStr = date+"17";
 			

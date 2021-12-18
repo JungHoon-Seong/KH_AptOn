@@ -19,4 +19,8 @@ public class MaintenanceCostDao {
 		System.out.println("여기 몇개 읽은 값 : "+ result.size());
 		return result;
 	}
+	
+	public MaintenanceCost selectprice(MaintenanceCost vo) {
+		return sqlSession.selectOne("Mcost.allcost", vo);
+	}
 }

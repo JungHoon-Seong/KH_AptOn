@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@page import="java.text.NumberFormat"%>
+<%@page import="java.text.DecimalFormat"%>
+<%@page import="kh.teamproject.apton.maintenancecost.model.vo.MaintenanceCost" %>
+<%MaintenanceCost mc = (MaintenanceCost) request.getAttribute("mcost");
+ MaintenanceCost lastmc = (MaintenanceCost) request.getAttribute("lastmcost");%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -71,6 +76,9 @@ font-family: 'Noto Sans KR', sans-serif;
 footer{
 font-family: 'Noto Sans KR', sans-serif;
 }
+#main-box{
+	text-align: center;
+}
 #main{
 	ovarflow: hidden;
 	border: 1px solid #ccc;
@@ -78,6 +86,22 @@ font-family: 'Noto Sans KR', sans-serif;
 }
 #nav{
 	background-color:cornflowerblue; 
+}
+#mCost_table {
+	width: 500px;
+	height: 500px;
+	border: 1px solid #444444;
+	border-collapse: collapse;
+}
+th, td {
+	padding: 10px;
+	border: 1px solid #444444;
+}
+#mcost {
+	margin-right: 20px;
+	width: 500px;
+	height: 500px;
+	float: left;
 }
 /* Style the tab */
 .tab {
@@ -114,6 +138,26 @@ font-family: 'Noto Sans KR', sans-serif;
 
 </head>
 <body>
+<%DecimalFormat formatter = new DecimalFormat("###,###,###");
+	String mCost = formatter.format(mc.getmCost());
+	String lmCost = formatter.format(lastmc.getmCost());
+	String cleanCost = formatter.format(mc.getCleanCost());
+	String lcleanCost = formatter.format(lastmc.getCleanCost());
+	String secuCost = formatter.format(mc.getSecuCost());
+	String lsecuCost = formatter.format(lastmc.getSecuCost());
+	String elevatorCost = formatter.format(mc.getElevatorCost());
+	String lelevatorCost = formatter.format(lastmc.getElevatorCost());
+	String disinCost = formatter.format(mc.getDisinCost());
+	String ldisinCost = formatter.format(lastmc.getDisinCost());
+	String comWtCost = formatter.format(mc.getHouseWaterCost());
+	String lcomWtCost = formatter.format(lastmc.getHouseWaterCost());
+	String comElCost = formatter.format(mc.getElecCost());
+	String lcomElCost = formatter.format(lastmc.getElecCost());
+	String price = formatter.format(mc.getPrice());
+	String lprice = formatter.format(lastmc.getPrice());
+	String date = mc.getMaintenanceCostDate();
+	String sh = date.substring(0, 10);
+	 %>
 <jsp:include page="../header.jsp" flush="true" />
 
 <main id="adminmain">
@@ -124,11 +168,57 @@ font-family: 'Noto Sans KR', sans-serif;
   <button class="w3-bar-item w3-button" onclick="location.href='http://localhost:8090/apton/generation'">에너지 사용량</button>
 </div>
 
-			<div id="nav">
-				<h1>개인 관리비</h1>
-				<h3></h3>
-			</div>
+	<div id="main-box">
+		<div id="mcost">
 		
+			<table id="mCost_table">
+				<tr>
+				<th colspan="3"><%=sh %> 항목 별 관리비</th>
+				</tr>
+				<tr>
+					<th>항목</th>
+					<th>전월고지금액</th>
+					<th>당월고지금액</th>
+				</tr>
+				<tr>
+					<td>일반관리비</td>
+					<td><%=lmCost %></td>
+					<td><%=mCost %></td>
+				</tr>
+				<tr>
+					<td>청소비</td>
+					<td><%=lcleanCost %></td>
+					<td><%=cleanCost %></td>
+				</tr>
+				<tr>
+					<td>경비비</td>
+					<td><%=secuCost %></td>
+					<td><%=lsecuCost %></td>
+				</tr>
+				<tr>
+					<td>승강기유지비</td>
+					<td><%=lelevatorCost %></td>
+					<td><%=elevatorCost %></td>
+				</tr>
+				<tr>
+					<td>소독비</td>
+					<td><%=lsecuCost %></td>
+					<td><%=secuCost %></td>
+				</tr>
+				<tr>
+					<td>공용수도료</td>
+					<td><%=lcomWtCost %></td>
+					<td><%=comWtCost %></td>
+				</tr>
+				<tr>
+					<td>공용전기료</td>
+					<td><%=lsecuCost %></td>
+					<td><%=secuCost %></td>
+				</tr>
+			</table>
+		</div>
+		<div id="columnchart_material"></div>
+	</div>
 	
 </section>
 </main>
