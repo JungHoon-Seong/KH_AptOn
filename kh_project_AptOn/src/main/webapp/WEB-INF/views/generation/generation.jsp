@@ -47,6 +47,9 @@
 <%Generation vo = (Generation) request.getAttribute("gener");%>
 
 <style>
+#allcostmain {
+	ovarflow: hidden;
+}
 #cost_section {
 	padding-top: 70px;
 }
@@ -66,11 +69,7 @@ footer {
 	width: 100%;
 	background-color: cornflowerblue;
 }
-#main {
-	ovarflow: hidden;
-	top: 500px;
-	text-align: center;
-}
+
 /* Style the tab */
 .tab {
   overflow: hidden;
@@ -123,13 +122,13 @@ footer {
 				long hh = Long.parseLong(h);
 				 %>
 				<h3><%=d %>동 <%=hh %>호 <%= ym %></h3>
-				
 			</div>
-		</section>
+			
+</section>
 </main>
-	<div id="main">
-    <div id="piechart" style="width: 900px; height: 500px;"></div>
-  	</div>
+    		<div id="generation-graph">
+				<div id="piechart" style="width: 900px; height: 500px;"></div>
+			</div>
   	
 </body>
 <script type="text/javascript">

@@ -26,9 +26,11 @@ public class MaintenanceCost {
 	private int elecCost;
 	private int houseWaterCost;
 	private Date maintenanceCostDate;
+	private int price;
 	
+	public MaintenanceCost() {}
 	public MaintenanceCost(long houseNum, int commonCostNum, int mCost, int cleanCost, int secuCost, int elevatorCost,
-			int disinCost, int elecCost, int houseWaterCost, Date maintenanceCostDate) {
+			int disinCost, int elecCost, int houseWaterCost, Date maintenanceCostDate, int price) {
 		super();
 		this.houseNum = houseNum;
 		this.commonCostNum = commonCostNum;
@@ -40,6 +42,7 @@ public class MaintenanceCost {
 		this.elecCost = elecCost;
 		this.houseWaterCost = houseWaterCost;
 		this.maintenanceCostDate = maintenanceCostDate;
+		this.price = price;
 	}
 
 	public long getHouseNum() {
@@ -122,13 +125,23 @@ public class MaintenanceCost {
 		this.maintenanceCostDate = maintenanceCostDate;
 	}
 
+	public int getPrice() {
+		return price;
+	}
+
+	public void setPrice(int price) {
+		this.price = price;
+	}
+
 	@Override
 	public String toString() {
 		return "MaintenanceCost [houseNum=" + houseNum + ", commonCostNum=" + commonCostNum + ", mCost=" + mCost
 				+ ", cleanCost=" + cleanCost + ", secuCost=" + secuCost + ", elevatorCost=" + elevatorCost
 				+ ", disinCost=" + disinCost + ", elecCost=" + elecCost + ", houseWaterCost=" + houseWaterCost
-				+ ", maintenanceCostDate=" + maintenanceCostDate + "]";
+				+ ", maintenanceCostDate=" + maintenanceCostDate + ", price=" + price + "]";
 	}
+
+	
 	
 	
 	

@@ -35,17 +35,20 @@
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
   <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
-  <style>
+  
+ <style>
   *{
   margin: 0px;
   padding: 0px;
   text-decoration: none;
-  font-family:sans-serif;
 
 }
 
 body {
   background-image: #34495e;
+}
+#container{
+	overflow: hidden;
 }
 
 .loginForm {

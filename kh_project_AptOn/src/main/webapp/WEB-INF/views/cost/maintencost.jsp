@@ -51,9 +51,13 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     
 <style>
+#adminmain{
+	ovarflow: hidden;
+}
 #contentsection{
 	font-family: 'Noto Sans KR', sans-serif;
 	width : 1300px;
+	margin: 0 auto;
 }
 boby{
 	display: block;
@@ -119,10 +123,13 @@ font-family: 'Noto Sans KR', sans-serif;
   <button class="w3-bar-item w3-button" onclick="location.href='http://localhost:8090/apton/maintencost'">개인 관리비</button>
   <button class="w3-bar-item w3-button" onclick="location.href='http://localhost:8090/apton/generation'">에너지 사용량</button>
 </div>
-<div id="nav">
-<h1>개인 관리비</h1>
-</div>
 
+			<div id="nav">
+				<h1>개인 관리비</h1>
+				<h3></h3>
+			</div>
+		
+	
 </section>
 </main>
 <div id="columnchart_material" style="width: 800px; height: 500px;"></div>

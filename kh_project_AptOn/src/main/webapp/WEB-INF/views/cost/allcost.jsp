@@ -10,31 +10,27 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>공동 관리비</title>
+ <meta content="" name="description">
+  <meta content="" name="keywords">
 
-<!-- 공통 css 및 글꼴 입력 부분 시작, title바로 밑에 삽입  -->
-<meta content="" name="description">
-<meta content="" name="keywords">
-
-<!-- Favicons -->
-<link href="resources/img/favicon.png" rel="icon">
-<link href="resources/img/apple-touch-icon.png" rel="apple-touch-icon">
+  <!-- Favicons -->
+  <link href="resources/img/favicon.png" rel="icon">
+  <link href="resources/img/apple-touch-icon.png" rel="apple-touch-icon">
 
 <!-- Google Fonts -->
-<link
-	href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
-	rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
 <!-- Vendor CSS Files -->
-
 <link href="resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-<link href="resources/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-<link href="resources/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-<link href="resources/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-<link href="resources/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <link href="resources/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="resources/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="resources/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="resources/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
 <!-- Template Main CSS File -->
-<link href="resources/css/style.css" rel="stylesheet">
+  <link href="resources/css/style.css" rel="stylesheet">
 
 <!-- =======================================================
   * Template Name: Lumia - v4.6.0
@@ -42,9 +38,8 @@
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
-<script src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
-<script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
 
 <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
 <script src="//cdn.quilljs.com/1.3.6/quill.js"></script>
@@ -52,24 +47,13 @@
 
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
 
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-<meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
 <style>
-#contentsection{
-	font-family: 'Noto Sans KR', sans-serif;
-	width : 1300px;
-}
-
-boby {
-	display: block;
-}
-
 header {
 	font-family: 'Noto Sans KR', sans-serif;
 }
@@ -77,10 +61,19 @@ header {
 footer {
 	font-family: 'Noto Sans KR', sans-serif;
 }
-#nav {
-	width: 100%;
-	background-color: cornflowerblue;
+#adminmain{
+	overflow: hidden;
 }
+#contentsection{
+	font-family: 'Noto Sans KR', sans-serif;
+	width : 1300px;
+	margin: 0 auto;
+}
+
+boby {
+	display: block;
+}
+
 #main-box{
 	text-align: center;
 }
@@ -92,8 +85,6 @@ footer {
 }
 
 #mcost {
-	margin-top: 30px;
-	margin-left: 50px;
 	width: 500px;
 	height: 500px;
 	float: left;
@@ -170,18 +161,13 @@ th, td {
   <button class="w3-bar-item w3-button" onclick="location.href='http://localhost:8090/apton/maintencost'">개인 관리비</button>
   <button class="w3-bar-item w3-button" onclick="location.href='http://localhost:8090/apton/generation'">에너지 사용량</button>
 </div>
-
-			<div id="nav">
-				<h1>공동 관리비</h1>
-				<h3>${vo.today }</h3>
-			</div>
-		
+			
 	<div id="main-box">
 		<div id="mcost">
 		
 			<table id="mCost_table">
 				<tr>
-				<th colspan="3">항목 별 관리비</th>
+				<th colspan="3">${vo.today } 항목 별 관리비</th>
 				</tr>
 				<tr>
 					<th>항목</th>
@@ -224,9 +210,6 @@ th, td {
 					<td><%=secuCost %></td>
 				</tr>
 			</table>
-		</div>
-		<div>
-			
 		</div>
 		<div id="columnchart_material"></div>
 	</div>
