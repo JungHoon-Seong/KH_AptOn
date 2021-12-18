@@ -206,11 +206,26 @@ public class NoticeController {
 	
 	
 	@RequestMapping(value = "adnotice-detail", method = RequestMethod.GET)
-	public ModelAndView selectAdContentView(ModelAndView mv, @RequestParam(value="no" , defaultValue = "0")int notice_num ) {
+	public ModelAndView selectAdContentView(ModelAndView mv, @RequestParam(value="no" , defaultValue = "0")int notice_num,
+			HttpServletRequest request,HttpServletResponse response) throws IOException  {
 		String viewPage = "error/commonError"; //기본페이지 에러페이지로 동일하게 설정함
+		
 		
 		System.out.println("글 번호: ->"+ notice_num);
 		List<Notice> noticelist = null;
+		
+		Admin admin = (Admin) request.getSession().getAttribute("admin");
+		//관리자로그인 확인 조건문
+		if(admin == null) {
+		PrintWriter out = response.getWriter();
+//		if(member == null) {
+			response.setContentType("text/html; charset=UTF-8");
+			 
+			out.println("<script>alert('관리자 로그인이 필요합니다'); location.href='./login';</script>");
+			 
+			out.flush();
+		}
+		
 		try {
 			noticelist = noticeService.selectContentView(notice_num);
 			viewPage= "/notice/admin_noticedetail";
@@ -253,6 +268,7 @@ public class NoticeController {
 	
 	// 공지 등록 
 	@RequestMapping(value = "noticeinsert", method = RequestMethod.GET)
+	
 	public String insertnotice() {
 
 		return "notice/admin_notice_insert";
@@ -261,11 +277,23 @@ public class NoticeController {
 	
 	@RequestMapping(value = "notice_insert", method = RequestMethod.POST)
 	@ResponseBody
-	public String insertnotice(String msg, HttpServletRequest request) {
+	public String insertnotice(String msg, HttpServletRequest request ,HttpServletResponse response) throws IOException {
 		String noticetitle = request.getParameter("noticetitle");
 		String adminId = request.getParameter("adminId");
 		String content = request.getParameter("content");
-
+		
+		Admin admin = (Admin) request.getSession().getAttribute("admin");
+		//관리자로그인 확인 조건문
+		if(admin == null) {
+		PrintWriter out = response.getWriter();
+//		if(member == null) {
+			response.setContentType("text/html; charset=UTF-8");
+			 
+			out.println("<script>alert('관리자 로그인이 필요합니다'); location.href='./login';</script>");
+			 
+			out.flush();
+		}
+		
 
 		System.out.println("noticetitle: " + noticetitle);
 		System.out.println("adminId"+ adminId);
@@ -282,12 +310,26 @@ public class NoticeController {
 	}
 
 	@RequestMapping(value = "noticeupdate", method = RequestMethod.GET)
-	public ModelAndView updatenotice(ModelAndView mv, @RequestParam(value="no" , defaultValue = "0")int notice_num) {
+	public ModelAndView updatenotice(ModelAndView mv, @RequestParam(value="no" , defaultValue = "0")int notice_num,
+			HttpServletRequest request ,HttpServletResponse response) throws IOException {
 		String viewPage = "error/commonError"; //기본페이지 에러페이지로 동일하게 설정함
 		//보안 높일려면 가구번호랑 세션아디 비교하여 확인기능 필요할듯
 		
 		System.out.println("글 번호: ->"+ notice_num);
 		List<Notice> noticelist = null;
+		
+		Admin admin = (Admin) request.getSession().getAttribute("admin");
+		//관리자로그인 확인 조건문
+		if(admin == null) {
+		PrintWriter out = response.getWriter();
+//		if(member == null) {
+			response.setContentType("text/html; charset=UTF-8");
+			 
+			out.println("<script>alert('관리자 로그인이 필요합니다'); location.href='./login';</script>");
+			 
+			out.flush();
+		}
+		
 		try {
 			noticelist = noticeService.selectContentView(notice_num);
 			viewPage= "/notice/admin_notice_update";

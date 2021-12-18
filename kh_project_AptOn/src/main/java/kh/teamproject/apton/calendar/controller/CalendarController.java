@@ -1,8 +1,11 @@
 package kh.teamproject.apton.calendar.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import kh.teamproject.apton.admin.model.vo.Admin;
 import kh.teamproject.apton.calendar.model.service.CalendarServicelmpl;
 import kh.teamproject.apton.calendar.model.vo.Calendar;
 
@@ -56,10 +60,23 @@ public class CalendarController {
 	}
 	// 관리자 일정 보기 	
 	@RequestMapping(value = "/admincalendarlist", method = RequestMethod.GET)
-	public ModelAndView selectadminCalendar(ModelAndView mv) {
+	public ModelAndView selectadminCalendar(ModelAndView mv 
+			,HttpServletRequest request ,HttpServletResponse response) throws IOException {
 		String viewPage = "error/commonError"; //기본페이지 에러페이지로 동일하게 설정함
 					
 		List<Calendar> calendar = null;
+		
+		Admin admin = (Admin) request.getSession().getAttribute("admin");
+		//관리자로그인 확인 조건문
+		if(admin == null) {
+		PrintWriter out = response.getWriter();
+//		if(member == null) {
+			response.setContentType("text/html; charset=UTF-8");
+			 
+			out.println("<script>alert('관리자 로그인이 필요합니다'); location.href='./login';</script>");
+			 
+			out.flush();
+		}
 		try {
 			calendar = calendarservice.getCalendar();
 			viewPage= "calendar/admin_calendar";

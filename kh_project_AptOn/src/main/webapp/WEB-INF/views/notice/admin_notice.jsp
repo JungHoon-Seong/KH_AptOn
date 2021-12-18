@@ -230,12 +230,12 @@ margin-top:-30px;
 
 var d = document.noticeinfo;      	
 function deleteMsg() {
-	var chkList = $("input[name=deletecheck]");
+var chkList = $("input:checkbox[name='deletecheck']:checked").length;
 	
-/* 	if(chkList.prop("checked", true).length == 0){
+	if(chkList == 0){
 		alert("삭제할 게시물을 선택하세요.");
     	return;
-	} */
+	} 
     if (!confirm("정말 삭제하시겠습니까?")) {
         alert("취소 되었습니다.");
         	return;
