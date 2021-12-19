@@ -11,7 +11,7 @@
 <head>
 <meta charset="UTF-8">
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
-<title>공동 관리비</title>
+<title>관리자 공동 관리비</title>
  <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -101,34 +101,7 @@ th, td {
 	padding: 10px;
 	border: 1px solid #444444;
 }
-/* Style the tab */
-.tab {
-  overflow: hidden;
-  border: 1px solid #ccc;
-  background-color: #f1f1f1;
-}
 
-/* Style the buttons inside the tab */
-.tab button {
-  background-color: inherit;
-  float: left;
-  border: none;
-  outline: none;
-  cursor: pointer;
-  padding: 14px 16px;
-  transition: 0.3s;
-  font-size: 17px;
-}
-
-/* Change background color of buttons on hover */
-.tab button:hover {
-  background-color: #ddd;
-}
-
-/* Create an active/current tablink class */
-.tab button.active {
-  background-color: #ccc;
-}
 </style>
 
 <!-- 공통 css 및 글꼴 입력 부분 끝  -->
@@ -152,14 +125,9 @@ th, td {
 	String comElCost = formatter.format(cu.getComElCost());
 	String lcomElCost = formatter.format(lastcu.getComElCost());
 	 %>
-<jsp:include page="../header.jsp" flush="true" />
+<jsp:include page="../header4admin.jsp" flush="true" />
 <main id="adminmain">
 <section id="contentsection">
-<div class="tab">
-  <button class="w3-bar-item w3-button" onclick="location.href='http://localhost:8090/apton/allcost'">공동 관리비</button>
-  <button class="w3-bar-item w3-button" onclick="location.href='http://localhost:8090/apton/maintencost'">개인 관리비</button>
-  <button class="w3-bar-item w3-button" onclick="location.href='http://localhost:8090/apton/generation'">에너지 사용량</button>
-</div>
 			
 	<div id="main-box">
 		<div id="mcost">

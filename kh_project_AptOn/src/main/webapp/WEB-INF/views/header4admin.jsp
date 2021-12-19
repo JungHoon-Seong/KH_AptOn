@@ -18,7 +18,7 @@
           <li><a class="nav-link scrollto active" href="/apton">Home</a></li>
           <li><a class="nav-link scrollto" href="noticelist">아파트 소식</a></li>
           <li><a class="nav-link scrollto" href="board-defectreception">민원 접수</a></li>
-          <li><a class="nav-link scrollto" href="allcost">우리집 관리</a></li>
+          <li><a class="nav-link scrollto" href="adallcost">우리집 관리</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
@@ -64,7 +64,7 @@
 		<li class="sidedroplist">
            <a class="dropdown" onclick="dropdown();">관리비</a>
             <ul class="hide">
-                <li><a href="allcost">공동 관리비 조회</a></li>
+                <li><a href="adallcost">공동 관리비 조회</a></li>
             </ul>
         </li>
     </ul>
