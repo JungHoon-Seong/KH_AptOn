@@ -51,6 +51,7 @@
  	width: 1100px;
  	margin-left: 30px;
  	padding: 20px;
+ 	margin-top: 100px;
  }
  table {
 	 width: 1100px;
@@ -171,12 +172,14 @@
 <!-- ========header.jsp 삽입해주세요 -->
 
   <!-- ======= Hero Section ======= -->
-  <section id="hero" class="d-flex flex-column justify-content-center align-items-center">
+<!--   <section id="hero" class="d-flex flex-column justify-content-center align-items-center">
     <div class="container text-center text-md-left" data-aos="fade-up">
       <h1>노원 롯데 캐슬 <span>시그니처</span></h1>
       <h2>with 아파트온</h2>
     </div>
-  </section><!-- End Hero -->
+  </section> -->
+  
+  <!-- End Hero -->
 
 
 

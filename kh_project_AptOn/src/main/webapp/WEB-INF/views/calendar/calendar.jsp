@@ -60,6 +60,7 @@
  #mainsection {
  	float: left;
  	width: 1200px;
+ 	margin-top: 100px;
  }
  table {
 	 border: 1px solid black;
@@ -117,21 +118,22 @@
 <!-- ========header.jsp 삽입해주세요 -->
 
   <!-- ======= Hero Section ======= -->
-  <section id="hero" class="d-flex flex-column justify-content-center align-items-center">
+<!--   <section id="hero" class="d-flex flex-column justify-content-center align-items-center">
     <div class="container text-center text-md-left" data-aos="fade-up">
       <h1>노원 롯데 캐슬 <span>시그니처</span></h1>
       <h2>with 아파트온</h2>
     </div>
-  </section><!-- End Hero -->
+  </section> -->
+  <!-- End Hero -->
 
 
 
 
 <main id="main">
-<h2>노원 롯데 캐슬 - <a href="/apton/calendarlist">아파트 일정</a></h2>
-
 
 <section id="mainsection">
+
+<h2>노원 롯데 캐슬 - <a href="/apton/calendarlist">아파트 일정</a></h2>
  <!-- calendar 태그 -->
   <div id='calendar-container'>
     <div id='calendar'></div>
