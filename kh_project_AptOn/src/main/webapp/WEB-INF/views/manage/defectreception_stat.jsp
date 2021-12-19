@@ -111,9 +111,10 @@ font-family: 'Noto Sans KR', sans-serif;
 	 background-color: #008CBA;
  }
  
- h2 {
- margin-top: 200px;
- margin-left: 200px;
+  h2 {
+  	 margin-left: 20px;
+	 margin-top: 200px;
+	 margin-bottom: 20px;
  }
  </style>
   
@@ -160,7 +161,7 @@ font-family: 'Noto Sans KR', sans-serif;
 
 
 <main id="adminmain">
-<h2>관리자 노원 롯데 캐슬 통계화면 - <a href="./manage-dr">아파트 민원 접수</a></h2>
+
 
 <aside id="aside">
 <!-- 대체됨 -->
@@ -173,7 +174,7 @@ font-family: 'Noto Sans KR', sans-serif;
 
 
 <section id="mainsection">
-
+<h2>관리자 노원 롯데 캐슬 - <a href="./manage-dr">아파트 민원 접수</a></h2>
 	
 	<!-- Todo 데이터를 본격적으로 그려야함 -->
 	 <div id="datachart" style="width: 800px; height: 500px;"></div>

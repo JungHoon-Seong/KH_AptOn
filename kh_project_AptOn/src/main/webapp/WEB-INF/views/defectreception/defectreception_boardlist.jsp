@@ -119,8 +119,9 @@ font-family: 'Noto Sans KR', sans-serif;
 	transition: all 0.5s;
  }
   h2 {
+  	 margin-left: 20px;
 	 margin-top: 200px;
-	 margin-left: 200px;
+	 margin-bottom: 20px;
  }
  #paging{
 	margin-left: auto;
@@ -172,7 +173,7 @@ font-family: 'Noto Sans KR', sans-serif;
 
 
 <main id="main">
-<h2>노원 롯데 캐슬 - <a href="./board-defectreception">아파트 민원 접수</a></h2>
+
 
 <aside id="aside">
 <!-- 메뉴이름 및 링크는 추후 결정 -->
@@ -183,6 +184,7 @@ font-family: 'Noto Sans KR', sans-serif;
 
 
 <section id="mainsection">
+<h2>노원 롯데 캐슬 - <a href="./board-defectreception">아파트 민원 접수</a></h2>
 	<table id="maintable">
 	<tr id="rowheader">
 		<td>No.</td>

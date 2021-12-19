@@ -155,8 +155,9 @@ font-family: 'Noto Sans KR', sans-serif;
  height: 375px;
  }
   h2 {
- margin-top: 200px;
- margin-left: 200px;
+  	 margin-left: 20px;
+	 margin-top: 200px;
+	 margin-bottom: 20px;
  }
 
 header{
@@ -196,7 +197,7 @@ font-family: 'Noto Sans KR', sans-serif;
 
 
 <main id="main">
-<h2>노원 롯데 캐슬 - <a href="./board-defectreception">아파트 민원 접수</a></h2>
+
 
 <aside id="aside">
 <!-- 메뉴이름 및 링크는 추후 결정 -->
@@ -207,6 +208,7 @@ font-family: 'Noto Sans KR', sans-serif;
    
 
 <section id="mainsection">
+<h2>노원 롯데 캐슬 - <a href="./board-defectreception">아파트 민원 접수</a></h2>
 	<table id="maintable">
 	<form id="" action="./insert-defectreception"  method="post" enctype="multipart/form-data">
 		<tr>

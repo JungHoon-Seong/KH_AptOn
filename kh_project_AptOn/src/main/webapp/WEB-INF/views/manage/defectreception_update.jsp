@@ -149,8 +149,9 @@ ul {
  	text-align: center;
  }
   h2 {
+  	 margin-left: 20px;
 	 margin-top: 200px;
-	 margin-left: 200px;
+	 margin-bottom: 20px;
  }
  th,.header {
 	background-color: #ffebcd;
@@ -186,12 +187,11 @@ ul {
 
 <main id="adminmain">
 
-<h2>노원 롯데 캐슬 - <a href="./manage-dr">아파트 민원 접수</a></h2>
-
 
 
 
 <section id="mainsection">
+<h2>관리자 노원 롯데 캐슬 - <a href="./manage-dr">아파트 민원 접수</a></h2>
 	<table id="maintable">
 	<tr>
 		<th>No.</th>
