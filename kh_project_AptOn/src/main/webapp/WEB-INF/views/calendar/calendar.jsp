@@ -163,6 +163,7 @@
         nowIndicator: true, // 현재 시간 마크
         dayMaxEvents: true, // 이벤트가 오버되면 높이 제한 (+ 몇 개식으로 표현)
         locale: 'ko', // 한국어 설정
+        displayEventTime: false,
         eventAdd: function(obj) { // 이벤트가 추가되면 발생하는 이벤트
           console.log(obj);
         },
@@ -191,7 +192,7 @@
           {
             title: '${calendar.calendar_title}',
             start: '${calendar.calendar_startdate}',
-            end:'${calendar.calendar_enddate}'
+            end:'${calendar.calendar_enddate}T23:59:00'
           },
 		</c:forEach>
         ]
