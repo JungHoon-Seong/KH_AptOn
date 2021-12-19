@@ -51,10 +51,10 @@ public class BoardDefectreceptionController {
 			HttpServletResponse response) throws Exception{
 		String viewPage = "error/commonError"; //기본페이지 에러페이지로 동일하게 설정함
 		
-		Member member = (Member)request.getSession().getAttribute("member");
+		Member memberId = (Member)request.getSession().getAttribute("member");
 		Admin admin = (Admin) request.getSession().getAttribute("admin");
 		//회원로그인 확인 조건문
-		if((member == null) && (admin == null)) {
+		if((memberId == null) && (admin == null)) {
 		PrintWriter out = response.getWriter();
 //		if(member == null) {
 			response.setContentType("text/html; charset=UTF-8");
@@ -123,8 +123,9 @@ public class BoardDefectreceptionController {
 		mv.addObject("startPage",startPage);
 		mv.addObject("endPage",endPage);
 		mv.addObject("maxPage",maxPage);
-		
-		
+		if (memberId != null) {
+		mv.addObject("memberId",memberId.getHouseNum());
+		}
 		mv.setViewName(viewPage);
 		return mv;
 	}
