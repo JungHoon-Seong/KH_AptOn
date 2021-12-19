@@ -53,13 +53,7 @@
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
 <style>
-header {
-	font-family: 'Noto Sans KR', sans-serif;
-}
 
-footer {
-	font-family: 'Noto Sans KR', sans-serif;
-}
 #adminmain{
 	overflow: hidden;
 }
@@ -214,6 +208,7 @@ th, td {
 	</div>
 </section>
 </main>
+<jsp:include page="../footer.jsp" flush="true" />
 </body>
 <script type="text/javascript">
 	google.charts.load('current', {

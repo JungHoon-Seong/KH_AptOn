@@ -46,13 +46,7 @@
 <%Generation vo = (Generation) request.getAttribute("gener");%>
 
 <style>
-header {
-	font-family: 'Noto Sans KR', sans-serif;
-}
 
-footer {
-	font-family: 'Noto Sans KR', sans-serif;
-}
 #adminmain{
 	overflow: hidden;
 }
@@ -127,6 +121,8 @@ boby {
 	</div>
   </section>
 </main>
+	<div id="columnchart_material" style="width: 800px; height: 450px;"></div>
+<jsp:include page="../footer.jsp" flush="true" />
 </body>
 <script type="text/javascript">
       google.charts.load('current', {'packages':['corechart']});

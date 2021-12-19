@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" isErrorPage="true" %>
+<%@ page isErrorPage="true" %>
+<% response.setStatus(200); %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -409,10 +412,9 @@
             <path class="st9" d="M320.3 257.8h549.9"/>
             <g id="Text">
               <text transform="translate(377.037 230.025)" class="st8 st10" font-size="21">
-                404
+                ${requestScope['javax.servlet.error.status_code']} ERROR 
               </text>
               <text transform="translate(659.5 213.994)" class="st8 st10" font-size="24.025">
-              Page not found. 
               </text>
               <div id="errormsg">
              
@@ -442,7 +444,7 @@
 var sec = 4;
 window.setInterval(function(){
 	document.getElementById("sec").innerHTML = sec--;
-	if(sec=="-1"){
+	if(sec < 0){
 		location.href ="<%=request.getContextPath()%>/${url }"
 	}
 }, 1000);

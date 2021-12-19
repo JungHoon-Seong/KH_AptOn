@@ -65,15 +65,11 @@
 boby{
 	display: block;
 }
-header{
-font-family: 'Noto Sans KR', sans-serif;
-}
+
 #main{
 	top: 500px;
 }
-footer{
-font-family: 'Noto Sans KR', sans-serif;
-}
+
 #main-box{
 	text-align: center;
 }
@@ -220,7 +216,9 @@ th, td {
 	
 </section>
 </main>
+
 <div id="columnchart_material" style="width: 800px; height: 500px;"></div>
+<jsp:include page="../footer.jsp" flush="true" />
 </body>
 <script type="text/javascript">
     /*

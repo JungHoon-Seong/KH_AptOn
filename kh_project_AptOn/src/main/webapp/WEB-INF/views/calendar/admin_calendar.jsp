@@ -195,6 +195,7 @@ margin-left:80px;
 </script>
 </section>
 </main>
+<div id="columnchart_material" style="width: 800px; height: 750px;"></div>
 <jsp:include page="../footer.jsp" flush="true" />
     
 </body>

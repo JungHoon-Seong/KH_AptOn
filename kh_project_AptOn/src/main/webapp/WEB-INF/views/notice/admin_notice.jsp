@@ -166,7 +166,6 @@ margin-top:-30px;
   
 <!-- jquery cdn -->
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-
 </head>
 <body>
 <jsp:include page="../header4admin.jsp" flush="true" />
@@ -251,6 +250,7 @@ var chkList = $("input:checkbox[name='deletecheck']:checked").length;
 	
 </section>
 </main>
+	<div id="columnchart_material" style="width: 800px; height: 650px;"></div>
 <jsp:include page="../footer.jsp" flush="true" />
 
 

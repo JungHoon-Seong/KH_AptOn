@@ -45,14 +45,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
 
-<style>
-header{
-font-family: 'Noto Sans KR', sans-serif;
-}
-footer{
-font-family: 'Noto Sans KR', sans-serif;
-}
-</style>
+
+
 <!-- 공통 css 및 글꼴 입력 부분 끝  -->
 
 
@@ -325,7 +319,7 @@ function golist(){
 <main id="adminmain">
 <section id="writesection">
 <fieldset>
-<legend>투표/결재 등록하기</legend>
+<legend>투표/서명 등록하기</legend>
   <div id="headdiv">
     <ul id="category">
       <li>

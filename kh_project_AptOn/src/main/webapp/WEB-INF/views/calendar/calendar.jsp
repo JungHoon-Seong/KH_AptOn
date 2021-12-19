@@ -204,7 +204,7 @@
 </script>
 </section>
 </main>
-
+<div id="columnchart_material" style="width: 800px; height: 780px;"></div>
      <!-- ======= Footer ======= -->
 <jsp:include page="../footer.jsp" flush="true" />
  

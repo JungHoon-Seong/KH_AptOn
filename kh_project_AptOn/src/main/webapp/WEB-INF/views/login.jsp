@@ -152,5 +152,7 @@ body {
 		
 	</form>
 	</div>
+	<div id="columnchart_material" style="width: 800px; height: 650px;"></div>
+<jsp:include page="footer.jsp" flush="true" />
 </body>
 </html>

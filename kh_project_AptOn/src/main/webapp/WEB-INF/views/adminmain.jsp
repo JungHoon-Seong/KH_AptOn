@@ -53,8 +53,10 @@
 
 <main id="adminmain">
 <section>
-공지사항최신글, 진행중인 투표, 이번달 공동관리비, 처리안된 민원접수 최신글
 
+<script type="text/javascript">
+	location.href= 'admincalendarlist';
+</script>
 </section>
 </main>
 

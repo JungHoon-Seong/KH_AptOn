@@ -47,14 +47,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-<style>
-header{
-font-family: 'Noto Sans KR', sans-serif;
-}
-footer{
-font-family: 'Noto Sans KR', sans-serif;
-}
-</style>
+
 
 <!-- 공통 css 및 글꼴 입력 부분 끝  -->
 
@@ -231,17 +224,16 @@ font-family: 'Noto Sans KR', sans-serif;
 				<li><a href="board-defectreception?p=${endPage+1}">다음</a></li> </c:if>
 		</ul>
 	</div>
-	<c:if test="${not empty  memberId}" >
 	<div id="btnWriteBox">
 		<button type='button' id='btnwrite' onclick='writescript()'>민원 작성</button>
 	</div>
-	</c:if>
 	
 </section>
 </main>
 
      <!-- ======= Footer ======= -->
-<jsp:include page="../footer.jsp" flush="true" />
+     
+
  
 
 
@@ -258,6 +250,6 @@ font-family: 'Noto Sans KR', sans-serif;
 
   <!-- Template Main JS File -->
   <script src="resources/js/main.js"></script>
-
+<jsp:include page="../footer.jsp" flush="true" />
 </body>
 </html>

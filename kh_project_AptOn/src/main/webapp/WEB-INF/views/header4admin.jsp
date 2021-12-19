@@ -1,5 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<%@ taglib prefix="p" uri="http://java.sun.com/jsp/jstl/core" %>
+<p:if test="${empty admin.adminId}">
+<script>
+
+alert("관리자 계정이 아닙니다!");
+location.href="error?msg=관리자 계정이 아닙니다.";
+
+</script>
+	 
+</p:if>
+
   <!-- ======= Header ======= -->
   <header id="header" class="fixed-top d-flex align-items-center">
     <div class="container d-flex align-items-center">
@@ -18,10 +30,12 @@
           <li><a class="nav-link scrollto active" href="/apton">Home</a></li>
           <li><a class="nav-link scrollto" href="noticelist">아파트 소식</a></li>
           <li><a class="nav-link scrollto" href="board-defectreception">민원 접수</a></li>
-          <li><a class="nav-link scrollto" href="adallcost">우리집 관리</a></li>
+          <li><a class="nav-link scrollto" href="calendarlist">우리집 관리</a></li>
+          <li><a class="nav-link scrollto" href="calendarlist">아파트 일정</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
+
 
     <!--   <div class="header-social-links d-flex align-items-center">
         <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
@@ -35,7 +49,6 @@
   <aside>
   <div id="mySidenav" class="sidenav">
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()"><span>&times;</span></a>
-  <a href="adminmain">관리자 메인</a>
   <div>
     <ul>
 		<li class="sidedroplist">
@@ -105,7 +118,6 @@ function openNav() {
 	  document.getElementById("mySidenav").style.width = "0";
 	  document.getElementById("adminmain").style.marginLeft= "0";
 	};
-
 </script>
 
 <script>

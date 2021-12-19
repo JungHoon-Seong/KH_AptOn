@@ -53,14 +53,7 @@
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   
-<style>
-header{
-font-family: 'Noto Sans KR', sans-serif;
-}
-footer{
-font-family: 'Noto Sans KR', sans-serif;
-}
-</style>
+
 
 <!-- 공통 css 및 글꼴 입력 부분 끝  -->
  <style>
