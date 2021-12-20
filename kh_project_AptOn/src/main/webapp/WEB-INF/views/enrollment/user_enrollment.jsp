@@ -273,7 +273,7 @@ $("form").submit(function(){
     }
 
 
-    var reg = /^[0][0-9]{1,2}-[0-9]{3,4}-[0-9]{4}$/;
+    var reg = /^[0][0-9]{1,2}[0-9]{3,4}[0-9]{4}$/;
         var val = $('#phone').val().trim();
         if(!reg.test(val)){
             alert("전화번호 형식을 확인하세요");
