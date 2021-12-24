@@ -36,7 +36,5 @@ JungHoon-Seong이 구현한 기능들
 
 **간단한 회원가입**
 
-![apton클래스다이어그램 2차](https://user-images.githubusercontent.com/89732566/147300759-9ef665f4-bfda-4a09-99c3-4a472f01b799.png)
 
-**클래스 다이어그램**
 
